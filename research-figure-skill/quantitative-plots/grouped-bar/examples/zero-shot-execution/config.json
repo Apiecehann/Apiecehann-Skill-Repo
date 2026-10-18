@@ -1,0 +1,228 @@
+{
+  "figure": {
+    "size_pt": [
+      960,
+      540
+    ],
+    "dpi": 180
+  },
+  "fonts": {
+    "light": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    },
+    "regular": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    },
+    "mono": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    },
+    "bold": {
+      "family": "DejaVu Sans Mono",
+      "weight": "bold",
+      "file": null
+    },
+    "heading": {
+      "family": [
+        "Liberation Sans",
+        "Arial",
+        "DejaVu Sans"
+      ],
+      "weight": "normal",
+      "file": null
+    },
+    "heading_bold": {
+      "family": [
+        "Liberation Sans",
+        "Arial",
+        "DejaVu Sans"
+      ],
+      "weight": "bold",
+      "file": null
+    }
+  },
+  "palette": {
+    "dp3": {
+      "fill": [
+        0.6392157077789307,
+        0.6745098233222961,
+        0.7254902124404907
+      ],
+      "edge": [
+        0.6392157077789307,
+        0.6745098233222961,
+        0.7254902124404907
+      ],
+      "label": "black"
+    },
+    "code-diffuser": {
+      "fill": [
+        0.48235294222831726,
+        0.5176470875740051,
+        0.5607843399047852
+      ],
+      "edge": [
+        0.48235294222831726,
+        0.5176470875740051,
+        0.5607843399047852
+      ],
+      "label": "black"
+    },
+    "pi0": {
+      "fill": [
+        0.34117648005485535,
+        0.3764705955982208,
+        0.42352941632270813
+      ],
+      "edge": [
+        0.34117648005485535,
+        0.3764705955982208,
+        0.42352941632270813
+      ],
+      "label": "black"
+    },
+    "saga-language": {
+      "fill": [
+        0.7254902124404907,
+        0.6470588445663452,
+        0.8470588326454163
+      ],
+      "edge": [
+        0.7254902124404907,
+        0.6470588445663452,
+        0.8470588326454163
+      ],
+      "label": "black"
+    },
+    "saga-point": {
+      "fill": [
+        0.6000000238418579,
+        0.4745098054409027,
+        0.7960784435272217
+      ],
+      "edge": [
+        0.6000000238418579,
+        0.4745098054409027,
+        0.7960784435272217
+      ],
+      "label": "black"
+    }
+  },
+  "panel_defaults": {
+    "limits": [
+      -0.03,
+      1.03
+    ],
+    "baseline": -0.03,
+    "ticks": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "tick_format": ".2f",
+    "tick_font": "bold",
+    "tick_size": 10.402844966710724,
+    "tick_length": 3.640995738348754,
+    "tick_width": 0.832227597336858,
+    "tick_pad": 3.640995738348754,
+    "tick_color": "black",
+    "text_color": "black",
+    "axis_color": "black",
+    "axis_width": 0.5201422483355362,
+    "baseline_width": 0.5201422483355362,
+    "category_mode": "group",
+    "category_font": "mono",
+    "category_size": 10.402844966710724,
+    "category_pad": 3.640995738348754,
+    "label_font": "mono",
+    "label_size": 12.48341396005287,
+    "label_pad": 4.16113798668429,
+    "ylabel": "Success Rate",
+    "bar_width": 14.30499267578125,
+    "bar_edge_width": 0,
+    "value_labels": false,
+    "grid": {
+      "kind": "lines",
+      "color": "#e0e0e0",
+      "linewidth": 0.5201422483355362,
+      "linestyle": "-"
+    }
+  },
+  "panels": [
+    {
+      "id": "tasks",
+      "rect_pt": [
+        87.09677419354838,
+        210.96774193548384,
+        834.8387096774194,
+        109.47538729191176
+      ],
+      "category_limits": [
+        0,
+        802.5099983215332
+      ],
+      "legend": {
+        "show": true,
+        "order": [
+          "dp3",
+          "code-diffuser",
+          "pi0",
+          "saga-language",
+          "saga-point"
+        ],
+        "labels": {
+          "dp3": "DP3",
+          "code-diffuser": "CodeDiffuser",
+          "pi0": "$\\pi0$",
+          "saga-language": "SAGA-Language",
+          "saga-point": "SAGA-Point"
+        },
+        "font": "mono",
+        "size": 12.48341396005287,
+        "loc": "lower center",
+        "anchor": [
+          0.5,
+          1.01
+        ],
+        "columns": 5,
+        "borderaxespad": 0
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "text": "Experiments",
+      "font": "heading",
+      "size": 25.5,
+      "position_pt": [
+        28.4,
+        494
+      ]
+    },
+    {
+      "text": "Zero-shot Execution",
+      "font": "heading_bold",
+      "size": 32,
+      "position_pt": [
+        28.4,
+        465.5
+      ]
+    }
+  ],
+  "provenance": {
+    "reference": "User-provided zero-shot execution slide; SAGA Figure 5",
+    "source": "https://arxiv.org/html/2512.12842v1",
+    "source_asset": "figures/zero_shot_quantitative_cropped.pdf",
+    "data_method": "45 rates recovered from source PDF geometry; rounded to 0.1, consistent with the paper's 10 trials. No intervals supplied.",
+    "layout": "Source chart geometry placed into the user-provided slide composition. Viewer chrome and black letterboxing excluded.",
+    "baseline": "Original chart paints each bar down to -0.03, making zero-valued bars visible below the zero tick; CSV zeros remain zero."
+  },
+  "data": "data.csv"
+}

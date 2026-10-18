@@ -20,14 +20,14 @@ from matplotlib.offsetbox import AnnotationBbox, DrawingArea
 from matplotlib.text import Text
 from matplotlib.textpath import TextToPath
 from matplotlib.path import Path as MplPath
-from matplotlib.patches import PathPatch, FancyBboxPatch
+from matplotlib.patches import PathPatch, FancyBboxPatch, FancyArrowPatch, Patch
 import numpy as np
 
 DEFAULTS = {
     'figure': {'size_pt': [540, 180], 'background': 'white', 'dpi': 300,
                'formats': ['png', 'pdf', 'svg'], 'svg_text': False},
-    'fonts': {'light': {'family': 'Liberation Sans', 'weight': 'normal', 'file': 'Graphik-Light.ttf'},
-              'regular': {'family': 'Liberation Sans', 'weight': 'normal', 'file': 'Graphik-Regular.ttf'},
+    'fonts': {'light': {'family': ['Liberation Sans','Arial','DejaVu Sans'], 'weight': 'normal', 'file': 'Graphik-Light.ttf'},
+              'regular': {'family': ['Liberation Sans','Arial','DejaVu Sans'], 'weight': 'normal', 'file': 'Graphik-Regular.ttf'},
               'mono': {'family': 'DejaVu Sans Mono', 'weight': 'normal', 'file': 'B612Mono-Regular.ttf'}},
     'palette': {'base': {'fill': '#a1a1a1', 'edge': '#525252', 'label': '#404040'},
                 'cue': {'fill': '#fabc00', 'edge': '#da7700', 'label': '#b45300'},
@@ -37,26 +37,45 @@ DEFAULTS = {
     'panel_defaults': {
         'orientation': 'vertical', 'limits': [0, 1.07], 'ticks': [0, .2, .4, .6, .8, 1],
         'tick_format': '.1f', 'tick_size': 9.5, 'tick_length': 4, 'tick_width': .6,
+        'tick_font': 'light', 'value_tick_length': None,
         'tick_pad': 3.5, 'tick_color': '#525252', 'text_color': '#111111',
         'axis_color': '#101828', 'axis_width': .6, 'baseline_width': .8,
+        'spines': ['left','bottom'],
         'show_value_ticks': True, 'show_category_ticks': True, 'show_categories': True,
         'category_size': 7.6, 'category_pad': 6, 'category_rotation': 0,
+        'category_mode': 'bar', 'category_font': 'light', 'invert_categories': False,
         'label_size': 11.5, 'label_pad': 4, 'ylabel': '',
+        'label_font': 'regular',
         'bar_width': .55, 'bar_edge_width': .8, 'bar_alpha': 1, 'hatch': None,
         'group_gap': .8, 'series_gap': .45, 'category_margin': .35,
         'error_width': .7, 'error_color': '#111111', 'error_cap': 2,
         'value_labels': True, 'value_format': '.2f', 'value_size': 10.5,
+        'value_font': 'light', 'value_color': None,
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
         'value_background_pad': .1, 'baseline': 0, 'allow_interval_clipping': False,
         'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': .1,
-                 'value_stop': 1, 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000},
-        'tokens': {'size': 6.3, 'gap': 2.6, 'padding_em': [.16, .16],
+                 'value_stop': 1, 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000,
+                 'linewidth': .5, 'linestyle': '-'},
+        'tokens': {'mode': 'readable', 'size': 6.3, 'gap': 2.6, 'padding_em': [.16, .16],
                    'height_em': 1.333333, 'baseline_em': .405, 'rounding': .194444,
                    'edge_width': .4, 'background': '#f5f5f5', 'edge': '#262626',
                    'shadow': True, 'shadow_offset': [.35, -.55], 'shadow_alpha': .28,
                    'offset_pt': 6, 'tint': False},
     },
-    'panels': [], 'annotations': [], 'bands': [], 'icons': [],
+    'legend_defaults': {'show': False, 'order': None, 'labels': {}, 'font': 'regular', 'size': 10,
+                        'loc': 'upper center', 'anchor': [.5,1.2], 'columns': 3, 'frame': True,
+                        'facecolor': 'white', 'edgecolor': '#cccccc', 'frame_alpha': 1,
+                        'frame_width': .8, 'rounded': True, 'borderpad': .4,
+                        'columnspacing': 2, 'handlelength': 2, 'handleheight': .7,
+                        'handletextpad': .8, 'borderaxespad': .5},
+    'gain_defaults': {'color': None, 'palette_part': 'edge', 'linewidth': 2.5,
+                     'head_length_pt': 7, 'head_width_pt': 6, 'tail_pad_pt': 5, 'tip_pad_pt': 9,
+                     'tail_dx_pt': -12, 'tip_dx_pt': -16,
+                     'control1': [.55,0], 'control2': [.9,.55],
+                     'label_position': [.5,.48], 'label_offset_pt': [-8,0],
+                     'label_size': 15, 'label_font': 'regular', 'label_format': '+.1f',
+                     'label_scale': 1, 'label_suffix': '', 'clip': False},
+    'panels': [], 'annotations': [], 'bands': [], 'icons': [], 'gains': [],
     'layout': {'columns': 3, 'left_pt': 42, 'right_pt': 8, 'top_pt': 22,
                'bottom_pt': 38, 'column_gap_pt': 30, 'row_gap_pt': 32},
     'rc': {},
@@ -120,7 +139,14 @@ def font(config, role='light', size=9, font_dir=None):
     bundled = Path(__file__).parent / 'fonts' / (spec.get('file') or 'unused')
     if bundled.is_file():
         return fm.FontProperties(fname=str(bundled), size=size)
-    return fm.FontProperties(family=spec['family'], weight=spec['weight'], size=size)
+    families=spec['family'] if isinstance(spec['family'],list) else [spec['family']]
+    for family in families:
+        try:
+            path=fm.findfont(fm.FontProperties(family=family,weight=spec['weight']),fallback_to_default=False)
+        except ValueError:
+            continue
+        return fm.FontProperties(fname=path,size=size)
+    raise ValueError(f'No available font for role {role}: {families}; configure fonts or --font-dir')
 
 
 def positions(rows, style):
@@ -203,6 +229,57 @@ def panel_rectangles(config):
                    h-layout['top_pt']-(r+1)*ph-r*layout['row_gap_pt'], pw, ph]
 
 
+def add_legend(ax, panel, rows, style, config, font_dir):
+    spec=merge(config['legend_defaults'],panel.get('legend',{}))
+    if not spec['show']:
+        return
+    present=list(dict.fromkeys(row['series'] for row in rows))
+    order=spec['order'] if spec['order'] is not None else present
+    if len(set(order))!=len(order) or set(order)!=set(present):
+        raise ValueError('Legend order must include each plotted series exactly once')
+    handles=[Patch(facecolor=config['palette'][key]['fill'],edgecolor=config['palette'][key]['edge'],
+                   linewidth=style['bar_edge_width'],alpha=style['bar_alpha'],
+                   hatch=config['palette'][key].get('hatch',style['hatch'])) for key in order]
+    legend=ax.legend(handles,[spec['labels'].get(key,key) for key in order],
+        prop=font(config,spec['font'],spec['size'],font_dir),loc=spec['loc'],
+        bbox_to_anchor=spec['anchor'],ncol=spec['columns'],frameon=spec['frame'],
+        facecolor=spec['facecolor'],edgecolor=spec['edgecolor'],framealpha=spec['frame_alpha'],
+        fancybox=spec['rounded'],borderpad=spec['borderpad'],columnspacing=spec['columnspacing'],
+        handlelength=spec['handlelength'],handleheight=spec['handleheight'],
+        handletextpad=spec['handletextpad'],borderaxespad=spec['borderaxespad'])
+    legend.get_frame().set_linewidth(spec['frame_width'])
+
+
+def add_gain(fig, spec, artists, config, font_dir):
+    """Anchor a cubic gain arrow to two current bar values; derive its label from data."""
+    spec=merge(config['gain_defaults'],spec)
+    before,after=artists[spec['from']],artists[spec['to']]
+    if before['axis'] is not after['axis']:
+        raise ValueError('Gain arrows must connect bars in one panel')
+    if not before['vertical']:
+        raise ValueError('Gain arrows currently require vertical panels')
+    width,height=config['figure']['size_pt'];size=np.array([width,height])
+    ax=before['axis']
+    def point(item):
+        return fig.transFigure.inverted().transform(ax.transData.transform((item['x'],item['value'])))*size
+    start=point(before)+[spec['tail_dx_pt'],spec['tail_pad_pt']]
+    end=point(after)+[spec['tip_dx_pt'],spec['tip_pad_pt']]
+    delta=end-start
+    path=MplPath(np.array([start,start+delta*spec['control1'],start+delta*spec['control2'],end])/size,
+                 [MplPath.MOVETO,MplPath.CURVE4,MplPath.CURVE4,MplPath.CURVE4])
+    color=spec['color'] or config['palette'][after['series']][spec['palette_part']]
+    arrow=FancyArrowPatch(path=path,transform=fig.transFigure,
+        arrowstyle=f'-|>,head_length={spec["head_length_pt"]},head_width={spec["head_width_pt"]/2}',
+        mutation_scale=1,linewidth=spec['linewidth'],color=color,clip_on=spec['clip'],zorder=7)
+    key=f'gain-{spec["from"]}-{spec["to"]}'
+    arrow.set_gid(key+'-arrow');fig.add_artist(arrow)
+    value=(after['value']-before['value'])*spec['label_scale']
+    position=(start+delta*spec['label_position']+spec['label_offset_pt'])/size
+    label=fig.text(*position,format(value,spec['label_format'])+spec['label_suffix'],ha='center',va='center',
+                   color=color,fontproperties=font(config,spec['label_font'],spec['label_size'],font_dir))
+    label.set_gid(key+'-label')
+
+
 def build_figure(config, rows, font_dir=None):
     config = merge(DEFAULTS, config)
     ids = [p['id'] for p in config['panels']]
@@ -230,7 +307,6 @@ def build_figure(config, rows, font_dir=None):
             axes[panel['id']] = ax
             rr = [r for r in rows if r['panel'] == panel['id']]
             xx = positions(rr, style)
-            value = np.array([r['value'] for r in rr])
             limits = style['limits']
             if limits[0] >= limits[1] or not limits[0] <= style['baseline'] <= limits[1]:
                 raise ValueError('Invalid numeric limits or baseline')
@@ -246,8 +322,8 @@ def build_figure(config, rows, font_dir=None):
             else:
                 ax.set(ylim=catlim, xlim=limits, xticks=style['ticks'], yticks=xx)
                 ax.set_xticklabels([format(v,style['tick_format']) for v in style['ticks']])
-            for side in ('top', 'right'): ax.spines[side].set_visible(False)
-            for side in ('left', 'bottom'):
+            for side in ('left','bottom','top','right'):
+                ax.spines[side].set_visible(side in style['spines'])
                 ax.spines[side].set_color(style['axis_color']); ax.spines[side].set_linewidth(style['axis_width'])
             ax.spines['bottom' if vertical else 'left'].set_linewidth(style['baseline_width'])
             ax.tick_params(length=style['tick_length'], width=style['tick_width'], pad=style['tick_pad'],
@@ -255,18 +331,34 @@ def build_figure(config, rows, font_dir=None):
             category_axis, value_axis = ('x','y') if vertical else ('y','x')
             ax.tick_params(axis=value_axis, labelleft=style['show_value_ticks'] if vertical else False,
                            labelbottom=style['show_value_ticks'] if not vertical else False)
+            if style['value_tick_length'] is not None:
+                ax.tick_params(axis=value_axis,length=style['value_tick_length'])
             ax.tick_params(axis=category_axis, length=style['tick_length'] if style['show_category_ticks'] else 0,
                            pad=style['category_pad'], labelsize=style['category_size'])
-            labels = [r.get('label',r['series']) if style['show_categories'] and not panel.get('tokens',{}).get(r['id']) else '' for r in rr]
+            mode=style['tokens']['mode']
+            if mode not in ('raw','readable'):
+                raise ValueError('tokens.mode must be readable or raw')
+            tokens=panel.get('readable_tokens',panel.get('tokens',{})) if mode=='readable' else panel.get('tokens',{})
+            if style['category_mode']=='group':
+                groups=list(dict.fromkeys(r['group'] for r in rr))
+                ticks=[float(np.mean([x for x,r in zip(xx,rr) if r['group']==g])) for g in groups]
+                (ax.set_xticks if vertical else ax.set_yticks)(ticks)
+                labels=[panel.get('group_labels',{}).get(g,g) if style['show_categories'] else '' for g in groups]
+            elif style['category_mode']=='bar':
+                labels=[r.get('label',r['series']) if style['show_categories'] and not tokens.get(r['id']) else '' for r in rr]
+            else:
+                raise ValueError('category_mode must be bar or group')
             (ax.set_xticklabels if vertical else ax.set_yticklabels)(labels, rotation=style['category_rotation'])
             for label in (ax.get_yticklabels() if vertical else ax.get_xticklabels()):
-                label.set_fontproperties(font(config,'light',style['tick_size'],font_dir))
+                label.set_fontproperties(font(config,style['tick_font'],style['tick_size'],font_dir))
             for label in (ax.get_xticklabels() if vertical else ax.get_yticklabels()):
-                label.set_fontproperties(font(config,'light',style['category_size'],font_dir))
+                label.set_fontproperties(font(config,style['category_font'],style['category_size'],font_dir))
+            if style['invert_categories']:
+                (ax.invert_xaxis if vertical else ax.invert_yaxis)()
             if style['ylabel']:
                 setter = ax.set_ylabel if vertical else ax.set_xlabel
                 setter(style['ylabel'], labelpad=style['label_pad'], color=style['text_color'],
-                       fontproperties=font(config,'regular',style['label_size'],font_dir))
+                       fontproperties=font(config,style['label_font'],style['label_size'],font_dir))
             grid = style['grid']
             if grid['kind'] == 'dots':
                 cat_extent = rect[2] if vertical else rect[3]
@@ -282,7 +374,9 @@ def build_figure(config, rows, font_dir=None):
                 ax.scatter(mx if vertical else my, my if vertical else mx, s=grid['size'],
                            color=grid['color'], alpha=grid['alpha'], edgecolors='none', zorder=0, clip_on=True)
             elif grid['kind'] == 'lines':
-                ax.set_axisbelow(True); ax.grid(axis=value_axis,color=grid['color'],alpha=grid['alpha'],linewidth=.5)
+                linestyle=tuple(grid['linestyle']) if isinstance(grid['linestyle'],list) else grid['linestyle']
+                ax.set_axisbelow(True); ax.grid(axis=value_axis,color=grid['color'],alpha=grid['alpha'],
+                                               linewidth=grid['linewidth'],linestyle=linestyle)
             elif grid['kind'] != 'none':
                 raise ValueError('grid.kind must be dots, lines, or none')
             for x, row in zip(xx, rr):
@@ -308,18 +402,23 @@ def build_figure(config, rows, font_dir=None):
                         xytext=(0,style['value_pad']) if vertical else (style['value_pad'],0),
                         textcoords='offset points',ha='center' if vertical else 'left',
                         va='baseline' if vertical else 'center',
-                        color=palette.get('label',palette['edge']),
+                        color=style['value_color'] or palette.get('label',palette['edge']),
                         bbox={'boxstyle':f'square,pad={style["value_background_pad"]}',
                               'facecolor':config['figure']['background'],'edgecolor':'none'} if style['value_background'] else None,
-                        fontproperties=font(config,'light',style['value_size'],font_dir),annotation_clip=False)
-                if row['id'] in panel.get('tokens',{}):
-                    token_label(ax,x,panel['tokens'][row['id']],style,config,palette,font_dir,
-                                panel.get('token_shift_pt',{}).get(row['id'],0))
-                artists[row['id']] = {'bar':bar,'error':error,'label':label,'x':float(x),'axis':ax}
+                        fontproperties=font(config,style['value_font'],style['value_size'],font_dir),annotation_clip=False)
+                if row['id'] in tokens:
+                    token_label(ax,x,tokens[row['id']],style,config,palette,font_dir,
+                                panel.get('token_shift_pt',{}).get(row['id'],0) if mode=='raw' else 0)
+                artists[row['id']] = {'bar':bar,'error':error,'label':label,'x':float(x),'axis':ax,
+                                      'value':row['value'],'series':row['series'],'vertical':vertical}
+            add_legend(ax,panel,rr,style,config,font_dir)
+        for spec in config['gains']:
+            add_gain(fig,spec,artists,config,font_dir)
         for a in config['annotations']:
             color = a.get('color','#111111')
             if a.get('palette'): color=config['palette'][a['palette']][a.get('palette_part','edge')]
-            props=dict(ha=a.get('ha','left'),va='baseline',rotation=a.get('rotation',0),rotation_mode='anchor',color=color,
+            props=dict(ha=a.get('ha','left'),va=a.get('va','baseline'),rotation=a.get('rotation',0),rotation_mode='anchor',color=color,
+                       linespacing=a.get('linespacing',1.2),
                        fontproperties=font(config,a.get('font','light'),a['size'],font_dir))
             if a.get('box'):props['bbox']=a['box']
             fig.text(a['position_pt'][0]/w,a['position_pt'][1]/h,a['text'],**props)

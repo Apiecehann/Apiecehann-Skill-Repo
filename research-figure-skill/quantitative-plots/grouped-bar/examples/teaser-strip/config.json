@@ -304,6 +304,20 @@
         "strip-2": 0.04441070556640625,
         "strip-3": -0.0841217041015625,
         "strip-5": -0.084136962890625
+      },
+      "readable_tokens": {
+        "strip-1": [
+          "Answer"
+        ],
+        "strip-2": [
+          "Okay"
+        ],
+        "strip-3": [
+          "Chicken"
+        ],
+        "strip-5": [
+          "Chicken"
+        ]
       }
     }
   ],
@@ -370,7 +384,8 @@
     "paper": "https://arxiv.org/abs/2610.06851v1",
     "source_figure": "teaser_strip.pdf",
     "data_status": "Recovered from published vector bar and interval geometry; not author raw trials.",
-    "reference_images_distributed": false
+    "reference_images_distributed": false,
+    "label_display": "Readable token labels by default; panel_defaults.tokens.mode=raw restores the original literal-token labels."
   },
   "fonts": {
     "symbol": {

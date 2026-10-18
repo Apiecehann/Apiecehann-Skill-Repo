@@ -198,6 +198,14 @@
       "token_shift_pt": {
         "base-1": 0.01800537109375,
         "base-2": -0.110992431640625
+      },
+      "readable_tokens": {
+        "base-1": [
+          "Okay"
+        ],
+        "base-2": [
+          "Chicken"
+        ]
       }
     },
     {
@@ -326,6 +334,14 @@
       "token_shift_pt": {
         "rename-1": 0.01800537109375,
         "rename-2": -0.110992431640625
+      },
+      "readable_tokens": {
+        "rename-1": [
+          "Okay"
+        ],
+        "rename-2": [
+          "Chicken"
+        ]
       }
     },
     {
@@ -455,6 +471,14 @@
       "token_shift_pt": {
         "redirect-1": 0.01800537109375,
         "redirect-2": -0.110992431640625
+      },
+      "readable_tokens": {
+        "redirect-1": [
+          "Okay"
+        ],
+        "redirect-2": [
+          "Chicken"
+        ]
       }
     }
   ],
@@ -561,7 +585,8 @@
     "source_figure": "counterfactuals.pdf",
     "data_status": "Recovered from published vector bar and interval geometry; not author raw trials.",
     "reference_images_distributed": false,
-    "original_interval_clipping": "redirect/cue has a recovered lower endpoint of -0.0004; the reference clips it at the zero baseline. Retained explicitly for reproduction."
+    "original_interval_clipping": "redirect/cue has a recovered lower endpoint of -0.0004; the reference clips it at the zero baseline. Retained explicitly for reproduction.",
+    "label_display": "Readable token labels by default; panel_defaults.tokens.mode=raw restores the original literal-token labels."
   },
   "fonts": {
     "symbol": {

@@ -196,6 +196,14 @@
       "token_shift_pt": {
         "math-1": -0.11587142944335938,
         "math-4": 0.1609039306640625
+      },
+      "readable_tokens": {
+        "math-1": [
+          "Okay"
+        ],
+        "math-4": [
+          "Alright"
+        ]
       }
     },
     {
@@ -544,7 +552,8 @@
     "paper": "https://arxiv.org/abs/2610.06851v1",
     "source_figure": "prefix_acc.pdf",
     "data_status": "Recovered from published vector bar and interval geometry; not author raw trials.",
-    "reference_images_distributed": false
+    "reference_images_distributed": false,
+    "label_display": "Readable token labels by default; panel_defaults.tokens.mode=raw restores the original literal-token labels."
   },
   "fonts": {
     "symbol": {

@@ -1,0 +1,197 @@
+{
+  "figure": {
+    "size_pt": [
+      520,
+      287
+    ],
+    "dpi": 220
+  },
+  "fonts": {
+    "light": {
+      "family": [
+        "Liberation Serif",
+        "Times New Roman",
+        "DejaVu Serif"
+      ],
+      "weight": "normal",
+      "file": null
+    },
+    "regular": {
+      "family": [
+        "Liberation Serif",
+        "Times New Roman",
+        "DejaVu Serif"
+      ],
+      "weight": "normal",
+      "file": null
+    },
+    "mono": {
+      "family": [
+        "Liberation Serif",
+        "Times New Roman",
+        "DejaVu Serif"
+      ],
+      "weight": "normal",
+      "file": null
+    },
+    "bold": {
+      "family": [
+        "Liberation Serif",
+        "Times New Roman",
+        "DejaVu Serif"
+      ],
+      "weight": "bold",
+      "file": null
+    }
+  },
+  "palette": {
+    "integrated-before": {
+      "fill": "#bdd7ee",
+      "edge": "#bdd7ee",
+      "label": "black"
+    },
+    "integrated-after": {
+      "fill": "#5b9bd5",
+      "edge": "#5b9bd5",
+      "label": "black"
+    },
+    "hierarchical-before": {
+      "fill": "#c5e0b4",
+      "edge": "#c5e0b4",
+      "label": "black"
+    },
+    "hierarchical-after": {
+      "fill": "#70ad47",
+      "edge": "#70ad47",
+      "label": "black"
+    }
+  },
+  "panel_defaults": {
+    "limits": [
+      70,
+      84
+    ],
+    "baseline": 70,
+    "ticks": [
+      70,
+      73,
+      76,
+      79,
+      82
+    ],
+    "tick_format": ".1f",
+    "tick_size": 19,
+    "tick_length": 0,
+    "tick_pad": 11,
+    "tick_color": "black",
+    "text_color": "black",
+    "axis_color": "black",
+    "axis_width": 1.5,
+    "baseline_width": 1.8,
+    "spines": [
+      "bottom"
+    ],
+    "show_categories": false,
+    "show_category_ticks": false,
+    "bar_width": 41.5,
+    "bar_edge_width": 0.6,
+    "value_labels": false,
+    "grid": {
+      "kind": "lines",
+      "color": "#858585",
+      "linewidth": 1.6,
+      "linestyle": [
+        0,
+        [
+          4.5,
+          4.5
+        ]
+      ]
+    }
+  },
+  "panels": [
+    {
+      "id": "pretraining",
+      "rect_pt": [
+        180.5,
+        45,
+        241,
+        160.4166666667
+      ],
+      "category_limits": [
+        0,
+        241
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "text": "Planning Head Pretraining on LIBERO-90\nand testing on LIBERO-LONG",
+      "font": "bold",
+      "size": 24,
+      "position_pt": [
+        260,
+        262
+      ],
+      "ha": "center",
+      "va": "top",
+      "linespacing": 1.35
+    }
+  ],
+  "gain_defaults": {
+    "linewidth": 3.3,
+    "head_length_pt": 10,
+    "head_width_pt": 11,
+    "control1": [
+      0.58,
+      0
+    ],
+    "control2": [
+      1,
+      0.55
+    ],
+    "label_font": "bold",
+    "label_size": 24,
+    "label_position": [
+      0.5,
+      0.5
+    ]
+  },
+  "gains": [
+    {
+      "from": "integrated-before",
+      "to": "integrated-after",
+      "color": "#4472c4",
+      "tail_dx_pt": -13.25,
+      "tip_dx_pt": -25.5,
+      "tail_pad_pt": 6,
+      "tip_pad_pt": 12,
+      "label_offset_pt": [
+        -16.75,
+        0
+      ]
+    },
+    {
+      "from": "hierarchical-before",
+      "to": "hierarchical-after",
+      "color": "#548235",
+      "tail_dx_pt": -4,
+      "tip_dx_pt": -24.5,
+      "tail_pad_pt": 1,
+      "tip_pad_pt": 12,
+      "label_offset_pt": [
+        -20.5,
+        -5
+      ]
+    }
+  ],
+  "provenance": {
+    "reference": "User-provided planning-head pretraining crop; VLA-OS project Finding 6",
+    "source": "https://nus-lins-lab.github.io/vlaos/",
+    "source_asset": "https://nus-lins-lab.github.io/vlaos/media/figures/newfinding6.png",
+    "data_source": "https://openreview.net/pdf/05a810d8dce16f520e115b9ee80b8096e6512276.pdf",
+    "data_method": "Paper table: Integrated-VLA 73.3 to 79.1; Hierarchical-VLA 74.2 to 79.8. Gains are calculated, not fixed text.",
+    "layout": "Reconstructed from raster reference. Uniform linear axis preserves table values; the bitmap's slight bar/tick misalignments are not encoded as a nonlinear scale."
+  },
+  "data": "data.csv"
+}

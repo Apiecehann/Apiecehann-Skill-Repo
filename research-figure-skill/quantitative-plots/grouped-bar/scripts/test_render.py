@@ -59,7 +59,8 @@ def test_missing_intervals_do_not_get_invented():
     assert all(item['error'] is None for item in a.values())
     plt.close(fig)
 
-@pytest.mark.parametrize('name,count',[('cue-comparison',30),('data-edit',9),('teaser-strip',6)])
+@pytest.mark.parametrize('name,count',[('cue-comparison',30),('data-edit',9),('teaser-strip',6),
+                                      ('zero-shot-execution',45),('affordance-distribution',8),('planning-gains',4)])
 def test_all_examples_export_with_bundled_and_system_fonts(name,count,tmp_path):
     config,rows=case(name)
     # No private fonts, reference PDFs or network access are used here.
@@ -100,3 +101,55 @@ def test_overrides_are_typed_and_unknown_parameter_rejected():
     apply_override(config,'panel_defaults.bar_width=0.9')
     assert config['panel_defaults']['bar_width']==.9
     with pytest.raises(ValueError):apply_override(config,'panel_defaults.bra_width=0.9')
+
+
+def test_group_labels_are_centered_and_legend_matches_series():
+    config,rows=case('zero-shot-execution');fig,a=build_figure(config,rows);ax=fig.axes[0]
+    assert [t.get_text() for t in ax.get_xticklabels()]==[f'Task {i}-{j}' for i in range(1,4) for j in range(1,4)]
+    centers=[np.mean([v['x'] for key,v in a.items() if key.startswith(f'task-{i}-')]) for i in range(1,10)]
+    np.testing.assert_allclose(ax.get_xticks(),centers)
+    assert len(ax.get_legend().get_texts())==5
+    zero=next(r for r in rows if r['value']==0)
+    bar=a[zero['id']]['bar']
+    assert bar.get_y()+bar.get_height()==pytest.approx(0)
+
+
+def test_horizontal_percentage_labels_follow_replaced_values():
+    config,rows=case('affordance-distribution');rows[0]['value']=.421
+    fig,a=build_figure(config,rows)
+    assert a['grasp']['bar'].get_width()==pytest.approx(.421)
+    assert a['grasp']['label'].get_text()=='42.1%'
+    assert fig.axes[0].yaxis_inverted()
+    assert [t.get_text() for t in fig.axes[0].get_yticklabels()][0]=='grasp'
+
+
+def test_gain_arrow_and_value_update_from_csv():
+    config,rows=case('planning-gains')
+    fig,a=build_figure(config,rows)
+    key='gain-integrated-before-integrated-after'
+    old=fig.findobj(lambda obj:obj.get_gid()==key+'-arrow')[0].get_path().vertices.copy()
+    assert fig.findobj(lambda obj:obj.get_gid()==key+'-label')[0].get_text()=='+5.8'
+    next(r for r in rows if r['id']=='integrated-after')['value']=80
+    fig,a=build_figure(config,rows)
+    assert fig.findobj(lambda obj:obj.get_gid()==key+'-label')[0].get_text()=='+6.7'
+    new=fig.findobj(lambda obj:obj.get_gid()==key+'-arrow')[0].get_path().vertices
+    assert not np.allclose(old,new)
+    assert a['integrated-after']['bar'].get_y()==70
+    assert a['integrated-after']['bar'].get_height()==10
+
+
+@pytest.mark.parametrize('name',['cue-comparison','data-edit','teaser-strip'])
+def test_readable_tokens_default_and_literal_opt_in(name):
+    config,rows=case(name);fig,_=build_figure(config,rows)
+    from matplotlib.text import Text
+    texts=[t.get_text() for t in fig.findobj(Text)]
+    assert not any(r'\n' in t or '\u2423' in t for t in texts)
+    assert 'Okay' in texts
+    config.setdefault('panel_defaults',{}).setdefault('tokens',{})['mode']='raw'
+    fig,_=build_figure(config,rows)
+    assert any(r'\n' in t.get_text() for t in fig.findobj(Text))
+
+
+def test_legend_cannot_silently_omit_series():
+    config,rows=case('zero-shot-execution');config['panels'][0]['legend']['order']=['dp3']
+    with pytest.raises(ValueError,match='each plotted series'):build_figure(config,rows)

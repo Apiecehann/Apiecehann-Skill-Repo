@@ -1,0 +1,224 @@
+{
+  "figure": {
+    "size_pt": [
+      201,
+      216.8
+    ],
+    "dpi": 300
+  },
+  "fonts": {
+    "light": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    },
+    "regular": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    },
+    "mono": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    },
+    "bold": {
+      "family": "DejaVu Sans Mono",
+      "weight": "bold",
+      "file": null
+    },
+    "heading": {
+      "family": [
+        "Liberation Sans",
+        "Arial",
+        "DejaVu Sans"
+      ],
+      "weight": "normal",
+      "file": null
+    },
+    "heading_bold": {
+      "family": [
+        "Liberation Sans",
+        "Arial",
+        "DejaVu Sans"
+      ],
+      "weight": "bold",
+      "file": null
+    }
+  },
+  "palette": {
+    "grasp": {
+      "fill": [
+        0.7921568751335144,
+        0.09019608050584793,
+        0.10980392247438431
+      ],
+      "edge": [
+        0.7921568751335144,
+        0.09019608050584793,
+        0.10980392247438431
+      ],
+      "label": "black"
+    },
+    "place": {
+      "fill": [
+        0.1254901885986328,
+        0.43921568989753723,
+        0.7058823704719543
+      ],
+      "edge": [
+        0.1254901885986328,
+        0.43921568989753723,
+        0.7058823704719543
+      ],
+      "label": "black"
+    },
+    "walk_to": {
+      "fill": [
+        1.0,
+        0.6901960968971252,
+        0.0
+      ],
+      "edge": [
+        1.0,
+        0.6901960968971252,
+        0.0
+      ],
+      "label": "black"
+    },
+    "direct_c.": {
+      "fill": [
+        0.0627450942993164,
+        0.5333333611488342,
+        0.5803921818733215
+      ],
+      "edge": [
+        0.0627450942993164,
+        0.5333333611488342,
+        0.5803921818733215
+      ],
+      "label": "black"
+    },
+    "indirect_c.": {
+      "fill": [
+        0.13333334028720856,
+        0.5411764979362488,
+        0.2666666805744171
+      ],
+      "edge": [
+        0.13333334028720856,
+        0.5411764979362488,
+        0.2666666805744171
+      ],
+      "label": "black"
+    },
+    "function": {
+      "fill": [
+        0.4117647111415863,
+        0.3137255012989044,
+        0.6352941393852234
+      ],
+      "edge": [
+        0.4117647111415863,
+        0.3137255012989044,
+        0.6352941393852234
+      ],
+      "label": "black"
+    },
+    "avoid": {
+      "fill": [
+        0.6901960968971252,
+        0.3450980484485626,
+        0.0941176488995552
+      ],
+      "edge": [
+        0.6901960968971252,
+        0.3450980484485626,
+        0.0941176488995552
+      ],
+      "label": "black"
+    },
+    "step_on": {
+      "fill": [
+        1.0,
+        0.42352941632270813,
+        0.1568627506494522
+      ],
+      "edge": [
+        1.0,
+        0.42352941632270813,
+        0.1568627506494522
+      ],
+      "label": "black"
+    }
+  },
+  "panel_defaults": {
+    "orientation": "horizontal",
+    "invert_categories": true,
+    "limits": [
+      0,
+      1
+    ],
+    "ticks": [
+      0,
+      0.5,
+      1
+    ],
+    "tick_format": ".1f",
+    "tick_font": "bold",
+    "tick_size": 9.881423950195312,
+    "tick_length": 3.458498382568359,
+    "tick_width": 0.7905139160156249,
+    "tick_pad": 3.458498382568359,
+    "tick_color": "black",
+    "text_color": "black",
+    "axis_color": "black",
+    "axis_width": 0.4940711975097656,
+    "baseline_width": 0.4940711975097656,
+    "category_size": 9.881423950195312,
+    "category_pad": 3.458498382568359,
+    "category_font": "mono",
+    "label_font": "mono",
+    "label_size": 11.857708740234374,
+    "label_pad": 3.9525695800781246,
+    "ylabel": "Percentage of Data",
+    "bar_width": 1,
+    "bar_edge_width": 0,
+    "bar_alpha": 0.5,
+    "value_format": ".1%",
+    "value_font": "bold",
+    "value_size": 9.881423950195312,
+    "value_pad": 0.8935277557373047,
+    "value_color": "black",
+    "value_background": false,
+    "grid": {
+      "kind": "lines",
+      "color": "#e0e0e0",
+      "linewidth": 0.4940711975097656,
+      "linestyle": "-"
+    }
+  },
+  "panels": [
+    {
+      "id": "distribution",
+      "category_limits": [
+        -0.9,
+        7.9
+      ],
+      "rect_pt": [
+        85.73301544189454,
+        44.25775146484375,
+        89.35277557373047,
+        146.36366271972656
+      ]
+    }
+  ],
+  "provenance": {
+    "reference": "User-provided horizontal affordance distribution; SAGA Figure 3 left panel",
+    "source": "https://arxiv.org/html/2512.12842v1",
+    "source_asset": "figures/data.pdf",
+    "data_method": "Percentages transcribed from the eight visible labels. Rounded published values, not underlying raw counts.",
+    "layout": "Plot-only crop, preserving the supplied margins; source diagram photographs excluded."
+  },
+  "data": "data.csv"
+}
