@@ -1,0 +1,16 @@
+id,panel,group,series,x,value,label
+task-4-dp3,tasks,Task 2-1,dp3,290.3913154602051,0.8,Task 2-1
+task-4-code-diffuser,tasks,Task 2-1,code-diffuser,304.6963081359863,0.6,Task 2-1
+task-4-pi0,tasks,Task 2-1,pi0,319.0013008117676,0.0,Task 2-1
+task-4-saga-language,tasks,Task 2-1,saga-language,333.3062934875488,1.0,Task 2-1
+task-4-saga-point,tasks,Task 2-1,saga-point,347.6112861633301,1.0,Task 2-1
+task-5-dp3,tasks,Task 2-2,dp3,372.6450386047363,0.4,Task 2-2
+task-5-code-diffuser,tasks,Task 2-2,code-diffuser,386.9500160217285,0.3,Task 2-2
+task-5-pi0,tasks,Task 2-2,pi0,401.2549934387207,0.0,Task 2-2
+task-5-saga-language,tasks,Task 2-2,saga-language,415.55998611450195,0.8,Task 2-2
+task-5-saga-point,tasks,Task 2-2,saga-point,429.8649787902832,0.8,Task 2-2
+task-9-dp3,tasks,Task 3-3,dp3,701.6598091125488,0.0,Task 3-3
+task-9-code-diffuser,tasks,Task 3-3,code-diffuser,715.9648017883301,0.3,Task 3-3
+task-9-pi0,tasks,Task 3-3,pi0,730.2697944641113,0.3,Task 3-3
+task-9-saga-language,tasks,Task 3-3,saga-language,744.5747871398926,1.0,Task 3-3
+task-9-saga-point,tasks,Task 3-3,saga-point,758.8797798156738,1.0,Task 3-3

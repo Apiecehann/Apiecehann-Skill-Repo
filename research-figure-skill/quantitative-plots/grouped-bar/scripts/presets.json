@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "styles": {
+    "paper-clean": {
+      "description": "清晰的无衬线字体、实色柱体、细网格；常规多方法对比。",
+      "font": "sans",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white",
+          "dpi": 200
+        },
+        "panel_defaults": {
+          "tick_size": 8,
+          "category_size": 8,
+          "label_size": 9,
+          "value_size": 8,
+          "tick_font": "regular",
+          "category_font": "regular",
+          "label_font": "regular",
+          "value_font": "regular",
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_width": 0.6,
+          "tick_pad": 4,
+          "category_pad": 5,
+          "label_pad": 5,
+          "axis_color": "#363d47",
+          "text_color": "#20252c",
+          "axis_width": 0.6,
+          "baseline_width": 0.8,
+          "spines": [
+            "bottom"
+          ],
+          "bar_fill_alpha": 1,
+          "bar_edge_alpha": 1,
+          "bar_edge_width": 0,
+          "error_width": 0.7,
+          "error_color": "#303641",
+          "error_cap": 2,
+          "value_labels": false,
+          "value_background": false,
+          "value_color": "#20252c",
+          "grid": {
+            "kind": "lines",
+            "color": "#cbd2dc",
+            "alpha": 0.6,
+            "linewidth": 0.5,
+            "linestyle": "-"
+          },
+          "tokens": {
+            "shadow": false
+          }
+        },
+        "legend_defaults": {
+          "font": "regular",
+          "size": 7,
+          "columns": 3,
+          "frame": false,
+          "loc": "lower center",
+          "anchor": [
+            0.5,
+            1.06
+          ],
+          "borderaxespad": 0,
+          "columnspacing": 1.5,
+          "handlelength": 1.4,
+          "handleheight": 0.7,
+          "handletextpad": 0.5
+        },
+        "gain_defaults": {
+          "linewidth": 1.8,
+          "head_length_pt": 5,
+          "head_width_pt": 5,
+          "tail_pad_pt": 3,
+          "tip_pad_pt": 4,
+          "tail_dx_pt": 0,
+          "tip_anchor": "left",
+          "tip_dx_pt": -5,
+          "label_offset_pt": [
+            -10,
+            0
+          ],
+          "label_size": 12,
+          "label_font": "bold"
+        }
+      }
+    },
+    "soft-outline": {
+      "description": "55% 填充、完整描边与不透明文字；柔和而保留轮廓。",
+      "font": "sans",
+      "palette": "tol-muted",
+      "config": {
+        "figure": {
+          "background": "white",
+          "dpi": 200
+        },
+        "panel_defaults": {
+          "tick_size": 8,
+          "category_size": 8,
+          "label_size": 9,
+          "value_size": 8,
+          "tick_font": "regular",
+          "category_font": "regular",
+          "label_font": "regular",
+          "value_font": "regular",
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_width": 0.6,
+          "tick_pad": 4,
+          "category_pad": 5,
+          "label_pad": 5,
+          "axis_color": "#363d47",
+          "text_color": "#20252c",
+          "axis_width": 0.6,
+          "baseline_width": 0.8,
+          "spines": [
+            "bottom"
+          ],
+          "bar_fill_alpha": 0.55,
+          "bar_edge_alpha": 1,
+          "bar_edge_width": 0.8,
+          "error_width": 0.7,
+          "error_color": "#303641",
+          "error_cap": 2,
+          "value_labels": false,
+          "value_background": false,
+          "value_color": "#20252c",
+          "grid": {
+            "kind": "lines",
+            "color": "#cbd2dc",
+            "alpha": 0.45,
+            "linewidth": 0.5,
+            "linestyle": "-"
+          },
+          "tokens": {
+            "shadow": false
+          }
+        },
+        "legend_defaults": {
+          "font": "regular",
+          "size": 7,
+          "columns": 3,
+          "frame": false,
+          "loc": "lower center",
+          "anchor": [
+            0.5,
+            1.06
+          ],
+          "borderaxespad": 0,
+          "columnspacing": 1.5,
+          "handlelength": 1.4,
+          "handleheight": 0.7,
+          "handletextpad": 0.5
+        },
+        "gain_defaults": {
+          "linewidth": 1.8,
+          "head_length_pt": 5,
+          "head_width_pt": 5,
+          "tail_pad_pt": 3,
+          "tip_pad_pt": 4,
+          "tail_dx_pt": 0,
+          "tip_anchor": "left",
+          "tip_dx_pt": -5,
+          "label_offset_pt": [
+            -10,
+            0
+          ],
+          "label_size": 12,
+          "label_font": "bold"
+        }
+      }
+    },
+    "serif-emphasis": {
+      "description": "衬线字体、较强基线与虚线网格；配合前后增益标注。",
+      "font": "serif",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white",
+          "dpi": 200
+        },
+        "panel_defaults": {
+          "tick_size": 9,
+          "category_size": 9,
+          "label_size": 10,
+          "value_size": 8,
+          "tick_font": "regular",
+          "category_font": "regular",
+          "label_font": "regular",
+          "value_font": "bold",
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_width": 0.6,
+          "tick_pad": 4,
+          "category_pad": 5,
+          "label_pad": 5,
+          "axis_color": "#363d47",
+          "text_color": "#20252c",
+          "axis_width": 0.6,
+          "baseline_width": 1,
+          "spines": [
+            "bottom"
+          ],
+          "bar_fill_alpha": 1,
+          "bar_edge_alpha": 1,
+          "bar_edge_width": 0,
+          "error_width": 0.7,
+          "error_color": "#303641",
+          "error_cap": 2,
+          "value_labels": false,
+          "value_background": false,
+          "value_color": "#20252c",
+          "grid": {
+            "kind": "lines",
+            "color": "#969da6",
+            "alpha": 0.75,
+            "linewidth": 0.65,
+            "linestyle": [
+              0,
+              [
+                4,
+                4
+              ]
+            ]
+          },
+          "tokens": {
+            "shadow": false
+          }
+        },
+        "legend_defaults": {
+          "font": "regular",
+          "size": 8,
+          "columns": 3,
+          "frame": false,
+          "loc": "lower center",
+          "anchor": [
+            0.5,
+            1.06
+          ],
+          "borderaxespad": 0,
+          "columnspacing": 1.5,
+          "handlelength": 1.4,
+          "handleheight": 0.7,
+          "handletextpad": 0.5
+        },
+        "gain_defaults": {
+          "linewidth": 1.8,
+          "head_length_pt": 5,
+          "head_width_pt": 5,
+          "tail_pad_pt": 3,
+          "tip_pad_pt": 4,
+          "tail_dx_pt": 0,
+          "tip_anchor": "left",
+          "tip_dx_pt": -5,
+          "label_offset_pt": [
+            -10,
+            0
+          ],
+          "label_size": 12,
+          "label_font": "bold"
+        }
+      }
+    }
+  },
+  "layouts": {
+    "grouped": {
+      "description": "按组并列，组中心刻度与顶部图例。",
+      "config": {
+        "figure": {
+          "size_pt": [
+            360,
+            210
+          ]
+        },
+        "layout": {
+          "columns": 1,
+          "left_pt": 40,
+          "right_pt": 12,
+          "top_pt": 46,
+          "bottom_pt": 32,
+          "column_gap_pt": 30,
+          "row_gap_pt": 48
+        },
+        "panel_defaults": {
+          "orientation": "vertical",
+          "position_mode": "auto",
+          "category_mode": "group",
+          "bar_width": 0.72,
+          "series_gap": 0.12,
+          "group_gap": 0.7,
+          "category_margin": 0.4,
+          "show_category_ticks": false
+        },
+        "legend_defaults": {
+          "show": true
+        }
+      }
+    },
+    "horizontal": {
+      "description": "横向类别排序与末端数值；长标签可增大左留白。",
+      "palette": "tol-muted",
+      "config": {
+        "figure": {
+          "size_pt": [
+            360,
+            250
+          ]
+        },
+        "layout": {
+          "columns": 1,
+          "left_pt": 100,
+          "right_pt": 44,
+          "top_pt": 18,
+          "bottom_pt": 38,
+          "column_gap_pt": 30,
+          "row_gap_pt": 40
+        },
+        "panel_defaults": {
+          "orientation": "horizontal",
+          "position_mode": "auto",
+          "category_mode": "bar",
+          "invert_categories": true,
+          "bar_width": 0.72,
+          "series_gap": 0.16,
+          "group_gap": 0.28,
+          "category_margin": 0.35,
+          "show_category_ticks": false,
+          "spines": [
+            "bottom"
+          ],
+          "value_labels": true,
+          "value_pad": 4
+        },
+        "legend_defaults": {
+          "show": false
+        }
+      }
+    },
+    "paired": {
+      "description": "成对柱体；增益关联与数轴范围由具体配置提供。",
+      "config": {
+        "figure": {
+          "size_pt": [
+            360,
+            230
+          ]
+        },
+        "layout": {
+          "columns": 1,
+          "left_pt": 42,
+          "right_pt": 16,
+          "top_pt": 34,
+          "bottom_pt": 34,
+          "column_gap_pt": 30,
+          "row_gap_pt": 40
+        },
+        "panel_defaults": {
+          "orientation": "vertical",
+          "position_mode": "auto",
+          "category_mode": "group",
+          "bar_width": 0.7,
+          "series_gap": 0.08,
+          "group_gap": 1.05,
+          "category_margin": 0.25,
+          "show_category_ticks": false
+        },
+        "legend_defaults": {
+          "show": false
+        }
+      }
+    }
+  },
+  "palettes": {
+    "tol-bright": {
+      "description": "平级分类，最多 7 个系列；采用 Paul Tol 的默认顺序。",
+      "kind": "categorical",
+      "colors": [
+        "#4477AA",
+        "#EE6677",
+        "#228833",
+        "#CCBB44",
+        "#66CCEE",
+        "#AA3377",
+        "#BBBBBB"
+      ],
+      "source": "https://sronpersonalpages.nl/~pault/",
+      "background": "white"
+    },
+    "tol-muted": {
+      "description": "较多分类，最多 9 个系列；采用 Paul Tol 的默认顺序。",
+      "kind": "categorical",
+      "colors": [
+        "#CC6677",
+        "#332288",
+        "#DDCC77",
+        "#117733",
+        "#88CCEE",
+        "#882255",
+        "#44AA99",
+        "#999933",
+        "#AA4499"
+      ],
+      "source": "https://sronpersonalpages.nl/~pault/",
+      "background": "white"
+    },
+    "blue-orange": {
+      "description": "两个平级方法；取自 Tol vibrant 的蓝色与橙色。",
+      "kind": "categorical",
+      "colors": [
+        "#0077BB",
+        "#EE7733"
+      ],
+      "source": "https://sronpersonalpages.nl/~pault/",
+      "background": "white"
+    },
+    "gray-purple": {
+      "description": "三个基线与两个重点方法；从 SAGA 示例提取，必须显式分配角色。",
+      "kind": "semantic",
+      "roles": {
+        "baseline-1": "#A3ACB9",
+        "baseline-2": "#7B848F",
+        "baseline-3": "#57606C",
+        "focus-secondary": "#B9A5D8",
+        "focus": "#9979CB"
+      },
+      "source": "../examples/zero-shot-execution/config.json",
+      "background": "white"
+    },
+    "paired-blue-green": {
+      "description": "两组改进前后；色相区分方法，浅深区分状态，必须显式分配角色。",
+      "kind": "semantic",
+      "roles": {
+        "a-before": "#BDD7EE",
+        "a-after": "#5B9BD5",
+        "b-before": "#C5E0B4",
+        "b-after": "#70AD47"
+      },
+      "source": "../examples/planning-gains/config.json",
+      "background": "white"
+    }
+  },
+  "fonts": {
+    "sans": {
+      "description": "DejaVu Sans：刻度和正文常规字重，强调用粗体；token 用等宽字体。",
+      "roles": {
+        "light": {
+          "family": "DejaVu Sans",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "DejaVu Sans",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "DejaVu Sans",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "DejaVu Sans",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "DejaVu Sans",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "serif": {
+      "description": "DejaVu Serif：正文和数字统一衬线风格，强调用粗体。",
+      "roles": {
+        "light": {
+          "family": "DejaVu Serif",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "DejaVu Serif",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "DejaVu Serif",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "DejaVu Serif",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "DejaVu Serif",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "mono": {
+      "description": "DejaVu Sans Mono：适合代码或动作标签；较宽，长图例需更多空间。",
+      "roles": {
+        "light": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "DejaVu Sans Mono",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "DejaVu Sans Mono",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    }
+  }
+}

@@ -5,11 +5,12 @@ description: 用统一脚本和示例配置生成科研柱形图，支持多系�
 
 # Research Figure Skill
 
-从 [分组柱状图示例](quantitative-plots/grouped-bar/README.md) 选择布局，读取对应 `config.json` 和 `data.csv`，调用同一个 `scripts/render.py`。
+从 [柱形图目录](quantitative-plots/grouped-bar/README.md) 进入。日常绘图优先读 [风格、配色与字体索引](quantitative-plots/grouped-bar/examples/style-guide/README.md)，选 `preset.style / layout / palette`，复用精简配置与同一个 `scripts/render.py`；需要精确复刻时选择六个原始示例。
 
 - 先保留已选示例的版式，替换数据字段；样式调整通过配置或 `--set` 实现。只有现有参数确实不足时才修改渲染器。
 - 新增版式时扩展共用组件及参数，示例目录只放数据、配置和成图，不新增按图片命名的绘图脚本。
-- `--defaults` 列出默认参数。面板局部配置优先于全局 `panel_defaults`；数据中的显式 `x` 优先于自动分组间距。
+- `--list-presets` 列出预设，`--defaults` 列出底层参数，`--resolved-config` 展开实际配置。明确配置覆盖预设，面板局部值覆盖全局值。原始配置默认保留显式 `x`；预设布局使用 `position_mode=auto` 重新分组，可明确改回 `data`。
+- 从数据的比较关系选择色板；保存 `series_order`，语义色板必须提供 `series_roles`。透明度分别调整填充与描边；误差棒、数值和刻度不要随填充一起变淡。不要从风格预设继承实验区间或截断坐标轴。
 - 数据变化后，柱高、区间和数值标签应共同变化；`gains` 绑定两根柱的行 ID，差值文字与箭头位置随数据更新。没有区间时不生成区间；不要把来源图的实验数值当成用户的结果。
 - 旧示例的默认 `tokens.mode=readable` 使用可读标签。仅需忠实呈现原论文 token 时改为 `raw`；不要将可见的 `\n` 当作文件编码错误处理。
 - 示例的原始图片保存在仓库外；仓库只保留脚本、输入数据、配置、生成图和必要的素材许可。使用来源说明定位参考，不下载参考图来充当脚本输出。

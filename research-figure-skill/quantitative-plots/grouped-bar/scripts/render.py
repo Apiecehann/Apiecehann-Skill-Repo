@@ -9,6 +9,7 @@ import copy
 import csv
 import json
 import math
+from functools import lru_cache
 from pathlib import Path
 
 import matplotlib
@@ -47,8 +48,10 @@ DEFAULTS = {
         'label_size': 11.5, 'label_pad': 4, 'ylabel': '',
         'label_font': 'regular',
         'bar_width': .55, 'bar_edge_width': .8, 'bar_alpha': 1, 'hatch': None,
+        'bar_fill_alpha': None, 'bar_edge_alpha': None, 'position_mode': 'data',
         'group_gap': .8, 'series_gap': .45, 'category_margin': .35,
         'error_width': .7, 'error_color': '#111111', 'error_cap': 2,
+        'error_alpha': 1, 'value_alpha': 1, 'text_alpha': 1,
         'value_labels': True, 'value_format': '.2f', 'value_size': 10.5,
         'value_font': 'light', 'value_color': None,
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
@@ -69,8 +72,10 @@ DEFAULTS = {
                         'columnspacing': 2, 'handlelength': 2, 'handleheight': .7,
                         'handletextpad': .8, 'borderaxespad': .5},
     'gain_defaults': {'color': None, 'palette_part': 'edge', 'linewidth': 2.5,
+                     'alpha': 1, 'label_alpha': 1,
                      'head_length_pt': 7, 'head_width_pt': 6, 'tail_pad_pt': 5, 'tip_pad_pt': 9,
                      'tail_dx_pt': -12, 'tip_dx_pt': -16,
+                     'tail_anchor': 'center', 'tip_anchor': 'center',
                      'control1': [.55,0], 'control2': [.9,.55],
                      'label_position': [.5,.48], 'label_offset_pt': [-8,0],
                      'label_size': 15, 'label_font': 'regular', 'label_format': '+.1f',
@@ -87,6 +92,99 @@ def merge(base, override):
     for key, value in override.items():
         result[key] = merge(result[key], value) if isinstance(value, dict) and isinstance(result.get(key), dict) else copy.deepcopy(value)
     return result
+
+
+@lru_cache(maxsize=1)
+def preset_catalog():
+    return json.loads((Path(__file__).parent/'presets.json').read_text(encoding='utf8'))
+
+
+def resolve_config(config, rows):
+    """Compose defaults < style < layout < palette/font < explicit configuration.
+
+    Presets never set numeric limits, ticks, baselines or interval definitions.
+    The six measured reference configurations still use the original path.
+    """
+    if 'preset' not in config:
+        result = merge(DEFAULTS, config)
+        for entry in result['palette'].values():
+            for key in ('fill_alpha','edge_alpha','label_alpha'):
+                entry.setdefault(key, None)
+        return result
+    catalog = preset_catalog()
+    selection = config['preset']
+    if not isinstance(selection, dict) or set(selection)-{'style','layout','palette','font'}:
+        raise ValueError('preset accepts style, layout, palette and optional font')
+    style_name = selection.get('style', 'paper-clean')
+    layout_name = selection.get('layout', 'grouped')
+    def pick(section, name):
+        if name not in catalog[section]:
+            raise ValueError(f'Unknown {section} preset {name!r}; choose from {list(catalog[section])}')
+        return catalog[section][name]
+    style = pick('styles', style_name)
+    layout = pick('layouts', layout_name)
+    palette_name = selection.get('palette', layout.get('palette', style['palette']))
+    palette = pick('palettes', palette_name)
+    font_name = selection.get('font', style['font'])
+    typography = pick('fonts', font_name)
+    result = merge(merge(DEFAULTS, style['config']), layout['config'])
+    result['fonts'] = copy.deepcopy(typography['roles'])
+    present = list(dict.fromkeys(row['series'] for row in rows))
+    order = config.get('series_order', present)
+    if not order or len(set(order)) != len(order) or not set(present).issubset(order):
+        raise ValueError('series_order must be unique and include every plotted series')
+    if palette['kind'] == 'categorical':
+        if len(order) > len(palette['colors']):
+            raise ValueError(f'{palette_name} supports at most {len(palette["colors"])} series; choose another palette')
+        colors = dict(zip(order, palette['colors']))
+    else:
+        roles = config.get('series_roles', {})
+        if not set(order).issubset(roles) or set(roles.values())-set(palette['roles']):
+            raise ValueError(f'{palette_name} needs series_roles using {list(palette["roles"])}')
+        colors = {key: palette['roles'][roles[key]] for key in order}
+    result['palette'] = {key: {'fill': color, 'edge': color, 'label': '#20252c'}
+                         for key, color in colors.items()}
+    result['figure']['background'] = palette.get('background', result['figure']['background'])
+    explicit = {key: value for key, value in config.items() if key != 'preset'}
+    result = merge(result, explicit)
+    if 'panels' not in config:
+        result['panels'] = [{'id': key} for key in dict.fromkeys(row['panel'] for row in rows)]
+    for panel in result['panels']:
+        members = {row['series'] for row in rows if row['panel'] == panel['id']}
+        legend = panel.setdefault('legend', {})
+        if result['legend_defaults']['order'] is None:
+            legend.setdefault('order', [key for key in order if key in members])
+    result['resolved_preset'] = dict(style=style_name, layout=layout_name, palette=palette_name, font=font_name)
+    return resolve_config(result, rows)
+
+
+def opacity(value, name):
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not 0 <= value <= 1:
+        raise ValueError(f'{name} must be a finite number between 0 and 1')
+    return value
+
+
+def bar_colors(palette, style):
+    """Separate face/edge RGBA; no artist-wide alpha that fades both together."""
+    colors = []
+    for part in ('fill', 'edge'):
+        alpha = style[f'bar_{part}_alpha']
+        if alpha is None:
+            alpha = style['bar_alpha']
+        if palette.get(f'{part}_alpha') is not None:
+            alpha = palette[f'{part}_alpha']
+        alpha = opacity(alpha, f'{part}_alpha')
+        colors.append(matplotlib.colors.to_rgba(palette[part], alpha))
+    return colors
+
+
+def read_config(path):
+    path = Path(path)
+    config = json.loads(path.read_text(encoding='utf-8-sig'))
+    for icon in config.get('icons', []):
+        if 'image' in icon:
+            icon['image'] = str((path.parent/icon['image']).resolve())
+    return config
 
 
 def apply_override(config, assignment):
@@ -151,7 +249,10 @@ def font(config, role='light', size=9, font_dir=None):
 
 def positions(rows, style):
     """Explicit positions preserve measured layouts; otherwise arrange all groups."""
-    explicit = ['x' in row for row in rows]
+    mode = style['position_mode']
+    if mode not in ('data', 'auto'):
+        raise ValueError('position_mode must be data or auto')
+    explicit = ['x' in row and mode == 'data' for row in rows]
     if any(explicit) and not all(explicit):
         raise ValueError('Explicit x positions must be supplied for every row in a panel')
     if all(explicit):
@@ -237,8 +338,8 @@ def add_legend(ax, panel, rows, style, config, font_dir):
     order=spec['order'] if spec['order'] is not None else present
     if len(set(order))!=len(order) or set(order)!=set(present):
         raise ValueError('Legend order must include each plotted series exactly once')
-    handles=[Patch(facecolor=config['palette'][key]['fill'],edgecolor=config['palette'][key]['edge'],
-                   linewidth=style['bar_edge_width'],alpha=style['bar_alpha'],
+    handles=[Patch(facecolor=bar_colors(config['palette'][key],style)[0],edgecolor=bar_colors(config['palette'][key],style)[1],
+                   linewidth=style['bar_edge_width'],
                    hatch=config['palette'][key].get('hatch',style['hatch'])) for key in order]
     legend=ax.legend(handles,[spec['labels'].get(key,key) for key in order],
         prop=font(config,spec['font'],spec['size'],font_dir),loc=spec['loc'],
@@ -260,28 +361,34 @@ def add_gain(fig, spec, artists, config, font_dir):
         raise ValueError('Gain arrows currently require vertical panels')
     width,height=config['figure']['size_pt'];size=np.array([width,height])
     ax=before['axis']
-    def point(item):
-        return fig.transFigure.inverted().transform(ax.transData.transform((item['x'],item['value'])))*size
-    start=point(before)+[spec['tail_dx_pt'],spec['tail_pad_pt']]
-    end=point(after)+[spec['tip_dx_pt'],spec['tip_pad_pt']]
+    def point(item, anchor):
+        bar=item['bar']
+        positions={'left':bar.get_x(),'center':item['x'],'right':bar.get_x()+bar.get_width()}
+        if anchor not in positions:
+            raise ValueError('Gain anchors must be left, center or right')
+        return fig.transFigure.inverted().transform(ax.transData.transform((positions[anchor],item['value'])))*size
+    start=point(before,spec['tail_anchor'])+[spec['tail_dx_pt'],spec['tail_pad_pt']]
+    end=point(after,spec['tip_anchor'])+[spec['tip_dx_pt'],spec['tip_pad_pt']]
     delta=end-start
     path=MplPath(np.array([start,start+delta*spec['control1'],start+delta*spec['control2'],end])/size,
                  [MplPath.MOVETO,MplPath.CURVE4,MplPath.CURVE4,MplPath.CURVE4])
     color=spec['color'] or config['palette'][after['series']][spec['palette_part']]
     arrow=FancyArrowPatch(path=path,transform=fig.transFigure,
         arrowstyle=f'-|>,head_length={spec["head_length_pt"]},head_width={spec["head_width_pt"]/2}',
-        mutation_scale=1,linewidth=spec['linewidth'],color=color,clip_on=spec['clip'],zorder=7)
+        mutation_scale=1,linewidth=spec['linewidth'],color=color,alpha=opacity(spec['alpha'],'gain.alpha'),
+        clip_on=spec['clip'],zorder=7)
     key=f'gain-{spec["from"]}-{spec["to"]}'
     arrow.set_gid(key+'-arrow');fig.add_artist(arrow)
     value=(after['value']-before['value'])*spec['label_scale']
     position=(start+delta*spec['label_position']+spec['label_offset_pt'])/size
     label=fig.text(*position,format(value,spec['label_format'])+spec['label_suffix'],ha='center',va='center',
-                   color=color,fontproperties=font(config,spec['label_font'],spec['label_size'],font_dir))
+                   color=color,alpha=opacity(spec['label_alpha'],'gain.label_alpha'),
+                   fontproperties=font(config,spec['label_font'],spec['label_size'],font_dir))
     label.set_gid(key+'-label')
 
 
 def build_figure(config, rows, font_dir=None):
-    config = merge(DEFAULTS, config)
+    config = resolve_config(config, rows)
     ids = [p['id'] for p in config['panels']]
     if not ids or len(set(ids)) != len(ids):
         raise ValueError('Panels need unique ids')
@@ -351,15 +458,19 @@ def build_figure(config, rows, font_dir=None):
             (ax.set_xticklabels if vertical else ax.set_yticklabels)(labels, rotation=style['category_rotation'])
             for label in (ax.get_yticklabels() if vertical else ax.get_xticklabels()):
                 label.set_fontproperties(font(config,style['tick_font'],style['tick_size'],font_dir))
+                label.set_alpha(opacity(style['text_alpha'],'text_alpha'))
             for label in (ax.get_xticklabels() if vertical else ax.get_yticklabels()):
                 label.set_fontproperties(font(config,style['category_font'],style['category_size'],font_dir))
+                label.set_alpha(opacity(style['text_alpha'],'text_alpha'))
             if style['invert_categories']:
                 (ax.invert_xaxis if vertical else ax.invert_yaxis)()
             if style['ylabel']:
                 setter = ax.set_ylabel if vertical else ax.set_xlabel
                 setter(style['ylabel'], labelpad=style['label_pad'], color=style['text_color'],
+                       alpha=opacity(style['text_alpha'],'text_alpha'),
                        fontproperties=font(config,style['label_font'],style['label_size'],font_dir))
             grid = style['grid']
+            opacity(grid['alpha'], 'grid.alpha')
             if grid['kind'] == 'dots':
                 cat_extent = rect[2] if vertical else rect[3]
                 if grid['spacing_pt'] <= 0 or grid['value_step'] <= 0:
@@ -381,8 +492,9 @@ def build_figure(config, rows, font_dir=None):
                 raise ValueError('grid.kind must be dots, lines, or none')
             for x, row in zip(xx, rr):
                 palette = config['palette'][row['series']]
-                common = dict(color=palette['fill'], edgecolor=palette['edge'], linewidth=style['bar_edge_width'],
-                              alpha=style['bar_alpha'], hatch=palette.get('hatch',style['hatch']),zorder=2)
+                fill, edge = bar_colors(palette, style)
+                common = dict(color=fill, edgecolor=edge, linewidth=style['bar_edge_width'],
+                              hatch=palette.get('hatch',style['hatch']),zorder=2)
                 if vertical:
                     bar = ax.bar(x,row['value']-style['baseline'],width=style['bar_width'],bottom=style['baseline'],**common)[0]
                 else:
@@ -393,7 +505,8 @@ def build_figure(config, rows, font_dir=None):
                     error = ax.errorbar(x if vertical else row['value'],row['value'] if vertical else x,
                                        **({'yerr':error_values} if vertical else {'xerr':error_values}),
                                        fmt='none',ecolor=style['error_color'],elinewidth=style['error_width'],
-                                       capsize=style['error_cap'],capthick=style['error_width'],zorder=4)
+                                       capsize=style['error_cap'],capthick=style['error_width'],
+                                       alpha=opacity(style['error_alpha'],'error_alpha'),zorder=4)
                 label = None
                 if style['value_labels']:
                     anchor = row.get('high',row['value']) if style['value_anchor']=='high' else row['value']
@@ -403,6 +516,7 @@ def build_figure(config, rows, font_dir=None):
                         textcoords='offset points',ha='center' if vertical else 'left',
                         va='baseline' if vertical else 'center',
                         color=style['value_color'] or palette.get('label',palette['edge']),
+                        alpha=opacity(style['value_alpha'] if palette.get('label_alpha') is None else palette['label_alpha'],'value_alpha'),
                         bbox={'boxstyle':f'square,pad={style["value_background_pad"]}',
                               'facecolor':config['figure']['background'],'edgecolor':'none'} if style['value_background'] else None,
                         fontproperties=font(config,style['value_font'],style['value_size'],font_dir),annotation_clip=False)
@@ -418,7 +532,7 @@ def build_figure(config, rows, font_dir=None):
             color = a.get('color','#111111')
             if a.get('palette'): color=config['palette'][a['palette']][a.get('palette_part','edge')]
             props=dict(ha=a.get('ha','left'),va=a.get('va','baseline'),rotation=a.get('rotation',0),rotation_mode='anchor',color=color,
-                       linespacing=a.get('linespacing',1.2),
+                       linespacing=a.get('linespacing',1.2),alpha=opacity(a.get('alpha',1),'annotation.alpha'),
                        fontproperties=font(config,a.get('font','light'),a['size'],font_dir))
             if a.get('box'):props['bbox']=a['box']
             fig.text(a['position_pt'][0]/w,a['position_pt'][1]/h,a['text'],**props)
@@ -452,14 +566,18 @@ def build_figure(config, rows, font_dir=None):
     return fig, artists
 
 
-def render(config, rows, output, font_dir=None):
-    config=merge(DEFAULTS,config)
-    fig,artists=build_figure(config,rows,font_dir)
+def export_figure(fig, config, output):
     output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
     with plt.rc_context({'pdf.fonttype':42,'svg.fonttype':'none' if config['figure']['svg_text'] else 'path'}):
         for ext in config['figure']['formats']:
             if ext not in ('png','pdf','svg'): raise ValueError(f'Unsupported export {ext}')
             fig.savefig(output.with_suffix('.'+ext),dpi=config['figure']['dpi'],facecolor=config['figure']['background'])
+
+
+def render(config, rows, output, font_dir=None):
+    config=resolve_config(config,rows)
+    fig,artists=build_figure(config,rows,font_dir)
+    export_figure(fig,config,output)
     plt.close(fig)
     return len(artists)
 
@@ -472,20 +590,35 @@ def main():
     parser.add_argument('--font-dir',type=Path,help='Optional directory with locally licensed font files')
     parser.add_argument('--set',action='append',default=[],metavar='PATH=JSON',help='Override any declared parameter')
     parser.add_argument('--defaults',action='store_true',help='Print complete default parameter groups')
+    parser.add_argument('--list-presets',action='store_true',help='List styles, layouts, palettes and font profiles')
+    for key in ('style','layout','palette','font'):
+        parser.add_argument('--'+key,help=f'Select a {key} preset; explicit config fields still win')
+    parser.add_argument('--resolved-config',type=Path,help='Write the complete resolved configuration for fine adjustments')
     args=parser.parse_args()
     if args.defaults: print(json.dumps(DEFAULTS,indent=2));return
-    if args.config is None: parser.error('--config is required')
-    config=merge(DEFAULTS,json.loads(args.config.read_text(encoding='utf8')))
-    for assignment in args.set: apply_override(config,assignment)
-    for icon in config['icons']:
-        if 'image' in icon: icon['image']=str(args.config.parent/icon['image'])
+    if args.list_presets:
+        print(json.dumps({section:{key:value['description'] for key,value in choices.items()}
+                          for section,choices in preset_catalog().items() if section in ('styles','layouts','palettes','fonts')},
+                         ensure_ascii=False,indent=2));return
+    if args.config is None and args.data is None: parser.error('Supply --config or --data')
+    config=read_config(args.config) if args.config else {'preset':{}}
+    for key in ('style','layout','palette','font'):
+        if getattr(args,key) is not None: config.setdefault('preset',{})[key]=getattr(args,key)
+    if args.data is None and 'data' not in config: parser.error('Configuration needs data or --data')
     data=args.data or args.config.parent/config['data']
     rows=load_data(data)
-    count=render(config,rows,args.output or args.config.parent/'figure',args.font_dir)
+    config=resolve_config(config,rows)
+    for assignment in args.set: apply_override(config,assignment)
+    if args.resolved_config:
+        args.resolved_config.parent.mkdir(parents=True,exist_ok=True)
+        snapshot=merge(config,{'data':str(data.resolve())})
+        args.resolved_config.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+    output=args.output or (args.config.parent/'figure' if args.config else Path('output/figure'))
+    count=render(config,rows,output,args.font_dir)
     missing=[name for name,s in config['fonts'].items() if s.get('file') and not
              ((args.font_dir and s.get('file') and (args.font_dir/s['file']).is_file()) or
               (s.get('file') and (Path(__file__).parent/'fonts'/s['file']).is_file()))]
-    print(json.dumps({'rendered_bars':count,'font_fallback_roles':missing,'output':str(args.output or args.config.parent/'figure')}))
+    print(json.dumps({'rendered_bars':count,'font_fallback_roles':missing,'output':str(output)}))
 
 
 if __name__=='__main__':

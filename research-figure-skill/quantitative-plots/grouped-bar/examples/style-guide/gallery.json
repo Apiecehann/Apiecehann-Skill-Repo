@@ -1,0 +1,198 @@
+{
+  "boards": [
+    {
+      "name": "styles",
+      "title": "STYLE PRESETS",
+      "subtitle": "Same 15 SAGA measurements; palette and layout held fixed.",
+      "columns": 3,
+      "cases": [
+        {
+          "title": "paper-clean",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "style": "paper-clean"
+            }
+          }
+        },
+        {
+          "title": "soft-outline",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "style": "soft-outline"
+            }
+          }
+        },
+        {
+          "title": "serif-emphasis",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "style": "serif-emphasis"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "palettes",
+      "title": "PALETTE PRESETS",
+      "subtitle": "Same measurements and typography; color roles change.",
+      "columns": 3,
+      "cases": [
+        {
+          "title": "tol-bright",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "palette": "tol-bright"
+            },
+            "series_roles": {
+              "dp3": "baseline-1",
+              "code-diffuser": "baseline-2",
+              "pi0": "baseline-3",
+              "saga-language": "focus-secondary",
+              "saga-point": "focus"
+            }
+          }
+        },
+        {
+          "title": "tol-muted",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "palette": "tol-muted"
+            },
+            "series_roles": {
+              "dp3": "baseline-1",
+              "code-diffuser": "baseline-2",
+              "pi0": "baseline-3",
+              "saga-language": "focus-secondary",
+              "saga-point": "focus"
+            }
+          }
+        },
+        {
+          "title": "gray-purple",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "palette": "gray-purple"
+            },
+            "series_roles": {
+              "dp3": "baseline-1",
+              "code-diffuser": "baseline-2",
+              "pi0": "baseline-3",
+              "saga-language": "focus-secondary",
+              "saga-point": "focus"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "fonts",
+      "title": "FONT PROFILES",
+      "subtitle": "Same values, colors and point sizes; only the font profile changes.",
+      "columns": 3,
+      "cases": [
+        {
+          "title": "sans",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "font": "sans"
+            }
+          }
+        },
+        {
+          "title": "serif",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "font": "serif"
+            }
+          }
+        },
+        {
+          "title": "mono",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "font": "mono"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "opacity",
+      "title": "FILL OPACITY",
+      "subtitle": "Same colors; outlines, legend text and axis labels remain opaque.",
+      "columns": 3,
+      "cases": [
+        {
+          "title": "Fill 35% / edge 100%",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "style": "soft-outline"
+            },
+            "panel_defaults": {
+              "bar_fill_alpha": 0.35
+            }
+          }
+        },
+        {
+          "title": "Fill 65% / edge 100%",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "style": "soft-outline"
+            },
+            "panel_defaults": {
+              "bar_fill_alpha": 0.65
+            }
+          }
+        },
+        {
+          "title": "Fill 100% / edge 100%",
+          "config": "config.json",
+          "override": {
+            "preset": {
+              "style": "soft-outline"
+            },
+            "panel_defaults": {
+              "bar_fill_alpha": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "layouts",
+      "title": "LAYOUT RECIPES",
+      "subtitle": "Reusable layouts with SAGA / VLA-OS data; axes and units are explicit.",
+      "columns": 2,
+      "cases": [
+        {
+          "title": "Grouped / 5 methods",
+          "config": "config.json"
+        },
+        {
+          "title": "Horizontal / 8 categories",
+          "config": "horizontal.json"
+        },
+        {
+          "title": "Paired / data-linked gains",
+          "config": "paired.json"
+        },
+        {
+          "title": "Grouped / 2 methods",
+          "config": "two-series.json"
+        }
+      ]
+    }
+  ]
+}

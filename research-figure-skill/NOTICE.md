@@ -15,3 +15,7 @@
 - `planning-gains`：[VLA-OS 项目页](https://nus-lins-lab.github.io/vlaos/) Finding 6 的柱图版式，采用用户提供的两行标题。数值核对自[论文表格](https://openreview.net/pdf/05a810d8dce16f520e115b9ee80b8096e6512276.pdf)：73.3→79.1、74.2→79.8。使用线性坐标和数据计算差值，未沿用位图中略有偏差的柱高／刻度对齐。
 
 `scripts/fonts/B612Mono-Regular.ttf` 来自 [Google Fonts / B612 Mono](https://github.com/google/fonts/tree/main/ofl/b612mono)，使用 SIL Open Font License 1.1，完整许可保存在同目录 `OFL.txt`。字体文件未修改。Graphik 字体文件及原始参考图不进入仓库。
+
+`examples/style-guide` 使用上述示例数据展示预设迁移。`data.csv` 筛选 SAGA 的 Task 2-1、Task 2-2、Task 3-3；`paired-data.csv` 保留四个 VLA-OS 数值，仅将系列重命名为 before／after。没有生成新的实验数值。原始六份配置与数据保留。
+
+`tol-bright`、`tol-muted` 和 `blue-orange` 的颜色取自 [Paul Tol's Notes](https://sronpersonalpages.nl/~pault/)（2026-10-19 核对）；前两者保留作者默认顺序，蓝／橙为 vibrant 色板的两个颜色。这里只记录颜色坐标与归属，未复制网站图片或绘图代码。`gray-purple`、`paired-blue-green` 从本仓库的 SAGA、VLA-OS 配置提取。新字体预设调用 Matplotlib 环境提供的 DejaVu 字体，没有另行分发新字体文件。
