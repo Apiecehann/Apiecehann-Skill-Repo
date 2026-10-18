@@ -1,0 +1,11 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.txt text eol=lf
+# Matplotlib emits spaces inside multiline SVG path attributes.
+*.svg text eol=lf -whitespace linguist-generated=true
+*.png binary
+*.pdf binary
+*.ttf binary
