@@ -1,0 +1,16 @@
+id,panel,group,series,value,lower,evidence
+g1s1,study,G1,S1,0.42,0.18,MOCK-layout-test
+g1s2,study,G1,S2,0.68,0.28,MOCK-layout-test
+g1s3,study,G1,S3,0.55,0.24,MOCK-layout-test
+g1s4,study,G1,S4,0.81,0.34,MOCK-layout-test
+g1s5,study,G1,S5,0.61,0.27,MOCK-layout-test
+g2s1,study,G2,S1,0.66,0.27,MOCK-layout-test
+g2s2,study,G2,S2,0.48,0.21,MOCK-layout-test
+g2s3,study,G2,S3,0.77,0.32,MOCK-layout-test
+g2s4,study,G2,S4,0.59,0.25,MOCK-layout-test
+g2s5,study,G2,S5,0.88,0.39,MOCK-layout-test
+g3s1,study,G3,S1,0.52,0.22,MOCK-layout-test
+g3s2,study,G3,S2,0.73,0.31,MOCK-layout-test
+g3s3,study,G3,S3,0.64,0.26,MOCK-layout-test
+g3s4,study,G3,S4,0.9,0.38,MOCK-layout-test
+g3s5,study,G3,S5,0.75,0.33,MOCK-layout-test

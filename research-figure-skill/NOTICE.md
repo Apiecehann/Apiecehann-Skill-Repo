@@ -19,3 +19,5 @@
 `examples/style-guide` 使用上述示例数据展示预设迁移。`data.csv` 筛选 SAGA 的 Task 2-1、Task 2-2、Task 3-3；`paired-data.csv` 保留四个 VLA-OS 数值，仅将系列重命名为 before／after。没有生成新的实验数值。原始六份配置与数据保留。
 
 `tol-bright`、`tol-muted` 和 `blue-orange` 的颜色取自 [Paul Tol's Notes](https://sronpersonalpages.nl/~pault/)（2026-10-19 核对）；前两者保留作者默认顺序，蓝／橙为 vibrant 色板的两个颜色。这里只记录颜色坐标与归属，未复制网站图片或绘图代码。`gray-purple`、`paired-blue-green` 从本仓库的 SAGA、VLA-OS 配置提取。新字体预设调用 Matplotlib 环境提供的 DejaVu 字体，没有另行分发新字体文件。
+
+`examples/palette-study` 是配色控制试验，全部数值明确标注 MOCK，仅用于比较视觉，不是新增实验结果。50 组颜色坐标来自 ColorBrewer、CARTO、Paul Tol、Scientific colour maps、Matplotlib、Colorcet 与 ggsci；逐项归属、来源及选色方式见该目录的 `candidates.json` 和 README。只保存配方与本仓库生成的比较图，未复制色卡网站截图或第三方绘图实现。ggsci 的 NPG / AAAS / NEJM 为期刊风格启发的配方，不是出版方官方要求。配色诊断调用 Colorspacious 1.1.2，未复制其模型实现。

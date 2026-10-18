@@ -15,7 +15,11 @@
 
 ## 选风格、布局和配色
 
-先看 [配置共性、配色与字体索引](examples/style-guide/README.md) 或 [五页成图对照 PDF](examples/style-guide/catalog.pdf)。所有预设定义集中在 [`scripts/presets.json`](scripts/presets.json)。
+配置结构见 [配置共性、配色与字体索引](examples/style-guide/README.md) 或 [五页成图对照 PDF](examples/style-guide/catalog.pdf)。配色请同时看新的 [100 个候选研究与 10 组短名单](examples/palette-study/README.md)：它根据实际柱图、纹理及色觉模拟重新检查推荐范围，旧预设的存在不代表已获视觉认可。预设定义集中在 [`scripts/presets.json`](scripts/presets.json)。
+
+| 新的配色比较 | 预览（点击放大） |
+|---|---|
+| [筛选依据与使用限制](examples/palette-study/README.md) · [成图对照 PDF](examples/palette-study/shortlist.pdf) · [JSON 配方](examples/palette-study/selected-palettes.json)<br>[全部 100 个候选](examples/palette-study/overview.png) · [Illustrator 待验证 SVG 色卡](examples/palette-study/swatches.svg) | <a href="examples/palette-study/swatches.png"><img src="examples/palette-study/swatches.png" width="380" alt="10 组配色短名单及白底 HEX"></a> |
 
 | 选择 | 当前可用 | 成图对照 |
 |---|---|---|

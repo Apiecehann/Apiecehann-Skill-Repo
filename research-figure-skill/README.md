@@ -20,14 +20,16 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 输出 `output/my-figure.png`、`.pdf`、`.svg`。日常使用只需选择风格、布局和配色；需要精调时展开底层参数。查看 [配置共性、配色与字体索引](quantitative-plots/grouped-bar/examples/style-guide/README.md) 和 [五页成图对照 PDF](quantitative-plots/grouped-bar/examples/style-guide/catalog.pdf)。原始复刻所用的 Graphik 商业字体不随仓库提供；精确字体入口仍为 `--font-dir`，详见图型 README。
 
+重新选配色时看 [100 个候选研究与 10 组短名单](quantitative-plots/grouped-bar/examples/palette-study/README.md)：包含普通柱图、下层纹理、色觉模拟和灰度对照，以及可供 Illustrator 检查的 SVG / PDF 色卡。短名单标注适用系列数与限制，尚未替换现有预设。
+
 图件生成依赖脚本、配置、CSV 和随附的开放字体，不需要访问小红书或原始参考图片。来源与数值恢复方式记录在各示例配置的 `provenance` 中。示例数据用于图件复刻，不代表使用者的实验结果。
 
 新增示例覆盖五系列任务比较、横向百分比和带增益箭头的前后对照。旧示例默认显示 `Okay`、`Alright`、`Chicken` 等可读标签；原始换行 token 写法可以通过配置恢复。
 
 ```text
 quantitative-plots/grouped-bar/
-├── scripts/       # render.py、presets.json、catalog.py、测试及开放字体
-└── examples/      # 六个原始示例，以及 style-guide 的配置、索引和对照页
+├── scripts/       # render.py、预设、catalog.py、palette_audit.py、测试及开放字体
+└── examples/      # 六个原始示例、style-guide、palette-study
 ```
 
 运行行为检查：

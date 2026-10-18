@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "P001",
+    "source_id": "colorbrewer--Set2",
+    "name": "Set2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#66c2a5",
+      "#fc8d62",
+      "#8da0cb",
+      "#e78ac3",
+      "#a6d854"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set2"
+  },
+  {
+    "id": "P002",
+    "source_id": "colorbrewer--Set2",
+    "name": "Set2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#66c2a5",
+      "#fc8d62",
+      "#8da0cb",
+      "#e78ac3",
+      "#a6d854"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set2"
+  },
+  {
+    "id": "P003",
+    "source_id": "colorbrewer--Accent",
+    "name": "Accent",
+    "family": "ColorBrewer",
+    "colors": [
+      "#7fc97f",
+      "#beaed4",
+      "#fdc086",
+      "#ffff99",
+      "#386cb0"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Accent"
+  },
+  {
+    "id": "P004",
+    "source_id": "colorbrewer--Accent",
+    "name": "Accent",
+    "family": "ColorBrewer",
+    "colors": [
+      "#7fc97f",
+      "#beaed4",
+      "#fdc086",
+      "#ffff99",
+      "#386cb0"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Accent"
+  },
+  {
+    "id": "P005",
+    "source_id": "colorbrewer--Set1",
+    "name": "Set1",
+    "family": "ColorBrewer",
+    "colors": [
+      "#e41a1c",
+      "#377eb8",
+      "#4daf4a",
+      "#984ea3",
+      "#ff7f00"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set1"
+  },
+  {
+    "id": "P006",
+    "source_id": "colorbrewer--Set1",
+    "name": "Set1",
+    "family": "ColorBrewer",
+    "colors": [
+      "#e41a1c",
+      "#377eb8",
+      "#4daf4a",
+      "#984ea3",
+      "#ff7f00"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set1"
+  },
+  {
+    "id": "P007",
+    "source_id": "colorbrewer--Set3",
+    "name": "Set3",
+    "family": "ColorBrewer",
+    "colors": [
+      "#8dd3c7",
+      "#ffffb3",
+      "#bebada",
+      "#fb8072",
+      "#80b1d3"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set3"
+  },
+  {
+    "id": "P008",
+    "source_id": "colorbrewer--Set3",
+    "name": "Set3",
+    "family": "ColorBrewer",
+    "colors": [
+      "#8dd3c7",
+      "#ffffb3",
+      "#bebada",
+      "#fb8072",
+      "#80b1d3"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set3"
+  },
+  {
+    "id": "P009",
+    "source_id": "colorbrewer--Dark2",
+    "name": "Dark2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#1b9e77",
+      "#d95f02",
+      "#7570b3",
+      "#e7298a",
+      "#66a61e"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Dark2"
+  },
+  {
+    "id": "P010",
+    "source_id": "colorbrewer--Dark2",
+    "name": "Dark2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#1b9e77",
+      "#d95f02",
+      "#7570b3",
+      "#e7298a",
+      "#66a61e"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Dark2"
+  },
+  {
+    "id": "P011",
+    "source_id": "colorbrewer--Paired",
+    "name": "Paired",
+    "family": "ColorBrewer",
+    "colors": [
+      "#a6cee3",
+      "#1f78b4",
+      "#b2df8a",
+      "#33a02c",
+      "#fb9a99"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Paired"
+  },
+  {
+    "id": "P012",
+    "source_id": "colorbrewer--Paired",
+    "name": "Paired",
+    "family": "ColorBrewer",
+    "colors": [
+      "#a6cee3",
+      "#1f78b4",
+      "#b2df8a",
+      "#33a02c",
+      "#fb9a99"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Paired"
+  },
+  {
+    "id": "P013",
+    "source_id": "colorbrewer--Pastel2",
+    "name": "Pastel2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#b3e2cd",
+      "#fdcdac",
+      "#cbd5e8",
+      "#f4cae4",
+      "#e6f5c9"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Pastel2"
+  },
+  {
+    "id": "P014",
+    "source_id": "colorbrewer--Pastel2",
+    "name": "Pastel2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#b3e2cd",
+      "#fdcdac",
+      "#cbd5e8",
+      "#f4cae4",
+      "#e6f5c9"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Pastel2"
+  },
+  {
+    "id": "P015",
+    "source_id": "colorbrewer--Pastel1",
+    "name": "Pastel1",
+    "family": "ColorBrewer",
+    "colors": [
+      "#fbb4ae",
+      "#b3cde3",
+      "#ccebc5",
+      "#decbe4",
+      "#fed9a6"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Pastel1"
+  },
+  {
+    "id": "P016",
+    "source_id": "colorbrewer--Pastel1",
+    "name": "Pastel1",
+    "family": "ColorBrewer",
+    "colors": [
+      "#fbb4ae",
+      "#b3cde3",
+      "#ccebc5",
+      "#decbe4",
+      "#fed9a6"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Pastel1"
+  },
+  {
+    "id": "P017",
+    "source_id": "carto--Antique",
+    "name": "Antique",
+    "family": "CARTO",
+    "colors": [
+      "#855C75",
+      "#D9AF6B",
+      "#AF6458",
+      "#736F4C",
+      "#526A83"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Antique"
+  },
+  {
+    "id": "P018",
+    "source_id": "carto--Antique",
+    "name": "Antique",
+    "family": "CARTO",
+    "colors": [
+      "#855C75",
+      "#D9AF6B",
+      "#AF6458",
+      "#736F4C",
+      "#526A83"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Antique"
+  },
+  {
+    "id": "P019",
+    "source_id": "carto--Bold",
+    "name": "Bold",
+    "family": "CARTO",
+    "colors": [
+      "#7F3C8D",
+      "#11A579",
+      "#3969AC",
+      "#F2B701",
+      "#E73F74"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Bold"
+  },
+  {
+    "id": "P020",
+    "source_id": "carto--Bold",
+    "name": "Bold",
+    "family": "CARTO",
+    "colors": [
+      "#7F3C8D",
+      "#11A579",
+      "#3969AC",
+      "#F2B701",
+      "#E73F74"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Bold"
+  },
+  {
+    "id": "P021",
+    "source_id": "carto--Pastel",
+    "name": "Pastel",
+    "family": "CARTO",
+    "colors": [
+      "#66C5CC",
+      "#F6CF71",
+      "#F89C74",
+      "#DCB0F2",
+      "#87C55F"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Pastel"
+  },
+  {
+    "id": "P022",
+    "source_id": "carto--Pastel",
+    "name": "Pastel",
+    "family": "CARTO",
+    "colors": [
+      "#66C5CC",
+      "#F6CF71",
+      "#F89C74",
+      "#DCB0F2",
+      "#87C55F"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Pastel"
+  },
+  {
+    "id": "P023",
+    "source_id": "carto--Prism",
+    "name": "Prism",
+    "family": "CARTO",
+    "colors": [
+      "#5F4690",
+      "#1D6996",
+      "#38A6A5",
+      "#0F8554",
+      "#73AF48"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Prism"
+  },
+  {
+    "id": "P024",
+    "source_id": "carto--Prism",
+    "name": "Prism",
+    "family": "CARTO",
+    "colors": [
+      "#5F4690",
+      "#1D6996",
+      "#38A6A5",
+      "#0F8554",
+      "#73AF48"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Prism"
+  },
+  {
+    "id": "P025",
+    "source_id": "ggsci--npg",
+    "name": "NPG",
+    "family": "ggsci",
+    "colors": [
+      "#E64B35",
+      "#4DBBD5",
+      "#00A087",
+      "#3C5488",
+      "#F39B7F"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://nanx.me/ggsci/reference/pal_npg.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "NPG"
+  },
+  {
+    "id": "P026",
+    "source_id": "ggsci--npg",
+    "name": "NPG",
+    "family": "ggsci",
+    "colors": [
+      "#E64B35",
+      "#4DBBD5",
+      "#00A087",
+      "#3C5488",
+      "#F39B7F"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://nanx.me/ggsci/reference/pal_npg.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "NPG"
+  },
+  {
+    "id": "P027",
+    "source_id": "carto--Vivid",
+    "name": "Vivid",
+    "family": "CARTO",
+    "colors": [
+      "#E58606",
+      "#5D69B1",
+      "#52BCA3",
+      "#99C945",
+      "#CC61B0"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Vivid"
+  },
+  {
+    "id": "P028",
+    "source_id": "carto--Vivid",
+    "name": "Vivid",
+    "family": "CARTO",
+    "colors": [
+      "#E58606",
+      "#5D69B1",
+      "#52BCA3",
+      "#99C945",
+      "#CC61B0"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Vivid"
+  },
+  {
+    "id": "P029",
+    "source_id": "paul-tol--bright",
+    "name": "bright",
+    "family": "Paul Tol",
+    "colors": [
+      "#4477AA",
+      "#EE6677",
+      "#228833",
+      "#CCBB44",
+      "#66CCEE"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "bright"
+  },
+  {
+    "id": "P030",
+    "source_id": "paul-tol--bright",
+    "name": "bright",
+    "family": "Paul Tol",
+    "colors": [
+      "#4477AA",
+      "#EE6677",
+      "#228833",
+      "#CCBB44",
+      "#66CCEE"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "bright"
+  },
+  {
+    "id": "P031",
+    "source_id": "paul-tol--vibrant",
+    "name": "vibrant",
+    "family": "Paul Tol",
+    "colors": [
+      "#EE7733",
+      "#0077BB",
+      "#33BBEE",
+      "#EE3377",
+      "#CC3311"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "vibrant"
+  },
+  {
+    "id": "P032",
+    "source_id": "paul-tol--vibrant",
+    "name": "vibrant",
+    "family": "Paul Tol",
+    "colors": [
+      "#EE7733",
+      "#0077BB",
+      "#33BBEE",
+      "#EE3377",
+      "#CC3311"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "vibrant"
+  },
+  {
+    "id": "P033",
+    "source_id": "paul-tol--muted",
+    "name": "muted",
+    "family": "Paul Tol",
+    "colors": [
+      "#CC6677",
+      "#332288",
+      "#DDCC77",
+      "#117733",
+      "#88CCEE"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "muted"
+  },
+  {
+    "id": "P034",
+    "source_id": "paul-tol--muted",
+    "name": "muted",
+    "family": "Paul Tol",
+    "colors": [
+      "#CC6677",
+      "#332288",
+      "#DDCC77",
+      "#117733",
+      "#88CCEE"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "muted"
+  },
+  {
+    "id": "P035",
+    "source_id": "paul-tol--dark",
+    "name": "dark",
+    "family": "Paul Tol",
+    "colors": [
+      "#4477BB",
+      "#CC4466",
+      "#228833",
+      "#2255AA",
+      "#993366"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "dark"
+  },
+  {
+    "id": "P036",
+    "source_id": "paul-tol--dark",
+    "name": "dark",
+    "family": "Paul Tol",
+    "colors": [
+      "#4477BB",
+      "#CC4466",
+      "#228833",
+      "#2255AA",
+      "#993366"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "dark"
+  },
+  {
+    "id": "P037",
+    "source_id": "paul-tol--pale",
+    "name": "pale",
+    "family": "Paul Tol",
+    "colors": [
+      "#AACCEE",
+      "#CCEEFF",
+      "#BBDDBB",
+      "#EEEEBB",
+      "#FFBBCC"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "pale"
+  },
+  {
+    "id": "P038",
+    "source_id": "paul-tol--pale",
+    "name": "pale",
+    "family": "Paul Tol",
+    "colors": [
+      "#AACCEE",
+      "#CCEEFF",
+      "#BBDDBB",
+      "#EEEEBB",
+      "#FFBBCC"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "pale"
+  },
+  {
+    "id": "P039",
+    "source_id": "paul-tol--light",
+    "name": "light",
+    "family": "Paul Tol",
+    "colors": [
+      "#77AADD",
+      "#EE8866",
+      "#EEDD88",
+      "#FFAABB",
+      "#99DDFF"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "light"
+  },
+  {
+    "id": "P040",
+    "source_id": "paul-tol--light",
+    "name": "light",
+    "family": "Paul Tol",
+    "colors": [
+      "#77AADD",
+      "#EE8866",
+      "#EEDD88",
+      "#FFAABB",
+      "#99DDFF"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "light"
+  },
+  {
+    "id": "P041",
+    "source_id": "scientific-colour-maps--actonS",
+    "name": "actonS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#2E214D",
+      "#E6E6F0",
+      "#C36D9A",
+      "#D4A6C4",
+      "#775A86"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "actonS"
+  },
+  {
+    "id": "P042",
+    "source_id": "scientific-colour-maps--actonS",
+    "name": "actonS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#2E214D",
+      "#E6E6F0",
+      "#C36D9A",
+      "#D4A6C4",
+      "#775A86"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "actonS"
+  },
+  {
+    "id": "P043",
+    "source_id": "scientific-colour-maps--bamakoS",
+    "name": "bamakoS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#00404C",
+      "#FFE599",
+      "#607D15",
+      "#B9A525",
+      "#2B5A34"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "bamakoS"
+  },
+  {
+    "id": "P044",
+    "source_id": "scientific-colour-maps--bamakoS",
+    "name": "bamakoS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#00404C",
+      "#FFE599",
+      "#607D15",
+      "#B9A525",
+      "#2B5A34"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "bamakoS"
+  },
+  {
+    "id": "P045",
+    "source_id": "scientific-colour-maps--batlowKS",
+    "name": "batlowKS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#04050A",
+      "#FDC0D6",
+      "#787C41",
+      "#39555F",
+      "#E5A160"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "batlowKS"
+  },
+  {
+    "id": "P046",
+    "source_id": "scientific-colour-maps--batlowKS",
+    "name": "batlowKS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#04050A",
+      "#FDC0D6",
+      "#787C41",
+      "#39555F",
+      "#E5A160"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "batlowKS"
+  },
+  {
+    "id": "P047",
+    "source_id": "scientific-colour-maps--batlowS",
+    "name": "batlowS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#011959",
+      "#FACCFA",
+      "#828231",
+      "#226061",
+      "#F19D6B"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "batlowS"
+  },
+  {
+    "id": "P048",
+    "source_id": "scientific-colour-maps--batlowS",
+    "name": "batlowS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#011959",
+      "#FACCFA",
+      "#828231",
+      "#226061",
+      "#F19D6B"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "batlowS"
+  },
+  {
+    "id": "P049",
+    "source_id": "scientific-colour-maps--batlowWS",
+    "name": "batlowWS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#FFFEFE",
+      "#011959",
+      "#7C8738",
+      "#E7AB84",
+      "#205F61"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "batlowWS"
+  },
+  {
+    "id": "P050",
+    "source_id": "scientific-colour-maps--batlowWS",
+    "name": "batlowWS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#FFFEFE",
+      "#011959",
+      "#7C8738",
+      "#E7AB84",
+      "#205F61"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "batlowWS"
+  },
+  {
+    "id": "P051",
+    "source_id": "scientific-colour-maps--bilbaoS",
+    "name": "bilbaoS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#F8F8F8",
+      "#4D0001",
+      "#A98565",
+      "#C0BAA2",
+      "#924946"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "bilbaoS"
+  },
+  {
+    "id": "P052",
+    "source_id": "scientific-colour-maps--bilbaoS",
+    "name": "bilbaoS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#F8F8F8",
+      "#4D0001",
+      "#A98565",
+      "#C0BAA2",
+      "#924946"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "bilbaoS"
+  },
+  {
+    "id": "P053",
+    "source_id": "scientific-colour-maps--budaS",
+    "name": "budaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#B301B3",
+      "#FFFF66",
+      "#CD857E",
+      "#BC4E90",
+      "#DCBE70"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "budaS"
+  },
+  {
+    "id": "P054",
+    "source_id": "scientific-colour-maps--budaS",
+    "name": "budaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#B301B3",
+      "#FFFF66",
+      "#CD857E",
+      "#BC4E90",
+      "#DCBE70"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "budaS"
+  },
+  {
+    "id": "P055",
+    "source_id": "scientific-colour-maps--davosS",
+    "name": "davosS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#00054A",
+      "#FDFDF4",
+      "#688B94",
+      "#2D5895",
+      "#B2C08F"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "davosS"
+  },
+  {
+    "id": "P056",
+    "source_id": "scientific-colour-maps--davosS",
+    "name": "davosS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#00054A",
+      "#FDFDF4",
+      "#688B94",
+      "#2D5895",
+      "#B2C08F"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "davosS"
+  },
+  {
+    "id": "P057",
+    "source_id": "scientific-colour-maps--devonS",
+    "name": "devonS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#2C1A4C",
+      "#F8F8FE",
+      "#778BDA",
+      "#28568C",
+      "#C6C1F3"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "devonS"
+  },
+  {
+    "id": "P058",
+    "source_id": "scientific-colour-maps--devonS",
+    "name": "devonS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#2C1A4C",
+      "#F8F8FE",
+      "#778BDA",
+      "#28568C",
+      "#C6C1F3"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "devonS"
+  },
+  {
+    "id": "P059",
+    "source_id": "scientific-colour-maps--glasgowS",
+    "name": "glasgowS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#361338",
+      "#DBD3FF",
+      "#6D702D",
+      "#702D06",
+      "#69A3A5"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "glasgowS"
+  },
+  {
+    "id": "P060",
+    "source_id": "scientific-colour-maps--glasgowS",
+    "name": "glasgowS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#361338",
+      "#DBD3FF",
+      "#6D702D",
+      "#702D06",
+      "#69A3A5"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "glasgowS"
+  },
+  {
+    "id": "P061",
+    "source_id": "scientific-colour-maps--hawaiiS",
+    "name": "hawaiiS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#8C0273",
+      "#B3F2FD",
+      "#9C951C",
+      "#6CD48C",
+      "#974E3E"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "hawaiiS"
+  },
+  {
+    "id": "P062",
+    "source_id": "scientific-colour-maps--hawaiiS",
+    "name": "hawaiiS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#8C0273",
+      "#B3F2FD",
+      "#9C951C",
+      "#6CD48C",
+      "#974E3E"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "hawaiiS"
+  },
+  {
+    "id": "P063",
+    "source_id": "scientific-colour-maps--imolaS",
+    "name": "imolaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#1A33B3",
+      "#FFFF66",
+      "#53857F",
+      "#91C36F",
+      "#305E9D"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "imolaS"
+  },
+  {
+    "id": "P064",
+    "source_id": "scientific-colour-maps--imolaS",
+    "name": "imolaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#1A33B3",
+      "#FFFF66",
+      "#53857F",
+      "#91C36F",
+      "#305E9D"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "imolaS"
+  },
+  {
+    "id": "P065",
+    "source_id": "scientific-colour-maps--lajollaS",
+    "name": "lajollaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#FFFFCC",
+      "#1A1A01",
+      "#DE764F",
+      "#7F3B34",
+      "#F2C360"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "lajollaS"
+  },
+  {
+    "id": "P066",
+    "source_id": "scientific-colour-maps--lajollaS",
+    "name": "lajollaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#FFFFCC",
+      "#1A1A01",
+      "#DE764F",
+      "#7F3B34",
+      "#F2C360"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "lajollaS"
+  },
+  {
+    "id": "P067",
+    "source_id": "scientific-colour-maps--lapazS",
+    "name": "lapazS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#1A0C64",
+      "#FEF2F3",
+      "#5C8CA3",
+      "#2D5393",
+      "#B5AD96"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "lapazS"
+  },
+  {
+    "id": "P068",
+    "source_id": "scientific-colour-maps--lapazS",
+    "name": "lapazS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#1A0C64",
+      "#FEF2F3",
+      "#5C8CA3",
+      "#2D5393",
+      "#B5AD96"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "lapazS"
+  },
+  {
+    "id": "P069",
+    "source_id": "scientific-colour-maps--lipariS",
+    "name": "lipariS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#031326",
+      "#FDF5DA",
+      "#A36267",
+      "#E99973",
+      "#525B7A"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "lipariS"
+  },
+  {
+    "id": "P070",
+    "source_id": "scientific-colour-maps--lipariS",
+    "name": "lipariS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#031326",
+      "#FDF5DA",
+      "#A36267",
+      "#E99973",
+      "#525B7A"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "lipariS"
+  },
+  {
+    "id": "P071",
+    "source_id": "scientific-colour-maps--naviaS",
+    "name": "naviaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#031327",
+      "#FCF4D9",
+      "#418A80",
+      "#1B608F",
+      "#87C269"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "naviaS"
+  },
+  {
+    "id": "P072",
+    "source_id": "scientific-colour-maps--naviaS",
+    "name": "naviaS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#031327",
+      "#FCF4D9",
+      "#418A80",
+      "#1B608F",
+      "#87C269"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "naviaS"
+  },
+  {
+    "id": "P073",
+    "source_id": "scientific-colour-maps--nuukS",
+    "name": "nuukS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#05598C",
+      "#FEFEB2",
+      "#A1A698",
+      "#537785",
+      "#C3C285"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "nuukS"
+  },
+  {
+    "id": "P074",
+    "source_id": "scientific-colour-maps--nuukS",
+    "name": "nuukS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#05598C",
+      "#FEFEB2",
+      "#A1A698",
+      "#537785",
+      "#C3C285"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "nuukS"
+  },
+  {
+    "id": "P075",
+    "source_id": "scientific-colour-maps--osloS",
+    "name": "osloS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#030609",
+      "#F9F9F9",
+      "#4E7ABB",
+      "#9FAFC9",
+      "#163A5D"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "osloS"
+  },
+  {
+    "id": "P076",
+    "source_id": "scientific-colour-maps--osloS",
+    "name": "osloS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#030609",
+      "#F9F9F9",
+      "#4E7ABB",
+      "#9FAFC9",
+      "#163A5D"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "osloS"
+  },
+  {
+    "id": "P077",
+    "source_id": "scientific-colour-maps--tokyoS",
+    "name": "tokyoS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#1A0E34",
+      "#FEFED8",
+      "#908786",
+      "#76466C",
+      "#A1C699"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "tokyoS"
+  },
+  {
+    "id": "P078",
+    "source_id": "scientific-colour-maps--tokyoS",
+    "name": "tokyoS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#1A0E34",
+      "#FEFED8",
+      "#908786",
+      "#76466C",
+      "#A1C699"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "tokyoS"
+  },
+  {
+    "id": "P079",
+    "source_id": "scientific-colour-maps--turkuS",
+    "name": "turkuS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#070707",
+      "#FFE6E6",
+      "#948D5B",
+      "#E5AA90",
+      "#4D4C3B"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "turkuS"
+  },
+  {
+    "id": "P080",
+    "source_id": "scientific-colour-maps--turkuS",
+    "name": "turkuS",
+    "family": "Scientific colour maps",
+    "colors": [
+      "#070707",
+      "#FFE6E6",
+      "#948D5B",
+      "#E5AA90",
+      "#4D4C3B"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://www.fabiocrameri.ch/colourmaps/",
+    "selection": "first five in author categorical order",
+    "attribution": "MIT; cmcrameri 1.10",
+    "display_name": "turkuS"
+  },
+  {
+    "id": "P081",
+    "source_id": "matplotlib--tab10",
+    "name": "tab10",
+    "family": "Matplotlib",
+    "colors": [
+      "#1F77B4",
+      "#FF7F0E",
+      "#2CA02C",
+      "#D62728",
+      "#9467BD"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://matplotlib.org/stable/users/explain/colors/colormaps.html",
+    "selection": "first five in author categorical order",
+    "attribution": "Matplotlib license",
+    "display_name": "tab10"
+  },
+  {
+    "id": "P082",
+    "source_id": "matplotlib--tab10",
+    "name": "tab10",
+    "family": "Matplotlib",
+    "colors": [
+      "#1F77B4",
+      "#FF7F0E",
+      "#2CA02C",
+      "#D62728",
+      "#9467BD"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://matplotlib.org/stable/users/explain/colors/colormaps.html",
+    "selection": "first five in author categorical order",
+    "attribution": "Matplotlib license",
+    "display_name": "tab10"
+  },
+  {
+    "id": "P083",
+    "source_id": "matplotlib--tab20",
+    "name": "tab20",
+    "family": "Matplotlib",
+    "colors": [
+      "#1F77B4",
+      "#AEC7E8",
+      "#FF7F0E",
+      "#FFBB78",
+      "#2CA02C"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://matplotlib.org/stable/users/explain/colors/colormaps.html",
+    "selection": "first five in author categorical order",
+    "attribution": "Matplotlib license",
+    "display_name": "tab20"
+  },
+  {
+    "id": "P084",
+    "source_id": "matplotlib--tab20",
+    "name": "tab20",
+    "family": "Matplotlib",
+    "colors": [
+      "#1F77B4",
+      "#AEC7E8",
+      "#FF7F0E",
+      "#FFBB78",
+      "#2CA02C"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://matplotlib.org/stable/users/explain/colors/colormaps.html",
+    "selection": "first five in author categorical order",
+    "attribution": "Matplotlib license",
+    "display_name": "tab20"
+  },
+  {
+    "id": "P085",
+    "source_id": "ggsci--nejm",
+    "name": "NEJM",
+    "family": "ggsci",
+    "colors": [
+      "#BC3C29",
+      "#0072B5",
+      "#E18727",
+      "#20854E",
+      "#7876B1"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://nanx.me/ggsci/reference/pal_nejm.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "NEJM"
+  },
+  {
+    "id": "P086",
+    "source_id": "ggsci--nejm",
+    "name": "NEJM",
+    "family": "ggsci",
+    "colors": [
+      "#BC3C29",
+      "#0072B5",
+      "#E18727",
+      "#20854E",
+      "#7876B1"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://nanx.me/ggsci/reference/pal_nejm.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "NEJM"
+  },
+  {
+    "id": "P087",
+    "source_id": "colorcet--glasbey_bw_minc_20_minl_30",
+    "name": "glasbey_bw_minc_20_minl_30",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#018700",
+      "#B500FF",
+      "#05ACC6",
+      "#97FF00"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey light"
+  },
+  {
+    "id": "P088",
+    "source_id": "colorcet--glasbey_bw_minc_20_minl_30",
+    "name": "glasbey_bw_minc_20_minl_30",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#018700",
+      "#B500FF",
+      "#05ACC6",
+      "#97FF00"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey light"
+  },
+  {
+    "id": "P089",
+    "source_id": "colorcet--glasbey_bw_minc_20_hue_330_100",
+    "name": "glasbey_bw_minc_20_hue_330_100",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#FF62F7",
+      "#AC9C00",
+      "#740070",
+      "#504900"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey warm"
+  },
+  {
+    "id": "P090",
+    "source_id": "colorcet--glasbey_bw_minc_20_hue_330_100",
+    "name": "glasbey_bw_minc_20_hue_330_100",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#FF62F7",
+      "#AC9C00",
+      "#740070",
+      "#504900"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey warm"
+  },
+  {
+    "id": "P091",
+    "source_id": "colorcet--glasbey_bw_minc_20",
+    "name": "glasbey_bw_minc_20",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#8C3BFF",
+      "#018700",
+      "#00ACC6",
+      "#97FF00"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey no-grey"
+  },
+  {
+    "id": "P092",
+    "source_id": "colorcet--glasbey_bw_minc_20",
+    "name": "glasbey_bw_minc_20",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#8C3BFF",
+      "#018700",
+      "#00ACC6",
+      "#97FF00"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey no-grey"
+  },
+  {
+    "id": "P093",
+    "source_id": "ggsci--aaas",
+    "name": "AAAS",
+    "family": "ggsci",
+    "colors": [
+      "#3B4992",
+      "#EE0000",
+      "#008B45",
+      "#631879",
+      "#008280"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://nanx.me/ggsci/reference/pal_aaas.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "AAAS"
+  },
+  {
+    "id": "P094",
+    "source_id": "ggsci--aaas",
+    "name": "AAAS",
+    "family": "ggsci",
+    "colors": [
+      "#3B4992",
+      "#EE0000",
+      "#008B45",
+      "#631879",
+      "#008280"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://nanx.me/ggsci/reference/pal_aaas.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "AAAS"
+  },
+  {
+    "id": "P095",
+    "source_id": "colorcet--glasbey_bw_minc_20_maxl_70",
+    "name": "glasbey_bw_minc_20_maxl_70",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#8C3BFF",
+      "#018700",
+      "#00ACC6",
+      "#E6A500"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey dark"
+  },
+  {
+    "id": "P096",
+    "source_id": "colorcet--glasbey_bw_minc_20_maxl_70",
+    "name": "glasbey_bw_minc_20_maxl_70",
+    "family": "Colorcet",
+    "colors": [
+      "#D60000",
+      "#8C3BFF",
+      "#018700",
+      "#00ACC6",
+      "#E6A500"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey dark"
+  },
+  {
+    "id": "P097",
+    "source_id": "colorcet--glasbey_hv",
+    "name": "glasbey_hv",
+    "family": "Colorcet",
+    "colors": [
+      "#2FA1DA",
+      "#FB4F2F",
+      "#E4AE38",
+      "#6D904F",
+      "#8A8A8A"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "glasbey_hv"
+  },
+  {
+    "id": "P098",
+    "source_id": "colorcet--glasbey_hv",
+    "name": "glasbey_hv",
+    "family": "Colorcet",
+    "colors": [
+      "#2FA1DA",
+      "#FB4F2F",
+      "#E4AE38",
+      "#6D904F",
+      "#8A8A8A"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "glasbey_hv"
+  },
+  {
+    "id": "P099",
+    "source_id": "colorcet--glasbey_bw_minc_20_hue_150_280",
+    "name": "glasbey_bw_minc_20_hue_150_280",
+    "family": "Colorcet",
+    "colors": [
+      "#0C69FF",
+      "#08954D",
+      "#00CAE4",
+      "#49FF90",
+      "#005760"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey cool"
+  },
+  {
+    "id": "P100",
+    "source_id": "colorcet--glasbey_bw_minc_20_hue_150_280",
+    "name": "glasbey_bw_minc_20_hue_150_280",
+    "family": "Colorcet",
+    "colors": [
+      "#0C69FF",
+      "#08954D",
+      "#00CAE4",
+      "#49FF90",
+      "#005760"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "Glasbey cool"
+  }
+]
