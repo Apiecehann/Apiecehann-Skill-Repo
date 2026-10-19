@@ -1,6 +1,8 @@
 """Behaviour checks: changed data, different groups, intervals and style overrides."""
 import csv
 import json
+import subprocess
+import sys
 import warnings
 from pathlib import Path
 import numpy as np
@@ -8,7 +10,7 @@ import pytest
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 from render import (DEFAULTS, build_figure, load_data, merge, apply_override,
-                    apply_override_file, render)
+                    apply_override_file, panel_rectangles, render)
 
 EXAMPLES=Path(__file__).resolve().parents[1]/'examples'
 
@@ -190,3 +192,53 @@ def test_readable_tokens_default_and_literal_opt_in(name):
 def test_legend_cannot_silently_omit_series():
     config,rows=case('zero-shot-execution');config['panels'][0]['legend']['order']=['dp3']
     with pytest.raises(ValueError,match='each plotted series'):build_figure(config,rows)
+
+
+def test_auto_limits_accept_counts_without_manual_limits():
+    rows=[{'id':'a','panel':'p','group':'A','series':'base','value':123.0},
+          {'id':'b','panel':'p','group':'B','series':'base','value':45.0}]
+    fig,_=build_figure({'panels':[{'id':'p'}]},rows)
+    ax=fig.axes[0]
+    assert ax.get_ylim()[0]==0
+    assert ax.get_ylim()[1]>=123
+    assert all(ax.get_ylim()[0] <= tick <= ax.get_ylim()[1] for tick in ax.get_yticks())
+
+
+def test_auto_limits_include_intervals_and_explicit_limits_win():
+    rows=[{'id':'a','panel':'p','group':'A','series':'base','value':1.0,'low':.9,'high':1.4}]
+    fig,_=build_figure({'panels':[{'id':'p'}]},rows)
+    assert fig.axes[0].get_ylim()[1]>=1.4
+    fig,_=build_figure({'panels':[{'id':'p'}],'panel_defaults':{'limits':[0,2]}},rows)
+    assert fig.axes[0].get_ylim()==(0.0,2.0)
+
+
+def test_fixed_panel_rectangles_do_not_require_auto_grid():
+    panels=[{'id':str(i),'rect_pt':[i*10,0,10,10]} for i in range(5)]
+    config={'figure':{'size_pt':[360,210]},'layout':{'columns':1},'panels':panels}
+    assert len(list(panel_rectangles(config)))==5
+
+
+def test_svg_text_is_editable_by_default(tmp_path):
+    rows=[{'id':'a','panel':'p','group':'A','series':'base','value':.5}]
+    config={'figure':{'formats':['svg']},'panels':[{'id':'p'}]}
+    render(config,rows,tmp_path/'text')
+    assert '<text' in (tmp_path/'text.svg').read_text(encoding='utf8')
+    config['figure']['svg_text']=False
+    render(config,rows,tmp_path/'paths')
+    assert '<text' not in (tmp_path/'paths.svg').read_text(encoding='utf8')
+
+
+def test_frozen_replica_rejects_style_but_accepts_palette(tmp_path):
+    script=Path(__file__).resolve().parent/'render.py'
+    config=EXAMPLES/'cue-comparison/config.json'
+    rejected=subprocess.run([sys.executable,str(script),'--config',str(config),
+                             '--style','soft-outline','--output',str(tmp_path/'x')],
+                            capture_output=True,text=True,encoding='utf8')
+    assert rejected.returncode!=0
+    assert 'measured panel geometry' in (rejected.stderr+rejected.stdout)
+    snapshot=tmp_path/'resolved.json'
+    subprocess.run([sys.executable,str(script),'--config',str(config),'--palette','tol-bright',
+                    '--resolved-config',str(snapshot),'--output',str(tmp_path/'ok')],
+                   check=True,capture_output=True,text=True,encoding='utf8')
+    resolved=json.loads(snapshot.read_text(encoding='utf8'))
+    assert resolved['palette']['base']['fill']=='#4477AA'

@@ -275,7 +275,7 @@
         },
         "layout": {
           "columns": 1,
-          "left_pt": 40,
+          "left_pt": 46,
           "right_pt": 12,
           "top_pt": 46,
           "bottom_pt": 32,
@@ -367,6 +367,88 @@
         },
         "legend_defaults": {
           "show": false
+        }
+      }
+    }
+  },
+  "sizes": {
+    "single": {
+      "description": "3.3 in 单栏；7/7/8 pt 字号、紧凑留白与自动图例。",
+      "config": {
+        "figure": {
+          "size_pt": [
+            237.6,
+            169.7
+          ]
+        },
+        "layout": {
+          "left_pt": 48,
+          "right_pt": 10,
+          "top_pt": 30,
+          "bottom_pt": 34,
+          "column_gap_pt": 18,
+          "row_gap_pt": 24
+        },
+        "panel_defaults": {
+          "tick_size": 7,
+          "category_size": 7,
+          "label_size": 8,
+          "value_size": 7,
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_pad": 3.5,
+          "category_pad": 6,
+          "label_pad": 4,
+          "bar_width": 0.6,
+          "series_gap": 0.18,
+          "group_gap": 0.9
+        },
+        "legend_defaults": {
+          "size": 6.5,
+          "columns": "auto",
+          "handlelength": 1.2,
+          "columnspacing": 1.2,
+          "handletextpad": 0.4
+        }
+      }
+    },
+    "double": {
+      "description": "7 in 双栏；8/9/8 pt 字号、较宽留白与自动图例。",
+      "config": {
+        "figure": {
+          "size_pt": [
+            504,
+            360
+          ]
+        },
+        "layout": {
+          "left_pt": 56,
+          "right_pt": 14,
+          "top_pt": 40,
+          "bottom_pt": 44,
+          "column_gap_pt": 28,
+          "row_gap_pt": 34
+        },
+        "panel_defaults": {
+          "tick_size": 8,
+          "category_size": 8,
+          "label_size": 9,
+          "value_size": 8,
+          "tick_length": 3.5,
+          "value_tick_length": 0,
+          "tick_pad": 4,
+          "category_pad": 7,
+          "label_pad": 5,
+          "bar_width": 0.64,
+          "series_gap": 0.18,
+          "group_gap": 0.9
+        },
+        "legend_defaults": {
+          "size": 7.5,
+          "columns": "auto",
+          "handlelength": 1.4,
+          "columnspacing": 1.5,
+          "handletextpad": 0.5
         }
       }
     }

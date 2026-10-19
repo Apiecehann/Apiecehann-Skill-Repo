@@ -25,6 +25,7 @@
 |---|---|---|
 | `style` | `paper-clean`、`soft-outline`、`serif-emphasis` | [风格](examples/style-guide/styles.png) |
 | `layout` | `grouped`、`horizontal`、`paired` | [布局](examples/style-guide/layouts.png) |
+| `size` | `single`（3.3 in 单栏）、`double`（7 in 双栏）；同时设置画布、字号、留白、柱宽与自动图例 | — |
 | `palette` | `tol-bright`、`tol-muted`、`blue-orange`、`gray-purple`、`paired-blue-green` | [多系列配色](examples/style-guide/palettes.png) · [两色与成对配色](examples/style-guide/layouts.png) |
 | 可选 `font` | `sans`、`serif`、`mono`；默认随风格选择 | [字体](examples/style-guide/fonts.png) |
 | 精调透明度 | 填充、描边、网格、误差棒、文字独立控制 | [35% / 65% / 100% 填充](examples/style-guide/opacity.png) |
@@ -34,10 +35,10 @@
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
   --config quantitative-plots/grouped-bar/examples/style-guide/config.json \
-  --style soft-outline --palette tol-muted --output output/my-figure
+  --size single --style soft-outline --palette tol-muted --output output/my-figure
 ```
 
-输出 PNG、PDF、SVG。换成自己的 CSV 时加 `--data my-data.csv`，并设置对应的系列名称、单位和坐标范围。预设不会继承参考图的截断基线，也不会编造误差区间。
+输出 PNG、PDF、SVG。`--size single` 把画布设为 3.3 in 单栏，并按该宽度给字号、留白和柱宽；`--size double` 对应 7 in 双栏。换成自己的 CSV 时加 `--data my-data.csv`，并设置对应的系列名称、单位和坐标范围。预设不会继承参考图的截断基线，也不会编造误差区间。SVG 默认保留可编辑文字；投稿需要轮廓时加 `--svg-paths`。
 
 精简配置的核心选择如下，完整可运行示例见 [config.json](examples/style-guide/config.json)：
 
@@ -52,7 +53,9 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 }
 ```
 
-默认数轴适用于 0–1 的比例；其他单位须提供 `panel_defaults.limits`、`ticks` 和标签。未指定 `panels` 时从 CSV 创建面板。颜色按 `series_order` 分配；建议明确保存该顺序，避免重排行时改变颜色。`gray-purple` 和 `paired-blue-green` 需要 `series_roles` 明确颜色含义，示例见 [配色索引](examples/style-guide/README.md#配色索引)。系列数超过色板容量时会报错，不循环复用颜色。
+未写 `panel_defaults.limits` / `ticks` 时，轴按数据自动取 nice 范围和刻度：0 基线、区间端点和数值范围都会纳入，不会静默截断。比例数据请显式设 `tick_format`（如 `.0%`）和 `ylabel`；复刻示例保留各自测得的轴范围。未指定 `panels` 时从 CSV 创建面板。颜色按 `series_order` 分配；建议明确保存该顺序，避免重排行时改变颜色。`gray-purple` 和 `paired-blue-green` 需要 `series_roles` 明确颜色含义，示例见 [配色索引](examples/style-guide/README.md#配色索引)。系列数超过色板容量时会报错，不循环复用颜色。
+
+六个复刻示例带 `frozen_config: true`，面板位置来自参考图。可以换 `--palette` 或 `--font`；`--style`、`--layout`、`--size` 会改变测量几何，CLI 会明确拒绝，请从 style-guide 模板开始。图例默认按图宽自动选择列数（`legend_defaults.columns: "auto"`），不再需要手调。
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py --list-presets
@@ -88,7 +91,7 @@ python quantitative-plots/grouped-bar/scripts/render.py --defaults
 
 | 参数组 | 内容 |
 |---|---|
-| `figure` | 画布尺寸（pt）、背景、分辨率、导出格式、SVG 文字或字形路径 |
+| `figure` | 画布尺寸（pt）、背景、分辨率、导出格式；SVG 默认文字，`--svg-paths` 可转轮廓 |
 | `fonts` | 正文、强调、等宽字体的文件名、系统回退字体及字重 |
 | `palette` | 每个条件的填充色、描边色、数值标签色、分项透明度、可选纹理 |
 | `panel_defaults` | 方向、坐标范围与刻度、字号、轴线、柱宽、组间距、区间、数值格式 |
@@ -97,7 +100,7 @@ python quantitative-plots/grouped-bar/scripts/render.py --defaults
 | `layout` | 自动面板网格的列数、四边留白及行列间距 |
 | `panels` | 每个面板的位置、局部样式及 token 标签映射 |
 | `annotations` / `bands` | 标题、混合字重轴标签和下方分组线 |
-| `legend_defaults` / `panels[].legend` | 图例顺序、文字、字体、列数、位置、边框及色块尺寸 |
+| `legend_defaults` / `panels[].legend` | 图例顺序、文字、字体、列数、位置、边框及色块尺寸；`columns: "auto"` 按图宽选列数 |
 | `gain_defaults` / `gains` | 关联行 ID、箭头曲率与端点偏移、箭头尺寸、差值格式与文字位置 |
 
 配置优先级：默认值 → 风格 → 布局 → 字体／配色 → 明确的全局配置 → 面板局部配置。没有 `preset` 时保留原来的默认值 → 全局 → 局部流程。`--set` 在配置展开后覆盖指定字段；标量可以直接写（`panel_defaults.value_size=9`、`panel_defaults.tokens.mode=raw`），JSON 类型会按需解析。嵌套对象或列表在 Windows PowerShell 下不要用 `--set`（PowerShell 会吞掉 JSON 的引号），改用 `--set-file`：

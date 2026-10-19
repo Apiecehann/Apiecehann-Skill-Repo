@@ -1,4 +1,5 @@
 {
+  "frozen_config": true,
   "data": "data.csv",
   "figure": {
     "size_pt": [

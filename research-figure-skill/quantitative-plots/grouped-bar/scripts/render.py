@@ -9,6 +9,7 @@ import copy
 import csv
 import json
 import math
+import warnings
 from functools import lru_cache
 from pathlib import Path
 
@@ -26,7 +27,7 @@ import numpy as np
 
 DEFAULTS = {
     'figure': {'size_pt': [540, 180], 'background': 'white', 'dpi': 300,
-               'formats': ['png', 'pdf', 'svg'], 'svg_text': False},
+               'formats': ['png', 'pdf', 'svg'], 'svg_text': True},
     'fonts': {'light': {'family': ['Liberation Sans','Arial','DejaVu Sans'], 'weight': 'normal', 'file': 'Graphik-Light.ttf'},
               'regular': {'family': ['Liberation Sans','Arial','DejaVu Sans'], 'weight': 'normal', 'file': 'Graphik-Regular.ttf'},
               'mono': {'family': 'DejaVu Sans Mono', 'weight': 'normal', 'file': 'B612Mono-Regular.ttf'}},
@@ -36,7 +37,7 @@ DEFAULTS = {
                 'edit': {'fill': '#ff6568', 'edge': '#e40016', 'label': '#bf000f'},
                 'answer': {'fill': '#a686ff', 'edge': '#7f22fe', 'label': '#7008e7'}},
     'panel_defaults': {
-        'orientation': 'vertical', 'limits': [0, 1.07], 'ticks': [0, .2, .4, .6, .8, 1],
+        'orientation': 'vertical', 'limits': 'auto', 'ticks': 'auto',
         'tick_format': '.1f', 'tick_size': 9.5, 'tick_length': 4, 'tick_width': .6,
         'tick_font': 'light', 'value_tick_length': None,
         'tick_pad': 3.5, 'tick_color': '#525252', 'text_color': '#111111',
@@ -56,8 +57,8 @@ DEFAULTS = {
         'value_font': 'light', 'value_color': None,
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
         'value_background_pad': .1, 'baseline': 0, 'allow_interval_clipping': False,
-        'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': .1,
-                 'value_stop': 1, 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000,
+        'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': 'auto',
+                 'value_stop': 'auto', 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000,
                  'linewidth': .5, 'linestyle': '-'},
         'tokens': {'mode': 'readable', 'size': 6.3, 'gap': 2.6, 'padding_em': [.16, .16],
                    'height_em': 1.333333, 'baseline_em': .405, 'rounding': .194444,
@@ -66,7 +67,7 @@ DEFAULTS = {
                    'offset_pt': 6, 'tint': False},
     },
     'legend_defaults': {'show': False, 'order': None, 'labels': {}, 'font': 'regular', 'size': 10,
-                        'loc': 'upper center', 'anchor': [.5,1.2], 'columns': 3, 'frame': True,
+                        'loc': 'upper center', 'anchor': [.5,1.2], 'columns': 'auto', 'frame': True,
                         'facecolor': 'white', 'edgecolor': '#cccccc', 'frame_alpha': 1,
                         'frame_width': .8, 'rounded': True, 'borderpad': .4,
                         'columnspacing': 2, 'handlelength': 2, 'handleheight': .7,
@@ -99,8 +100,47 @@ def preset_catalog():
     return json.loads((Path(__file__).parent/'presets.json').read_text(encoding='utf8'))
 
 
+def palette_colors(name, order, roles):
+    """Resolve a palette preset to {series: hex} without mutating config."""
+    palettes = preset_catalog()['palettes']
+    if name not in palettes:
+        raise ValueError(f'Unknown palettes preset {name!r}; choose from {list(palettes)}')
+    palette = palettes[name]
+    if palette['kind'] == 'categorical':
+        if len(order) > len(palette['colors']):
+            raise ValueError(f'{name} supports at most {len(palette["colors"])} series; choose another palette')
+        return dict(zip(order, palette['colors'])), palette
+    if not set(order).issubset(roles) or set(roles.values()) - set(palette['roles']):
+        raise ValueError(f'{name} needs series_roles using {list(palette["roles"])}')
+    return {key: palette['roles'][roles[key]] for key in order}, palette
+
+
+def apply_palette_selection(config, rows, name):
+    """Apply --palette after resolution, so it also wins on frozen replicas."""
+    present = list(dict.fromkeys(row['series'] for row in rows))
+    order = config.get('series_order', present)
+    if not order or len(set(order)) != len(order) or not set(present).issubset(order):
+        raise ValueError('series_order must be unique and include every plotted series')
+    colors, palette = palette_colors(name, order, config.get('series_roles', {}))
+    for key, color in colors.items():
+        previous = dict(config['palette'].get(key, {}))
+        for stale in ('token_fill', 'token_edge'):
+            previous.pop(stale, None)
+        config['palette'][key] = {**previous, 'fill': color, 'edge': color, 'label': '#20252c'}
+    config['figure']['background'] = palette.get('background', config['figure']['background'])
+    config.setdefault('resolved_preset', {})['palette'] = name
+
+
+def apply_font_selection(config, name):
+    fonts = preset_catalog()['fonts']
+    if name not in fonts:
+        raise ValueError(f'Unknown fonts preset {name!r}; choose from {list(fonts)}')
+    config['fonts'] = copy.deepcopy(fonts[name]['roles'])
+    config.setdefault('resolved_preset', {})['font'] = name
+
+
 def resolve_config(config, rows):
-    """Compose defaults < style < layout < palette/font < explicit configuration.
+    """Compose defaults < style < layout < size < palette/font < explicit configuration.
 
     Presets never set numeric limits, ticks, baselines or interval definitions.
     The six measured reference configurations still use the original path.
@@ -113,8 +153,8 @@ def resolve_config(config, rows):
         return result
     catalog = preset_catalog()
     selection = config['preset']
-    if not isinstance(selection, dict) or set(selection)-{'style','layout','palette','font'}:
-        raise ValueError('preset accepts style, layout, palette and optional font')
+    if not isinstance(selection, dict) or set(selection)-{'style','layout','size','palette','font'}:
+        raise ValueError('preset accepts style, layout, size, palette and optional font')
     style_name = selection.get('style', 'paper-clean')
     layout_name = selection.get('layout', 'grouped')
     def pick(section, name):
@@ -123,25 +163,21 @@ def resolve_config(config, rows):
         return catalog[section][name]
     style = pick('styles', style_name)
     layout = pick('layouts', layout_name)
+    size_name = selection.get('size')
+    size = pick('sizes', size_name) if size_name else None
     palette_name = selection.get('palette', layout.get('palette', style['palette']))
     palette = pick('palettes', palette_name)
     font_name = selection.get('font', style['font'])
     typography = pick('fonts', font_name)
     result = merge(merge(DEFAULTS, style['config']), layout['config'])
+    if size:
+        result = merge(result, size['config'])
     result['fonts'] = copy.deepcopy(typography['roles'])
     present = list(dict.fromkeys(row['series'] for row in rows))
     order = config.get('series_order', present)
     if not order or len(set(order)) != len(order) or not set(present).issubset(order):
         raise ValueError('series_order must be unique and include every plotted series')
-    if palette['kind'] == 'categorical':
-        if len(order) > len(palette['colors']):
-            raise ValueError(f'{palette_name} supports at most {len(palette["colors"])} series; choose another palette')
-        colors = dict(zip(order, palette['colors']))
-    else:
-        roles = config.get('series_roles', {})
-        if not set(order).issubset(roles) or set(roles.values())-set(palette['roles']):
-            raise ValueError(f'{palette_name} needs series_roles using {list(palette["roles"])}')
-        colors = {key: palette['roles'][roles[key]] for key in order}
+    colors, palette = palette_colors(palette_name, order, config.get('series_roles', {}))
     result['palette'] = {key: {'fill': color, 'edge': color, 'label': '#20252c'}
                          for key, color in colors.items()}
     result['figure']['background'] = palette.get('background', result['figure']['background'])
@@ -154,7 +190,8 @@ def resolve_config(config, rows):
         legend = panel.setdefault('legend', {})
         if result['legend_defaults']['order'] is None:
             legend.setdefault('order', [key for key in order if key in members])
-    result['resolved_preset'] = dict(style=style_name, layout=layout_name, palette=palette_name, font=font_name)
+    result['resolved_preset'] = dict(style=style_name, layout=layout_name, size=size_name,
+                                     palette=palette_name, font=font_name)
     return resolve_config(result, rows)
 
 
@@ -306,6 +343,54 @@ def positions(rows, style):
     return np.array([result[row['id']] for row in rows])
 
 
+def nice_step(span, target=5):
+    """A 1/2/2.5/5 x 10^n step that gives roughly `target` intervals."""
+    if span <= 0:
+        return 1.0
+    raw = span / target
+    exponent = math.floor(math.log10(raw))
+    base = 10 ** exponent
+    for factor in (1, 2, 2.5, 5, 10):
+        if factor * base >= raw - 1e-12:
+            return factor * base
+    return 10 * base
+
+
+def nice_ticks(limits, target=5):
+    lower, upper = limits
+    step = nice_step(upper - lower, target)
+    value = math.ceil(lower / step - 1e-9) * step
+    ticks = []
+    while value <= upper + 1e-9:
+        ticks.append(round(value, 10))
+        value += step
+    return ticks
+
+
+def auto_axis(rows, baseline):
+    """Derive limits and ticks from data, including intervals; never clips silently."""
+    highs = [row.get('high', row['value']) for row in rows]
+    lows = [row.get('low', row['value']) for row in rows]
+    top = max(highs + [baseline])
+    bottom = min(lows + [baseline])
+    if not math.isfinite(top) or not math.isfinite(bottom):
+        raise ValueError('Non-finite data cannot define an axis')
+    span = top - bottom
+    if span <= 0:
+        span = max(abs(top), 1.0) * 0.1
+    step = nice_step(span * 1.08, target=6)
+    lower = math.floor((bottom - span * 0.04) / step) * step
+    upper = math.ceil((top + span * 0.04) / step) * step
+    if baseline == 0 and bottom >= 0:
+        lower = 0.0
+    if top <= 0:
+        upper = 0.0
+    if upper <= lower:
+        upper = lower + step
+    ticks = [round(lower + i * step, 10) for i in range(int(round((upper - lower) / step)) + 1)]
+    return [round(lower, 10), round(upper, 10)], ticks
+
+
 def tint(color, amount=.84):
     rgb = np.array(matplotlib.colors.to_rgb(color))
     return tuple(rgb + (1-rgb)*amount)
@@ -354,7 +439,12 @@ def token_label(ax, x, tokens, style, config, palette, font_dir, shift_pt=0):
 
 def panel_rectangles(config):
     w, h = config['figure']['size_pt']; layout = config['layout']
-    count = len(config['panels']); cols = min(count, layout['columns']); rows = math.ceil(count/cols)
+    panels = config['panels']
+    if panels and all('rect_pt' in panel for panel in panels):
+        for panel in panels:
+            yield panel['rect_pt']
+        return
+    count = len(panels); cols = min(count, layout['columns']); rows = math.ceil(count/cols)
     pw = (w-layout['left_pt']-layout['right_pt']-(cols-1)*layout['column_gap_pt'])/cols
     ph = (h-layout['top_pt']-layout['bottom_pt']-(rows-1)*layout['row_gap_pt'])/rows
     if min(pw, ph) <= 0:
@@ -368,7 +458,7 @@ def panel_rectangles(config):
                    h-layout['top_pt']-(r+1)*ph-r*layout['row_gap_pt'], pw, ph]
 
 
-def add_legend(ax, panel, rows, style, config, font_dir):
+def add_legend(fig, ax, panel, rows, style, config, font_dir):
     spec=merge(config['legend_defaults'],panel.get('legend',{}))
     if not spec['show']:
         return
@@ -379,14 +469,35 @@ def add_legend(ax, panel, rows, style, config, font_dir):
     handles=[Patch(facecolor=bar_colors(config['palette'][key],style)[0],edgecolor=bar_colors(config['palette'][key],style)[1],
                    linewidth=style['bar_edge_width'],
                    hatch=config['palette'][key].get('hatch',style['hatch'])) for key in order]
-    legend=ax.legend(handles,[spec['labels'].get(key,key) for key in order],
-        prop=font(config,spec['font'],spec['size'],font_dir),loc=spec['loc'],
-        bbox_to_anchor=spec['anchor'],ncol=spec['columns'],frameon=spec['frame'],
-        facecolor=spec['facecolor'],edgecolor=spec['edgecolor'],framealpha=spec['frame_alpha'],
-        fancybox=spec['rounded'],borderpad=spec['borderpad'],columnspacing=spec['columnspacing'],
-        handlelength=spec['handlelength'],handleheight=spec['handleheight'],
-        handletextpad=spec['handletextpad'],borderaxespad=spec['borderaxespad'])
+    labels=[spec['labels'].get(key,key) for key in order]
+    def make(columns):
+        return ax.legend(handles,labels,
+            prop=font(config,spec['font'],spec['size'],font_dir),loc=spec['loc'],
+            bbox_to_anchor=spec['anchor'],ncol=columns,frameon=spec['frame'],
+            facecolor=spec['facecolor'],edgecolor=spec['edgecolor'],framealpha=spec['frame_alpha'],
+            fancybox=spec['rounded'],borderpad=spec['borderpad'],columnspacing=spec['columnspacing'],
+            handlelength=spec['handlelength'],handleheight=spec['handleheight'],
+            handletextpad=spec['handletextpad'],borderaxespad=spec['borderaxespad'])
+    if spec['columns'] == 'auto':
+        width_pt=config['figure']['size_pt'][0]
+        center=(ax.get_position().x0+float(spec['anchor'][0])*ax.get_position().width)*width_pt
+        available=max(2*min(center,width_pt-center)-4,10)
+        for count in range(len(labels),0,-1):
+            legend=make(count)
+            fig.canvas.draw()
+            width=legend.get_window_extent(fig.canvas.get_renderer()).width*72/fig.dpi
+            if width <= available:
+                break
+            legend.remove()
+        else:
+            legend=make(1)
+    else:
+        legend=make(int(spec['columns']))
     legend.get_frame().set_linewidth(spec['frame_width'])
+    fig.canvas.draw()
+    bbox=legend.get_window_extent(fig.canvas.get_renderer())
+    if bbox.x0 < 0 or bbox.y0 < 0 or bbox.x1 > fig.bbox.x1 or bbox.y1 > fig.bbox.y1:
+        warnings.warn('Legend extends outside the figure; increase layout margins or reduce legend.size', UserWarning)
 
 
 def add_gain(fig, spec, artists, config, font_dir):
@@ -453,6 +564,20 @@ def build_figure(config, rows, font_dir=None):
             rr = [r for r in rows if r['panel'] == panel['id']]
             xx = positions(rr, style)
             limits = style['limits']
+            ticks = style['ticks']
+            if limits == 'auto':
+                limits, auto_ticks = auto_axis(rr, style['baseline'])
+                if ticks == 'auto':
+                    ticks = auto_ticks
+            elif ticks == 'auto':
+                ticks = nice_ticks(limits)
+            if not isinstance(limits, (list, tuple)) or len(limits) != 2:
+                raise ValueError('limits must be [lower, upper] or "auto"')
+            if isinstance(ticks, str):
+                raise ValueError('ticks must be a list or "auto"')
+            ticks = list(ticks)
+            if not ticks:
+                raise ValueError('ticks must not be empty')
             if limits[0] >= limits[1] or not limits[0] <= style['baseline'] <= limits[1]:
                 raise ValueError('Invalid numeric limits or baseline')
             if any(r['value'] < limits[0] or r['value'] > limits[1] for r in rr):
@@ -462,11 +587,11 @@ def build_figure(config, rows, font_dir=None):
             catlim = panel.get('category_limits', [xx.min()-style['bar_width']/2-style['category_margin'],
                                                   xx.max()+style['bar_width']/2+style['category_margin']])
             if vertical:
-                ax.set(xlim=catlim, ylim=limits, yticks=style['ticks'], xticks=xx)
-                ax.set_yticklabels([format(v,style['tick_format']) for v in style['ticks']])
+                ax.set(xlim=catlim, ylim=limits, yticks=ticks, xticks=xx)
+                ax.set_yticklabels([format(v,style['tick_format']) for v in ticks])
             else:
-                ax.set(ylim=catlim, xlim=limits, xticks=style['ticks'], yticks=xx)
-                ax.set_xticklabels([format(v,style['tick_format']) for v in style['ticks']])
+                ax.set(ylim=catlim, xlim=limits, xticks=ticks, yticks=xx)
+                ax.set_xticklabels([format(v,style['tick_format']) for v in ticks])
             for side in ('left','bottom','top','right'):
                 ax.spines[side].set_visible(side in style['spines'])
                 ax.spines[side].set_color(style['axis_color']); ax.spines[side].set_linewidth(style['axis_width'])
@@ -510,15 +635,17 @@ def build_figure(config, rows, font_dir=None):
             grid = style['grid']
             opacity(grid['alpha'], 'grid.alpha')
             if grid['kind'] == 'dots':
+                value_stop = limits[1] if grid['value_stop'] == 'auto' else grid['value_stop']
+                value_step = (limits[1]-limits[0])/10 if grid['value_step'] == 'auto' else grid['value_step']
                 cat_extent = rect[2] if vertical else rect[3]
-                if grid['spacing_pt'] <= 0 or grid['value_step'] <= 0:
+                if grid['spacing_pt'] <= 0 or value_step <= 0:
                     raise ValueError('Grid spacing must be positive')
-                point_count = (cat_extent/grid['spacing_pt']+1)*((min(grid['value_stop'],limits[1])-limits[0])/grid['value_step']+1)
+                point_count = (cat_extent/grid['spacing_pt']+1)*((min(value_stop,limits[1])-limits[0])/value_step+1)
                 if point_count > grid['max_points']:
                     raise ValueError('Grid is too dense; increase spacing or explicitly raise grid.max_points')
                 step = grid['spacing_pt'] / cat_extent * (catlim[1]-catlim[0])
                 gx = np.arange(catlim[0], catlim[1]+step*.001, step)
-                gy = np.arange(limits[0], min(grid['value_stop'],limits[1])+grid['value_step']*.001,grid['value_step'])
+                gy = np.arange(limits[0], min(value_stop,limits[1])+value_step*.001,value_step)
                 mx,my = np.meshgrid(gx,gy)
                 ax.scatter(mx if vertical else my, my if vertical else mx, s=grid['size'],
                            color=grid['color'], alpha=grid['alpha'], edgecolors='none', zorder=0, clip_on=True)
@@ -563,7 +690,7 @@ def build_figure(config, rows, font_dir=None):
                                 panel.get('token_shift_pt',{}).get(row['id'],0) if mode=='raw' else 0)
                 artists[row['id']] = {'bar':bar,'error':error,'label':label,'x':float(x),'axis':ax,
                                       'value':row['value'],'series':row['series'],'vertical':vertical}
-            add_legend(ax,panel,rr,style,config,font_dir)
+            add_legend(fig,ax,panel,rr,style,config,font_dir)
         for spec in config['gains']:
             add_gain(fig,spec,artists,config,font_dir)
         for a in config['annotations']:
@@ -601,6 +728,13 @@ def build_figure(config, rows, font_dir=None):
                 fig.add_artist(PathPatch(MplPath(vertices,shape['codes']),transform=fig.transFigure,
                     facecolor=shape.get('fill','none'),edgecolor=shape.get('stroke','none'),lw=shape.get('width',0),zorder=6))
         fig.canvas.draw()
+        renderer = fig.canvas.get_renderer()
+        tight = fig.get_tightbbox(renderer)
+        tolerance = 0.5 / 72
+        if (tight.x0 < -tolerance or tight.y0 < -tolerance or
+                tight.x1 > fig.get_figwidth() + tolerance or
+                tight.y1 > fig.get_figheight() + tolerance):
+            warnings.warn('Some text or legend extends outside the figure; adjust layout margins or font sizes', UserWarning)
     return fig, artists
 
 
@@ -629,26 +763,35 @@ def main():
     parser.add_argument('--set',action='append',default=[],metavar='PATH=VALUE',help='Override one parameter; bare values are strings, JSON types are parsed')
     parser.add_argument('--set-file',action='append',default=[],type=Path,metavar='JSON',help='Merge a JSON object of overrides; use for nested values and on PowerShell')
     parser.add_argument('--defaults',action='store_true',help='Print complete default parameter groups')
-    parser.add_argument('--list-presets',action='store_true',help='List styles, layouts, palettes and font profiles')
-    for key in ('style','layout','palette','font'):
+    parser.add_argument('--list-presets',action='store_true',help='List styles, layouts, sizes, palettes and font profiles')
+    for key in ('style','layout','size','palette','font'):
         parser.add_argument('--'+key,help=f'Select a {key} preset; explicit config fields still win')
+    parser.add_argument('--svg-text',dest='svg_text',action='store_true',default=None,help='Keep SVG text editable (default)')
+    parser.add_argument('--svg-paths',dest='svg_text',action='store_false',help='Convert SVG text to paths for submission')
     parser.add_argument('--resolved-config',type=Path,help='Write the complete resolved configuration for fine adjustments')
     args=parser.parse_args()
     if args.defaults: print(json.dumps(DEFAULTS,indent=2));return
     if args.list_presets:
         print(json.dumps({section:{key:value['description'] for key,value in choices.items()}
-                          for section,choices in preset_catalog().items() if section in ('styles','layouts','palettes','fonts')},
+                          for section,choices in preset_catalog().items() if section in ('styles','layouts','sizes','palettes','fonts')},
                          ensure_ascii=False,indent=2));return
     if args.config is None and args.data is None: parser.error('Supply --config or --data')
     config=read_config(args.config) if args.config else {'preset':{}}
-    for key in ('style','layout','palette','font'):
-        if getattr(args,key) is not None: config.setdefault('preset',{})[key]=getattr(args,key)
+    frozen=bool(config.get('frozen_config'))
+    if frozen and any(getattr(args,key) is not None for key in ('style','layout','size')):
+        parser.error('This config preserves measured panel geometry; --style/--layout/--size would re-layout it. Use --palette/--font, or start from examples/style-guide.')
+    if not frozen:
+        for key in ('style','layout','size','palette','font'):
+            if getattr(args,key) is not None: config.setdefault('preset',{})[key]=getattr(args,key)
     if args.data is None and 'data' not in config: parser.error('Configuration needs data or --data')
     data=args.data or args.config.parent/config['data']
     rows=load_data(data)
     config=resolve_config(config,rows)
+    if args.palette: apply_palette_selection(config,rows,args.palette)
+    if args.font: apply_font_selection(config,args.font)
     for path in args.set_file: config=apply_override_file(config,path)
     for assignment in args.set: apply_override(config,assignment)
+    if args.svg_text is not None: config['figure']['svg_text']=args.svg_text
     if args.resolved_config:
         args.resolved_config.parent.mkdir(parents=True,exist_ok=True)
         snapshot=merge(config,{'data':str(data.resolve())})

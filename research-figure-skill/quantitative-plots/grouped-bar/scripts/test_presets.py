@@ -131,6 +131,35 @@ def test_auto_spacing_can_be_overridden_by_explicit_positions():
     assert fixed[rows[0]['id']]['x'] == rows[0]['x']
 
 
+def test_size_preset_sets_canvas_and_type_scale():
+    config,rows = recipe();config['preset']['size']='single'
+    resolved = resolve_config(config,rows)
+    assert resolved['figure']['size_pt']==[237.6,169.7]
+    assert resolved['panel_defaults']['tick_size']==7
+    assert resolved['panel_defaults']['label_size']==8
+    assert resolved['legend_defaults']['size']==6.5
+    assert resolved['legend_defaults']['columns']=='auto'
+
+
+def test_size_preset_does_not_override_explicit_values():
+    config,rows = recipe();config['preset']['size']='single'
+    config['panel_defaults']['tick_size']=9
+    assert resolve_config(config,rows)['panel_defaults']['tick_size']==9
+
+
+def test_unknown_size_preset_is_rejected():
+    config,rows = recipe();config['preset']['size']='huge'
+    with pytest.raises(ValueError,match='Unknown sizes'):resolve_config(config,rows)
+
+
+def test_single_size_legend_fits_without_manual_columns():
+    config,rows = recipe();config['preset']['size']='single'
+    fig,_ = build_figure(config,rows)
+    bbox = fig.axes[0].get_legend().get_window_extent(fig.canvas.get_renderer())
+    assert fig.bbox.x0 <= bbox.x0 and bbox.x1 <= fig.bbox.x1
+    assert fig.bbox.y0 <= bbox.y0 and bbox.y1 <= fig.bbox.y1
+
+
 def test_gain_tip_tracks_the_bar_edge_when_width_changes():
     config,rows = recipe('paired.json')
     for width in (.5,1.2):
