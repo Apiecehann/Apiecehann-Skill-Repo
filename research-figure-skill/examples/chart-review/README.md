@@ -22,8 +22,10 @@
 - `ridgeline/`：6 张，49
 - `det/`：6 张，50
 - `node-link/`：5 张，43
+- `sankey/`：5 张，45
+- `treemap/`：5 张，45
 
-P1 进度：`scatter3d`、`voxel`、`ridgeline`、`det`、`node-link` 的 chart-review 已完成；`sankey`、`treemap` 正式 chart 已实现，chart-review 待补。
+P1 进度：`scatter3d`、`voxel`、`ridgeline`、`det`、`node-link`、`sankey`、`treemap` 的 chart-review 已完成；overlay 正在收尾。
 
 Batch 1 = dumbbell / line-band / scatter。Batch 2 = distribution-overlap / kde / box / violin / ecdf。Batch 3 = heatmap / roc / pr / calibration。两 series 的图不做 `categorical`，heatmap 不做 color structure，所以不是每张都 11 张。
 

@@ -67,7 +67,8 @@
       },
       "supports": [
         "box",
-        "violin"
+        "violin",
+        "dot-plot"
       ],
       "avoid": [
         "点太多，改用密度"
@@ -187,7 +188,11 @@
         "label": "auto",
         "size": 5
       },
-      "supports": [],
+      "supports": [
+        "roc",
+        "pr",
+        "calibration"
+      ],
       "avoid": [
         "没有选定阈值"
       ]

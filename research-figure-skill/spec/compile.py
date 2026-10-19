@@ -733,6 +733,7 @@ def compile_classification(ir, ir_path, output, render=False):
         "colors": dict(zip(order, palette["colors"][-len(order):])),
         "series_labels": ir.get("series_labels", {}),
         "bins": axis.get("bins", 10), "size_pt": size_pt,
+        "operating_point": any(o.get("id") == "operating-point" for o in ir.get("overlays", [])),
         "x_label": axis.get("x_label", ""), "y_label": axis.get("y_label", ""),
         "legend": ir["labels"].get("legend", "top") == "top",
         "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],

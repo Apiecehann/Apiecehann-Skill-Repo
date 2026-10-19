@@ -584,6 +584,13 @@ def render_roc(config, rows, out_stem):
         fpr, tpr, auc = _roc_points([r["score"] for r in subset], [r["label"] for r in subset])
         ax.plot(fpr, tpr, color=colors[name], linewidth=1.8, drawstyle="steps-post",
                 label=f"{labels.get(name, name)} (AUC={auc:.3f})")
+        if config.get("operating_point"):
+            idx = int(np.argmin(np.abs(fpr - .1)))
+            ax.scatter([fpr[idx]], [tpr[idx]], s=26, color=colors[name], zorder=4)
+            ax.annotate("operating", (fpr[idx], tpr[idx]), xytext=(12, -14),
+                        textcoords="offset points", fontsize=6.5, color="#374151",
+                        bbox={"facecolor": "white", "edgecolor": "none", "pad": 1},
+                        arrowprops={"arrowstyle": "-", "color": "#6B7280", "linewidth": .6})
     ax.plot([0, 1], [0, 1], color="#9CA3AF", linestyle="--", linewidth=.8)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1.02)
@@ -617,6 +624,13 @@ def render_pr(config, rows, out_stem):
         ax.step(recall, precision, where="post", color=colors[name], linewidth=1.8,
                 label=labels.get(name, name))
         ax.axhline(baseline, color=colors[name], linestyle=":", linewidth=.8, alpha=.7)
+        if config.get("operating_point"):
+            idx = int(np.argmin(np.abs(recall - .5)))
+            ax.scatter([recall[idx]], [precision[idx]], s=26, color=colors[name], zorder=4)
+            ax.annotate("operating", (recall[idx], precision[idx]), xytext=(12, -14),
+                        textcoords="offset points", fontsize=6.5, color="#374151",
+                        bbox={"facecolor": "white", "edgecolor": "none", "pad": 1},
+                        arrowprops={"arrowstyle": "-", "color": "#6B7280", "linewidth": .6})
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1.02)
     ax.set_xlabel("Recall", fontsize=8)
