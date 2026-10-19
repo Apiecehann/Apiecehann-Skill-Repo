@@ -81,13 +81,18 @@ def load_recipes():
     if registry.get("version") != 1 or not isinstance(registry.get("recipes"), list):
         raise ValueError("recipes.json requires version 1 and a recipes list")
     seen = set()
+    chart_ids = {c["id"] for c in json.loads((ROOT / "library/charts.json").read_text(encoding="utf8"))["charts"]}
     for recipe in registry["recipes"]:
-        if set(recipe) != {"id", "title", "tags", "ir"}:
-            raise ValueError("Each recipe needs id, title, tags and ir")
+        if set(recipe) != {"id", "title", "chart", "variant", "tags", "ir"}:
+            raise ValueError("Each recipe needs id, title, chart, variant, tags and ir")
         name = recipe["id"]
         if not isinstance(name, str) or not name or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-" for c in name) or name in seen:
             raise ValueError(f"Invalid or duplicate recipe id {name!r}")
         seen.add(name)
+        if recipe["chart"] not in chart_ids:
+            raise ValueError(f"Recipe {name}: unknown chart {recipe['chart']!r}")
+        if not isinstance(recipe["variant"], str) or not recipe["variant"].strip():
+            raise ValueError(f"Recipe {name}: variant is required")
         if not isinstance(recipe["title"], str) or not recipe["title"].strip():
             raise ValueError(f"Recipe {name}: title is required")
         tags = recipe["tags"]

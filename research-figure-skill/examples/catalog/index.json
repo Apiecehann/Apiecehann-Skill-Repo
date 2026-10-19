@@ -9,24 +9,24 @@
     ],
     "decisions": {
       "recipes": [
-        "ours-vs-baselines",
-        "before-after",
-        "capacity-88-of-96",
         "ablation-legend",
+        "capacity-88-of-96",
+        "ours-vs-baselines",
         "horizontal-percent",
-        "print-bw",
-        "multi-panel",
-        "slide-teaser",
         "increment-base",
-        "distribution-overlap",
+        "multi-panel",
+        "before-after",
+        "print-bw",
+        "slide-teaser",
         "dot-plot",
         "dumbbell",
         "line-band",
         "scatter",
+        "distribution-overlap",
+        "kde",
         "box",
         "violin",
         "ecdf",
-        "kde",
         "heatmap",
         "roc",
         "pr",
@@ -35,108 +35,96 @@
       ]
     }
   },
+  "groups": {
+    "grouped-bar": [
+      "ablation-legend",
+      "capacity-88-of-96",
+      "ours-vs-baselines",
+      "horizontal-percent",
+      "increment-base",
+      "multi-panel",
+      "before-after",
+      "print-bw",
+      "slide-teaser"
+    ],
+    "dot-plot": [
+      "dot-plot"
+    ],
+    "dumbbell": [
+      "dumbbell"
+    ],
+    "line-band": [
+      "line-band"
+    ],
+    "scatter": [
+      "scatter"
+    ],
+    "distribution-overlap": [
+      "distribution-overlap"
+    ],
+    "kde": [
+      "kde"
+    ],
+    "box": [
+      "box"
+    ],
+    "violin": [
+      "violin"
+    ],
+    "ecdf": [
+      "ecdf"
+    ],
+    "heatmap": [
+      "heatmap"
+    ],
+    "roc": [
+      "roc"
+    ],
+    "pr": [
+      "pr"
+    ],
+    "calibration": [
+      "calibration"
+    ],
+    "surface": [
+      "surface"
+    ]
+  },
   "entries": [
     {
-      "recipe": "ours-vs-baselines",
-      "title": "Ours vs baselines",
+      "recipe": "ablation-legend",
+      "title": "Ablation with legend",
+      "chart": "grouped-bar",
+      "variant": "ablation",
       "tags": [
         "paper",
-        "single-column",
-        "focus",
-        "delta"
+        "double-column",
+        "ablation",
+        "legend"
       ],
       "files": {
-        "png": "ours-vs-baselines/figure.png",
-        "pdf": "ours-vs-baselines/figure.pdf",
-        "svg": "ours-vs-baselines/figure.svg",
-        "config": "ours-vs-baselines/config.json",
-        "data": "ours-vs-baselines/data.csv",
-        "decisions": "ours-vs-baselines/decisions.json"
+        "png": "ablation-legend/figure.png",
+        "pdf": "ablation-legend/figure.pdf",
+        "svg": "ablation-legend/figure.svg",
+        "config": "ablation-legend/config.json",
+        "data": "ablation-legend/data.csv",
+        "decisions": "ablation-legend/decisions.json"
       },
       "decisions": {
-        "claim": "在三个模拟基准中突出本文方法，并标注 Bench B 相对 Method 1 的提升。",
+        "claim": "比较五个模拟消融设置在三个任务上的得分。",
         "chart": "grouped-bar",
-        "size": "single",
+        "size": "double",
         "size_pt": [
-          237.6,
-          169.7
+          504,
+          360
         ],
-        "palette": "neutral-accent",
+        "palette": "tol-muted",
         "layout": "grouped",
         "encoding": [
           "grouped-bar"
         ],
-        "emphasis": [
-          "focus-gray"
-        ],
-        "annotations": [
-          "delta"
-        ],
-        "labels": {
-          "values": false,
-          "legend": "top"
-        },
-        "axes": {
-          "main": {
-            "limits": [
-              0.0,
-              1.2000000000000002
-            ],
-            "ticks": [
-              0.0,
-              0.25,
-              0.5,
-              0.75,
-              1.0
-            ]
-          }
-        },
-        "log": [
-          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
-          "emphasis focus-gray -> 1 focus (ours), 3 muted",
-          "annotation delta -> main/Bench B: method-1 -> ours (+22.0 pp)",
-          "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
-          "axis main -> [0.0, 1.2000000000000002]; ticks [0.0, 0.25, 0.5, 0.75, 1.0]",
-          "legend auto -> renderer measures columns at render time"
-        ]
-      }
-    },
-    {
-      "recipe": "before-after",
-      "title": "Before and after",
-      "tags": [
-        "paper",
-        "single-column",
-        "paired",
-        "delta"
-      ],
-      "files": {
-        "png": "before-after/figure.png",
-        "pdf": "before-after/figure.pdf",
-        "svg": "before-after/figure.svg",
-        "config": "before-after/config.json",
-        "data": "before-after/data.csv",
-        "decisions": "before-after/decisions.json"
-      },
-      "decisions": {
-        "claim": "比较三个模拟任务的改动前后差异。",
-        "chart": "grouped-bar",
-        "size": "single",
-        "size_pt": [
-          237.6,
-          169.7
-        ],
-        "palette": "blue-orange",
-        "layout": "paired",
-        "encoding": [
-          "grouped-bar"
-        ],
         "emphasis": [],
-        "annotations": [
-          "delta",
-          "delta",
-          "delta"
-        ],
+        "annotations": [],
         "labels": {
           "values": false,
           "legend": "top"
@@ -145,24 +133,26 @@
           "main": {
             "limits": [
               0.0,
-              120
+              0.9
             ],
             "ticks": [
               0.0,
-              25.0,
-              50.0,
-              75.0,
-              100.0
+              0.1,
+              0.2,
+              0.3,
+              0.4,
+              0.5,
+              0.6,
+              0.7,
+              0.8,
+              0.9
             ]
           }
         },
         "log": [
-          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
-          "annotation delta -> main/Task A: before -> after (+17.0)",
-          "annotation delta -> main/Task B: before -> after (+19.0)",
-          "annotation delta -> main/Task C: before -> after (+19.0)",
-          "palette blue-orange -> before #0077BB, after #EE7733",
-          "axis main -> [0.0, 120]; ticks [0.0, 25.0, 50.0, 75.0, 100.0]",
+          "size double -> 504 x 360 pt; type 8/9/7.5 pt",
+          "palette tol-muted -> full #CC6677, no-a #332288, no-b #DDCC77, no-c #117733, no-d #88CCEE",
+          "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -170,6 +160,8 @@
     {
       "recipe": "capacity-88-of-96",
       "title": "Capacity: 88 of 96",
+      "chart": "grouped-bar",
+      "variant": "capacity",
       "tags": [
         "paper",
         "single-column",
@@ -234,37 +226,43 @@
       }
     },
     {
-      "recipe": "ablation-legend",
-      "title": "Ablation with legend",
+      "recipe": "ours-vs-baselines",
+      "title": "Ours vs baselines",
+      "chart": "grouped-bar",
+      "variant": "focus",
       "tags": [
         "paper",
-        "double-column",
-        "ablation",
-        "legend"
+        "single-column",
+        "focus",
+        "delta"
       ],
       "files": {
-        "png": "ablation-legend/figure.png",
-        "pdf": "ablation-legend/figure.pdf",
-        "svg": "ablation-legend/figure.svg",
-        "config": "ablation-legend/config.json",
-        "data": "ablation-legend/data.csv",
-        "decisions": "ablation-legend/decisions.json"
+        "png": "ours-vs-baselines/figure.png",
+        "pdf": "ours-vs-baselines/figure.pdf",
+        "svg": "ours-vs-baselines/figure.svg",
+        "config": "ours-vs-baselines/config.json",
+        "data": "ours-vs-baselines/data.csv",
+        "decisions": "ours-vs-baselines/decisions.json"
       },
       "decisions": {
-        "claim": "比较五个模拟消融设置在三个任务上的得分。",
+        "claim": "在三个模拟基准中突出本文方法，并标注 Bench B 相对 Method 1 的提升。",
         "chart": "grouped-bar",
-        "size": "double",
+        "size": "single",
         "size_pt": [
-          504,
-          360
+          237.6,
+          169.7
         ],
-        "palette": "tol-muted",
+        "palette": "neutral-accent",
         "layout": "grouped",
         "encoding": [
           "grouped-bar"
         ],
-        "emphasis": [],
-        "annotations": [],
+        "emphasis": [
+          "focus-gray"
+        ],
+        "annotations": [
+          "delta"
+        ],
         "labels": {
           "values": false,
           "legend": "top"
@@ -273,26 +271,23 @@
           "main": {
             "limits": [
               0.0,
-              0.9
+              1.2000000000000002
             ],
             "ticks": [
               0.0,
-              0.1,
-              0.2,
-              0.3,
-              0.4,
+              0.25,
               0.5,
-              0.6,
-              0.7,
-              0.8,
-              0.9
+              0.75,
+              1.0
             ]
           }
         },
         "log": [
-          "size double -> 504 x 360 pt; type 8/9/7.5 pt",
-          "palette tol-muted -> full #CC6677, no-a #332288, no-b #DDCC77, no-c #117733, no-d #88CCEE",
-          "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
+          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+          "emphasis focus-gray -> 1 focus (ours), 3 muted",
+          "annotation delta -> main/Bench B: method-1 -> ours (+22.0 pp)",
+          "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
+          "axis main -> [0.0, 1.2000000000000002]; ticks [0.0, 0.25, 0.5, 0.75, 1.0]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -300,6 +295,8 @@
     {
       "recipe": "horizontal-percent",
       "title": "Horizontal percentages",
+      "chart": "grouped-bar",
+      "variant": "horizontal",
       "tags": [
         "paper",
         "single-column",
@@ -364,71 +361,74 @@
       }
     },
     {
-      "recipe": "print-bw",
-      "title": "Print in grayscale",
+      "recipe": "increment-base",
+      "title": "Base plus increment",
+      "chart": "grouped-bar",
+      "variant": "increment",
       "tags": [
         "paper",
-        "single-column",
-        "grayscale",
-        "hatch"
+        "1.5-column",
+        "increment",
+        "base"
       ],
       "files": {
-        "png": "print-bw/figure.png",
-        "pdf": "print-bw/figure.pdf",
-        "svg": "print-bw/figure.svg",
-        "config": "print-bw/config.json",
-        "data": "print-bw/data.csv",
-        "decisions": "print-bw/decisions.json"
+        "png": "increment-base/figure.png",
+        "pdf": "increment-base/figure.pdf",
+        "svg": "increment-base/figure.svg",
+        "config": "increment-base/config.json",
+        "data": "increment-base/data.csv",
+        "decisions": "increment-base/decisions.json"
       },
       "decisions": {
-        "claim": "在黑白印刷下区分三个模拟方法。",
+        "claim": "模拟 2023-2025 三年任务成功率：hatched 部分是当年基数，实色部分是下一年增量。",
         "chart": "grouped-bar",
-        "size": "single",
+        "size": "medium",
         "size_pt": [
-          237.6,
-          169.7
+          324,
+          231.4
         ],
-        "palette": "grayscale",
+        "palette": "blue-orange",
         "layout": "grouped",
         "encoding": [
-          "grouped-bar"
+          "increment"
         ],
         "emphasis": [],
         "annotations": [],
         "labels": {
           "values": false,
-          "legend": "top"
+          "legend": "none",
+          "value_size": 6.5
         },
         "axes": {
           "main": {
             "limits": [
-              0.0,
-              0.8
+              0,
+              1.0
             ],
             "ticks": [
               0.0,
-              0.1,
               0.2,
-              0.3,
               0.4,
-              0.5,
               0.6,
-              0.7,
-              0.8
+              0.8,
+              1.0
             ]
           }
         },
         "log": [
-          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
-          "palette grayscale -> method-a #D9D9D9, method-b #BFBFBF, method-c #A3A3A3",
-          "axis main -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
-          "legend auto -> renderer measures columns at render time"
+          "size medium -> 324 x 231.4 pt; type 7.5/8.5/7 pt",
+          "encoding increment -> base normalized to base; value is total",
+          "palette blue-orange -> ours #0077BB",
+          "axis main -> [0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+          "legend -> hidden"
         ]
       }
     },
     {
       "recipe": "multi-panel",
       "title": "Two-panel comparison",
+      "chart": "grouped-bar",
+      "variant": "multi-panel",
       "tags": [
         "paper",
         "single-column",
@@ -511,8 +511,143 @@
       }
     },
     {
+      "recipe": "before-after",
+      "title": "Before and after",
+      "chart": "grouped-bar",
+      "variant": "paired",
+      "tags": [
+        "paper",
+        "single-column",
+        "paired",
+        "delta"
+      ],
+      "files": {
+        "png": "before-after/figure.png",
+        "pdf": "before-after/figure.pdf",
+        "svg": "before-after/figure.svg",
+        "config": "before-after/config.json",
+        "data": "before-after/data.csv",
+        "decisions": "before-after/decisions.json"
+      },
+      "decisions": {
+        "claim": "比较三个模拟任务的改动前后差异。",
+        "chart": "grouped-bar",
+        "size": "single",
+        "size_pt": [
+          237.6,
+          169.7
+        ],
+        "palette": "blue-orange",
+        "layout": "paired",
+        "encoding": [
+          "grouped-bar"
+        ],
+        "emphasis": [],
+        "annotations": [
+          "delta",
+          "delta",
+          "delta"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "axes": {
+          "main": {
+            "limits": [
+              0.0,
+              120
+            ],
+            "ticks": [
+              0.0,
+              25.0,
+              50.0,
+              75.0,
+              100.0
+            ]
+          }
+        },
+        "log": [
+          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+          "annotation delta -> main/Task A: before -> after (+17.0)",
+          "annotation delta -> main/Task B: before -> after (+19.0)",
+          "annotation delta -> main/Task C: before -> after (+19.0)",
+          "palette blue-orange -> before #0077BB, after #EE7733",
+          "axis main -> [0.0, 120]; ticks [0.0, 25.0, 50.0, 75.0, 100.0]",
+          "legend auto -> renderer measures columns at render time"
+        ]
+      }
+    },
+    {
+      "recipe": "print-bw",
+      "title": "Print in grayscale",
+      "chart": "grouped-bar",
+      "variant": "print",
+      "tags": [
+        "paper",
+        "single-column",
+        "grayscale",
+        "hatch"
+      ],
+      "files": {
+        "png": "print-bw/figure.png",
+        "pdf": "print-bw/figure.pdf",
+        "svg": "print-bw/figure.svg",
+        "config": "print-bw/config.json",
+        "data": "print-bw/data.csv",
+        "decisions": "print-bw/decisions.json"
+      },
+      "decisions": {
+        "claim": "在黑白印刷下区分三个模拟方法。",
+        "chart": "grouped-bar",
+        "size": "single",
+        "size_pt": [
+          237.6,
+          169.7
+        ],
+        "palette": "grayscale",
+        "layout": "grouped",
+        "encoding": [
+          "grouped-bar"
+        ],
+        "emphasis": [],
+        "annotations": [],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "axes": {
+          "main": {
+            "limits": [
+              0.0,
+              0.8
+            ],
+            "ticks": [
+              0.0,
+              0.1,
+              0.2,
+              0.3,
+              0.4,
+              0.5,
+              0.6,
+              0.7,
+              0.8
+            ]
+          }
+        },
+        "log": [
+          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+          "palette grayscale -> method-a #D9D9D9, method-b #BFBFBF, method-c #A3A3A3",
+          "axis main -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
+          "legend auto -> renderer measures columns at render time"
+        ]
+      }
+    },
+    {
       "recipe": "slide-teaser",
       "title": "Slide teaser",
+      "chart": "grouped-bar",
+      "variant": "slide",
       "tags": [
         "slide",
         "double-column",
@@ -579,119 +714,10 @@
       }
     },
     {
-      "recipe": "increment-base",
-      "title": "Base plus increment",
-      "tags": [
-        "paper",
-        "1.5-column",
-        "increment",
-        "base"
-      ],
-      "files": {
-        "png": "increment-base/figure.png",
-        "pdf": "increment-base/figure.pdf",
-        "svg": "increment-base/figure.svg",
-        "config": "increment-base/config.json",
-        "data": "increment-base/data.csv",
-        "decisions": "increment-base/decisions.json"
-      },
-      "decisions": {
-        "claim": "模拟 2023-2025 三年任务成功率：hatched 部分是当年基数，实色部分是下一年增量。",
-        "chart": "grouped-bar",
-        "size": "medium",
-        "size_pt": [
-          324,
-          231.4
-        ],
-        "palette": "blue-orange",
-        "layout": "grouped",
-        "encoding": [
-          "increment"
-        ],
-        "emphasis": [],
-        "annotations": [],
-        "labels": {
-          "values": false,
-          "legend": "none",
-          "value_size": 6.5
-        },
-        "axes": {
-          "main": {
-            "limits": [
-              0,
-              1.0
-            ],
-            "ticks": [
-              0.0,
-              0.2,
-              0.4,
-              0.6,
-              0.8,
-              1.0
-            ]
-          }
-        },
-        "log": [
-          "size medium -> 324 x 231.4 pt; type 7.5/8.5/7 pt",
-          "encoding increment -> base normalized to base; value is total",
-          "palette blue-orange -> ours #0077BB",
-          "axis main -> [0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
-          "legend -> hidden"
-        ]
-      }
-    },
-    {
-      "recipe": "distribution-overlap",
-      "title": "Distribution overlap",
-      "tags": [
-        "paper",
-        "double-column",
-        "distribution",
-        "overlap"
-      ],
-      "files": {
-        "png": "distribution-overlap/figure.png",
-        "pdf": "distribution-overlap/figure.pdf",
-        "svg": "distribution-overlap/figure.svg",
-        "config": "distribution-overlap/config.json",
-        "data": "distribution-overlap/data.csv",
-        "decisions": "distribution-overlap/decisions.json"
-      },
-      "decisions": {
-        "claim": "MOCK：比较 CE / LS 两种 setting 下 Correct 与 Incorrect 的 confidence 分布。",
-        "chart": "distribution-overlap",
-        "size": "double",
-        "size_pt": [
-          504,
-          252
-        ],
-        "palette": "blue-orange",
-        "encoding": [
-          "distribution-overlap"
-        ],
-        "labels": {
-          "values": false,
-          "legend": "top"
-        },
-        "layout": "distribution-overlap",
-        "emphasis": [],
-        "annotations": [],
-        "axes": {
-          "x": [
-            0,
-            1
-          ],
-          "bins": 20
-        },
-        "log": [
-          "distribution -> 2 panel(s), 2 series, x [0, 1], 20 bins",
-          "palette blue-orange -> correct, incorrect"
-        ]
-      }
-    },
-    {
       "recipe": "dot-plot",
       "title": "Dot plot",
+      "chart": "dot-plot",
+      "variant": "four-series",
       "tags": [
         "paper",
         "single-column",
@@ -739,6 +765,8 @@
     {
       "recipe": "dumbbell",
       "title": "Dumbbell",
+      "chart": "dumbbell",
+      "variant": "three-group",
       "tags": [
         "paper",
         "single-column",
@@ -786,6 +814,8 @@
     {
       "recipe": "line-band",
       "title": "Line with CI band",
+      "chart": "line-band",
+      "variant": "training",
       "tags": [
         "paper",
         "single-column",
@@ -833,6 +863,8 @@
     {
       "recipe": "scatter",
       "title": "Scatter with trend and ellipse",
+      "chart": "scatter",
+      "variant": "trend-ellipse",
       "tags": [
         "paper",
         "single-column",
@@ -878,8 +910,110 @@
       }
     },
     {
+      "recipe": "distribution-overlap",
+      "title": "Distribution overlap",
+      "chart": "distribution-overlap",
+      "variant": "two-panel",
+      "tags": [
+        "paper",
+        "double-column",
+        "distribution",
+        "overlap"
+      ],
+      "files": {
+        "png": "distribution-overlap/figure.png",
+        "pdf": "distribution-overlap/figure.pdf",
+        "svg": "distribution-overlap/figure.svg",
+        "config": "distribution-overlap/config.json",
+        "data": "distribution-overlap/data.csv",
+        "decisions": "distribution-overlap/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：比较 CE / LS 两种 setting 下 Correct 与 Incorrect 的 confidence 分布。",
+        "chart": "distribution-overlap",
+        "size": "double",
+        "size_pt": [
+          504,
+          252
+        ],
+        "palette": "blue-orange",
+        "encoding": [
+          "distribution-overlap"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "distribution-overlap",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            1
+          ],
+          "bins": 20
+        },
+        "log": [
+          "distribution -> 2 panel(s), 2 series, x [0, 1], 20 bins",
+          "palette blue-orange -> correct, incorrect"
+        ]
+      }
+    },
+    {
+      "recipe": "kde",
+      "title": "KDE density",
+      "chart": "kde",
+      "variant": "overlap",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "kde"
+      ],
+      "files": {
+        "png": "kde/figure.png",
+        "pdf": "kde/figure.pdf",
+        "svg": "kde/figure.svg",
+        "config": "kde/config.json",
+        "data": "kde/data.csv",
+        "decisions": "kde/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法的 confidence density，比较 overlap。",
+        "chart": "kde",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "blue-orange",
+        "encoding": [
+          "kde"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "kde",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            1
+          ]
+        },
+        "log": [
+          "kde -> 1 groups, 2 series, 160 observations"
+        ]
+      }
+    },
+    {
       "recipe": "box",
       "title": "Box distribution",
+      "chart": "box",
+      "variant": "raw-significance",
       "tags": [
         "paper",
         "single-column",
@@ -927,6 +1061,8 @@
     {
       "recipe": "violin",
       "title": "Violin distribution",
+      "chart": "violin",
+      "variant": "raw-points",
       "tags": [
         "paper",
         "single-column",
@@ -974,6 +1110,8 @@
     {
       "recipe": "ecdf",
       "title": "ECDF",
+      "chart": "ecdf",
+      "variant": "latency",
       "tags": [
         "paper",
         "single-column",
@@ -1019,55 +1157,10 @@
       }
     },
     {
-      "recipe": "kde",
-      "title": "KDE density",
-      "tags": [
-        "paper",
-        "single-column",
-        "distribution",
-        "kde"
-      ],
-      "files": {
-        "png": "kde/figure.png",
-        "pdf": "kde/figure.pdf",
-        "svg": "kde/figure.svg",
-        "config": "kde/config.json",
-        "data": "kde/data.csv",
-        "decisions": "kde/decisions.json"
-      },
-      "decisions": {
-        "claim": "MOCK：两个方法的 confidence density，比较 overlap。",
-        "chart": "kde",
-        "size": "single",
-        "size_pt": [
-          360,
-          240
-        ],
-        "palette": "blue-orange",
-        "encoding": [
-          "kde"
-        ],
-        "labels": {
-          "values": false,
-          "legend": "top"
-        },
-        "layout": "kde",
-        "emphasis": [],
-        "annotations": [],
-        "axes": {
-          "x": [
-            0,
-            1
-          ]
-        },
-        "log": [
-          "kde -> 1 groups, 2 series, 160 observations"
-        ]
-      }
-    },
-    {
       "recipe": "heatmap",
       "title": "Heatmap",
+      "chart": "heatmap",
+      "variant": "layer-task",
       "tags": [
         "paper",
         "single-column",
@@ -1124,6 +1217,8 @@
     {
       "recipe": "roc",
       "title": "ROC curve",
+      "chart": "roc",
+      "variant": "single-series",
       "tags": [
         "paper",
         "single-column",
@@ -1168,6 +1263,8 @@
     {
       "recipe": "pr",
       "title": "Precision-recall curve",
+      "chart": "pr",
+      "variant": "single-series",
       "tags": [
         "paper",
         "single-column",
@@ -1212,6 +1309,8 @@
     {
       "recipe": "calibration",
       "title": "Calibration curve",
+      "chart": "calibration",
+      "variant": "single-series",
       "tags": [
         "paper",
         "single-column",
@@ -1256,6 +1355,8 @@
     {
       "recipe": "surface",
       "title": "3D surface and contour",
+      "chart": "surface",
+      "variant": "loss-landscape",
       "tags": [
         "paper",
         "double-column",

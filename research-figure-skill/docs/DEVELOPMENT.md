@@ -29,6 +29,8 @@
 
 P0 的目标是覆盖 CS 论文里最常见的 80% 图，不是覆盖所有 Matplotlib/Pandas 图型。
 
+**两层结构**：`chart family`（几何形状）+ `variant`（同一 family 下的使用情况）。`library/recipes.json` 每条 recipe 有 `chart` / `variant`；Grouped Bar 已有 9 个 variant（focus、paired、capacity、ablation、horizontal、print、multi-panel、slide、increment），它们不是 9 种 chart。变体计划见 `docs/VARIANTS.md`。
+
 ### 3.1 P0 charts
 
 | # | chart id | family | 主要用途 | 状态 |

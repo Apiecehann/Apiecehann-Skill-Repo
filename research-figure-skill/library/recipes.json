@@ -10,7 +10,9 @@
         "focus",
         "delta"
       ],
-      "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
+      "ir": "examples/templates/ours-vs-baselines/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "focus"
     },
     {
       "id": "before-after",
@@ -21,7 +23,9 @@
         "paired",
         "delta"
       ],
-      "ir": "examples/templates/before-after/figure.ir.json"
+      "ir": "examples/templates/before-after/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "paired"
     },
     {
       "id": "capacity-88-of-96",
@@ -31,7 +35,9 @@
         "single-column",
         "capacity"
       ],
-      "ir": "examples/templates/capacity-88-of-96/figure.ir.json"
+      "ir": "examples/templates/capacity-88-of-96/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "capacity"
     },
     {
       "id": "ablation-legend",
@@ -42,7 +48,9 @@
         "ablation",
         "legend"
       ],
-      "ir": "examples/templates/ablation-legend/figure.ir.json"
+      "ir": "examples/templates/ablation-legend/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "ablation"
     },
     {
       "id": "horizontal-percent",
@@ -53,7 +61,9 @@
         "horizontal",
         "percent"
       ],
-      "ir": "examples/templates/horizontal-percent/figure.ir.json"
+      "ir": "examples/templates/horizontal-percent/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "horizontal"
     },
     {
       "id": "print-bw",
@@ -64,7 +74,9 @@
         "grayscale",
         "hatch"
       ],
-      "ir": "examples/templates/print-bw/figure.ir.json"
+      "ir": "examples/templates/print-bw/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "print"
     },
     {
       "id": "multi-panel",
@@ -74,7 +86,9 @@
         "single-column",
         "multi-panel"
       ],
-      "ir": "examples/templates/multi-panel/figure.ir.json"
+      "ir": "examples/templates/multi-panel/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "multi-panel"
     },
     {
       "id": "slide-teaser",
@@ -85,7 +99,9 @@
         "large-type",
         "focus"
       ],
-      "ir": "examples/templates/slide-teaser/figure.ir.json"
+      "ir": "examples/templates/slide-teaser/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "slide"
     },
     {
       "id": "increment-base",
@@ -96,7 +112,9 @@
         "increment",
         "base"
       ],
-      "ir": "examples/templates/increment-base/figure.ir.json"
+      "ir": "examples/templates/increment-base/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "increment"
     },
     {
       "id": "distribution-overlap",
@@ -107,7 +125,9 @@
         "distribution",
         "overlap"
       ],
-      "ir": "examples/templates/distribution-overlap/figure.ir.json"
+      "ir": "examples/templates/distribution-overlap/figure.ir.json",
+      "chart": "distribution-overlap",
+      "variant": "two-panel"
     },
     {
       "id": "dot-plot",
@@ -118,7 +138,9 @@
         "comparison",
         "dot"
       ],
-      "ir": "examples/templates/dot-plot/figure.ir.json"
+      "ir": "examples/templates/dot-plot/figure.ir.json",
+      "chart": "dot-plot",
+      "variant": "four-series"
     },
     {
       "id": "dumbbell",
@@ -129,7 +151,9 @@
         "comparison",
         "paired"
       ],
-      "ir": "examples/templates/dumbbell/figure.ir.json"
+      "ir": "examples/templates/dumbbell/figure.ir.json",
+      "chart": "dumbbell",
+      "variant": "three-group"
     },
     {
       "id": "line-band",
@@ -140,7 +164,9 @@
         "time",
         "band"
       ],
-      "ir": "examples/templates/line-band/figure.ir.json"
+      "ir": "examples/templates/line-band/figure.ir.json",
+      "chart": "line-band",
+      "variant": "training"
     },
     {
       "id": "scatter",
@@ -151,61 +177,126 @@
         "relationship",
         "trend"
       ],
-      "ir": "examples/templates/scatter/figure.ir.json"
+      "ir": "examples/templates/scatter/figure.ir.json",
+      "chart": "scatter",
+      "variant": "trend-ellipse"
     },
     {
       "id": "box",
       "title": "Box distribution",
-      "tags": ["paper", "single-column", "distribution", "box"],
-      "ir": "examples/templates/box/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "box"
+      ],
+      "ir": "examples/templates/box/figure.ir.json",
+      "chart": "box",
+      "variant": "raw-significance"
     },
     {
       "id": "violin",
       "title": "Violin distribution",
-      "tags": ["paper", "single-column", "distribution", "violin"],
-      "ir": "examples/templates/violin/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "violin"
+      ],
+      "ir": "examples/templates/violin/figure.ir.json",
+      "chart": "violin",
+      "variant": "raw-points"
     },
     {
       "id": "ecdf",
       "title": "ECDF",
-      "tags": ["paper", "single-column", "distribution", "ecdf"],
-      "ir": "examples/templates/ecdf/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "ecdf"
+      ],
+      "ir": "examples/templates/ecdf/figure.ir.json",
+      "chart": "ecdf",
+      "variant": "latency"
     },
     {
       "id": "kde",
       "title": "KDE density",
-      "tags": ["paper", "single-column", "distribution", "kde"],
-      "ir": "examples/templates/kde/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "kde"
+      ],
+      "ir": "examples/templates/kde/figure.ir.json",
+      "chart": "kde",
+      "variant": "overlap"
     },
     {
       "id": "heatmap",
       "title": "Heatmap",
-      "tags": ["paper", "single-column", "matrix", "heatmap"],
-      "ir": "examples/templates/heatmap/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "matrix",
+        "heatmap"
+      ],
+      "ir": "examples/templates/heatmap/figure.ir.json",
+      "chart": "heatmap",
+      "variant": "layer-task"
     },
     {
       "id": "roc",
       "title": "ROC curve",
-      "tags": ["paper", "single-column", "classification", "roc"],
-      "ir": "examples/templates/roc/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "roc"
+      ],
+      "ir": "examples/templates/roc/figure.ir.json",
+      "chart": "roc",
+      "variant": "single-series"
     },
     {
       "id": "pr",
       "title": "Precision-recall curve",
-      "tags": ["paper", "single-column", "classification", "pr"],
-      "ir": "examples/templates/pr/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "pr"
+      ],
+      "ir": "examples/templates/pr/figure.ir.json",
+      "chart": "pr",
+      "variant": "single-series"
     },
     {
       "id": "calibration",
       "title": "Calibration curve",
-      "tags": ["paper", "single-column", "classification", "calibration"],
-      "ir": "examples/templates/calibration/figure.ir.json"
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "calibration"
+      ],
+      "ir": "examples/templates/calibration/figure.ir.json",
+      "chart": "calibration",
+      "variant": "single-series"
     },
     {
       "id": "surface",
       "title": "3D surface and contour",
-      "tags": ["paper", "double-column", "3d", "surface"],
-      "ir": "examples/templates/surface/figure.ir.json"
+      "tags": [
+        "paper",
+        "double-column",
+        "3d",
+        "surface"
+      ],
+      "ir": "examples/templates/surface/figure.ir.json",
+      "chart": "surface",
+      "variant": "loss-landscape"
     }
   ]
 }
