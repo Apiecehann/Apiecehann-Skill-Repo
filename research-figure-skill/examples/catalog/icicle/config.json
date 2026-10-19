@@ -1,0 +1,78 @@
+{
+  "chart": "icicle",
+  "rows": [
+    {
+      "parent": "",
+      "label": "root",
+      "value": 100.0
+    },
+    {
+      "parent": "root",
+      "label": "Encoder",
+      "value": 55.0
+    },
+    {
+      "parent": "root",
+      "label": "Decoder",
+      "value": 30.0
+    },
+    {
+      "parent": "root",
+      "label": "Aux",
+      "value": 15.0
+    },
+    {
+      "parent": "Encoder",
+      "label": "Attention",
+      "value": 35.0
+    },
+    {
+      "parent": "Encoder",
+      "label": "FFN",
+      "value": 20.0
+    },
+    {
+      "parent": "Decoder",
+      "label": "Cross",
+      "value": 18.0
+    },
+    {
+      "parent": "Decoder",
+      "label": "Self",
+      "value": 12.0
+    },
+    {
+      "parent": "Aux",
+      "label": "Head",
+      "value": 15.0
+    }
+  ],
+  "colors": [
+    "#4477AA",
+    "#EE6677",
+    "#228833",
+    "#CCBB44",
+    "#66CCEE",
+    "#AA3377",
+    "#BBBBBB"
+  ],
+  "size_pt": [
+    380,
+    320
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

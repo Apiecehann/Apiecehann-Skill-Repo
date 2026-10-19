@@ -470,6 +470,69 @@ def render_ridgeline(config, rows, out_stem):
     return _save_fig(fig, out_stem)
 
 
+def _tree(rows):
+    by_parent = {}
+    for row in rows:
+        by_parent.setdefault(row["parent"], []).append(row)
+    return by_parent
+
+
+def render_sunburst(config, rows, out_stem):
+    by_parent = _tree(rows)
+    root = next(r for r in rows if r["parent"] in ("", "root"))
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72),
+                           subplot_kw={"projection": "polar"}, dpi=200)
+    fig.patch.set_facecolor("white"); ax.set_facecolor("white")
+    ax.axis("off")
+    colors = config["colors"]
+    def walk(node, start, end, depth):
+        children = by_parent.get(node["label"], [])
+        total = sum(c["value"] for c in children)
+        if not total:
+            return
+        angle = start
+        for i, child in enumerate(children):
+            span = (end - start) * child["value"] / total
+            color = colors[(depth + i) % len(colors)]
+            ax.bar((angle + span / 2), .8, width=span, bottom=depth + .1,
+                   color=color, edgecolor="white", linewidth=.6, align="center")
+            if span > .15:
+                ax.text(angle + span / 2, depth + .5, child["label"], ha="center", va="center",
+                        fontsize=6.5, rotation=np.degrees(angle + span / 2) - 90)
+            walk(child, angle, angle + span, depth + 1)
+            angle += span
+    walk(root, 0, 2 * np.pi, 0)
+    ax.set_ylim(0, 4)
+    ax.set_position([.18, .12, .64, .76])
+    return _save_fig(fig, out_stem)
+
+
+def render_icicle(config, rows, out_stem):
+    by_parent = _tree(rows)
+    root = next(r for r in rows if r["parent"] in ("", "root"))
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white"); ax.set_facecolor("white")
+    colors = config["colors"]
+    def walk(node, x, width, depth):
+        children = by_parent.get(node["label"], [])
+        total = sum(c["value"] for c in children)
+        if not total:
+            return
+        cursor = x
+        for i, child in enumerate(children):
+            w = width * child["value"] / total
+            ax.add_patch(matplotlib.patches.Rectangle((cursor, -depth), w, .9,
+                                                      facecolor=colors[(depth + i) % len(colors)],
+                                                      edgecolor="white", linewidth=.7))
+            ax.text(cursor + w / 2, -depth + .45, child["label"], ha="center", va="center", fontsize=6.5)
+            walk(child, cursor, w, depth + 1)
+            cursor += w
+    walk(root, 0, 1, 0)
+    ax.set_xlim(0, 1); ax.set_ylim(-2.2, .4); ax.axis("off")
+    ax.set_position([.08, .25, .84, .5])
+    return _save_fig(fig, out_stem)
+
+
 def render_radar(config, rows, out_stem):
     axes = config["axes"]
     series = config["series_order"]

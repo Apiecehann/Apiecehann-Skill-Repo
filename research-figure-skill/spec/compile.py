@@ -1044,6 +1044,59 @@ def compile_flow(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_hierarchy(ir, ir_path, output, render=False):
+    chart = ir["chart"]
+    enc = ir["encoding"]
+    missing = {"parent", "label", "value"} - set(enc)
+    if missing:
+        raise ValueError(f"{chart} encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    rows = [{"parent": raw[enc["parent"]].strip(), "label": raw[enc["label"]].strip(),
+             "value": numeric(raw[enc["value"]], enc["value"], str(i))}
+            for i, raw in enumerate(source, 1)]
+    labels = [r["label"] for r in rows]
+    if len(labels) != len(set(labels)):
+        raise ValueError("hierarchy labels must be unique")
+    roots = [r for r in rows if r["parent"] == ""]
+    if len(roots) != 1:
+        raise ValueError("hierarchy requires exactly one root with empty/root parent")
+    known = set(labels)
+    for row in rows:
+        if row["parent"] not in ("", "root") and row["parent"] not in known:
+            raise ValueError(f"hierarchy parent {row['parent']!r} is unknown")
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette = presets["palettes"].get(ir["theme"].get("palette", "tol-bright"))
+    if palette is None:
+        raise ValueError("Unknown palette")
+    size = ir["size"]["preset"]
+    size_pt = {"single": [380, 320], "medium": [440, 360], "double": [520, 420],
+               "slide": [640, 480]}[size]
+    config = {
+        "chart": chart, "rows": rows, "colors": palette["colors"],
+        "size_pt": size_pt, "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["parent", "label", "value"])
+        writer.writeheader(); writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": chart, "size": size, "size_pt": size_pt,
+        "palette": ir["theme"].get("palette", "tol-bright"), "encoding": [chart],
+        "labels": ir["labels"], "layout": chart, "emphasis": [], "annotations": [],
+        "axes": {}, "log": [f"{chart} -> {len(rows)} nodes"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        renderer = charts2d.render_sunburst if chart == "sunburst" else charts2d.render_icicle
+        renderer(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_quiver3d(ir, ir_path, output, render=False):
     enc = ir["encoding"]
     missing = {"x", "y", "z", "u", "v", "w"} - set(enc)
@@ -1268,6 +1321,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_mesh3d(ir, ir_path, output, render)
     if ir["chart"] == "quiver3d":
         return compile_quiver3d(ir, ir_path, output, render)
+    if ir["chart"] in ("sunburst", "icicle"):
+        return compile_hierarchy(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

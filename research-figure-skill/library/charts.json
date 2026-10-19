@@ -349,6 +349,30 @@
       ],
       "supports": [],
       "ir": "examples/templates/quiver3d/figure.ir.json"
+    },
+    {
+      "id": "sunburst",
+      "family": "hierarchy",
+      "status": "implemented",
+      "requires": [
+        "parent",
+        "label",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/sunburst/figure.ir.json"
+    },
+    {
+      "id": "icicle",
+      "family": "hierarchy",
+      "status": "implemented",
+      "requires": [
+        "parent",
+        "label",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/icicle/figure.ir.json"
     }
   ]
 }

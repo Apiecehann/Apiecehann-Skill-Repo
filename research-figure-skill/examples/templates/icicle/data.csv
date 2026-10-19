@@ -1,0 +1,10 @@
+﻿parent,label,value
+,root,100
+root,Encoder,55
+root,Decoder,30
+root,Aux,15
+Encoder,Attention,35
+Encoder,FFN,20
+Decoder,Cross,18
+Decoder,Self,12
+Aux,Head,15

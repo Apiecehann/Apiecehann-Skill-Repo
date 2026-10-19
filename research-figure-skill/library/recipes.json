@@ -453,6 +453,32 @@
       "ir": "examples/templates/quiver3d/figure.ir.json",
       "chart": "quiver3d",
       "variant": "vector-field"
+    },
+    {
+      "id": "sunburst",
+      "title": "Sunburst",
+      "tags": [
+        "paper",
+        "single-column",
+        "hierarchy",
+        "sunburst"
+      ],
+      "ir": "examples/templates/sunburst/figure.ir.json",
+      "chart": "sunburst",
+      "variant": "two-level"
+    },
+    {
+      "id": "icicle",
+      "title": "Icicle",
+      "tags": [
+        "paper",
+        "single-column",
+        "hierarchy",
+        "icicle"
+      ],
+      "ir": "examples/templates/icicle/figure.ir.json",
+      "chart": "icicle",
+      "variant": "two-level"
     }
   ]
 }

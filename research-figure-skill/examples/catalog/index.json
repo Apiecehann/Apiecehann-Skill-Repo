@@ -43,7 +43,9 @@
         "radar",
         "bar3d",
         "mesh3d",
-        "quiver3d"
+        "quiver3d",
+        "sunburst",
+        "icicle"
       ]
     }
   },
@@ -134,6 +136,12 @@
     ],
     "quiver3d": [
       "quiver3d"
+    ],
+    "sunburst": [
+      "sunburst"
+    ],
+    "icicle": [
+      "icicle"
     ]
   },
   "entries": [
@@ -2116,6 +2124,94 @@
         "axes": {},
         "log": [
           "quiver3d -> 75 vectors"
+        ]
+      }
+    },
+    {
+      "recipe": "sunburst",
+      "title": "Sunburst",
+      "chart": "sunburst",
+      "variant": "two-level",
+      "tags": [
+        "paper",
+        "single-column",
+        "hierarchy",
+        "sunburst"
+      ],
+      "files": {
+        "png": "sunburst/figure.png",
+        "pdf": "sunburst/figure.pdf",
+        "svg": "sunburst/figure.svg",
+        "config": "sunburst/config.json",
+        "data": "sunburst/data.csv",
+        "decisions": "sunburst/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：模型模块的两层占比（sunburst）。",
+        "chart": "sunburst",
+        "size": "single",
+        "size_pt": [
+          380,
+          320
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "sunburst"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "sunburst",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "sunburst -> 9 nodes"
+        ]
+      }
+    },
+    {
+      "recipe": "icicle",
+      "title": "Icicle",
+      "chart": "icicle",
+      "variant": "two-level",
+      "tags": [
+        "paper",
+        "single-column",
+        "hierarchy",
+        "icicle"
+      ],
+      "files": {
+        "png": "icicle/figure.png",
+        "pdf": "icicle/figure.pdf",
+        "svg": "icicle/figure.svg",
+        "config": "icicle/config.json",
+        "data": "icicle/data.csv",
+        "decisions": "icicle/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：模型模块的两层占比（icicle）。",
+        "chart": "icicle",
+        "size": "single",
+        "size_pt": [
+          380,
+          320
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "icicle"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "icicle",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "icicle -> 9 nodes"
         ]
       }
     }

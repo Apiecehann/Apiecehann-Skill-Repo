@@ -1,0 +1,10 @@
+{
+  "claim": "MOCK：模型模块的两层占比（icicle）。",
+  "chart": "icicle",
+  "data": "data.csv",
+  "encoding": {"parent": "parent", "label": "label", "value": "value"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "tol-bright", "font": "sans"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true}
+}

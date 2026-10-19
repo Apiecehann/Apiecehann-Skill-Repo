@@ -35,7 +35,9 @@
         "radar",
         "bar3d",
         "mesh3d",
-        "quiver3d"
+        "quiver3d",
+        "sunburst",
+        "icicle"
       ]
     },
     "data": {
@@ -181,6 +183,10 @@
           "minLength": 1
         },
         "w": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent": {
           "type": "string",
           "minLength": 1
         },
