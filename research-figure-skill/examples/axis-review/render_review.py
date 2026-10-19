@@ -430,7 +430,7 @@ def annotations():
                      "label_scale": 100, "label_suffix": " pp"}]
     cfg["gain_defaults"] = {"arrow_style": "curved", "label_size": 9,
                             "label_font": "gain", "label_side": "left",
-                            "linewidth": 1.8}
+                            "label_shift_pt": [5, -5], "linewidth": 1.8}
     cfg["panel_defaults"]["ticks"] = [0, .5, 1]
     img = render_panel(paired, cfg, "annotation-delta")
     items.append({"image": img, "label": "curved delta", "note": "arrow between paired bars"})

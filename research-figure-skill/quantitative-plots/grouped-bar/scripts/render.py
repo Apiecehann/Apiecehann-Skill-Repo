@@ -861,9 +861,13 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
     side = spec.get('label_side', 'above')
     if side not in ('above', 'left'):
         raise ValueError('gain.label_side must be above or left')
+    shift = spec.get('label_shift_pt', [0, 0])
+    if (not isinstance(shift, (list, tuple)) or len(shift) != 2 or
+            any(type(v) not in (int, float) or not math.isfinite(v) for v in shift)):
+        raise ValueError('gain.label_shift_pt must be two finite numbers')
     if side == 'left':
-        ys = [max(start[1], end[1])+margin+half_h] + ys
-        xs = [start[0]-half_w-margin] + xs
+        ys = [max(start[1], end[1])+margin+half_h+shift[1]] + ys
+        xs = [start[0]-half_w-margin+shift[0]] + xs
     all_paths = [points] + [g['points_pt'] for g in previous]
     position = None
     leader_points = None
