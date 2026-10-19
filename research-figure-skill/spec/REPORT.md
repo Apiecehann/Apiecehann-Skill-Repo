@@ -87,3 +87,5 @@
 阶段 3 完成 increment-base 模板与注册：`examples/templates/increment-base/` 含 3 年 MOCK 数据、`encoding.base` 的 IR、中文 README；`library/recipes.json` 与 `spec/evals/cases.jsonl` 各加一条，check.py 的 `encoding_cards` 识别 increment。模板导出 PNG/PDF/SVG。测试从 173 增至 179 passed（含 curved delta 与白底 style 的回归）。
 
 附加：gain 增加 `arrow_style: "curved"`，用单段三次弧线并在碰撞时抬高 ceiling；默认仍为 `route`，冻结 gain 不变。`12-annotation` 使用 curved 版本；新增 `14-bar-spacing` 与 `15-color-pairing`（固定 orange accent，24 组 baseline）。
+
+补充（用户收敛）：annotation 轴只保留 curved delta 与 distribution overlap；后者新增 examples/distribution-overlap/（两 panel 重叠直方图，白底 + 双向 grid）。颜色筛选新增 library/palettes-120.json 与 16-palette-library.png（120 组 4-color 卡）。

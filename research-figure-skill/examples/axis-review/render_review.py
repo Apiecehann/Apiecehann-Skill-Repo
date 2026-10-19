@@ -418,36 +418,12 @@ def annotations():
                      "label_scale": 100, "label_suffix": " pp"}]
     cfg["gain_defaults"] = {"arrow_style": "curved"}
     img = render_panel(paired, cfg, "annotation-delta")
-    items.append({"image": img, "label": "delta", "note": "same-panel pair"})
+    items.append({"image": img, "label": "curved delta", "note": "arrow between paired bars"})
 
-    cap = read("capacity.csv")
-    cfg = config(cap, colors=["#A3ACB9"], labels={"achieved": "Achieved"},
-                 tick_format=".0f", ylabel="Items", grid="h-hairline",
-                 capacity={"field": "capacity", "label_format": "{value}/{capacity}",
-                           "show_percent": True})
-    cfg["panel_defaults"]["bar_width"] = .25
-    cfg["panel_defaults"]["category_margin"] = .9
-    img = render_panel(cap, cfg, "annotation-capacity")
-    items.append({"image": img, "label": "capacity", "note": "88 / 96"})
-
-    focus = read("focus.csv")
-    cfg = config(focus, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
-                 reference_lines=[{"value": .8, "label": "SOTA", "color": "#6B7280",
-                                   "label_x": .02, "label_ha": "left"}])
-    img = render_panel(focus, cfg, "annotation-reference")
-    items.append({"image": img, "label": "reference line", "note": "SOTA / threshold"})
-
-    inc = read("increment.csv")
-    cfg = config(inc, colors=[ACCENTS["orange"]], labels={"ours": "Ours"},
-                 tick_format=".0%", ylabel="Score", grid="none", legend=False,
-                 capacity=None)
-    cfg["panel_defaults"]["increment"] = {"field": "base", "delta_format": "+{delta:.0%}"}
-    cfg["panel_defaults"]["value_format"] = ".0%"
-    cfg["panel_defaults"]["bar_width"] = .5
-    cfg["panel_defaults"]["category_margin"] = .35
-    img = render_panel(inc, cfg, "annotation-increment")
-    items.append({"image": img, "label": "base + increment", "note": "hatched base + solid delta"})
-    make_sheet("annotation", "delta / capacity / reference-line / base+increment。",
+    distribution = HERE.parent / "distribution-overlap" / "figure.png"
+    items.append({"image": distribution, "label": "distribution overlap",
+                  "note": "two histograms, two panels"})
+    make_sheet("annotation", "只保留两类：箭头 / 分布重叠图。",
                items, 2, "12-annotation.png", cell=(620, 420))
 
 
@@ -505,6 +481,34 @@ def color_pairing():
         items.append({"image": img, "label": name, "note": " / ".join(baselines)})
     make_sheet("color pairing", f"基准 accent = {base}；24 组 baseline 配色，先选关系再选具体色卡。",
                items, 4, "15-color-pairing.png", cell=(330, 270))
+
+
+def palette_library():
+    data = json.loads((ROOT / "library" / "palettes-120.json").read_text(encoding="utf8"))
+    palettes = data["palettes"]
+    columns, cell_w, cell_h = 6, 220, 112
+    rows = (len(palettes) + columns - 1) // columns
+    head = 78
+    sheet = Image.new("RGB", (24 * 2 + cell_w * columns, head + cell_h * rows + 20), "white")
+    draw = ImageDraw.Draw(sheet)
+    draw.text((24, 18), "palette library", fill="#20252c", font=ImageFont.truetype(FONT_PATH, 30))
+    draw.text((24, 52), f"{len(palettes)} 组 4-color 色卡；固定 accent 在最后一位；先筛关系，再看具体色。",
+              fill="#57606c", font=ImageFont.truetype(FONT_PATH, 14))
+    name_font = ImageFont.truetype(FONT_PATH, 12)
+    small_font = ImageFont.truetype(FONT_PATH, 8)
+    for i, palette in enumerate(palettes):
+        x = 24 + (i % columns) * cell_w
+        y = head + (i // columns) * cell_h
+        colors = palette["colors"]
+        for j, color in enumerate(colors):
+            sx = x + 10 + j * 50
+            draw.rectangle((sx, y + 8, sx + 44, y + 36), fill=color, outline="#D9DEE3")
+        draw.text((x + 10, y + 44), palette["id"], fill="#111827", font=name_font)
+        draw.text((x + 10, y + 64), " ".join(colors), fill="#6B7280", font=small_font)
+        draw.text((x + 10, y + 80), f"{palette['base']} / {palette['family']}",
+                  fill="#9CA3AF", font=small_font)
+    sheet.save(HERE / "16-palette-library.png")
+    print("wrote 16-palette-library.png")
 
 
 def color_structure():
@@ -604,16 +608,17 @@ def main():
     panel_gap()
     bar_spacing()
     color_pairing()
+    palette_library()
     index = {"version": 1,
              "sheets": ["00-color-structure.png", "01-baseline-color.png", "02-baseline-mark.png",
                         "03-baseline-matrix.png", "04-accent.png", "05-paired.png",
                         "06-categorical.png", "07-grid.png", "08-style.png", "09-type.png",
                         "10-layout.png", "11-size.png", "12-annotation.png", "13-panel-gap.png",
-                        "14-bar-spacing.png", "15-color-pairing.png"],
+                        "14-bar-spacing.png", "15-color-pairing.png", "16-palette-library.png"],
              "axes": ["color structure", "baseline color", "baseline mark",
                       "baseline color x mark", "accent", "paired", "categorical", "grid",
                       "style", "type", "layout", "size", "annotation", "panel gap",
-                      "bar spacing", "color pairing"]}
+                      "bar spacing", "color pairing", "palette library"]}
     (HERE / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     print("wrote", HERE / "index.json")
 

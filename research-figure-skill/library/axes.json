@@ -771,22 +771,10 @@
       "question": "要加什么标记？",
       "options": [
         {
-          "id": "delta",
-          "label": "delta arrow",
-          "when": [
-            "两根柱的差值就是重点"
-          ],
-          "avoid": [
-            "区间穿过箭头",
-            "横向布局"
-          ],
-          "status": "implemented"
-        },
-        {
           "id": "delta-curved",
-          "label": "curved delta",
+          "label": "curved delta arrow",
           "when": [
-            "参考图弧线箭头"
+            "before/after 或组内差值"
           ],
           "avoid": [
             "空间极窄"
@@ -794,62 +782,15 @@
           "status": "implemented"
         },
         {
-          "id": "capacity",
-          "label": "capacity bar",
+          "id": "distribution-overlap",
+          "label": "overlapping distributions",
           "when": [
-            "有真实总量/容量"
+            "两组连续值分布"
           ],
           "avoid": [
-            "总量只是另一个方法的分数",
-            "有区间"
+            "只有均值"
           ],
           "status": "implemented"
-        },
-        {
-          "id": "increment",
-          "label": "base + increment",
-          "when": [
-            "今年基数 + 明年增量",
-            "增量是重点"
-          ],
-          "avoid": [
-            "增量为负",
-            "没有真实基数"
-          ],
-          "status": "implemented"
-        },
-        {
-          "id": "bracket",
-          "label": "group bracket",
-          "when": [
-            "比较两组/两段"
-          ],
-          "avoid": [
-            "组内标签已经拥挤"
-          ],
-          "status": "planned"
-        },
-        {
-          "id": "reference-line",
-          "label": "reference line",
-          "when": [
-            "SOTA/阈值/去年水平"
-          ],
-          "avoid": [
-            "参考值没有来源"
-          ],
-          "status": "implemented"
-        },
-        {
-          "id": "direct-label",
-          "label": "direct labels",
-          "when": [
-            "可以去掉图例"
-          ],
-          "avoid": [
-            "标签重叠"
-          ],
-          "status": "planned"
         }
       ]
     },
@@ -1398,7 +1339,9 @@
           ],
           "status": "implemented"
         }
-      ]
+      ],
+      "library": "library/palettes-120.json",
+      "library_count": 120
     }
   }
 }

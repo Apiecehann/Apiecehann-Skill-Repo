@@ -311,3 +311,11 @@ def test_increment_ir_normalizes_custom_column_and_uses_existing_backend(source,
     assert decisions["encoding"] == ["increment"]
     assert backend.load_data(tmp_path / "build/data.csv")[0]["base"] == .3
     assert (tmp_path / "build/figure.svg").is_file()
+
+
+def test_palette_library_has_120_unique_four_color_cards():
+    library = json.loads((SPEC.parent / "library/palettes-120.json").read_text(encoding="utf8"))
+    assert library["count"] == 120
+    assert len(library["palettes"]) == 120
+    assert len({tuple(p["colors"]) for p in library["palettes"]}) == 120
+    assert all(len(p["colors"]) == 4 for p in library["palettes"])

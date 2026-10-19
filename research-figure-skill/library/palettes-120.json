@@ -1,0 +1,1326 @@
+{
+  "version": 1,
+  "count": 120,
+  "palettes": [
+    {
+      "id": "orange-tints",
+      "base": "orange",
+      "family": "tints",
+      "colors": [
+        "#e5b490",
+        "#dd9e6f",
+        "#d6874e",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-shades",
+      "base": "orange",
+      "family": "shades",
+      "colors": [
+        "#df6e1b",
+        "#b25816",
+        "#844110",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-analogous",
+      "base": "orange",
+      "family": "analogous",
+      "colors": [
+        "#e02f44",
+        "#e04a2f",
+        "#e0aa2f",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-complement",
+      "base": "orange",
+      "family": "complement",
+      "colors": [
+        "#83bde8",
+        "#469ddd",
+        "#2074b1",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-split",
+      "base": "orange",
+      "family": "split",
+      "colors": [
+        "#2fe0d6",
+        "#2f95e0",
+        "#2f40e0",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-triadic",
+      "base": "orange",
+      "family": "triadic",
+      "colors": [
+        "#2fe07a",
+        "#2f95e0",
+        "#792fe0",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-tetradic",
+      "base": "orange",
+      "family": "tetradic",
+      "colors": [
+        "#3ce02f",
+        "#2f95e0",
+        "#d22fe0",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-muted",
+      "base": "orange",
+      "family": "muted",
+      "colors": [
+        "#c4a288",
+        "#af8160",
+        "#8c6446",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-pastel",
+      "base": "orange",
+      "family": "pastel",
+      "colors": [
+        "#dccabc",
+        "#e6dad0",
+        "#d5bfaf",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "orange-dark",
+      "base": "orange",
+      "family": "dark",
+      "colors": [
+        "#9c4c11",
+        "#813f0e",
+        "#65310b",
+        "#E07A2F"
+      ]
+    },
+    {
+      "id": "blue-tints",
+      "base": "blue",
+      "family": "tints",
+      "colors": [
+        "#87b1d7",
+        "#689dcd",
+        "#4a89c3",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-shades",
+      "base": "blue",
+      "family": "shades",
+      "colors": [
+        "#2776bd",
+        "#1e5b93",
+        "#154168",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-analogous",
+      "base": "blue",
+      "family": "analogous",
+      "colors": [
+        "#2fc9bf",
+        "#2faac9",
+        "#2f56c9",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-complement",
+      "base": "blue",
+      "family": "complement",
+      "colors": [
+        "#daa779",
+        "#cb8341",
+        "#935b28",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-split",
+      "base": "blue",
+      "family": "split",
+      "colors": [
+        "#c92f30",
+        "#c9782f",
+        "#c9c22f",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-triadic",
+      "base": "blue",
+      "family": "triadic",
+      "colors": [
+        "#c92f80",
+        "#c9782f",
+        "#81c92f",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-tetradic",
+      "base": "blue",
+      "family": "tetradic",
+      "colors": [
+        "#c52fc9",
+        "#c9782f",
+        "#33c92f",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-muted",
+      "base": "blue",
+      "family": "muted",
+      "colors": [
+        "#7f9cb7",
+        "#597e9f",
+        "#435f77",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-pastel",
+      "base": "blue",
+      "family": "pastel",
+      "colors": [
+        "#bfcdd9",
+        "#d2dce5",
+        "#b2c3d2",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "blue-dark",
+      "base": "blue",
+      "family": "dark",
+      "colors": [
+        "#1d5a91",
+        "#184a77",
+        "#123a5e",
+        "#2F80C9"
+      ]
+    },
+    {
+      "id": "teal-tints",
+      "base": "teal",
+      "family": "tints",
+      "colors": [
+        "#55ceba",
+        "#38c2ab",
+        "#2fa28f",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-shades",
+      "base": "teal",
+      "family": "shades",
+      "colors": [
+        "#18907c",
+        "#116557",
+        "#0a3931",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-analogous",
+      "base": "teal",
+      "family": "analogous",
+      "colors": [
+        "#1f9e44",
+        "#1f9e67",
+        "#1f919e",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-complement",
+      "base": "teal",
+      "family": "complement",
+      "colors": [
+        "#d4455d",
+        "#aa283d",
+        "#681825",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-split",
+      "base": "teal",
+      "family": "split",
+      "colors": [
+        "#9e1f71",
+        "#9e1f34",
+        "#9e471f",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-triadic",
+      "base": "teal",
+      "family": "triadic",
+      "colors": [
+        "#891f9e",
+        "#9e1f34",
+        "#9e881f",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-tetradic",
+      "base": "teal",
+      "family": "tetradic",
+      "colors": [
+        "#4a1f9e",
+        "#9e1f34",
+        "#749e1f",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-muted",
+      "base": "teal",
+      "family": "muted",
+      "colors": [
+        "#57a396",
+        "#427b72",
+        "#2d534d",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-pastel",
+      "base": "teal",
+      "family": "pastel",
+      "colors": [
+        "#bedad6",
+        "#d1e5e2",
+        "#b1d3cd",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "teal-dark",
+      "base": "teal",
+      "family": "dark",
+      "colors": [
+        "#189681",
+        "#147b6a",
+        "#0f6153",
+        "#1F9E89"
+      ]
+    },
+    {
+      "id": "green-tints",
+      "base": "green",
+      "family": "tints",
+      "colors": [
+        "#7ebf95",
+        "#62b27e",
+        "#4e9e6a",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-shades",
+      "base": "green",
+      "family": "shades",
+      "colors": [
+        "#319253",
+        "#246c3d",
+        "#174528",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-analogous",
+      "base": "green",
+      "family": "analogous",
+      "colors": [
+        "#4c9d3a",
+        "#3a9d42",
+        "#3a9d78",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-complement",
+      "base": "green",
+      "family": "complement",
+      "colors": [
+        "#c370a6",
+        "#a64584",
+        "#6c2d56",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-split",
+      "base": "green",
+      "family": "split",
+      "colors": [
+        "#903a9d",
+        "#9d3a7a",
+        "#9d3a4a",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-triadic",
+      "base": "green",
+      "family": "triadic",
+      "colors": [
+        "#5d3a9d",
+        "#9d3a7a",
+        "#9d5d3a",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-tetradic",
+      "base": "green",
+      "family": "tetradic",
+      "colors": [
+        "#3a489d",
+        "#9d3a7a",
+        "#9d8f3a",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-muted",
+      "base": "green",
+      "family": "muted",
+      "colors": [
+        "#72a283",
+        "#558265",
+        "#3d5d48",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-pastel",
+      "base": "green",
+      "family": "pastel",
+      "colors": [
+        "#c2d6c9",
+        "#d4e2d9",
+        "#b6cebe",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "green-dark",
+      "base": "green",
+      "family": "dark",
+      "colors": [
+        "#2c824a",
+        "#246b3d",
+        "#1c5430",
+        "#3A9D5D"
+      ]
+    },
+    {
+      "id": "rose-tints",
+      "base": "rose",
+      "family": "tints",
+      "colors": [
+        "#d5a3b0",
+        "#c98698",
+        "#bc6a80",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-shades",
+      "base": "rose",
+      "family": "shades",
+      "colors": [
+        "#c33a5f",
+        "#9c2f4c",
+        "#752339",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-analogous",
+      "base": "rose",
+      "family": "analogous",
+      "colors": [
+        "#c44eae",
+        "#c44e8e",
+        "#c44e4e",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-complement",
+      "base": "rose",
+      "family": "complement",
+      "colors": [
+        "#96d7c6",
+        "#63c4a9",
+        "#3b9a80",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-split",
+      "base": "rose",
+      "family": "split",
+      "colors": [
+        "#4ec46b",
+        "#4ec4a4",
+        "#4eabc4",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-triadic",
+      "base": "rose",
+      "family": "triadic",
+      "colors": [
+        "#6ec44e",
+        "#4ec4a4",
+        "#4e6ec4",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-tetradic",
+      "base": "rose",
+      "family": "tetradic",
+      "colors": [
+        "#a9c44e",
+        "#4ec4a4",
+        "#694ec4",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-muted",
+      "base": "rose",
+      "family": "muted",
+      "colors": [
+        "#bb949f",
+        "#a46e7d",
+        "#82525f",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-pastel",
+      "base": "rose",
+      "family": "pastel",
+      "colors": [
+        "#d7c1c7",
+        "#e3d4d8",
+        "#cfb5bc",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "rose-dark",
+      "base": "rose",
+      "family": "dark",
+      "colors": [
+        "#862841",
+        "#6e2136",
+        "#561a2a",
+        "#C44E6E"
+      ]
+    },
+    {
+      "id": "violet-tints",
+      "base": "violet",
+      "family": "tints",
+      "colors": [
+        "#baadd4",
+        "#a392c6",
+        "#8c77b8",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-shades",
+      "base": "violet",
+      "family": "shades",
+      "colors": [
+        "#6e48be",
+        "#58379c",
+        "#432a77",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-analogous",
+      "base": "violet",
+      "family": "analogous",
+      "colors": [
+        "#5c71bf",
+        "#615cbf",
+        "#975cbf",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-complement",
+      "base": "violet",
+      "family": "complement",
+      "colors": [
+        "#c5d6a1",
+        "#a6c070",
+        "#7e9a44",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-split",
+      "base": "violet",
+      "family": "split",
+      "colors": [
+        "#bfaf5c",
+        "#9fbf5c",
+        "#6fbf5c",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-triadic",
+      "base": "violet",
+      "family": "triadic",
+      "colors": [
+        "#bf7c5c",
+        "#9fbf5c",
+        "#5cbf7c",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-tetradic",
+      "base": "violet",
+      "family": "tetradic",
+      "colors": [
+        "#bf5c6d",
+        "#9fbf5c",
+        "#5cbfae",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-muted",
+      "base": "violet",
+      "family": "muted",
+      "colors": [
+        "#a69cbc",
+        "#8677a4",
+        "#675985",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-pastel",
+      "base": "violet",
+      "family": "pastel",
+      "colors": [
+        "#c9c3d5",
+        "#d9d5e2",
+        "#beb7cd",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "violet-dark",
+      "base": "violet",
+      "family": "dark",
+      "colors": [
+        "#482e80",
+        "#3c2669",
+        "#2f1e53",
+        "#7C5CBF"
+      ]
+    },
+    {
+      "id": "amber-tints",
+      "base": "amber",
+      "family": "tints",
+      "colors": [
+        "#e2ca9e",
+        "#d9b97e",
+        "#d0a85e",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-shades",
+      "base": "amber",
+      "family": "shades",
+      "colors": [
+        "#db9d2b",
+        "#b4801f",
+        "#886117",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-analogous",
+      "base": "amber",
+      "family": "analogous",
+      "colors": [
+        "#d95241",
+        "#d97b41",
+        "#d9cd41",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-complement",
+      "base": "amber",
+      "family": "complement",
+      "colors": [
+        "#91aee5",
+        "#5784d7",
+        "#2a5ab2",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-split",
+      "base": "amber",
+      "family": "split",
+      "colors": [
+        "#41bfd9",
+        "#4176d9",
+        "#5541d9",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-triadic",
+      "base": "amber",
+      "family": "triadic",
+      "colors": [
+        "#41d9a4",
+        "#4176d9",
+        "#a341d9",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-tetradic",
+      "base": "amber",
+      "family": "tetradic",
+      "colors": [
+        "#41d958",
+        "#4176d9",
+        "#d941c2",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-muted",
+      "base": "amber",
+      "family": "muted",
+      "colors": [
+        "#c5b393",
+        "#af976b",
+        "#90784d",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-pastel",
+      "base": "amber",
+      "family": "pastel",
+      "colors": [
+        "#dad0be",
+        "#e5ded1",
+        "#d3c7b1",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "amber-dark",
+      "base": "amber",
+      "family": "dark",
+      "colors": [
+        "#956a18",
+        "#7b5714",
+        "#604410",
+        "#D9A441"
+      ]
+    },
+    {
+      "id": "brown-tints",
+      "base": "brown",
+      "family": "tints",
+      "colors": [
+        "#c3a997",
+        "#b4937d",
+        "#a57e64",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-shades",
+      "base": "brown",
+      "family": "shades",
+      "colors": [
+        "#9f6740",
+        "#7b4f32",
+        "#573823",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-analogous",
+      "base": "brown",
+      "family": "analogous",
+      "colors": [
+        "#a94b58",
+        "#a9584b",
+        "#a98a4b",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-complement",
+      "base": "brown",
+      "family": "complement",
+      "colors": [
+        "#8badc5",
+        "#5b8cad",
+        "#3d617a",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-split",
+      "base": "brown",
+      "family": "split",
+      "colors": [
+        "#4ba9a2",
+        "#4b83a9",
+        "#4b56a9",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-triadic",
+      "base": "brown",
+      "family": "triadic",
+      "colors": [
+        "#4ba971",
+        "#4b83a9",
+        "#714ba9",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-tetradic",
+      "base": "brown",
+      "family": "tetradic",
+      "colors": [
+        "#54a94b",
+        "#4b83a9",
+        "#a04ba9",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-muted",
+      "base": "brown",
+      "family": "muted",
+      "colors": [
+        "#aa9587",
+        "#8f7665",
+        "#6b584c",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-pastel",
+      "base": "brown",
+      "family": "pastel",
+      "colors": [
+        "#d4cac4",
+        "#e1dad6",
+        "#ccc0b8",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "brown-dark",
+      "base": "brown",
+      "family": "dark",
+      "colors": [
+        "#7b5033",
+        "#65422a",
+        "#4f3421",
+        "#A9714B"
+      ]
+    },
+    {
+      "id": "slate-tints",
+      "base": "slate",
+      "family": "tints",
+      "colors": [
+        "#a4a9b1",
+        "#8e959e",
+        "#78808c",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-shades",
+      "base": "slate",
+      "family": "shades",
+      "colors": [
+        "#576984",
+        "#435165",
+        "#2e3846",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-analogous",
+      "base": "slate",
+      "family": "analogous",
+      "colors": [
+        "#64898b",
+        "#647f8b",
+        "#64698b",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-complement",
+      "base": "slate",
+      "family": "complement",
+      "colors": [
+        "#b0a79b",
+        "#908474",
+        "#635b4f",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-split",
+      "base": "slate",
+      "family": "split",
+      "colors": [
+        "#8b6864",
+        "#8b7b64",
+        "#888b64",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-triadic",
+      "base": "slate",
+      "family": "triadic",
+      "colors": [
+        "#8b6474",
+        "#8b7b64",
+        "#748b64",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-tetradic",
+      "base": "slate",
+      "family": "tetradic",
+      "colors": [
+        "#8b6488",
+        "#8b7b64",
+        "#648b68",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-muted",
+      "base": "slate",
+      "family": "muted",
+      "colors": [
+        "#8e959e",
+        "#6f7680",
+        "#52585f",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-pastel",
+      "base": "slate",
+      "family": "pastel",
+      "colors": [
+        "#c9cbcf",
+        "#d9dbde",
+        "#bec1c6",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "slate-dark",
+      "base": "slate",
+      "family": "dark",
+      "colors": [
+        "#475466",
+        "#3b4554",
+        "#2e3642",
+        "#64748B"
+      ]
+    },
+    {
+      "id": "plum-tints",
+      "base": "plum",
+      "family": "tints",
+      "colors": [
+        "#aea0ac",
+        "#9c8a99",
+        "#897585",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-shades",
+      "base": "plum",
+      "family": "shades",
+      "colors": [
+        "#83527a",
+        "#643e5d",
+        "#442a40",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-analogous",
+      "base": "plum",
+      "family": "analogous",
+      "colors": [
+        "#7b5e8b",
+        "#875e8b",
+        "#8b5e77",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-complement",
+      "base": "plum",
+      "family": "complement",
+      "colors": [
+        "#95b09a",
+        "#6d9173",
+        "#4a624e",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-split",
+      "base": "plum",
+      "family": "split",
+      "colors": [
+        "#6c8b5e",
+        "#5e8b66",
+        "#5e8b7c",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-triadic",
+      "base": "plum",
+      "family": "triadic",
+      "colors": [
+        "#838b5e",
+        "#5e8b66",
+        "#5e838b",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-tetradic",
+      "base": "plum",
+      "family": "tetradic",
+      "colors": [
+        "#8b7c5e",
+        "#5e8b66",
+        "#5e6c8b",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-muted",
+      "base": "plum",
+      "family": "muted",
+      "colors": [
+        "#9c8a99",
+        "#7f6a7b",
+        "#5d4e5b",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-pastel",
+      "base": "plum",
+      "family": "pastel",
+      "colors": [
+        "#d0c8cf",
+        "#ded8dd",
+        "#c7bdc5",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "plum-dark",
+      "base": "plum",
+      "family": "dark",
+      "colors": [
+        "#694562",
+        "#563951",
+        "#442c40",
+        "#8B5E83"
+      ]
+    },
+    {
+      "id": "tol-bright",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#4477AA",
+        "#EE6677",
+        "#228833",
+        "#CCBB44"
+      ]
+    },
+    {
+      "id": "tol-muted",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#88CCEE",
+        "#44AA99",
+        "#999933",
+        "#CC6677"
+      ]
+    },
+    {
+      "id": "tableau10",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#4E79A7",
+        "#F28E2B",
+        "#E15759",
+        "#76B7B2"
+      ]
+    },
+    {
+      "id": "npg",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#4DBBD5",
+        "#00A087",
+        "#3C5488",
+        "#E64B35"
+      ]
+    },
+    {
+      "id": "set1",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#E41A1C",
+        "#377EB8",
+        "#4DAF4A",
+        "#984EA3"
+      ]
+    },
+    {
+      "id": "set2",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#66C2A5",
+        "#FC8D62",
+        "#8DA0CB",
+        "#E78AC3"
+      ]
+    },
+    {
+      "id": "set3",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#8DD3C7",
+        "#FFFFB3",
+        "#BEBADA",
+        "#FB8072"
+      ]
+    },
+    {
+      "id": "paired",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#A6CEE3",
+        "#1F78B4",
+        "#B2DF8A",
+        "#33A02C"
+      ]
+    },
+    {
+      "id": "pastel1",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#FBB4AE",
+        "#B3CDE3",
+        "#CCEBC5",
+        "#DECBE4"
+      ]
+    },
+    {
+      "id": "dark2",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#1B9E77",
+        "#D95F02",
+        "#7570B3",
+        "#E7298A"
+      ]
+    },
+    {
+      "id": "grayscale",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#D9D9D9",
+        "#A6A6A6",
+        "#737373",
+        "#404040"
+      ]
+    },
+    {
+      "id": "blues",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#DEEBF7",
+        "#9ECAE1",
+        "#4292C6",
+        "#08519C"
+      ]
+    },
+    {
+      "id": "greens",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#E5F5E0",
+        "#A1D99B",
+        "#41AB5D",
+        "#006D2C"
+      ]
+    },
+    {
+      "id": "oranges",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#FEE6CE",
+        "#FDAE6B",
+        "#E6550D",
+        "#A63603"
+      ]
+    },
+    {
+      "id": "reds",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#FEE0D2",
+        "#FC9272",
+        "#DE2D26",
+        "#A50F15"
+      ]
+    },
+    {
+      "id": "purples",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#EFEDF5",
+        "#BCBDDC",
+        "#807DBA",
+        "#54278F"
+      ]
+    },
+    {
+      "id": "viridis",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#440154",
+        "#31688E",
+        "#35B779",
+        "#FDE725"
+      ]
+    },
+    {
+      "id": "cividis",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#00224E",
+        "#123570",
+        "#5C7C8A",
+        "#FEE838"
+      ]
+    },
+    {
+      "id": "earth",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#8C6D46",
+        "#C2A878",
+        "#5B7B5A",
+        "#D9C3A5"
+      ]
+    },
+    {
+      "id": "ocean",
+      "base": "curated",
+      "family": "curated",
+      "colors": [
+        "#0B3954",
+        "#087E8B",
+        "#4EA5A5",
+        "#C7E8E3"
+      ]
+    }
+  ]
+}

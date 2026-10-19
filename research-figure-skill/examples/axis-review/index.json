@@ -16,7 +16,8 @@
     "12-annotation.png",
     "13-panel-gap.png",
     "14-bar-spacing.png",
-    "15-color-pairing.png"
+    "15-color-pairing.png",
+    "16-palette-library.png"
   ],
   "axes": [
     "color structure",
@@ -34,6 +35,7 @@
     "annotation",
     "panel gap",
     "bar spacing",
-    "color pairing"
+    "color pairing",
+    "palette library"
   ]
 }

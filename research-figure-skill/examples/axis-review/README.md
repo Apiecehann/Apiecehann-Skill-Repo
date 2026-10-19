@@ -18,10 +18,11 @@
 | `09-type.png` | type | 15 个字体：Arial / Helvetica / Segoe UI / Calibri / Verdana / Tahoma / Trebuchet / Times / Georgia / Garamond / Cambria / Consolas / Courier / Comic / Segoe Script |
 | `10-layout.png` | layout | 竖/横 × 1/2/4 series × 单/多面板 |
 | `11-size.png` | size | 9 种宽度/高度/长宽比 |
-| `12-annotation.png` | annotation | delta（含弧线）/ capacity / reference-line / base+increment |
+| `12-annotation.png` | annotation | 只保留两类：curved delta / distribution overlap |
 | `13-panel-gap.png` | panel gap | normal / zero gap / composite |
 | `14-bar-spacing.png` | bar spacing | spaced / touching / tight-groups / touching-all |
 | `15-color-pairing.png` | color pairing | 固定 accent = orange，24 组 baseline 配色 |
+| `16-palette-library.png` | palette library | 120 组 4-color 色卡（100 生成 + 20 策展） |
 
 ## 关于 outline / alpha / hatch
 
@@ -50,6 +51,8 @@
 - 再看具体色卡；
 - 如果基准 accent 换成 blue/teal，同一组关系要重新筛，不能直接搬。
 
+`16-palette-library.png` 是 **120 组 4-color 色卡**：10 个 base × 10 个 harmony family（tints/shades/analogous/complement/split/triadic/tetradic/muted/pastel/dark）+ 20 个策展色板（Tol/Tableau/NPG/Set1-3/Paired/Pastel1/Dark2/Grayscale/Blues/Greens/Oranges/Reds/Purples/Viridis/Cividis/Earth/Ocean）。JSON 在 `library/palettes-120.json`。
+
 ## 怎么给反馈
 
 一次回一张表即可，格式随意。例如：
@@ -65,9 +68,10 @@ style: 15 个都留
 type: 15 个都留
 layout: 6 个都留
 size: 9 个都留
-annotation: delta/delta-curved/capacity/reference-line/increment 保留；bracket/direct planned
+annotation: curved delta / distribution overlap
 bar_spacing: spaced/touching/tight-groups/touching-all 都留
 color_pairing: 24 组都留；基准 accent 固定 orange
+palette_library: 120 组里筛 3–5 组
 ```
 
 不需要选“最终图”，只标“保留 / 删除 / 换颜色”。
@@ -88,4 +92,4 @@ cd research-figure-skill
 python examples/axis-review/render_review.py
 ```
 
-输出本目录的 16 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。
+输出本目录的 17 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。
