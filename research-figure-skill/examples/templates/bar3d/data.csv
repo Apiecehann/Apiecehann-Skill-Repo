@@ -1,0 +1,9 @@
+﻿id,group,series,value
+a1,Bench A,method-1,72
+a2,Bench A,ours,84
+b1,Bench B,method-1,61
+b2,Bench B,ours,74
+c1,Bench C,method-1,55
+c2,Bench C,ours,69
+d1,Bench D,method-1,66
+d2,Bench D,ours,78

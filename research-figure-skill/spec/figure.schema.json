@@ -32,7 +32,8 @@
         "node-link",
         "sankey",
         "treemap",
-        "radar"
+        "radar",
+        "bar3d"
       ]
     },
     "data": {

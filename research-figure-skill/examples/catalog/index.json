@@ -40,7 +40,8 @@
         "node-link",
         "sankey",
         "treemap",
-        "radar"
+        "radar",
+        "bar3d"
       ]
     }
   },
@@ -122,6 +123,9 @@
     ],
     "radar": [
       "radar"
+    ],
+    "bar3d": [
+      "bar3d"
     ]
   },
   "entries": [
@@ -1926,6 +1930,61 @@
         ],
         "log": [
           "radar -> 6 axes, 3 series"
+        ]
+      }
+    },
+    {
+      "recipe": "bar3d",
+      "title": "3D grouped bars",
+      "chart": "bar3d",
+      "variant": "four-groups",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "bar"
+      ],
+      "files": {
+        "png": "bar3d/figure.png",
+        "pdf": "bar3d/figure.pdf",
+        "svg": "bar3d/figure.svg",
+        "config": "bar3d/config.json",
+        "data": "bar3d/data.csv",
+        "decisions": "bar3d/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：四个 benchmark 上两个系列的 3D 柱状比较。",
+        "chart": "bar3d",
+        "size": "single",
+        "size_pt": [
+          420,
+          300
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "bar3d"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "bar3d",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            "Bench A",
+            "Bench B",
+            "Bench C",
+            "Bench D"
+          ],
+          "series": [
+            "method-1",
+            "ours"
+          ]
+        },
+        "log": [
+          "bar3d -> 4 groups, 2 series"
         ]
       }
     }

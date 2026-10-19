@@ -12,6 +12,30 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def render_bar3d(config, rows, out_stem):
+    width, height = config.get("size_pt", [420, 300])
+    fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)
+    fig.patch.set_facecolor("white")
+    ax = fig.add_subplot(111, projection="3d")
+    groups = config["groups"]; series = config["series_order"]
+    for j, name in enumerate(series):
+        for i, group in enumerate(groups):
+            value = next(r["value"] for r in rows if r["group"] == group and r["series"] == name)
+            ax.bar3d(i - .22, j - .22, 0, .36, .36, value,
+                     color=config["colors"][name], edgecolor="white", linewidth=.3, alpha=.9)
+    ax.set_xticks(range(len(groups))); ax.set_xticklabels(groups, fontsize=6)
+    ax.set_yticks(range(len(series))); ax.set_yticklabels(series, fontsize=6)
+    ax.set_zlabel(config.get("z_label", "Value"), fontsize=7, labelpad=2)
+    ax.tick_params(labelsize=6, pad=0)
+    ax.view_init(elev=config.get("elev", 24), azim=config.get("azim", -55))
+    fig.subplots_adjust(left=.02, right=.98, bottom=.02, top=.98)
+    out_stem = Path(out_stem); out_stem.parent.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
+    plt.close(fig)
+    return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
+
+
 def render_scatter3d(config, rows, out_stem):
     width, height = config.get("size_pt", [420, 300])
     fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)

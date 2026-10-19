@@ -310,6 +310,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/radar/figure.ir.json"
+    },
+    {
+      "id": "bar3d",
+      "family": "3d",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/bar3d/figure.ir.json"
     }
   ]
 }

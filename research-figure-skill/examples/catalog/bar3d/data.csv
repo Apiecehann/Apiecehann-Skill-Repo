@@ -1,0 +1,9 @@
+group,series,value
+Bench A,method-1,72.0
+Bench A,ours,84.0
+Bench B,method-1,61.0
+Bench B,ours,74.0
+Bench C,method-1,55.0
+Bench C,ours,69.0
+Bench D,method-1,66.0
+Bench D,ours,78.0

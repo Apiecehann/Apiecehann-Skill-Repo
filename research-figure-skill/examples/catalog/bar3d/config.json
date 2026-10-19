@@ -1,0 +1,43 @@
+{
+  "chart": "bar3d",
+  "groups": [
+    "Bench A",
+    "Bench B",
+    "Bench C",
+    "Bench D"
+  ],
+  "series_order": [
+    "method-1",
+    "ours"
+  ],
+  "colors": {
+    "method-1": "#AA3377",
+    "ours": "#BBBBBB"
+  },
+  "series_labels": {
+    "method-1": "Method 1",
+    "ours": "Ours"
+  },
+  "z_label": "Success rate (%)",
+  "elev": 24,
+  "azim": -55,
+  "size_pt": [
+    420,
+    300
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

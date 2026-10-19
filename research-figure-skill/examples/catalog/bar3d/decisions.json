@@ -1,0 +1,35 @@
+{
+  "claim": "MOCK：四个 benchmark 上两个系列的 3D 柱状比较。",
+  "chart": "bar3d",
+  "size": "single",
+  "size_pt": [
+    420,
+    300
+  ],
+  "palette": "tol-bright",
+  "encoding": [
+    "bar3d"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "bar3d",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      "Bench A",
+      "Bench B",
+      "Bench C",
+      "Bench D"
+    ],
+    "series": [
+      "method-1",
+      "ours"
+    ]
+  },
+  "log": [
+    "bar3d -> 4 groups, 2 series"
+  ]
+}

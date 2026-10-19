@@ -1,0 +1,14 @@
+{
+  "claim": "MOCK：四个 benchmark 上两个系列的 3D 柱状比较。",
+  "chart": "bar3d",
+  "data": "data.csv",
+  "encoding": {"x": "group", "y": "value", "series": "series"},
+  "series_order": ["method-1", "ours"],
+  "series_labels": {"method-1": "Method 1", "ours": "Ours"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "tol-bright", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Benchmark", "y_label": "Success rate (%)"},
+  "view": {"elev": 24, "azim": -55}
+}

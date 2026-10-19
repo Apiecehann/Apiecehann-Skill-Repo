@@ -414,6 +414,19 @@
       "ir": "examples/templates/radar/figure.ir.json",
       "chart": "radar",
       "variant": "six-axis"
+    },
+    {
+      "id": "bar3d",
+      "title": "3D grouped bars",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "bar"
+      ],
+      "ir": "examples/templates/bar3d/figure.ir.json",
+      "chart": "bar3d",
+      "variant": "four-groups"
     }
   ]
 }
