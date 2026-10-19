@@ -73,6 +73,16 @@ def font_roles(path, family, bold_path=None):
     return roles
 
 
+def humanist_roles():
+    roles = {}
+    for role in ("light", "regular", "bold", "mono", "heading", "heading_bold"):
+        bold = role in ("bold", "heading_bold")
+        roles[role] = {"family": ["Segoe UI", "Arial", "DejaVu Sans"],
+                       "weight": "bold" if bold else "normal", "file": None}
+    roles["gain"] = roles["regular"]
+    return roles
+
+
 def config(rows, *, style="paper-clean", layout="grouped", size="single",
            font="sans", colors=None, labels=None, grid="none", legend=True,
            fill=None, edge=None, hatch=None, fonts=None, baseline_only=False,
@@ -413,10 +423,14 @@ def sizes():
 def annotations():
     items = []
     paired = read("paired.csv")
-    cfg = config(paired, layout="paired", colors=PAIRS["blue"], labels=LABELS2)
+    cfg = config(paired, layout="paired", colors=PAIRS["blue"], labels=LABELS2,
+                 fonts=humanist_roles())
     cfg["gains"] = [{"from": "b-b", "to": "a-b", "label_format": "+.0f",
                      "label_scale": 100, "label_suffix": " pp"}]
-    cfg["gain_defaults"] = {"arrow_style": "curved", "label_size": 10, "linewidth": 1.8}
+    cfg["gain_defaults"] = {"arrow_style": "curved", "label_size": 9,
+                            "label_font": "gain", "label_side": "left",
+                            "linewidth": 1.8}
+    cfg["panel_defaults"]["ticks"] = [0, .5, 1]
     img = render_panel(paired, cfg, "annotation-delta")
     items.append({"image": img, "label": "curved delta", "note": "arrow between paired bars"})
 

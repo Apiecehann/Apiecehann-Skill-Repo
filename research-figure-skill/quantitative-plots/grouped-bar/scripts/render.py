@@ -89,7 +89,7 @@ DEFAULTS = {
                      'control1': [.55,0], 'control2': [.9,.55],
                      'label_position': [.5,.48], 'label_offset_pt': [-8,0],
                      'label_size': 15, 'label_font': 'regular', 'label_format': '+.1f',
-                     'label_scale': 1, 'label_suffix': '', 'clip': False},
+                     'label_scale': 1, 'label_suffix': '', 'label_side': 'above', 'clip': False},
     'panels': [], 'annotations': [], 'bands': [], 'icons': [], 'gains': [],
     'layout': {'columns': 3, 'left_pt': 42, 'right_pt': 8, 'top_pt': 22,
                'bottom_pt': 38, 'column_gap_pt': 30, 'row_gap_pt': 32},
@@ -858,6 +858,12 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
     above = points[:, 1].max()+margin+half_h
     ys = [above + i*(2+half_h) for i in range(6)]
     ys += list(np.arange(inner.y1-half_h, inner.y0+half_h, -max(half_h, 2)))
+    side = spec.get('label_side', 'above')
+    if side not in ('above', 'left'):
+        raise ValueError('gain.label_side must be above or left')
+    if side == 'left':
+        ys = [max(start[1], end[1])+margin+half_h] + ys
+        xs = [start[0]-half_w-margin] + xs
     all_paths = [points] + [g['points_pt'] for g in previous]
     position = None
     leader_points = None
