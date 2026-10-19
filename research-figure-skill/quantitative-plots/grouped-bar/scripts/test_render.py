@@ -242,3 +242,79 @@ def test_frozen_replica_rejects_style_but_accepts_palette(tmp_path):
                    check=True,capture_output=True,text=True,encoding='utf8')
     resolved=json.loads(snapshot.read_text(encoding='utf8'))
     assert resolved['palette']['base']['fill']=='#4477AA'
+
+
+@pytest.mark.parametrize("orientation", ["vertical", "horizontal"])
+def test_capacity_hollow_and_solid_geometry_labels_and_axis(orientation):
+    rows = [{"id": "done", "panel": "p", "group": "A", "series": "base", "value": 88., "capacity": 96.}]
+    config = {"panels": [{"id": "p"}], "layout": {"right_pt": 110}, "panel_defaults": {"orientation": orientation,
+              "capacity": {"field": "capacity"}, "value_format": ".0f"}}
+    fig, artists = build_figure(config, rows)
+    item = artists["done"]
+    hollow, solid = item["capacity_bar"], item["bar"]
+    extent = lambda p: p.get_height() if orientation == "vertical" else p.get_width()
+    assert extent(hollow) == 96
+    assert extent(solid) == 88
+    assert hollow.get_facecolor()[3] == 0
+    assert hollow.get_zorder() == 1 and solid.get_zorder() == 2
+    assert hollow.get_linestyle() == "--"
+    assert hollow.get_alpha() == .45
+    assert item["label"].get_text() == "88"
+    assert item["capacity_label"].get_text() == "88 / 96 (92%)"
+    assert (fig.axes[0].get_ylim() if orientation == "vertical" else fig.axes[0].get_xlim())[1] >= 96
+
+
+def test_capacity_nonzero_baseline_and_custom_label():
+    rows = [{"id": "a", "panel": "p", "group": "A", "series": "base", "value": 88., "capacity": 96.}]
+    cfg = {"panels": [{"id": "p"}], "panel_defaults": {"baseline": 70,
+           "capacity": {"field": "capacity", "label_format": "{value:.0f} of {capacity:.0f}", "show_percent": False}}}
+    _, artists = build_figure(cfg, rows)
+    assert artists["a"]["bar"].get_y() == 70
+    assert artists["a"]["bar"].get_height() == 18
+    assert artists["a"]["capacity_bar"].get_height() == 26
+    assert artists["a"]["capacity_label"].get_text() == "88 of 96"
+
+
+@pytest.mark.parametrize("change, message", [
+    ({"capacity": 80.}, "capacity >= value"),
+    ({"capacity": float("nan")}, "capacity"),
+    ({"low": 80., "high": 90.}, "Interval.*capacity"),
+])
+def test_capacity_rejects_invalid_semantics(change, message):
+    row = {"id": "a", "panel": "p", "group": "A", "series": "base", "value": 88., "capacity": 96.}
+    row.update(change)
+    with pytest.raises(ValueError, match=message):
+        build_figure({"panels": [{"id": "p"}], "panel_defaults": {"capacity": {"field": "capacity"}}}, [row])
+
+
+def test_capacity_mixed_panel_rows_fail_even_when_disabled():
+    rows = [{"id": "a", "panel": "p", "group": "A", "series": "base", "value": 88., "capacity": 96.},
+            {"id": "b", "panel": "p", "group": "B", "series": "base", "value": 70.}]
+    with pytest.raises(ValueError, match="all rows"):
+        build_figure({"panels": [{"id": "p"}]}, rows)
+
+
+@pytest.mark.parametrize("style, message", [
+    ({"limits": [0, 90]}, "clip capacity"),
+    ({"baseline": 90}, "capacity >= value >= baseline"),
+])
+def test_capacity_axis_and_baseline_validation(style, message):
+    rows = [{"id": "a", "panel": "p", "group": "A", "series": "base", "value": 88., "capacity": 96.}]
+    with pytest.raises(ValueError, match=message):
+        build_figure({"panels": [{"id": "p"}], "panel_defaults": style}, rows)
+
+
+def test_capacity_csv_parsing_and_interval_conflict(tmp_path):
+    path = tmp_path / "data.csv"
+    path.write_text("id,panel,group,series,value,capacity\na,p,A,base,88,96\n")
+    assert load_data(path)[0]["capacity"] == 96.
+    path.write_text("id,panel,group,series,value,capacity,low,high\na,p,A,base,88,96,80,90\n")
+    with pytest.raises(ValueError, match="Interval.*capacity"):
+        load_data(path)
+
+
+def test_zero_capacity_has_no_fabricated_percentage():
+    row = {"id": "a", "panel": "p", "group": "A", "series": "base", "value": 0., "capacity": 0.}
+    _, artists = build_figure({"panels": [{"id": "p"}],
+                              "panel_defaults": {"capacity": {"field": "capacity"}}}, [row])
+    assert artists["a"]["capacity_label"].get_text() == "0 / 0 (n/a)"

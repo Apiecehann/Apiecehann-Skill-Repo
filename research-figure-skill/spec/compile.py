@@ -166,7 +166,7 @@ def apply_cards(ir, config, rows, log):
     library = json.loads((ROOT / "library/cards.json").read_text(encoding="utf8"))
     if "capacity" in ir["encoding"]:
         params = library["encoding"]["capacity"]["params"]
-        config["panel_defaults"]["capacity"] = dict(params, field="capacity")
+        config["panel_defaults"]["capacity"].update(params, field="capacity")
         log.append(f"encoding capacity -> {ir['encoding']['capacity']} normalized to capacity")
     emphasis = ir.get("emphasis", [])
     for request in emphasis:
@@ -297,6 +297,12 @@ def translate(ir, rows, order):
                 raise ValueError("axis.y_max/baseline would clip CSV values, intervals or capacity")
         config["panel_defaults"]["limits"] = [lower, upper]
     apply_cards(ir, config, rows, log)
+    if layout == "horizontal" and "capacity" in ir["encoding"]:
+        style = config["panel_defaults"]
+        props = backend.font(config, style["value_font"], style["value_size"])
+        widths = [backend.TextToPath().get_text_width_height_descent(
+            backend.capacity_text(r, style["capacity"]), props, False)[0] for r in rows]
+        config["layout"]["right_pt"] = max(config["layout"]["right_pt"], max(widths) + style["value_pad"] + 8)
     width, height = config["figure"]["size_pt"]
     style = config["panel_defaults"]
     log.insert(0, f"size {ir['size']['preset']} -> {width:g} x {height:g} pt; type {style['tick_size']:g}/{style['label_size']:g}/{config['legend_defaults']['size']:g} pt")
@@ -338,8 +344,6 @@ def compile_ir(ir_path, output, render=False):
         writer.writerows(rows)
     for name, content in (("config.json", config), ("decisions.json", decisions)):
         (output / name).write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
-    if render and "capacity" in ir["encoding"] and "capacity" not in backend.DEFAULTS["panel_defaults"]:
-        raise ValueError("capacity rendering needs the capacity backend extension")
     if render:
         backend.render(config, rows, output / "figure")
     return config, decisions

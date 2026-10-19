@@ -57,6 +57,8 @@ DEFAULTS = {
         'value_font': 'light', 'value_color': None,
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
         'value_background_pad': .1, 'baseline': 0, 'allow_interval_clipping': False,
+        'capacity': {'field': None, 'linestyle': '--', 'edge_width': .7,
+                     'alpha': .45, 'label_format': '{value}/{capacity}', 'show_percent': True},
         'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': 'auto',
                  'value_stop': 'auto', 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000,
                  'linewidth': .5, 'linestyle': '-'},
@@ -291,7 +293,7 @@ def load_data(path):
         if row['id'] in seen:
             raise ValueError(f'Duplicate row id: {row["id"]}')
         seen.add(row['id'])
-        for key in ('value', 'low', 'high', 'x'):
+        for key in ('value', 'low', 'high', 'x', 'capacity'):
             if row.get(key, '') != '':
                 row[key] = float(row[key])
                 if not math.isfinite(row[key]):
@@ -302,6 +304,7 @@ def load_data(path):
             raise ValueError('Supply both interval endpoints or neither')
         if 'low' in row and not row['low'] <= row['value'] <= row['high']:
             raise ValueError(f'Invalid interval in {row["id"]}')
+    validate_capacity(rows, -math.inf)
     return rows
 
 
@@ -367,9 +370,57 @@ def nice_ticks(limits, target=5):
     return ticks
 
 
+def validate_capacity(rows, baseline, field=None):
+    """Normalize an optional capacity field and reject ambiguous panel semantics."""
+    if field is not None:
+        if not isinstance(field, str) or not field:
+            raise ValueError('capacity.field must be a column name or null')
+        normalized = []
+        for row in rows:
+            if row.get(field, '') == '':
+                raise ValueError(f'Missing capacity field {field!r} in {row["id"]}')
+            try:
+                value = float(row[field])
+            except (TypeError, ValueError):
+                raise ValueError(f'Invalid capacity in {row["id"]}: expected a finite number') from None
+            normalized.append({**row, 'capacity': value})
+        rows = normalized
+    for panel in dict.fromkeys(r['panel'] for r in rows):
+        members = [r for r in rows if r['panel'] == panel]
+        present = ['capacity' in r for r in members]
+        if any(present) and not all(present):
+            raise ValueError(f'Panel {panel}: all rows must supply capacity or none')
+        for row in members:
+            if 'capacity' not in row:
+                continue
+            if type(row['capacity']) not in (int, float) or not math.isfinite(row['capacity']):
+                raise ValueError(f'Non-finite or invalid capacity in {row["id"]}')
+            if 'low' in row or 'high' in row:
+                raise ValueError(f'Interval + capacity is not supported in {row["id"]}')
+            if not row['capacity'] >= row['value'] >= baseline:
+                raise ValueError(f'Row {row["id"]}: require capacity >= value >= baseline ({baseline})')
+    return rows
+
+
+def capacity_text(row, spec):
+    value, capacity = row['value'], row['capacity']
+    percent = 100 * value / capacity if capacity else None
+    template = spec['label_format']
+    try:
+        if template == '{value}/{capacity}':
+            text = f'{value:g} / {capacity:g}'
+        else:
+            text = template.format(value=value, capacity=capacity, percent=percent)
+    except (ValueError, KeyError, AttributeError, IndexError, TypeError) as exc:
+        raise ValueError(f'Invalid capacity.label_format {template!r}; use value, capacity or percent: {exc}') from None
+    if spec['show_percent']:
+        text += f' ({percent:.0f}%)' if percent is not None else ' (n/a)'
+    return text
+
+
 def auto_axis(rows, baseline):
-    """Derive limits and ticks from data, including intervals; never clips silently."""
-    highs = [row.get('high', row['value']) for row in rows]
+    """Derive limits and ticks from data, including intervals and capacity; never clips silently."""
+    highs = [max(row.get('high', row['value']), row.get('capacity', row['value'])) for row in rows]
     lows = [row.get('low', row['value']) for row in rows]
     top = max(highs + [baseline])
     bottom = min(lows + [baseline])
@@ -562,6 +613,7 @@ def build_figure(config, rows, font_dir=None):
             ax = fig.add_axes([rect[0]/w, rect[1]/h, rect[2]/w, rect[3]/h])
             axes[panel['id']] = ax
             rr = [r for r in rows if r['panel'] == panel['id']]
+            rr = validate_capacity(rr, style['baseline'], style['capacity']['field'])
             xx = positions(rr, style)
             limits = style['limits']
             ticks = style['ticks']
@@ -584,6 +636,8 @@ def build_figure(config, rows, font_dir=None):
                 raise ValueError(f'Numeric limits clip bar heights in {panel["id"]}; expand limits explicitly')
             if not style['allow_interval_clipping'] and any(r.get('low',r['value']) < limits[0] or r.get('high',r['value']) > limits[1] for r in rr):
                 raise ValueError(f'Numeric limits clip data in {panel["id"]}; expand limits explicitly')
+            if any(r.get('capacity', r['value']) > limits[1] for r in rr):
+                raise ValueError(f'Numeric limits clip capacity in {panel["id"]}; expand limits explicitly')
             catlim = panel.get('category_limits', [xx.min()-style['bar_width']/2-style['category_margin'],
                                                   xx.max()+style['bar_width']/2+style['category_margin']])
             if vertical:
@@ -658,6 +712,28 @@ def build_figure(config, rows, font_dir=None):
             for x, row in zip(xx, rr):
                 palette = config['palette'][row['series']]
                 fill, edge = bar_colors(palette, style)
+                capacity_bar = capacity_label = None
+                if style['capacity']['field'] is not None:
+                    cs = style['capacity']
+                    outline = dict(facecolor='none', edgecolor=palette['edge'],
+                                   linewidth=cs['edge_width'], linestyle=cs['linestyle'],
+                                   alpha=opacity(cs['alpha'], 'capacity.alpha'), zorder=1)
+                    if vertical:
+                        capacity_bar = ax.bar(x,row['capacity']-style['baseline'],
+                                              width=style['bar_width'],bottom=style['baseline'],**outline)[0]
+                    else:
+                        capacity_bar = ax.barh(x,row['capacity']-style['baseline'],
+                                               height=style['bar_width'],left=style['baseline'],**outline)[0]
+                    capacity_bar.set_gid('capacity-'+row['id'])
+                    capacity_label = ax.annotate(capacity_text(row, cs),
+                        (x,row['capacity']) if vertical else (row['capacity'],x),
+                        xytext=(0,style['value_pad']) if vertical else (style['value_pad'],0),
+                        textcoords='offset points',ha='center' if vertical else 'left',
+                        va='baseline' if vertical else 'center',
+                        color=style['value_color'] or palette.get('label',palette['edge']),
+                        fontproperties=font(config,style['value_font'],style['value_size'],font_dir),
+                        annotation_clip=False)
+                    capacity_label.set_gid('capacity-'+row['id']+'-label')
                 common = dict(color=fill, edgecolor=edge, linewidth=style['bar_edge_width'],
                               hatch=palette.get('hatch',style['hatch']),zorder=2)
                 if vertical:
@@ -689,7 +765,8 @@ def build_figure(config, rows, font_dir=None):
                     token_label(ax,x,tokens[row['id']],style,config,palette,font_dir,
                                 panel.get('token_shift_pt',{}).get(row['id'],0) if mode=='raw' else 0)
                 artists[row['id']] = {'bar':bar,'error':error,'label':label,'x':float(x),'axis':ax,
-                                      'value':row['value'],'series':row['series'],'vertical':vertical}
+                                      'value':row['value'],'series':row['series'],'vertical':vertical,
+                                      'capacity_bar':capacity_bar,'capacity_label':capacity_label}
             add_legend(fig,ax,panel,rr,style,config,font_dir)
         for spec in config['gains']:
             add_gain(fig,spec,artists,config,font_dir)
