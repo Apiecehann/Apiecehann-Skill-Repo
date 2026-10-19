@@ -60,14 +60,14 @@ P0 的目标是覆盖 CS 论文里最常见的 80% 图，不是覆盖所有 Matp
 
 | overlay | 层 | requires | 支持 chart | 优先级 |
 |---|---|---|---|---|
-| `errorbar` | stat | `x,y,yerr` 或 raw replicates | bar、line、dot、scatter(binned) | P0 |
-| `ci-band` | stat | `x,y,replicate` 或 `low,high` | line、scatter、roc、pr | P0 |
-| `raw-points` | stat | `x,y` + group | bar、box、violin、dot | P0 |
-| `reference-line` | reference | `axis,value` | 所有 2D chart | P0 |
-| `trend` | stat | `x,y` + optional group | scatter、line | P0 |
+| `errorbar` | stat | `x,y,yerr` 或 raw replicates | grouped-bar、horizontal-bar、dot | P0 |
+| `ci-band` | stat | `x,y,replicate` 或 `low,high` | line-band | P0 |
+| `raw-points` | stat | `x,y` + group | box、violin | P0 |
+| `reference-line` | reference | `axis,value` | 2D bar/line/scatter/distribution；heatmap/ROC/PR/calibration/surface 暂无 | P0 |
+| `trend` | stat | `x,y` + optional group | scatter | P0 |
 | `confidence-ellipse` | stat | `x,y` + series | scatter | P0 |
-| `significance-bracket` | annotation | two groups + optional p | bar、dot、box、violin | P0 |
-| `delta` | annotation | two rows/values | bar、dot、dumbbell | 已有 |
+| `significance-bracket` | annotation | two groups + optional p | box、violin | P0 |
+| `delta` | annotation | two rows/values | grouped-bar、dumbbell | P0 |
 | `operating-point` | annotation | `x,y,label` | roc、pr、calibration | P1 |
 
 ### 3.3 P0 明确不做

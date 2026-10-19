@@ -21,9 +21,7 @@
       "supports": [
         "grouped-bar",
         "horizontal-bar",
-        "dot-plot",
-        "scatter",
-        "line-band"
+        "dot-plot"
       ],
       "avoid": [
         "只有单个观测"
@@ -46,10 +44,7 @@
         "alpha": 0.18
       },
       "supports": [
-        "line-band",
-        "scatter",
-        "roc",
-        "pr"
+        "line-band"
       ],
       "avoid": [
         "没有重复观测也没有 low/high"
@@ -94,7 +89,19 @@
         "linewidth": 0.8
       },
       "supports": [
-        "*"
+        "grouped-bar",
+        "horizontal-bar",
+        "dot-plot",
+        "line-band",
+        "scatter",
+        "distribution-overlap",
+        "kde",
+        "box",
+        "violin",
+        "ecdf",
+        "roc",
+        "pr",
+        "calibration"
       ],
       "avoid": [
         "参考值没有来源"
@@ -115,8 +122,7 @@
         "ci": 0.95
       },
       "supports": [
-        "scatter",
-        "line-band"
+        "scatter"
       ],
       "avoid": [
         "类别轴",
@@ -181,11 +187,7 @@
         "label": "auto",
         "size": 5
       },
-      "supports": [
-        "roc",
-        "pr",
-        "calibration"
-      ],
+      "supports": [],
       "avoid": [
         "没有选定阈值"
       ]
@@ -207,7 +209,6 @@
       },
       "supports": [
         "grouped-bar",
-        "dot-plot",
         "dumbbell"
       ],
       "avoid": [

@@ -12,9 +12,7 @@
       ],
       "supports": [
         "errorbar",
-        "raw-points",
         "reference-line",
-        "significance-bracket",
         "delta"
       ],
       "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
@@ -30,9 +28,7 @@
       ],
       "supports": [
         "errorbar",
-        "raw-points",
-        "reference-line",
-        "significance-bracket"
+        "reference-line"
       ],
       "ir": "examples/templates/horizontal-percent/figure.ir.json"
     },
@@ -47,10 +43,7 @@
       ],
       "supports": [
         "errorbar",
-        "raw-points",
-        "reference-line",
-        "significance-bracket",
-        "delta"
+        "reference-line"
       ]
     },
     {
@@ -77,8 +70,7 @@
       ],
       "supports": [
         "ci-band",
-        "reference-line",
-        "trend"
+        "reference-line"
       ]
     },
     {
@@ -93,8 +85,7 @@
         "raw-points",
         "reference-line",
         "trend",
-        "confidence-ellipse",
-        "ci-band"
+        "confidence-ellipse"
       ]
     },
     {
@@ -120,8 +111,7 @@
         "value"
       ],
       "supports": [
-        "reference-line",
-        "raw-points"
+        "reference-line"
       ]
     },
     {
@@ -174,9 +164,7 @@
         "col",
         "value"
       ],
-      "supports": [
-        "reference-line"
-      ]
+      "supports": []
     },
     {
       "id": "roc",
@@ -187,9 +175,7 @@
         "label"
       ],
       "supports": [
-        "ci-band",
-        "reference-line",
-        "operating-point"
+        "reference-line"
       ]
     },
     {
@@ -201,9 +187,7 @@
         "label"
       ],
       "supports": [
-        "ci-band",
-        "reference-line",
-        "operating-point"
+        "reference-line"
       ]
     },
     {
@@ -227,9 +211,7 @@
         "y",
         "z"
       ],
-      "supports": [
-        "reference-line"
-      ]
+      "supports": []
     }
   ]
 }
