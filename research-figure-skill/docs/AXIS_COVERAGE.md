@@ -7,10 +7,10 @@
 用户优先级修正（2026-10-19，第二版）：
 
 - 颜色结构：重要，必做。
-- 风格 / 字体：重要；全局各扩到 **20 个**，每个 chart 的 sheet 用 6–8 个代表，完整 20 个放在全局 style/type 表。
+- 风格 / 字体：各 **15 个**，每个 chart 各一张 sheet；不展开 15×15。
 - 标注：保留。
 - 网格：**加回来，必做**。
-- 每 chart 目标：**12–18 个 panel**，不是 5 个，也不是 150 个。
+- 每 chart 目标：约 **60–90 个 panel**（dot-plot 是 11 张轴图 / 75 panel），不是 5 个，也不是 150 个。
 - **允许新增 chart-specific 轴**；删掉不适用的轴后，要补上这个图真正需要的轴。
 
 ## 1. 先分两类轴
@@ -19,14 +19,14 @@
 
 这些轴对所有 chart 都适用，已经有独立 reference 表：
 
-- `style`：全局 **20 个**（当前 15，补 5 个）
-- `type`：全局 **20 个**（当前 15，补 5 个）
+- `style`：全局 **15 个**
+- `type`：全局 **15 个**
 - `accent` / `categorical` / `paired` / `color_pairing`：全局色板
 - `grid`：全局网格策略
 - `size`：4 个物理尺寸
 - `panel_gap` / `bar_spacing`：布局级
 
-它们不进入每个 chart 的全量列表；每个 chart 只取 6–8 个代表，完整 20 个放在全局 style/type 表。
+它们不进入每个 chart 的全量列表；每个 chart 用完整 15 个 style/type，不展开 15×15。
 
 ### 每 chart 轴（需要按 chart 覆盖）
 
@@ -37,7 +37,7 @@
 3. **annotation**：reference / errorbar / bracket / delta / trend / ellipse / operating point
 4. **layout**：vertical / horizontal / paired / multi-panel（只选适用的）
 5. **size**：single / medium / double / slide（选 2–3 个代表）
-6. **style/type contrast**：6–8 个代表，不重复 20 个
+6. **style/type contrast**：完整 15 个 style、15 个 type，各一张 sheet
 
 ### Chart-specific 轴（新增）
 
