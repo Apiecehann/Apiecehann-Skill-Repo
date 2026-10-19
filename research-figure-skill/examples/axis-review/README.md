@@ -14,12 +14,13 @@
 | `05-paired.png` | paired palette | before/after 用哪组同色相浅深 |
 | `06-categorical.png` | categorical palette | 5 个等权类别用哪组 |
 | `07-grid.png` | grid | none / h-hairline / h-dashed / full-hairline / full-dashed / dots |
-| `08-style.png` | style | 6 个风格：paper / soft / serif / bold-slide / minimal-mono / hand-drawn |
-| `09-type.png` | type | Arial / Times / Consolas / Segoe UI / Comic Sans |
+| `08-style.png` | style | 15 个风格：paper / soft / serif / bold-slide / minimal-mono / hand-drawn / boxed / grid / editorial / dark / blueprint / poster / notebook / high-contrast / pastel |
+| `09-type.png` | type | 15 个字体：Arial / Helvetica / Segoe UI / Calibri / Verdana / Tahoma / Trebuchet / Times / Georgia / Garamond / Cambria / Consolas / Courier / Comic / Segoe Script |
 | `10-layout.png` | layout | 竖/横 × 1/2/4 series × 单/多面板 |
 | `11-size.png` | size | 9 种宽度/高度/长宽比 |
-| `12-annotation.png` | annotation | delta / capacity / reference-line；increment 等 Codex |
+| `12-annotation.png` | annotation | delta / capacity / reference-line / base+increment |
 | `13-panel-gap.png` | panel gap | normal / zero gap / composite |
+| `14-bar-spacing.png` | bar spacing | spaced / touching / tight-groups / touching-all |
 
 ## 关于 outline / alpha / hatch
 
@@ -51,11 +52,12 @@ accent: orange 默认；blue/teal 备选
 paired: blue/green/teal/orange/rose 都留
 categorical: pastel-eight/tol-bright/tol-muted/set2/npg/tableau10 都留
 grid: none/hairline/dashed 保留；dots 删
-style: 6 个都留
-type: 5 个都留
-layout: 4 个都留
-size: 4 个都留
-annotation: delta/capacity/reference-line 保留；increment 等 Codex；bracket/direct planned
+style: 15 个都留
+type: 15 个都留
+layout: 6 个都留
+size: 9 个都留
+annotation: delta/capacity/reference-line/increment 保留；bracket/direct planned
+bar_spacing: spaced/touching/tight-groups/touching-all 都留
 ```
 
 不需要选“最终图”，只标“保留 / 删除 / 换颜色”。
@@ -67,7 +69,7 @@ annotation: delta/capacity/reference-line 保留；increment 等 Codex；bracket
 - `implemented`：当前 renderer/compiler 能直接出图；
 - `planned`：类别先定，代码后续补。
 
-`08-style` / `09-type` 现在都画了 6 / 5 个选项；`12-annotation` 里的 increment、bracket、direct-label 仍是 planned，等 Codex 或后续实现。
+`08-style` / `09-type` 现在都画了 15 个选项；`12-annotation` 里的 increment 已按 Codex 的 base+increment 实现，bracket / direct-label 仍是 planned。
 
 ## 生成
 
@@ -76,4 +78,4 @@ cd research-figure-skill
 python examples/axis-review/render_review.py
 ```
 
-输出本目录的 14 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。
+输出本目录的 15 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。

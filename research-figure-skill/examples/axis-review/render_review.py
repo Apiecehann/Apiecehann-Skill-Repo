@@ -257,37 +257,103 @@ def grids():
 def styles():
     rows = read("focus.csv")
     items = []
-    for style in ("paper-clean", "soft-outline", "serif-emphasis",
-                  "bold-slide", "minimal-mono", "hand-drawn"):
-        extra = {}
-        if style == "hand-drawn":
-            extra["fonts"] = font_roles(str(Path(r"C:\Windows\Fonts") / "comic.ttf"), "Comic Sans MS")
-        cfg = config(rows, style=style, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
-                     fill=None, edge=None, grid=None, **extra)
-        img = render_panel(rows, cfg, f"style-{style}")
-        items.append({"image": img, "label": style, "note": "implemented"})
-    make_sheet("style", "6 个已实现；hand-drawn 只用于 talk/博客。",
-               items, 3, "08-style.png")
+    specs = [
+        ("paper-clean", "paper-clean", D_ORANGE + [ACCENTS["orange"]], None, "journal clean"),
+        ("soft-outline", "soft-outline", D_ORANGE + [ACCENTS["orange"]], None, "55% fill + edge"),
+        ("serif-emphasis", "serif-emphasis", D_ORANGE + [ACCENTS["orange"]], None, "serif + dashed grid"),
+        ("bold-slide", "bold-slide", D_ORANGE + [ACCENTS["orange"]], None, "large type, thick axes"),
+        ("minimal-mono", "minimal-mono", D_ORANGE + [ACCENTS["orange"]], None, "thin axes, no grid"),
+        ("hand-drawn", "hand-drawn", D_ORANGE + [ACCENTS["orange"]],
+         {"fonts": font_roles(str(Path(r"C:\Windows\Fonts") / "comic.ttf"), "Comic Sans MS")},
+         "sketch + paper"),
+        ("boxed-journal", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
+         {"panel_defaults": {"spines": ["left", "bottom", "top", "right"],
+                             "grid": {"kind": "none"}, "axis_width": .7, "bar_edge_width": .4}},
+         "all spines, ticks in"),
+        ("grid-paper", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
+         {"panel_defaults": {"grid": {"kind": "lines", "axis": "both", "color": "#D9DEE3",
+                                      "linewidth": .4, "linestyle": "-"}}},
+         "full 2D hairline"),
+        ("editorial-serif", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
+         {"preset": {"font": "serif"}, "panel_defaults": {"grid": {"kind": "none"}, "axis_width": .5,
+                                                          "tick_size": 8, "label_size": 10}},
+         "serif, no grid, airy"),
+        ("dark-slide", "paper-clean", ["#60A5FA", "#F59E0B", "#34D399", "#F472B6"],
+         {"figure": {"background": "#0F172A"},
+          "panel_defaults": {"text_color": "#E5E7EB", "axis_color": "#E5E7EB", "tick_color": "#CBD5E1",
+                             "grid": {"kind": "none"}, "bar_edge_width": 0,
+                             "tick_size": 10, "category_size": 10, "label_size": 12}},
+         "dark background"),
+        ("blueprint", "paper-clean", ["#38BDF8", "#22D3EE", "#818CF8", "#A5F3FC"],
+         {"preset": {"font": "mono"}, "figure": {"background": "#0B1F33"},
+          "panel_defaults": {"text_color": "#A5D8FF", "axis_color": "#3B82F6", "tick_color": "#93C5FD",
+                             "grid": {"kind": "lines", "axis": "both", "color": "#1E4D6B",
+                                      "linewidth": .4, "linestyle": "-"},
+                             "spines": ["bottom"], "axis_width": .6, "bar_edge_width": .5}},
+         "technical blueprint"),
+        ("poster-bold", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
+         {"panel_defaults": {"tick_size": 10, "category_size": 11, "label_size": 13, "value_size": 10,
+                             "axis_width": 2, "baseline_width": 2.4,
+                             "grid": {"kind": "none"}, "spines": ["bottom"]}},
+         "huge type, poster"),
+        ("notebook", "paper-clean", ["#E8B4A0", "#C9A227", "#7FA6A0", "#5B6C8F"],
+         {"font": "humanist", "figure": {"background": "#FFFDF5"},
+          "panel_defaults": {"text_color": "#4B4237", "axis_color": "#4B4237", "tick_color": "#6B5F4E",
+                             "grid": {"kind": "lines", "axis": "value", "color": "#E5DEC9",
+                                      "linewidth": .4, "linestyle": "-"}}},
+         "warm notebook"),
+        ("high-contrast", "paper-clean", ["#111827", "#374151", "#6B7280", ACCENTS["orange"]],
+         {"panel_defaults": {"text_color": "#030712", "axis_color": "#030712", "tick_color": "#111827",
+                             "axis_width": 1.5, "baseline_width": 1.8, "grid": {"kind": "none"},
+                             "tick_size": 9, "label_size": 11}},
+         "max contrast"),
+        ("pastel-poster", "paper-clean", ["#D88D91", "#99B4D7", "#F9D78D", "#9CC2A4"],
+         {"panel_defaults": {"tick_size": 12, "category_size": 12, "label_size": 14,
+                             "axis_width": 1.0, "baseline_width": 1.4,
+                             "grid": {"kind": "none"}, "spines": ["bottom"]}},
+         "pastel + large type"),
+    ]
+    for name, preset, colors, overrides, note in specs:
+        cfg = config(rows, style=preset, colors=colors, labels=LABELS4,
+                     fill=None if name not in ("dark-slide", "blueprint") else 1,
+                     edge=None if name not in ("dark-slide", "blueprint") else 0,
+                     grid=None)
+        if overrides:
+            cfg = backend.merge(cfg, overrides)
+        img = render_panel(rows, cfg, f"style-{name}")
+        items.append({"image": img, "label": name, "note": note})
+    make_sheet("style", "15 个风格；其中 9 个是 review variant，确认后再 promote 到 presets。",
+               items, 3, "08-style.png", cell=(420, 340))
 
 
 def fonts():
     rows = read("focus.csv")
     specs = [
-        ("sans", "Arial", "arial.ttf"),
-        ("serif", "Times New Roman", "times.ttf"),
-        ("mono", "Consolas", "consola.ttf"),
-        ("humanist", "Segoe UI", "segoeui.ttf"),
-        ("handwritten", "Comic Sans MS", "comic.ttf"),
+        ("arial", "Arial", "arial.ttf"),
+        ("helvetica", "Helvetica (Arial)", "arial.ttf"),
+        ("segoe-ui", "Segoe UI", "segoeui.ttf"),
+        ("calibri", "Calibri", "calibri.ttf"),
+        ("verdana", "Verdana", "verdana.ttf"),
+        ("tahoma", "Tahoma", "tahoma.ttf"),
+        ("trebuchet", "Trebuchet MS", "trebuc.ttf"),
+        ("times", "Times New Roman", "times.ttf"),
+        ("georgia", "Georgia", "georgia.ttf"),
+        ("garamond", "Garamond", "gara.ttf"),
+        ("cambria", "Cambria", "cambria.ttc"),
+        ("consolas", "Consolas", "consola.ttf"),
+        ("courier", "Courier New", "cour.ttf"),
+        ("comic", "Comic Sans MS", "comic.ttf"),
+        ("segoe-script", "Segoe Script", "segoesc.ttf"),
     ]
     items = []
     for name, family, filename in specs:
         path = str(Path(r"C:\Windows\Fonts") / filename)
-        cfg = config(rows, font=name, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
+        cfg = config(rows, font="sans", colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
                      fonts=font_roles(path, family))
         img = render_panel(rows, cfg, f"type-{name}")
         items.append({"image": img, "label": name, "note": family})
-    make_sheet("type", "5 个字体；review 使用 Windows 字体文件，skill 预设仍按可用性回退。",
-               items, 3, "09-type.png")
+    make_sheet("type", "15 个字体；review 使用 Windows 字体文件，skill 预设按可用性回退。",
+               items, 3, "09-type.png", cell=(420, 340))
 
 
 def layouts():
@@ -371,8 +437,37 @@ def annotations():
                  reference_lines=[{"value": .8, "label": "SOTA", "color": "#6B7280"}])
     img = render_panel(focus, cfg, "annotation-reference")
     items.append({"image": img, "label": "reference line", "note": "SOTA / threshold"})
-    make_sheet("annotation", "delta / capacity / reference-line；increment 等 Codex 完成。",
-               items, 3, "12-annotation.png")
+
+    inc = read("increment.csv")
+    cfg = config(inc, colors=[ACCENTS["orange"]], labels={"ours": "Ours"},
+                 tick_format=".0%", ylabel="Score", grid="none", legend=False,
+                 capacity=None)
+    cfg["panel_defaults"]["increment"] = {"field": "base", "delta_format": "+{delta:.0%}"}
+    cfg["panel_defaults"]["value_format"] = ".0%"
+    cfg["panel_defaults"]["bar_width"] = .5
+    cfg["panel_defaults"]["category_margin"] = .35
+    img = render_panel(inc, cfg, "annotation-increment")
+    items.append({"image": img, "label": "base + increment", "note": "hatched base + solid delta"})
+    make_sheet("annotation", "delta / capacity / reference-line / base+increment。",
+               items, 2, "12-annotation.png")
+
+
+def bar_spacing():
+    rows = read("focus.csv")
+    items = []
+    specs = [
+        ("spaced", .18, .9, "normal within-group gap"),
+        ("touching", 0, .9, "bars in the same group touch"),
+        ("tight-groups", .18, .3, "groups close, bars spaced"),
+        ("touching-all", 0, .3, "bars and groups both tight"),
+    ]
+    for name, series_gap, group_gap, note in specs:
+        cfg = config(rows, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4)
+        cfg["panel_defaults"].update(series_gap=series_gap, group_gap=group_gap)
+        img = render_panel(rows, cfg, f"spacing-{name}")
+        items.append({"image": img, "label": name, "note": note})
+    make_sheet("bar spacing", "同一类的 bar 是否贴住；与 group 间距分开控制。",
+               items, 2, "14-bar-spacing.png")
 
 
 def color_structure():
@@ -470,14 +565,16 @@ def main():
     sizes()
     annotations()
     panel_gap()
+    bar_spacing()
     index = {"version": 1,
              "sheets": ["00-color-structure.png", "01-baseline-color.png", "02-baseline-mark.png",
                         "03-baseline-matrix.png", "04-accent.png", "05-paired.png",
                         "06-categorical.png", "07-grid.png", "08-style.png", "09-type.png",
-                        "10-layout.png", "11-size.png", "12-annotation.png", "13-panel-gap.png"],
+                        "10-layout.png", "11-size.png", "12-annotation.png", "13-panel-gap.png",
+                        "14-bar-spacing.png"],
              "axes": ["color structure", "baseline color", "baseline mark",
                       "baseline color x mark", "accent", "paired", "categorical", "grid",
-                      "style", "type", "layout", "size", "annotation", "panel gap"]}
+                      "style", "type", "layout", "size", "annotation", "panel gap", "bar spacing"]}
     (HERE / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     print("wrote", HERE / "index.json")
 

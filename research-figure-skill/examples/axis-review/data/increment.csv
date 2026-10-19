@@ -1,0 +1,4 @@
+id,panel,group,series,value,base
+a,main,Task A,ours,0.96,0.88
+b,main,Task B,ours,0.92,0.82
+c,main,Task C,ours,0.98,0.90

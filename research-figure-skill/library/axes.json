@@ -361,73 +361,68 @@
       "options": [
         {
           "id": "none",
-          "label": "no grid",
+          "label": "none",
           "when": [
-            "横向条、强调数据本身",
-            "幻灯片"
+            "干净版面"
           ],
           "avoid": [
-            "需要读精确差值"
+            "需要读精确值"
           ],
-          "params": {
-            "kind": "none"
-          },
           "status": "implemented"
         },
         {
-          "id": "hairline",
-          "label": "hairline",
+          "id": "h-hairline",
+          "label": "horizontal hairline",
           "when": [
-            "论文、需要轻参考线"
+            "bar/line 默认"
           ],
           "avoid": [
-            "和柱体颜色太接近"
+            "横向版式需换轴"
           ],
-          "params": {
-            "kind": "lines",
-            "color": "#D9DEE3",
-            "linewidth": 0.4,
-            "linestyle": "-"
-          },
           "status": "implemented"
         },
         {
-          "id": "dashed",
-          "label": "dashed horizontal",
+          "id": "h-dashed",
+          "label": "horizontal dashed",
           "when": [
-            "参考图风格、读差值"
+            "参考图风格"
           ],
           "avoid": [
-            "密集多面板"
+            "小尺寸"
           ],
-          "params": {
-            "kind": "lines",
-            "color": "#BFC7CF",
-            "linewidth": 0.5,
-            "linestyle": [
-              0,
-              [
-                4,
-                4
-              ]
-            ]
-          },
+          "status": "implemented"
+        },
+        {
+          "id": "full-hairline",
+          "label": "full 2D hairline",
+          "when": [
+            "需要双向读数"
+          ],
+          "avoid": [
+            "会压过数据"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "full-dashed",
+          "label": "full 2D dashed",
+          "when": [
+            "参考图风格"
+          ],
+          "avoid": [
+            "小尺寸"
+          ],
           "status": "implemented"
         },
         {
           "id": "dots",
           "label": "dots",
           "when": [
-            "轻量背景、论文"
+            "轻量背景"
           ],
           "avoid": [
-            "小尺寸输出，容易变噪点"
+            "打印分辨率低"
           ],
-          "params": {
-            "kind": "dots",
-            "spacing_pt": 10.5,
-            "size": 0.75
-          },
           "status": "implemented"
         }
       ]
@@ -500,6 +495,105 @@
             "期刊投稿、密集数据"
           ],
           "status": "implemented"
+        },
+        {
+          "id": "boxed-journal",
+          "label": "boxed-journal",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "grid-paper",
+          "label": "grid-paper",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "editorial-serif",
+          "label": "editorial-serif",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "dark-slide",
+          "label": "dark-slide",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "blueprint",
+          "label": "blueprint",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "poster-bold",
+          "label": "poster-bold",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "notebook",
+          "label": "notebook",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "high-contrast",
+          "label": "high-contrast",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "pastel-poster",
+          "label": "pastel-poster",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
         }
       ]
     },
@@ -560,6 +654,116 @@
             "期刊"
           ],
           "status": "implemented"
+        },
+        {
+          "id": "helvetica",
+          "label": "helvetica",
+          "when": [
+            "Helvetica/Arial"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "calibri",
+          "label": "calibri",
+          "when": [
+            "Calibri"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "verdana",
+          "label": "verdana",
+          "when": [
+            "Verdana"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tahoma",
+          "label": "tahoma",
+          "when": [
+            "Tahoma"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "trebuchet",
+          "label": "trebuchet",
+          "when": [
+            "Trebuchet MS"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "georgia",
+          "label": "georgia",
+          "when": [
+            "Georgia"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "garamond",
+          "label": "garamond",
+          "when": [
+            "Garamond"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "cambria",
+          "label": "cambria",
+          "when": [
+            "Cambria"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "courier",
+          "label": "courier",
+          "when": [
+            "Courier New"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "segoe-script",
+          "label": "segoe-script",
+          "when": [
+            "Segoe Script"
+          ],
+          "avoid": [
+            "字体缺失时回退"
+          ],
+          "status": "implemented"
         }
       ]
     },
@@ -601,7 +805,7 @@
             "增量为负",
             "没有真实基数"
           ],
-          "status": "planned"
+          "status": "implemented"
         },
         {
           "id": "bracket",
@@ -733,6 +937,61 @@
             "期刊投稿"
           ],
           "status": "implemented"
+        },
+        {
+          "id": "tiny",
+          "label": "2.0 x 1.4 in",
+          "when": [
+            "长宽比探索"
+          ],
+          "avoid": [
+            "tiny 不适合正文"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "square",
+          "label": "3.3 x 3.3 in",
+          "when": [
+            "长宽比探索"
+          ],
+          "avoid": [
+            "tiny 不适合正文"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "wide",
+          "label": "3.3 x 1.8 in",
+          "when": [
+            "长宽比探索"
+          ],
+          "avoid": [
+            "tiny 不适合正文"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "double-wide",
+          "label": "7 x 3.6 in",
+          "when": [
+            "长宽比探索"
+          ],
+          "avoid": [
+            "tiny 不适合正文"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tall",
+          "label": "2.5 x 4.2 in",
+          "when": [
+            "长宽比探索"
+          ],
+          "avoid": [
+            "tiny 不适合正文"
+          ],
+          "status": "implemented"
         }
       ]
     },
@@ -807,6 +1066,55 @@
           ],
           "avoid": [
             "超过色板容量"
+          ],
+          "status": "implemented"
+        }
+      ]
+    },
+    "bar_spacing": {
+      "question": "同一类的 bar 是否贴住；与 group 间距分开控制。",
+      "options": [
+        {
+          "id": "spaced",
+          "label": "spaced",
+          "when": [
+            "默认"
+          ],
+          "avoid": [
+            "空间不足"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "touching",
+          "label": "touching",
+          "when": [
+            "同组比较最强"
+          ],
+          "avoid": [
+            "易读性下降"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tight-groups",
+          "label": "tight groups",
+          "when": [
+            "类别多"
+          ],
+          "avoid": [
+            "标签拥挤"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "touching-all",
+          "label": "touching all",
+          "when": [
+            "极紧凑"
+          ],
+          "avoid": [
+            "默认"
           ],
           "status": "implemented"
         }

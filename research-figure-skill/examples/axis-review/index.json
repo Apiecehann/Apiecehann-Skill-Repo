@@ -14,7 +14,8 @@
     "10-layout.png",
     "11-size.png",
     "12-annotation.png",
-    "13-panel-gap.png"
+    "13-panel-gap.png",
+    "14-bar-spacing.png"
   ],
   "axes": [
     "color structure",
@@ -30,6 +31,7 @@
     "layout",
     "size",
     "annotation",
-    "panel gap"
+    "panel gap",
+    "bar spacing"
   ]
 }
