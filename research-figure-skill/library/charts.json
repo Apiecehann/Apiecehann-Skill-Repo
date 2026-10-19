@@ -16,7 +16,7 @@
         "delta",
         "raw-points"
       ],
-      "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
+      "ir": "templates/ours-vs-baselines/figure.ir.json"
     },
     {
       "id": "horizontal-bar",
@@ -32,7 +32,7 @@
         "reference-line",
         "raw-points"
       ],
-      "ir": "examples/templates/horizontal-percent/figure.ir.json"
+      "ir": "templates/horizontal-percent/figure.ir.json"
     },
     {
       "id": "dot-plot",
@@ -226,7 +226,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/scatter3d/figure.ir.json"
+      "ir": "templates/scatter3d/figure.ir.json"
     },
     {
       "id": "voxel",
@@ -239,7 +239,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/voxel/figure.ir.json"
+      "ir": "templates/voxel/figure.ir.json"
     },
     {
       "id": "ridgeline",
@@ -251,7 +251,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/ridgeline/figure.ir.json"
+      "ir": "templates/ridgeline/figure.ir.json"
     },
     {
       "id": "det",
@@ -262,7 +262,7 @@
         "label"
       ],
       "supports": [],
-      "ir": "examples/templates/det/figure.ir.json"
+      "ir": "templates/det/figure.ir.json"
     },
     {
       "id": "node-link",
@@ -274,7 +274,7 @@
         "weight"
       ],
       "supports": [],
-      "ir": "examples/templates/node-link/figure.ir.json"
+      "ir": "templates/node-link/figure.ir.json"
     },
     {
       "id": "sankey",
@@ -286,7 +286,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/sankey/figure.ir.json"
+      "ir": "templates/sankey/figure.ir.json"
     },
     {
       "id": "treemap",
@@ -297,7 +297,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/treemap/figure.ir.json"
+      "ir": "templates/treemap/figure.ir.json"
     },
     {
       "id": "radar",
@@ -309,7 +309,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/radar/figure.ir.json"
+      "ir": "templates/radar/figure.ir.json"
     },
     {
       "id": "bar3d",
@@ -321,7 +321,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/bar3d/figure.ir.json"
+      "ir": "templates/bar3d/figure.ir.json"
     },
     {
       "id": "mesh3d",
@@ -333,7 +333,7 @@
         "z"
       ],
       "supports": [],
-      "ir": "examples/templates/mesh3d/figure.ir.json"
+      "ir": "templates/mesh3d/figure.ir.json"
     },
     {
       "id": "quiver3d",
@@ -348,7 +348,7 @@
         "w"
       ],
       "supports": [],
-      "ir": "examples/templates/quiver3d/figure.ir.json"
+      "ir": "templates/quiver3d/figure.ir.json"
     },
     {
       "id": "sunburst",
@@ -360,7 +360,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/sunburst/figure.ir.json"
+      "ir": "templates/sunburst/figure.ir.json"
     },
     {
       "id": "icicle",
@@ -372,7 +372,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/icicle/figure.ir.json"
+      "ir": "templates/icicle/figure.ir.json"
     },
     {
       "id": "chord",
@@ -384,7 +384,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/chord/figure.ir.json"
+      "ir": "templates/chord/figure.ir.json"
     },
     {
       "id": "alluvial",
@@ -396,7 +396,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/alluvial/figure.ir.json"
+      "ir": "templates/alluvial/figure.ir.json"
     },
     {
       "id": "qq",
@@ -408,7 +408,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/qq/figure.ir.json"
+      "ir": "templates/qq/figure.ir.json"
     },
     {
       "id": "eventplot",
@@ -420,7 +420,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/eventplot/figure.ir.json"
+      "ir": "templates/eventplot/figure.ir.json"
     },
     {
       "id": "hist2d",
@@ -431,7 +431,7 @@
         "y"
       ],
       "supports": [],
-      "ir": "examples/templates/hist2d/figure.ir.json"
+      "ir": "templates/hist2d/figure.ir.json"
     },
     {
       "id": "hexbin",
@@ -442,7 +442,7 @@
         "y"
       ],
       "supports": [],
-      "ir": "examples/templates/hexbin/figure.ir.json"
+      "ir": "templates/hexbin/figure.ir.json"
     },
     {
       "id": "clustermap",
@@ -454,7 +454,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/clustermap/figure.ir.json"
+      "ir": "templates/clustermap/figure.ir.json"
     },
     {
       "id": "calendar-heatmap",
@@ -465,7 +465,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/calendar-heatmap/figure.ir.json"
+      "ir": "templates/calendar-heatmap/figure.ir.json"
     },
     {
       "id": "waffle",
@@ -476,7 +476,7 @@
         "value"
       ],
       "supports": [],
-      "ir": "examples/templates/waffle/figure.ir.json"
+      "ir": "templates/waffle/figure.ir.json"
     },
     {
       "id": "broken-axis",
@@ -488,7 +488,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/broken-axis/figure.ir.json"
+      "ir": "templates/broken-axis/figure.ir.json"
     },
     {
       "id": "inset-zoom",
@@ -500,7 +500,7 @@
         "series"
       ],
       "supports": [],
-      "ir": "examples/templates/inset-zoom/figure.ir.json"
+      "ir": "templates/inset-zoom/figure.ir.json"
     }
   ]
 }

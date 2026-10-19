@@ -1,52 +1,52 @@
-{"id": "case-01", "request": "四种方法在三个 benchmark 上的成功率，突出我们的方法，单栏，不要柱上数字", "recipe": "ours-vs-baselines", "data": "examples/templates/ours-vs-baselines/data.csv", "expect": {"chart": "grouped-bar", "size": "single", "emphasis": ["focus-gray"], "labels": {"values": false, "legend": "top"}}}
-{"id": "case-02", "request": "三个任务比较改动前后两个版本，单栏，用箭头标出每组差值", "recipe": "before-after", "data": "examples/templates/before-after/data.csv", "expect": {"layout": "paired", "size": "single", "annotations": ["delta", "delta", "delta"], "emphasis": []}}
-{"id": "case-03", "request": "总共九十六项完成八十八项，画实心完成量和空心总量，单栏", "recipe": "capacity-88-of-96", "data": "examples/templates/capacity-88-of-96/data.csv", "expect": {"size": "single", "encoding_cards": ["capacity"], "encoding": {"capacity": "capacity"}, "labels": {"values": false}}}
-{"id": "case-04", "request": "五个消融设置在三个任务上比较，双栏，图例放顶部", "recipe": "ablation-legend", "data": "examples/templates/ablation-legend/data.csv", "expect": {"size": "double", "labels": {"legend": "top", "values": false}, "layout": "grouped"}}
-{"id": "case-05", "request": "四类动作的成功比例用横向柱图，数值和轴都用百分比，单栏", "recipe": "horizontal-percent", "data": "examples/templates/horizontal-percent/data.csv", "expect": {"layout": "horizontal", "size": "single", "labels": {"values": true, "value_format": ".0%"}, "axis": {"y_format": ".0%"}}}
-{"id": "case-06", "request": "图要黑白打印，三种方法用灰度和纹理区分，单栏", "recipe": "print-bw", "data": "examples/templates/print-bw/data.csv", "expect": {"size": "single", "theme": {"palette": "grayscale", "hatch": true}, "emphasis": []}}
-{"id": "case-07", "request": "两个环境各三个方法，纵向分成两面板，保持单栏宽度并突出 Ours", "recipe": "multi-panel", "data": "examples/templates/multi-panel/data.csv", "expect": {"size": "single", "encoding": {"panel": "panel"}, "emphasis": ["focus-gray"]}}
-{"id": "case-08", "request": "演示用的四方法三基准对比，双栏宽度，放大字号并突出我们的方法", "recipe": "slide-teaser", "data": "examples/templates/slide-teaser/data.csv", "expect": {"size": "double", "theme": {"type_scale": 1.5}, "emphasis": ["focus-gray"]}}
-{"id": "case-09", "request": "用中性灰衬托 Ours，在 Bench B 标注相对 Method 1 的百分点提升", "recipe": "ours-vs-baselines", "data": "examples/templates/ours-vs-baselines/data.csv", "expect": {"theme": {"palette": "neutral-accent"}, "annotations": ["delta"], "series_order": ["method-1", "method-2", "method-3", "ours"]}}
-{"id": "case-10", "request": "完成数量与总量对比，不把总量画成第二个方法，不显示普通柱上数字", "recipe": "capacity-88-of-96", "data": "examples/templates/capacity-88-of-96/data.csv", "expect": {"encoding_cards": ["capacity"], "series_order": ["achieved"], "labels": {"values": false, "legend": "none"}}}
-{"id": "case-11", "request": "论文单栏图，不标柱上数值，顶部图例和纹理要对应", "recipe": "print-bw", "data": "examples/templates/print-bw/data.csv", "expect": {"size": "single", "theme": {"hatch": true}, "labels": {"values": false, "legend": "top"}}}
-{"id": "case-12", "request": "五个消融设置的双栏论文图，同时导出 PNG、PDF 和可编辑文字 SVG", "recipe": "ablation-legend", "data": "examples/templates/ablation-legend/data.csv", "expect": {"size": "double", "output": {"formats": ["png", "pdf", "svg"], "svg_text": true}}}
-{"id": "case-13", "request": "三年任务成功率，用 hatched 基数加实色增量表示今年基数和下一年增长，单栏", "recipe": "increment-base", "data": "examples/templates/increment-base/data.csv", "expect": {"encoding_cards": ["increment"], "encoding": {"base": "base"}, "layout": "grouped", "labels": {"values": false, "legend": "none"}}}
-{"id": "case-14", "request": "两个 setting 下比较 Correct/Incorrect 的 confidence 分布，双栏，看 overlap", "recipe": "distribution-overlap", "data": "examples/templates/distribution-overlap/data.csv", "expect": {"encoding_cards": ["distribution"], "chart": "distribution-overlap", "labels": {"legend": "top"}}}
-{"id": "case-15", "request": "四种方法在三个 benchmark 上用 dot plot 对比，单栏，顶部图例", "recipe": "dot-plot", "data": "examples/templates/dot-plot/data.csv", "expect": {"chart": "dot-plot", "labels": {"legend": "top"}}}
-{"id": "case-16", "request": "三个任务改动前后用 dumbbell 对比，标出差值，单栏", "recipe": "dumbbell", "data": "examples/templates/dumbbell/data.csv", "expect": {"chart": "dumbbell", "labels": {"legend": "top"}}}
-{"id": "case-17", "request": "训练曲线两个方法，带 95% 区间和 SOTA 参考线，单栏", "recipe": "line-band", "data": "examples/templates/line-band/data.csv", "expect": {"chart": "line-band", "stats": [{"kind": "ci-band"}], "reference": [{"axis": "y", "value": 75, "label": "SOTA"}]}}
-{"id": "case-18", "request": "latency-throughput 散点，两个方法带线性趋势和置信椭圆，单栏", "recipe": "scatter", "data": "examples/templates/scatter/data.csv", "expect": {"chart": "scatter", "stats": [{"kind": "trend", "method": "linear"}, {"kind": "confidence-ellipse", "level": 0.95}], "reference": [{"axis": "y", "value": 80, "label": "target"}]}}
-{"id": "case-19", "request": "两个方法在三个 benchmark 上的 latency 分布，用 box 看中位数和 IQR", "recipe": "box", "data": "examples/templates/box/data.csv", "expect": {"chart": "box", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
-{"id": "case-20", "request": "两个方法在三个 benchmark 上的 latency 分布形状，用 violin", "recipe": "violin", "data": "examples/templates/violin/data.csv", "expect": {"chart": "violin", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
-{"id": "case-21", "request": "两个方法的 latency ECDF，比较尾部，单栏", "recipe": "ecdf", "data": "examples/templates/ecdf/data.csv", "expect": {"chart": "ecdf"}}
-{"id": "case-22", "request": "两个方法的 confidence KDE，比较 overlap，单栏", "recipe": "kde", "data": "examples/templates/kde/data.csv", "expect": {"chart": "kde"}}
-{"id": "case-23", "request": "四层五任务的指标矩阵，用 heatmap 并标 cell 数值", "recipe": "heatmap", "data": "examples/templates/heatmap/data.csv", "expect": {"chart": "heatmap", "labels": {"values": true, "legend": "none"}}}
-{"id": "case-24", "request": "二分类 ROC，带 AUC 图例，单栏", "recipe": "roc", "data": "examples/templates/roc/data.csv", "expect": {"chart": "roc"}}
-{"id": "case-25", "request": "不平衡二分类的 precision-recall，单栏", "recipe": "pr", "data": "examples/templates/pr/data.csv", "expect": {"chart": "pr"}}
-{"id": "case-26", "request": "二分类置信度校准曲线，单栏", "recipe": "calibration", "data": "examples/templates/calibration/data.csv", "expect": {"chart": "calibration"}}
-{"id": "case-27", "request": "二维参数网格的 loss landscape，用 3D surface + 2D contour 投影", "recipe": "surface", "data": "examples/templates/surface/data.csv", "expect": {"chart": "surface"}}
-{"id": "case-28", "request": "三个方法在 accuracy/robustness/efficiency 三维空间的分布，3D 散点，单栏", "recipe": "scatter3d", "data": "examples/templates/scatter3d/data.csv", "expect": {"chart": "scatter3d"}}
-{"id": "case-29", "request": "7x7x7 三维体素密度场，单栏", "recipe": "voxel", "data": "examples/templates/voxel/data.csv", "expect": {"chart": "voxel"}}
-{"id": "case-30", "request": "四个难度分组的成功率分布，ridgeline 山脊图，单栏", "recipe": "ridgeline", "data": "examples/templates/ridgeline/data.csv", "expect": {"chart": "ridgeline"}}
-{"id": "case-31", "request": "二分类检测错误权衡 DET 曲线，单栏", "recipe": "det", "data": "examples/templates/det/data.csv", "expect": {"chart": "det"}}
-{"id": "case-32", "request": "模型模块之间的连接关系，node-link 圆形布局，单栏", "recipe": "node-link", "data": "examples/templates/node-link/data.csv", "expect": {"chart": "node-link"}}
-{"id": "case-33", "request": "数据到模块的三阶段流向，sankey，单栏", "recipe": "sankey", "data": "examples/templates/sankey/data.csv", "expect": {"chart": "sankey"}}
-{"id": "case-34", "request": "四个类别的面积占比，treemap，单栏", "recipe": "treemap", "data": "examples/templates/treemap/data.csv", "expect": {"chart": "treemap"}}
-{"id": "case-35", "request": "每个 benchmark 有重复观测，bar 上叠原始点，单栏", "recipe": "grouped-bar-raw", "data": "examples/templates/grouped-bar-raw/data.csv", "expect": {"chart": "grouped-bar"}}
-{"id": "case-36", "request": "三个方法在六个能力维度上的雷达图，单栏", "recipe": "radar", "data": "examples/templates/radar/data.csv", "expect": {"chart": "radar"}}
-{"id": "case-37", "request": "四个 benchmark 两个系列的 3D 柱状比较，单栏", "recipe": "bar3d", "data": "examples/templates/bar3d/data.csv", "expect": {"chart": "bar3d"}}
-{"id": "case-38", "request": "二维参数网格的 wireframe mesh，单栏", "recipe": "mesh3d", "data": "examples/templates/mesh3d/data.csv", "expect": {"chart": "mesh3d"}}
-{"id": "case-39", "request": "三维空间中的向量场，quiver3d，单栏", "recipe": "quiver3d", "data": "examples/templates/quiver3d/data.csv", "expect": {"chart": "quiver3d"}}
-{"id": "case-40", "request": "模型模块的两层占比，sunburst，单栏", "recipe": "sunburst", "data": "examples/templates/sunburst/data.csv", "expect": {"chart": "sunburst"}}
-{"id": "case-41", "request": "模型模块的两层占比，icicle，单栏", "recipe": "icicle", "data": "examples/templates/icicle/data.csv", "expect": {"chart": "icicle"}}
-{"id": "case-42", "request": "四个模态之间的交叉流量，chord，单栏", "recipe": "chord", "data": "examples/templates/chord/data.csv", "expect": {"chart": "chord"}}
-{"id": "case-43", "request": "数据到模块的三阶段 alluvial 流向，单栏", "recipe": "alluvial", "data": "examples/templates/alluvial/data.csv", "expect": {"chart": "alluvial"}}
-{"id": "case-44", "request": "样本分位数对正态理论分位数的 QQ 图，单栏", "recipe": "qq", "data": "examples/templates/qq/data.csv", "expect": {"chart": "qq"}}
-{"id": "case-45", "request": "两个方法的延迟事件序列 eventplot，单栏", "recipe": "eventplot", "data": "examples/templates/eventplot/data.csv", "expect": {"chart": "eventplot"}}
-{"id": "case-46", "request": "两个指标的二维直方密度，hist2d，单栏", "recipe": "hist2d", "data": "examples/templates/hist2d/data.csv", "expect": {"chart": "hist2d"}}
-{"id": "case-47", "request": "两个指标的六边形分箱密度，hexbin，单栏", "recipe": "hexbin", "data": "examples/templates/hexbin/data.csv", "expect": {"chart": "hexbin"}}
-{"id": "case-48", "request": "行/列按总量排序的 clustered heatmap，单栏", "recipe": "clustermap", "data": "examples/templates/clustermap/data.csv", "expect": {"chart": "clustermap"}}
-{"id": "case-49", "request": "每天的活动量日历热力图，单栏", "recipe": "calendar-heatmap", "data": "examples/templates/calendar-heatmap/data.csv", "expect": {"chart": "calendar-heatmap"}}
-{"id": "case-50", "request": "100 格中的类别占比，waffle，单栏", "recipe": "waffle", "data": "examples/templates/waffle/data.csv", "expect": {"chart": "waffle"}}
-{"id": "case-51", "request": "x 轴在 50 附近断开的趋势对比，broken axis，单栏", "recipe": "broken-axis", "data": "examples/templates/broken-axis/data.csv", "expect": {"chart": "broken-axis"}}
-{"id": "case-52", "request": "散点主图 + 局部放大 inset，单栏", "recipe": "inset-zoom", "data": "examples/templates/inset-zoom/data.csv", "expect": {"chart": "inset-zoom"}}
+{"id": "case-01", "request": "四种方法在三个 benchmark 上的成功率，突出我们的方法，单栏，不要柱上数字", "recipe": "ours-vs-baselines", "data": "templates/ours-vs-baselines/data.csv", "expect": {"chart": "grouped-bar", "size": "single", "emphasis": ["focus-gray"], "labels": {"values": false, "legend": "top"}}}
+{"id": "case-02", "request": "三个任务比较改动前后两个版本，单栏，用箭头标出每组差值", "recipe": "before-after", "data": "templates/before-after/data.csv", "expect": {"layout": "paired", "size": "single", "annotations": ["delta", "delta", "delta"], "emphasis": []}}
+{"id": "case-03", "request": "总共九十六项完成八十八项，画实心完成量和空心总量，单栏", "recipe": "capacity-88-of-96", "data": "templates/capacity-88-of-96/data.csv", "expect": {"size": "single", "encoding_cards": ["capacity"], "encoding": {"capacity": "capacity"}, "labels": {"values": false}}}
+{"id": "case-04", "request": "五个消融设置在三个任务上比较，双栏，图例放顶部", "recipe": "ablation-legend", "data": "templates/ablation-legend/data.csv", "expect": {"size": "double", "labels": {"legend": "top", "values": false}, "layout": "grouped"}}
+{"id": "case-05", "request": "四类动作的成功比例用横向柱图，数值和轴都用百分比，单栏", "recipe": "horizontal-percent", "data": "templates/horizontal-percent/data.csv", "expect": {"layout": "horizontal", "size": "single", "labels": {"values": true, "value_format": ".0%"}, "axis": {"y_format": ".0%"}}}
+{"id": "case-06", "request": "图要黑白打印，三种方法用灰度和纹理区分，单栏", "recipe": "print-bw", "data": "templates/print-bw/data.csv", "expect": {"size": "single", "theme": {"palette": "grayscale", "hatch": true}, "emphasis": []}}
+{"id": "case-07", "request": "两个环境各三个方法，纵向分成两面板，保持单栏宽度并突出 Ours", "recipe": "multi-panel", "data": "templates/multi-panel/data.csv", "expect": {"size": "single", "encoding": {"panel": "panel"}, "emphasis": ["focus-gray"]}}
+{"id": "case-08", "request": "演示用的四方法三基准对比，双栏宽度，放大字号并突出我们的方法", "recipe": "slide-teaser", "data": "templates/slide-teaser/data.csv", "expect": {"size": "double", "theme": {"type_scale": 1.5}, "emphasis": ["focus-gray"]}}
+{"id": "case-09", "request": "用中性灰衬托 Ours，在 Bench B 标注相对 Method 1 的百分点提升", "recipe": "ours-vs-baselines", "data": "templates/ours-vs-baselines/data.csv", "expect": {"theme": {"palette": "neutral-accent"}, "annotations": ["delta"], "series_order": ["method-1", "method-2", "method-3", "ours"]}}
+{"id": "case-10", "request": "完成数量与总量对比，不把总量画成第二个方法，不显示普通柱上数字", "recipe": "capacity-88-of-96", "data": "templates/capacity-88-of-96/data.csv", "expect": {"encoding_cards": ["capacity"], "series_order": ["achieved"], "labels": {"values": false, "legend": "none"}}}
+{"id": "case-11", "request": "论文单栏图，不标柱上数值，顶部图例和纹理要对应", "recipe": "print-bw", "data": "templates/print-bw/data.csv", "expect": {"size": "single", "theme": {"hatch": true}, "labels": {"values": false, "legend": "top"}}}
+{"id": "case-12", "request": "五个消融设置的双栏论文图，同时导出 PNG、PDF 和可编辑文字 SVG", "recipe": "ablation-legend", "data": "templates/ablation-legend/data.csv", "expect": {"size": "double", "output": {"formats": ["png", "pdf", "svg"], "svg_text": true}}}
+{"id": "case-13", "request": "三年任务成功率，用 hatched 基数加实色增量表示今年基数和下一年增长，单栏", "recipe": "increment-base", "data": "templates/increment-base/data.csv", "expect": {"encoding_cards": ["increment"], "encoding": {"base": "base"}, "layout": "grouped", "labels": {"values": false, "legend": "none"}}}
+{"id": "case-14", "request": "两个 setting 下比较 Correct/Incorrect 的 confidence 分布，双栏，看 overlap", "recipe": "distribution-overlap", "data": "templates/distribution-overlap/data.csv", "expect": {"encoding_cards": ["distribution"], "chart": "distribution-overlap", "labels": {"legend": "top"}}}
+{"id": "case-15", "request": "四种方法在三个 benchmark 上用 dot plot 对比，单栏，顶部图例", "recipe": "dot-plot", "data": "templates/dot-plot/data.csv", "expect": {"chart": "dot-plot", "labels": {"legend": "top"}}}
+{"id": "case-16", "request": "三个任务改动前后用 dumbbell 对比，标出差值，单栏", "recipe": "dumbbell", "data": "templates/dumbbell/data.csv", "expect": {"chart": "dumbbell", "labels": {"legend": "top"}}}
+{"id": "case-17", "request": "训练曲线两个方法，带 95% 区间和 SOTA 参考线，单栏", "recipe": "line-band", "data": "templates/line-band/data.csv", "expect": {"chart": "line-band", "stats": [{"kind": "ci-band"}], "reference": [{"axis": "y", "value": 75, "label": "SOTA"}]}}
+{"id": "case-18", "request": "latency-throughput 散点，两个方法带线性趋势和置信椭圆，单栏", "recipe": "scatter", "data": "templates/scatter/data.csv", "expect": {"chart": "scatter", "stats": [{"kind": "trend", "method": "linear"}, {"kind": "confidence-ellipse", "level": 0.95}], "reference": [{"axis": "y", "value": 80, "label": "target"}]}}
+{"id": "case-19", "request": "两个方法在三个 benchmark 上的 latency 分布，用 box 看中位数和 IQR", "recipe": "box", "data": "templates/box/data.csv", "expect": {"chart": "box", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
+{"id": "case-20", "request": "两个方法在三个 benchmark 上的 latency 分布形状，用 violin", "recipe": "violin", "data": "templates/violin/data.csv", "expect": {"chart": "violin", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
+{"id": "case-21", "request": "两个方法的 latency ECDF，比较尾部，单栏", "recipe": "ecdf", "data": "templates/ecdf/data.csv", "expect": {"chart": "ecdf"}}
+{"id": "case-22", "request": "两个方法的 confidence KDE，比较 overlap，单栏", "recipe": "kde", "data": "templates/kde/data.csv", "expect": {"chart": "kde"}}
+{"id": "case-23", "request": "四层五任务的指标矩阵，用 heatmap 并标 cell 数值", "recipe": "heatmap", "data": "templates/heatmap/data.csv", "expect": {"chart": "heatmap", "labels": {"values": true, "legend": "none"}}}
+{"id": "case-24", "request": "二分类 ROC，带 AUC 图例，单栏", "recipe": "roc", "data": "templates/roc/data.csv", "expect": {"chart": "roc"}}
+{"id": "case-25", "request": "不平衡二分类的 precision-recall，单栏", "recipe": "pr", "data": "templates/pr/data.csv", "expect": {"chart": "pr"}}
+{"id": "case-26", "request": "二分类置信度校准曲线，单栏", "recipe": "calibration", "data": "templates/calibration/data.csv", "expect": {"chart": "calibration"}}
+{"id": "case-27", "request": "二维参数网格的 loss landscape，用 3D surface + 2D contour 投影", "recipe": "surface", "data": "templates/surface/data.csv", "expect": {"chart": "surface"}}
+{"id": "case-28", "request": "三个方法在 accuracy/robustness/efficiency 三维空间的分布，3D 散点，单栏", "recipe": "scatter3d", "data": "templates/scatter3d/data.csv", "expect": {"chart": "scatter3d"}}
+{"id": "case-29", "request": "7x7x7 三维体素密度场，单栏", "recipe": "voxel", "data": "templates/voxel/data.csv", "expect": {"chart": "voxel"}}
+{"id": "case-30", "request": "四个难度分组的成功率分布，ridgeline 山脊图，单栏", "recipe": "ridgeline", "data": "templates/ridgeline/data.csv", "expect": {"chart": "ridgeline"}}
+{"id": "case-31", "request": "二分类检测错误权衡 DET 曲线，单栏", "recipe": "det", "data": "templates/det/data.csv", "expect": {"chart": "det"}}
+{"id": "case-32", "request": "模型模块之间的连接关系，node-link 圆形布局，单栏", "recipe": "node-link", "data": "templates/node-link/data.csv", "expect": {"chart": "node-link"}}
+{"id": "case-33", "request": "数据到模块的三阶段流向，sankey，单栏", "recipe": "sankey", "data": "templates/sankey/data.csv", "expect": {"chart": "sankey"}}
+{"id": "case-34", "request": "四个类别的面积占比，treemap，单栏", "recipe": "treemap", "data": "templates/treemap/data.csv", "expect": {"chart": "treemap"}}
+{"id": "case-35", "request": "每个 benchmark 有重复观测，bar 上叠原始点，单栏", "recipe": "grouped-bar-raw", "data": "templates/grouped-bar-raw/data.csv", "expect": {"chart": "grouped-bar"}}
+{"id": "case-36", "request": "三个方法在六个能力维度上的雷达图，单栏", "recipe": "radar", "data": "templates/radar/data.csv", "expect": {"chart": "radar"}}
+{"id": "case-37", "request": "四个 benchmark 两个系列的 3D 柱状比较，单栏", "recipe": "bar3d", "data": "templates/bar3d/data.csv", "expect": {"chart": "bar3d"}}
+{"id": "case-38", "request": "二维参数网格的 wireframe mesh，单栏", "recipe": "mesh3d", "data": "templates/mesh3d/data.csv", "expect": {"chart": "mesh3d"}}
+{"id": "case-39", "request": "三维空间中的向量场，quiver3d，单栏", "recipe": "quiver3d", "data": "templates/quiver3d/data.csv", "expect": {"chart": "quiver3d"}}
+{"id": "case-40", "request": "模型模块的两层占比，sunburst，单栏", "recipe": "sunburst", "data": "templates/sunburst/data.csv", "expect": {"chart": "sunburst"}}
+{"id": "case-41", "request": "模型模块的两层占比，icicle，单栏", "recipe": "icicle", "data": "templates/icicle/data.csv", "expect": {"chart": "icicle"}}
+{"id": "case-42", "request": "四个模态之间的交叉流量，chord，单栏", "recipe": "chord", "data": "templates/chord/data.csv", "expect": {"chart": "chord"}}
+{"id": "case-43", "request": "数据到模块的三阶段 alluvial 流向，单栏", "recipe": "alluvial", "data": "templates/alluvial/data.csv", "expect": {"chart": "alluvial"}}
+{"id": "case-44", "request": "样本分位数对正态理论分位数的 QQ 图，单栏", "recipe": "qq", "data": "templates/qq/data.csv", "expect": {"chart": "qq"}}
+{"id": "case-45", "request": "两个方法的延迟事件序列 eventplot，单栏", "recipe": "eventplot", "data": "templates/eventplot/data.csv", "expect": {"chart": "eventplot"}}
+{"id": "case-46", "request": "两个指标的二维直方密度，hist2d，单栏", "recipe": "hist2d", "data": "templates/hist2d/data.csv", "expect": {"chart": "hist2d"}}
+{"id": "case-47", "request": "两个指标的六边形分箱密度，hexbin，单栏", "recipe": "hexbin", "data": "templates/hexbin/data.csv", "expect": {"chart": "hexbin"}}
+{"id": "case-48", "request": "行/列按总量排序的 clustered heatmap，单栏", "recipe": "clustermap", "data": "templates/clustermap/data.csv", "expect": {"chart": "clustermap"}}
+{"id": "case-49", "request": "每天的活动量日历热力图，单栏", "recipe": "calendar-heatmap", "data": "templates/calendar-heatmap/data.csv", "expect": {"chart": "calendar-heatmap"}}
+{"id": "case-50", "request": "100 格中的类别占比，waffle，单栏", "recipe": "waffle", "data": "templates/waffle/data.csv", "expect": {"chart": "waffle"}}
+{"id": "case-51", "request": "x 轴在 50 附近断开的趋势对比，broken axis，单栏", "recipe": "broken-axis", "data": "templates/broken-axis/data.csv", "expect": {"chart": "broken-axis"}}
+{"id": "case-52", "request": "散点主图 + 局部放大 inset，单栏", "recipe": "inset-zoom", "data": "templates/inset-zoom/data.csv", "expect": {"chart": "inset-zoom"}}

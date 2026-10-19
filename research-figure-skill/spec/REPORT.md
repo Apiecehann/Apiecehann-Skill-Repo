@@ -50,7 +50,7 @@
 ## 阶段 4–5 收尾（验收记录）
 
 - Stage 4 的实现由 Codex 完成，验收时统一提交为 `f625cc2 test(spec): add compiler and catalog coverage`。包含 `catalog.py`、`evals/`、8 个 catalog 资产、`index.json` 和扩充后的 `test_compile.py`；完整测试 `137 passed`。
-- 视觉检查：`examples/catalog/contact-sheet.png` 覆盖 8 个 recipe；`capacity-88-of-96` 的空心总量/实心完成值、`ours-vs-baselines` 的灰底 + focus、`before-after` 的 delta 均正常。
+- 视觉检查：`reference/catalog/contact-sheet.png` 覆盖 8 个 recipe；`capacity-88-of-96` 的空心总量/实心完成值、`ours-vs-baselines` 的灰底 + focus、`before-after` 的 delta 均正常。
 - 已知限制：`multi-panel` 在 `single` 下两面板较拥挤，建议改用 `double`；这是尺寸选择问题，不是渲染错误。
 - Stage 5 文档：新增 `spec/README.md`、`library/README.md`；`SKILL.md` 改为 IR 主入口；`grouped-bar/README.md` 增加 IR quickstart；本报告补齐阶段 4–5。
 - 最终验收命令：`../.venv/bin/python -m pytest quantitative-plots/grouped-bar/scripts spec -q`。
@@ -61,7 +61,7 @@
 - `auto_axis` 收紧 headroom：85% 的数据现在到 90%，不再是 100%。
 - capacity 单组柱宽降到 0.35、`category_margin` 0.55，不再占满槽宽。
 - horizontal 单系列 `group_gap` 降到 0.06，并关闭网格；横向条更紧凑。
-- 新增 `examples/palette-shootout/`：4 种 baseline 策略 × 3 个 accent 的真实成图对照，附 `stage1.png` 和 `index.json`，用于用户选色。
+- 新增 `reference/palette-shootout/`：4 种 baseline 策略 × 3 个 accent 的真实成图对照，附 `stage1.png` 和 `index.json`，用于用户选色。
 - 回归测试增加到 140 passed。
 
 ## increment/delta 能力任务
@@ -84,13 +84,13 @@
 
 阶段 2 最终验收：完整测试 173 passed in 30.04s，无警告；git diff --check 通过。冻结 gain 的坐标与标签快照逐一一致。
 
-阶段 3 完成 increment-base 模板与注册：`examples/templates/increment-base/` 含 3 年 MOCK 数据、`encoding.base` 的 IR、中文 README；`library/recipes.json` 与 `spec/evals/cases.jsonl` 各加一条，check.py 的 `encoding_cards` 识别 increment。模板导出 PNG/PDF/SVG。测试从 173 增至 179 passed（含 curved delta 与白底 style 的回归）。
+阶段 3 完成 increment-base 模板与注册：`templates/increment-base/` 含 3 年 MOCK 数据、`encoding.base` 的 IR、中文 README；`library/recipes.json` 与 `spec/evals/cases.jsonl` 各加一条，check.py 的 `encoding_cards` 识别 increment。模板导出 PNG/PDF/SVG。测试从 173 增至 179 passed（含 curved delta 与白底 style 的回归）。
 
 附加：gain 增加 `arrow_style: "curved"`，用单段三次弧线并在碰撞时抬高 ceiling；默认仍为 `route`，冻结 gain 不变。`12-annotation` 使用 curved 版本；新增 `14-bar-spacing` 与 `15-color-pairing`（固定 orange accent，24 组 baseline）。
 
-补充（用户收敛）：annotation 轴只保留 curved delta 与 distribution overlap；后者新增 examples/distribution-overlap/（两 panel 重叠直方图，白底 + 双向 grid）。颜色筛选新增 library/palettes-120.json 与 16-palette-library.png（120 组 4-color 卡）。
+补充（用户收敛）：annotation 轴只保留 curved delta 与 distribution overlap；后者新增 reference/distribution-overlap/（两 panel 重叠直方图，白底 + 双向 grid）。颜色筛选新增 library/palettes-120.json 与 16-palette-library.png（120 组 4-color 卡）。
 
-Promote：15 个 style、15 个 font、5 个 palette（d3-orange / d3-blue / d3-teal / d3-rose / neutral-slate）已写入 presets；review 图仍保留作对照。curved delta 仍是变体，默认 route。Distribution Overlap 已接入 IR：chart 枚举、encoding.value、compile_distribution、library/recipes.json、evals case-14；模板 examples/templates/distribution-overlap/ 可导出 PNG/PDF/SVG。
+Promote：15 个 style、15 个 font、5 个 palette（d3-orange / d3-blue / d3-teal / d3-rose / neutral-slate）已写入 presets；review 图仍保留作对照。curved delta 仍是变体，默认 route。Distribution Overlap 已接入 IR：chart 枚举、encoding.value、compile_distribution、library/recipes.json、evals case-14；模板 templates/distribution-overlap/ 可导出 PNG/PDF/SVG。
 
 P0 开发文档：docs/DEVELOPMENT.md；新增 library/charts.json 与 library/overlays.json。M1 实现 dot-plot 与 dumbbell：IR、renderer、template、recipes/evals、catalog；tests 187 passed。
 

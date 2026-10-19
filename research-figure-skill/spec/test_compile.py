@@ -86,7 +86,8 @@ def test_compile_render_and_replay(source, tmp_path):
                    cwd=tmp_path, check=True, capture_output=True)
     assert (tmp_path / "replay.png").read_bytes() == (tmp_path / "build/figure.png").read_bytes()
 
-TEMPLATES = SPEC.parent / "examples/templates"
+TEMPLATES = SPEC.parent / "templates"
+TEMPLATE_NAMES = sorted(p.name for p in TEMPLATES.iterdir() if (p / "figure.ir.json").is_file())
 
 
 def test_focus_gray_keeps_alpha_and_hatch(source, tmp_path):
@@ -143,14 +144,14 @@ def test_capacity_config_and_invalid_capacity(source, tmp_path):
         compile_ir(source[0], tmp_path / "invalid")
 
 
-@pytest.mark.parametrize("name", sorted(p.name for p in TEMPLATES.iterdir()))
+@pytest.mark.parametrize("name", TEMPLATE_NAMES)
 def test_all_recipes_compile(name, tmp_path):
     config, _ = compile_ir(TEMPLATES / name / "figure.ir.json", tmp_path / name)
     assert config["figure"]["formats"] == ["png", "pdf", "svg"]
     assert "MOCK / layout test" in (TEMPLATES / name / "README.md").read_text()
 
 
-@pytest.mark.parametrize("name", sorted(p.name for p in TEMPLATES.iterdir()))
+@pytest.mark.parametrize("name", TEMPLATE_NAMES)
 def test_every_recipe_renders_without_warnings_and_matches_decisions(name, tmp_path):
     import warnings
     path = tmp_path / name

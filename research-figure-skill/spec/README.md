@@ -18,7 +18,7 @@ figure.ir.json（约 10 个语义字段）
 
 ```bash
 python spec/compile.py \
-  --ir examples/templates/ours-vs-baselines/figure.ir.json \
+  --ir templates/ours-vs-baselines/figure.ir.json \
   --output output/ours-vs-baselines --render
 ```
 
@@ -39,7 +39,7 @@ output/ours-vs-baselines/
 重建目录：
 
 ```bash
-python spec/catalog.py --output examples/catalog
+python spec/catalog.py --output reference/catalog
 ```
 
 检查 eval 模板：

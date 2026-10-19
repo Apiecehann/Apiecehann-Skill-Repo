@@ -7,7 +7,7 @@
 1. **chart family**：几何形状（grouped-bar、dot-plot、dumbbell、box、surface…）
 2. **variant**：同一 family 下的具体使用情况（focus、paired、capacity、ablation…）
 
-`library/recipes.json` 现在每条 recipe 都有 `chart` 和 `variant`；`examples/catalog/index.json` 的 `groups` 按 chart 分组。
+`library/recipes.json` 现在每条 recipe 都有 `chart` 和 `variant`；`reference/catalog/index.json` 的 `groups` 按 chart 分组。
 
 ## Grouped Bar（已有 9 个 variant）
 
@@ -60,7 +60,7 @@ scatter-embedding
 ## 目录
 
 ```text
-examples/templates/<chart>-<variant>/
+templates/<chart>-<variant>/
 ├─ data.csv
 ├─ figure.ir.json
 └─ README.md

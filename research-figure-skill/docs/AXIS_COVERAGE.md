@@ -55,7 +55,7 @@
 | surface | `view-angle`、`contour-projection`、`colorbar` |
 | grouped-bar | `capacity`、`increment`、`delta`、`significance-bracket` |
 
-这些轴进入 `examples/chart-review/<chart>/` 的 sheet，不写进全局 `axes.json` 的 13 轴。
+这些轴进入 `reference/chart-review/<chart>/` 的 sheet，不写进全局 `axes.json` 的 13 轴。
 
 ## 2. 覆盖规则
 

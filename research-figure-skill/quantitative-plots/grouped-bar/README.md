@@ -10,7 +10,7 @@
 
 ```bash
 python spec/compile.py \
-  --ir examples/templates/ours-vs-baselines/figure.ir.json \
+  --ir templates/ours-vs-baselines/figure.ir.json \
   --output output/ours-vs-baselines --render
 ```
 

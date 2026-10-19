@@ -10,7 +10,7 @@
         "focus",
         "delta"
       ],
-      "ir": "examples/templates/ours-vs-baselines/figure.ir.json",
+      "ir": "templates/ours-vs-baselines/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "focus"
     },
@@ -23,7 +23,7 @@
         "paired",
         "delta"
       ],
-      "ir": "examples/templates/before-after/figure.ir.json",
+      "ir": "templates/before-after/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "paired"
     },
@@ -35,7 +35,7 @@
         "single-column",
         "capacity"
       ],
-      "ir": "examples/templates/capacity-88-of-96/figure.ir.json",
+      "ir": "templates/capacity-88-of-96/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "capacity"
     },
@@ -48,7 +48,7 @@
         "ablation",
         "legend"
       ],
-      "ir": "examples/templates/ablation-legend/figure.ir.json",
+      "ir": "templates/ablation-legend/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "ablation"
     },
@@ -61,7 +61,7 @@
         "horizontal",
         "percent"
       ],
-      "ir": "examples/templates/horizontal-percent/figure.ir.json",
+      "ir": "templates/horizontal-percent/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "horizontal"
     },
@@ -74,7 +74,7 @@
         "grayscale",
         "hatch"
       ],
-      "ir": "examples/templates/print-bw/figure.ir.json",
+      "ir": "templates/print-bw/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "print"
     },
@@ -86,7 +86,7 @@
         "single-column",
         "multi-panel"
       ],
-      "ir": "examples/templates/multi-panel/figure.ir.json",
+      "ir": "templates/multi-panel/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "multi-panel"
     },
@@ -99,7 +99,7 @@
         "large-type",
         "focus"
       ],
-      "ir": "examples/templates/slide-teaser/figure.ir.json",
+      "ir": "templates/slide-teaser/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "slide"
     },
@@ -112,7 +112,7 @@
         "increment",
         "base"
       ],
-      "ir": "examples/templates/increment-base/figure.ir.json",
+      "ir": "templates/increment-base/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "increment"
     },
@@ -125,7 +125,7 @@
         "distribution",
         "overlap"
       ],
-      "ir": "examples/templates/distribution-overlap/figure.ir.json",
+      "ir": "templates/distribution-overlap/figure.ir.json",
       "chart": "distribution-overlap",
       "variant": "two-panel"
     },
@@ -138,7 +138,7 @@
         "comparison",
         "dot"
       ],
-      "ir": "examples/templates/dot-plot/figure.ir.json",
+      "ir": "templates/dot-plot/figure.ir.json",
       "chart": "dot-plot",
       "variant": "four-series"
     },
@@ -151,7 +151,7 @@
         "comparison",
         "paired"
       ],
-      "ir": "examples/templates/dumbbell/figure.ir.json",
+      "ir": "templates/dumbbell/figure.ir.json",
       "chart": "dumbbell",
       "variant": "three-group"
     },
@@ -164,7 +164,7 @@
         "time",
         "band"
       ],
-      "ir": "examples/templates/line-band/figure.ir.json",
+      "ir": "templates/line-band/figure.ir.json",
       "chart": "line-band",
       "variant": "training"
     },
@@ -177,7 +177,7 @@
         "relationship",
         "trend"
       ],
-      "ir": "examples/templates/scatter/figure.ir.json",
+      "ir": "templates/scatter/figure.ir.json",
       "chart": "scatter",
       "variant": "trend-ellipse"
     },
@@ -190,7 +190,7 @@
         "distribution",
         "box"
       ],
-      "ir": "examples/templates/box/figure.ir.json",
+      "ir": "templates/box/figure.ir.json",
       "chart": "box",
       "variant": "raw-significance"
     },
@@ -203,7 +203,7 @@
         "distribution",
         "violin"
       ],
-      "ir": "examples/templates/violin/figure.ir.json",
+      "ir": "templates/violin/figure.ir.json",
       "chart": "violin",
       "variant": "raw-points"
     },
@@ -216,7 +216,7 @@
         "distribution",
         "ecdf"
       ],
-      "ir": "examples/templates/ecdf/figure.ir.json",
+      "ir": "templates/ecdf/figure.ir.json",
       "chart": "ecdf",
       "variant": "latency"
     },
@@ -229,7 +229,7 @@
         "distribution",
         "kde"
       ],
-      "ir": "examples/templates/kde/figure.ir.json",
+      "ir": "templates/kde/figure.ir.json",
       "chart": "kde",
       "variant": "overlap"
     },
@@ -242,7 +242,7 @@
         "matrix",
         "heatmap"
       ],
-      "ir": "examples/templates/heatmap/figure.ir.json",
+      "ir": "templates/heatmap/figure.ir.json",
       "chart": "heatmap",
       "variant": "layer-task"
     },
@@ -255,7 +255,7 @@
         "classification",
         "roc"
       ],
-      "ir": "examples/templates/roc/figure.ir.json",
+      "ir": "templates/roc/figure.ir.json",
       "chart": "roc",
       "variant": "single-series"
     },
@@ -268,7 +268,7 @@
         "classification",
         "pr"
       ],
-      "ir": "examples/templates/pr/figure.ir.json",
+      "ir": "templates/pr/figure.ir.json",
       "chart": "pr",
       "variant": "single-series"
     },
@@ -281,7 +281,7 @@
         "classification",
         "calibration"
       ],
-      "ir": "examples/templates/calibration/figure.ir.json",
+      "ir": "templates/calibration/figure.ir.json",
       "chart": "calibration",
       "variant": "single-series"
     },
@@ -294,7 +294,7 @@
         "3d",
         "surface"
       ],
-      "ir": "examples/templates/surface/figure.ir.json",
+      "ir": "templates/surface/figure.ir.json",
       "chart": "surface",
       "variant": "loss-landscape"
     },
@@ -307,7 +307,7 @@
         "3d",
         "scatter"
       ],
-      "ir": "examples/templates/scatter3d/figure.ir.json",
+      "ir": "templates/scatter3d/figure.ir.json",
       "chart": "scatter3d",
       "variant": "three-series"
     },
@@ -320,7 +320,7 @@
         "3d",
         "voxel"
       ],
-      "ir": "examples/templates/voxel/figure.ir.json",
+      "ir": "templates/voxel/figure.ir.json",
       "chart": "voxel",
       "variant": "density-field"
     },
@@ -333,7 +333,7 @@
         "distribution",
         "ridgeline"
       ],
-      "ir": "examples/templates/ridgeline/figure.ir.json",
+      "ir": "templates/ridgeline/figure.ir.json",
       "chart": "ridgeline",
       "variant": "four-groups"
     },
@@ -346,7 +346,7 @@
         "classification",
         "det"
       ],
-      "ir": "examples/templates/det/figure.ir.json",
+      "ir": "templates/det/figure.ir.json",
       "chart": "det",
       "variant": "single-series"
     },
@@ -359,7 +359,7 @@
         "network",
         "node-link"
       ],
-      "ir": "examples/templates/node-link/figure.ir.json",
+      "ir": "templates/node-link/figure.ir.json",
       "chart": "node-link",
       "variant": "circular"
     },
@@ -372,7 +372,7 @@
         "flow",
         "sankey"
       ],
-      "ir": "examples/templates/sankey/figure.ir.json",
+      "ir": "templates/sankey/figure.ir.json",
       "chart": "sankey",
       "variant": "three-stage"
     },
@@ -385,7 +385,7 @@
         "hierarchy",
         "treemap"
       ],
-      "ir": "examples/templates/treemap/figure.ir.json",
+      "ir": "templates/treemap/figure.ir.json",
       "chart": "treemap",
       "variant": "four-categories"
     },
@@ -398,7 +398,7 @@
         "comparison",
         "raw-points"
       ],
-      "ir": "examples/templates/grouped-bar-raw/figure.ir.json",
+      "ir": "templates/grouped-bar-raw/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "raw-points"
     },
@@ -411,7 +411,7 @@
         "comparison",
         "radar"
       ],
-      "ir": "examples/templates/radar/figure.ir.json",
+      "ir": "templates/radar/figure.ir.json",
       "chart": "radar",
       "variant": "six-axis"
     },
@@ -424,7 +424,7 @@
         "3d",
         "bar"
       ],
-      "ir": "examples/templates/bar3d/figure.ir.json",
+      "ir": "templates/bar3d/figure.ir.json",
       "chart": "bar3d",
       "variant": "four-groups"
     },
@@ -437,7 +437,7 @@
         "3d",
         "mesh"
       ],
-      "ir": "examples/templates/mesh3d/figure.ir.json",
+      "ir": "templates/mesh3d/figure.ir.json",
       "chart": "mesh3d",
       "variant": "loss-landscape"
     },
@@ -450,7 +450,7 @@
         "3d",
         "quiver"
       ],
-      "ir": "examples/templates/quiver3d/figure.ir.json",
+      "ir": "templates/quiver3d/figure.ir.json",
       "chart": "quiver3d",
       "variant": "vector-field"
     },
@@ -463,7 +463,7 @@
         "hierarchy",
         "sunburst"
       ],
-      "ir": "examples/templates/sunburst/figure.ir.json",
+      "ir": "templates/sunburst/figure.ir.json",
       "chart": "sunburst",
       "variant": "two-level"
     },
@@ -476,7 +476,7 @@
         "hierarchy",
         "icicle"
       ],
-      "ir": "examples/templates/icicle/figure.ir.json",
+      "ir": "templates/icicle/figure.ir.json",
       "chart": "icicle",
       "variant": "two-level"
     },
@@ -489,7 +489,7 @@
         "flow",
         "chord"
       ],
-      "ir": "examples/templates/chord/figure.ir.json",
+      "ir": "templates/chord/figure.ir.json",
       "chart": "chord",
       "variant": "four-nodes"
     },
@@ -502,7 +502,7 @@
         "flow",
         "alluvial"
       ],
-      "ir": "examples/templates/alluvial/figure.ir.json",
+      "ir": "templates/alluvial/figure.ir.json",
       "chart": "alluvial",
       "variant": "three-stage"
     },
@@ -515,7 +515,7 @@
         "diagnostic",
         "qq"
       ],
-      "ir": "examples/templates/qq/figure.ir.json",
+      "ir": "templates/qq/figure.ir.json",
       "chart": "qq",
       "variant": "normal"
     },
@@ -528,7 +528,7 @@
         "diagnostic",
         "eventplot"
       ],
-      "ir": "examples/templates/eventplot/figure.ir.json",
+      "ir": "templates/eventplot/figure.ir.json",
       "chart": "eventplot",
       "variant": "two-series"
     },
@@ -541,7 +541,7 @@
         "diagnostic",
         "hist2d"
       ],
-      "ir": "examples/templates/hist2d/figure.ir.json",
+      "ir": "templates/hist2d/figure.ir.json",
       "chart": "hist2d",
       "variant": "density"
     },
@@ -554,7 +554,7 @@
         "diagnostic",
         "hexbin"
       ],
-      "ir": "examples/templates/hexbin/figure.ir.json",
+      "ir": "templates/hexbin/figure.ir.json",
       "chart": "hexbin",
       "variant": "density"
     },
@@ -567,7 +567,7 @@
         "matrix",
         "clustermap"
       ],
-      "ir": "examples/templates/clustermap/figure.ir.json",
+      "ir": "templates/clustermap/figure.ir.json",
       "chart": "clustermap",
       "variant": "layer-task"
     },
@@ -580,7 +580,7 @@
         "matrix",
         "calendar"
       ],
-      "ir": "examples/templates/calendar-heatmap/figure.ir.json",
+      "ir": "templates/calendar-heatmap/figure.ir.json",
       "chart": "calendar-heatmap",
       "variant": "quarter"
     },
@@ -593,7 +593,7 @@
         "comparison",
         "waffle"
       ],
-      "ir": "examples/templates/waffle/figure.ir.json",
+      "ir": "templates/waffle/figure.ir.json",
       "chart": "waffle",
       "variant": "100-cells"
     },
@@ -606,7 +606,7 @@
         "layout",
         "broken-axis"
       ],
-      "ir": "examples/templates/broken-axis/figure.ir.json",
+      "ir": "templates/broken-axis/figure.ir.json",
       "chart": "broken-axis",
       "variant": "split-x"
     },
@@ -619,7 +619,7 @@
         "layout",
         "inset"
       ],
-      "ir": "examples/templates/inset-zoom/figure.ir.json",
+      "ir": "templates/inset-zoom/figure.ir.json",
       "chart": "inset-zoom",
       "variant": "corner-inset"
     }

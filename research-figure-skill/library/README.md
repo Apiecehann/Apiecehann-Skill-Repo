@@ -36,7 +36,7 @@
   "id": "ours-vs-baselines",
   "title": "Ours vs baselines",
   "tags": ["paper", "single-column", "focus", "delta"],
-  "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
+  "ir": "templates/ours-vs-baselines/figure.ir.json"
 }
 ```
 
@@ -55,9 +55,9 @@ recipe 是**策展组合**，不是笛卡尔积。当前 8 个：
 
 1. 在 `cards.json` 的 `encoding` / `emphasis` / `annotations` 下增加条目。
 2. 在 `spec/compile.py` 的 `apply_cards()` 里实现参数到 renderer 配置的映射。
-3. 加至少一个 `examples/templates/<recipe>/`：IR、mock CSV、中文 README。
+3. 加至少一个 `templates/<recipe>/`：IR、mock CSV、中文 README。
 4. 加测试：合法路径、拒绝路径、生成配置的关键字段。
-5. 跑 `python spec/catalog.py --output examples/catalog`，检查 contact sheet。
+5. 跑 `python spec/catalog.py --output reference/catalog`，检查 contact sheet。
 6. 更新 `spec/REPORT.md` 和本文件的卡片表。
 
 ## 新增一个 recipe
