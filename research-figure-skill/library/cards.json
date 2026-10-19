@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "encoding": {
+    "capacity": {
+      "layer": "encoding",
+      "intent": "将已达到的量与有意义的总量比较",
+      "when": [
+        "存在真实容量或总量",
+        "capacity >= value >= baseline"
+      ],
+      "avoid": [
+        "总量只是另一方法的得分",
+        "存在区间"
+      ],
+      "params": {
+        "field": "capacity",
+        "label_format": "{value}/{capacity}",
+        "show_percent": true
+      },
+      "operations": [
+        "从 baseline 到 capacity 绘制空心虚线柱",
+        "叠加到 value 的实心柱",
+        "在总量端标注数值和比例"
+      ],
+      "qa": [
+        "容量不小于实值",
+        "轴范围包含容量",
+        "灰度下仍可辨认空心轮廓"
+      ],
+      "example": "examples/templates/capacity-88-of-96/figure.ir.json"
+    }
+  },
+  "emphasis": {
+    "focus-gray": {
+      "layer": "emphasis",
+      "intent": "突出一个系列并保留其他系列的可读性",
+      "when": [
+        "恰好一个重点系列",
+        "2–5 个系列"
+      ],
+      "avoid": [
+        "多个重点",
+        "超过 5 个系列",
+        "依赖彩虹配色区分基线"
+      ],
+      "params": {
+        "others": "gray-ramp",
+        "focus": "accent",
+        "accent": "#9979CB",
+        "gray_ramp": [
+          "#A3ACB9",
+          "#7B848F",
+          "#57606C",
+          "#343B45"
+        ],
+        "outline": "#57606C"
+      },
+      "operations": [
+        "按 series_order 为非重点系列分配灰阶",
+        "重点使用 accent",
+        "保留透明度和纹理；浅填充用深描边保证可读性"
+      ],
+      "qa": [
+        "非重点柱轮廓对白底对比度至少 3:1；透明度覆盖需重新检查",
+        "图例覆盖全部系列"
+      ],
+      "example": "examples/templates/ours-vs-baselines/figure.ir.json"
+    }
+  },
+  "annotations": {
+    "delta": {
+      "layer": "annotation",
+      "intent": "显示同组两根柱之间的变化",
+      "when": [
+        "同一面板和组中有两个可识别系列",
+        "差值是要传达的信息"
+      ],
+      "avoid": [
+        "区间可能穿过箭头",
+        "横向图暂不支持"
+      ],
+      "params": {
+        "label_format": "+.1f",
+        "label_scale": 1
+      },
+      "operations": [
+        "按 panel/group/from/to 解析 CSV 行 ID",
+        "生成 renderer gains，颜色沿用目标系列"
+      ],
+      "qa": [
+        "箭头不穿过数字",
+        "差值单位和缩放正确",
+        "标签颜色与目标系列一致"
+      ],
+      "example": "examples/templates/before-after/figure.ir.json"
+    }
+  }
+}

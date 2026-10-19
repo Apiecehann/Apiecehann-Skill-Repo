@@ -1,0 +1,64 @@
+{
+  "claim": "比较三个模拟任务的改动前后差异。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "soft-outline",
+    "palette": "blue-orange",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "before",
+    "after"
+  ],
+  "axis": {
+    "y_label": "Score",
+    "y_format": ".2g"
+  },
+  "layout": "paired",
+  "series_labels": {
+    "before": "Before",
+    "after": "After"
+  },
+  "annotations": [
+    {
+      "card": "delta",
+      "group": "Task A",
+      "from": "before",
+      "to": "after"
+    },
+    {
+      "card": "delta",
+      "group": "Task B",
+      "from": "before",
+      "to": "after"
+    },
+    {
+      "card": "delta",
+      "group": "Task C",
+      "from": "before",
+      "to": "after"
+    }
+  ]
+}

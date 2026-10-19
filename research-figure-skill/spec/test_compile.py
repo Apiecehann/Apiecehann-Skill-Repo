@@ -87,3 +87,66 @@ def test_compile_render_and_replay(source, tmp_path):
                     str(tmp_path / "build/config.json"), "--output", str(tmp_path / "replay")],
                    cwd=tmp_path, check=True, capture_output=True)
     assert (tmp_path / "replay.png").read_bytes() == (tmp_path / "build/figure.png").read_bytes()
+
+TEMPLATES = SPEC.parent / "examples/templates"
+
+
+def test_focus_gray_keeps_alpha_and_hatch(source, tmp_path):
+    ir = source[1]
+    ir["emphasis"] = [{"card": "focus-gray", "series": "ours"}]
+    ir["theme"]["series_styles"] = {"base": {"fill_alpha": .4, "hatch": "/"}}
+    config, _ = compile_ir(save(source), tmp_path / "build")
+    assert config["palette"]["ours"]["fill"] == "#9979CB"
+    assert config["palette"]["base"]["fill"] == "#A3ACB9"
+    assert config["palette"]["base"]["edge"] == "#57606C"
+    assert config["palette"]["base"]["fill_alpha"] == .4
+    assert config["palette"]["base"]["hatch"] == "/"
+
+
+def test_delta_resolves_row_ids(source, tmp_path):
+    source[1]["annotations"] = [{"card": "delta", "group": "B", "from": "base", "to": "ours", "label_scale": 100}]
+    config, decisions = compile_ir(save(source), tmp_path / "build")
+    gain = config["gains"][0]
+    assert (gain["from"], gain["to"]) == ("row-0003", "row-0004")
+    assert gain["label_scale"] == 100
+    assert "(+30.0)" in "\n".join(decisions["log"])
+
+
+@pytest.mark.parametrize("card_request, message", [
+    ({"card": "missing", "group": "A", "from": "base", "to": "ours"}, "Unknown annotation card"),
+    ({"card": "delta", "from": "base", "to": "ours"}, "specify matching group and panel"),
+    ({"card": "delta", "group": "A", "from": "ours", "to": "ours"}, "distinct"),
+])
+def test_invalid_annotation(source, tmp_path, card_request, message):
+    source[1]["annotations"] = [card_request]
+    with pytest.raises(ValueError, match=message):
+        compile_ir(save(source), tmp_path / "build")
+
+
+def test_unknown_emphasis_card(source, tmp_path):
+    source[1]["emphasis"] = [{"card": "unknown", "series": "ours"}]
+    with pytest.raises(ValueError, match="Unknown emphasis card"):
+        compile_ir(save(source), tmp_path / "build")
+
+
+def test_multiple_focus_series_rejected(source, tmp_path):
+    source[1]["emphasis"] = [{"card": "focus-gray", "series": s} for s in ("base", "ours")]
+    with pytest.raises(ValueError, match="exactly one"):
+        compile_ir(save(source), tmp_path / "build")
+
+
+def test_capacity_config_and_invalid_capacity(source, tmp_path):
+    source[1]["encoding"]["capacity"] = "total"
+    (tmp_path / "source.csv").write_text("task,method,score,total\nA,base,0.5,1\nA,ours,0.8,1\n")
+    config, _ = compile_ir(save(source), tmp_path / "build")
+    assert config["panel_defaults"]["capacity"]["field"] == "capacity"
+    (tmp_path / "source.csv").write_text("task,method,score,total\nA,base,0.5,0.4\nA,ours,0.8,1\n")
+    with pytest.raises(ValueError, match="capacity >= value"):
+        compile_ir(source[0], tmp_path / "invalid")
+
+
+@pytest.mark.parametrize("name", sorted(p.name for p in TEMPLATES.iterdir()))
+def test_all_recipes_compile(name, tmp_path):
+    config, _ = compile_ir(TEMPLATES / name / "figure.ir.json", tmp_path / name)
+    assert config["figure"]["formats"] == ["png", "pdf", "svg"]
+    assert "MOCK / layout test" in (TEMPLATES / name / "README.md").read_text()

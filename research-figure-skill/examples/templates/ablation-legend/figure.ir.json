@@ -1,0 +1,49 @@
+{
+  "claim": "比较五个模拟消融设置在三个任务上的得分。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "double"
+  },
+  "theme": {
+    "style": "soft-outline",
+    "palette": "tol-muted",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "full",
+    "no-a",
+    "no-b",
+    "no-c",
+    "no-d"
+  ],
+  "axis": {
+    "y_label": "Score",
+    "y_format": ".0%"
+  },
+  "series_labels": {
+    "full": "Full",
+    "no-a": "Without A",
+    "no-b": "Without B",
+    "no-c": "Without C",
+    "no-d": "Without D"
+  }
+}

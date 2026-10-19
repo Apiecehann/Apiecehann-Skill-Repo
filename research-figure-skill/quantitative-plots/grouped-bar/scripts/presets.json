@@ -520,6 +520,30 @@
       },
       "source": "../examples/planning-gains/config.json",
       "background": "white"
+    },
+    "neutral-accent": {
+      "description": "中性灰与紫色；重点身份由 focus-gray 卡明确指定。",
+      "kind": "categorical",
+      "colors": [
+        "#A3ACB9",
+        "#7B848F",
+        "#57606C",
+        "#9979CB",
+        "#343B45"
+      ],
+      "background": "white"
+    },
+    "grayscale": {
+      "description": "五级灰度；印刷时结合纹理和标签。",
+      "kind": "categorical",
+      "colors": [
+        "#484848",
+        "#6C6C6C",
+        "#909090",
+        "#B4B4B4",
+        "#D8D8D8"
+      ],
+      "background": "white"
     }
   },
   "fonts": {

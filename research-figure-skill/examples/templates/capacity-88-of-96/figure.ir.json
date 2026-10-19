@@ -1,0 +1,42 @@
+{
+  "claim": "显示一个模拟任务完成 88 项、总量为 96 项。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series",
+    "capacity": "capacity"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "soft-outline",
+    "palette": "neutral-accent",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "achieved"
+  ],
+  "axis": {
+    "y_label": "Items",
+    "y_format": ".0f"
+  },
+  "series_labels": {
+    "achieved": "Achieved"
+  }
+}

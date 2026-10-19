@@ -1,0 +1,40 @@
+{
+  "claim": "比较四个模拟类别的成功比例。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "soft-outline",
+    "palette": "blue-orange",
+    "font": "sans"
+  },
+  "labels": {
+    "values": true,
+    "legend": "none",
+    "value_format": ".0%"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "method"
+  ],
+  "axis": {
+    "y_label": "Success rate",
+    "y_format": ".0%"
+  },
+  "layout": "horizontal"
+}

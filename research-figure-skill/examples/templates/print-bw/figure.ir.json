@@ -1,0 +1,46 @@
+{
+  "claim": "在黑白印刷下区分三个模拟方法。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "paper-clean",
+    "palette": "grayscale",
+    "font": "sans",
+    "hatch": true
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "method-a",
+    "method-b",
+    "method-c"
+  ],
+  "axis": {
+    "y_label": "Score",
+    "y_format": ".0%"
+  },
+  "series_labels": {
+    "method-a": "A",
+    "method-b": "B",
+    "method-c": "C"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "recipes": [
+    {
+      "id": "ours-vs-baselines",
+      "title": "Ours vs baselines",
+      "tags": [
+        "paper",
+        "single-column",
+        "focus",
+        "delta"
+      ],
+      "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
+    },
+    {
+      "id": "before-after",
+      "title": "Before and after",
+      "tags": [
+        "paper",
+        "single-column",
+        "paired",
+        "delta"
+      ],
+      "ir": "examples/templates/before-after/figure.ir.json"
+    },
+    {
+      "id": "capacity-88-of-96",
+      "title": "Capacity: 88 of 96",
+      "tags": [
+        "paper",
+        "single-column",
+        "capacity"
+      ],
+      "ir": "examples/templates/capacity-88-of-96/figure.ir.json"
+    },
+    {
+      "id": "ablation-legend",
+      "title": "Ablation with legend",
+      "tags": [
+        "paper",
+        "double-column",
+        "ablation",
+        "legend"
+      ],
+      "ir": "examples/templates/ablation-legend/figure.ir.json"
+    },
+    {
+      "id": "horizontal-percent",
+      "title": "Horizontal percentages",
+      "tags": [
+        "paper",
+        "single-column",
+        "horizontal",
+        "percent"
+      ],
+      "ir": "examples/templates/horizontal-percent/figure.ir.json"
+    },
+    {
+      "id": "print-bw",
+      "title": "Print in grayscale",
+      "tags": [
+        "paper",
+        "single-column",
+        "grayscale",
+        "hatch"
+      ],
+      "ir": "examples/templates/print-bw/figure.ir.json"
+    },
+    {
+      "id": "multi-panel",
+      "title": "Two-panel comparison",
+      "tags": [
+        "paper",
+        "single-column",
+        "multi-panel"
+      ],
+      "ir": "examples/templates/multi-panel/figure.ir.json"
+    },
+    {
+      "id": "slide-teaser",
+      "title": "Slide teaser",
+      "tags": [
+        "slide",
+        "double-column",
+        "large-type",
+        "focus"
+      ],
+      "ir": "examples/templates/slide-teaser/figure.ir.json"
+    }
+  ]
+}

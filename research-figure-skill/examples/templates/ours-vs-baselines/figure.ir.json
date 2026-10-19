@@ -1,0 +1,63 @@
+{
+  "claim": "在三个模拟基准中突出本文方法，并标注 Bench B 相对 Method 1 的提升。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "soft-outline",
+    "palette": "neutral-accent",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "method-1",
+    "method-2",
+    "method-3",
+    "ours"
+  ],
+  "axis": {
+    "y_label": "Success rate",
+    "y_format": ".0%"
+  },
+  "series_labels": {
+    "method-1": "M1",
+    "method-2": "M2",
+    "method-3": "M3",
+    "ours": "Ours"
+  },
+  "emphasis": [
+    {
+      "card": "focus-gray",
+      "series": "ours"
+    }
+  ],
+  "annotations": [
+    {
+      "card": "delta",
+      "group": "Bench B",
+      "from": "method-1",
+      "to": "ours",
+      "label_scale": 100,
+      "label_suffix": " pp"
+    }
+  ]
+}

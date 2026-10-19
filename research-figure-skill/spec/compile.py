@@ -156,12 +156,83 @@ def read_rows(ir, ir_path):
     return rows, order
 
 
+def contrast_on_white(rgba):
+    rgb = [v * rgba[3] + 1 - rgba[3] for v in rgba[:3]]
+    linear = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4 for v in rgb]
+    return 1.05 / (sum(v * w for v, w in zip(linear, (.2126, .7152, .0722))) + .05)
+
+
 def apply_cards(ir, config, rows, log):
-    requests = [*ir.get("emphasis", []), *ir.get("annotations", [])]
-    if requests:
-        raise ValueError(f"Unknown or not yet installed card {requests[0]['card']!r}")
+    library = json.loads((ROOT / "library/cards.json").read_text(encoding="utf8"))
     if "capacity" in ir["encoding"]:
-        raise ValueError("capacity card is not yet installed")
+        params = library["encoding"]["capacity"]["params"]
+        config["panel_defaults"]["capacity"] = dict(params, field="capacity")
+        log.append(f"encoding capacity -> {ir['encoding']['capacity']} normalized to capacity")
+    emphasis = ir.get("emphasis", [])
+    for request in emphasis:
+        if request["card"] not in library["emphasis"]:
+            raise ValueError(f"Unknown emphasis card {request['card']!r}; choose focus-gray")
+    if emphasis:
+        if len(emphasis) != 1:
+            raise ValueError("focus-gray requires exactly one focus series")
+        present = {r["series"] for r in rows}
+        order = config["series_order"]
+        if not 2 <= len(order) <= 5:
+            raise ValueError("focus-gray requires 2-5 series")
+        request = emphasis[0]
+        focus = request["series"]
+        if focus not in present:
+            raise ValueError(f"focus-gray series {focus!r} is absent from CSV")
+        params = library["emphasis"]["focus-gray"]["params"]
+        accent = request.get("accent", params["accent"])
+        try:
+            backend.matplotlib.colors.to_rgba(accent)
+        except ValueError:
+            raise ValueError(f"focus-gray: invalid accent {accent!r}") from None
+        muted = [s for s in order if s != focus]
+        colors = dict(zip(muted, params["gray_ramp"]))
+        colors[focus] = accent
+        for series, color in colors.items():
+            # Keep all user-specified alpha and hatch fields.
+            config["palette"][series].update(fill=color, edge=color, label="#20252c")
+            if series != focus and contrast_on_white(backend.matplotlib.colors.to_rgba(color)) < 3:
+                config["palette"][series]["edge"] = params["outline"]
+        config["panel_defaults"]["bar_edge_width"] = max(.7, config["panel_defaults"]["bar_edge_width"])
+        for series in muted:
+            _, edge = backend.bar_colors(config["palette"][series], config["panel_defaults"])
+            if contrast_on_white(edge) < 3:
+                log.append(f"QA focus-gray: {series} outline contrast below 3:1 after alpha override")
+        log.append(f"emphasis focus-gray -> 1 focus ({focus}), {len(muted)} muted")
+    for request in ir.get("annotations", []):
+        if request["card"] not in library["annotations"]:
+            raise ValueError(f"Unknown annotation card {request['card']!r}; choose delta")
+        if config["panel_defaults"]["orientation"] != "vertical":
+            raise ValueError("delta currently requires vertical layout; remove delta or change layout")
+        if request["from"] == request["to"]:
+            raise ValueError("delta needs distinct from/to series")
+        groups = {}
+        for row in rows:
+            if ("panel" not in request or row["panel"] == request["panel"]) and ("group" not in request or row["group"] == request["group"]):
+                groups.setdefault((row["panel"], row["group"]), {})[row["series"]] = row
+        pairs = [(key, members) for key, members in groups.items() if request["from"] in members and request["to"] in members]
+        if len(pairs) != 1:
+            raise ValueError(f"delta {request['from']} -> {request['to']}: expected one pair, found {len(pairs)}; specify matching group and panel")
+        (panel, group), members = pairs[0]
+        before, after = members[request["from"]], members[request["to"]]
+        if "low" in before or "low" in after:
+            raise ValueError("delta with intervals is not supported; remove delta or use data without intervals")
+        params = library["annotations"]["delta"]["params"]
+        gain = {key: request.get(key, params[key]) for key in ("label_format", "label_scale")}
+        gain.update({"from": before["id"], "to": after["id"], "label_suffix": request.get("label_suffix", "")})
+        difference = (after["value"] - before["value"]) * gain["label_scale"]
+        if not math.isfinite(difference):
+            raise ValueError("delta: scaled difference must be finite")
+        try:
+            label = format(difference, gain["label_format"]) + gain["label_suffix"]
+        except ValueError:
+            raise ValueError(f"delta: invalid label_format {gain['label_format']!r}") from None
+        config["gains"].append(gain)
+        log.append(f"annotation delta -> {panel}/{group}: {request['from']} -> {request['to']} ({label})")
 
 
 def translate(ir, rows, order):
@@ -214,6 +285,7 @@ def translate(ir, rows, order):
     panel_count = len(config["panels"])
     if panel_count > 1:
         config["figure"]["size_pt"][1] *= panel_count
+        config["layout"]["top_pt"] = max(config["layout"]["top_pt"], 42 * scale)
         config["layout"]["row_gap_pt"] = max(config["layout"]["row_gap_pt"], 48 * scale)
     if "y_max" in axis and axis["y_max"] is not None:
         upper = axis["y_max"]
@@ -266,6 +338,8 @@ def compile_ir(ir_path, output, render=False):
         writer.writerows(rows)
     for name, content in (("config.json", config), ("decisions.json", decisions)):
         (output / name).write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render and "capacity" in ir["encoding"] and "capacity" not in backend.DEFAULTS["panel_defaults"]:
+        raise ValueError("capacity rendering needs the capacity backend extension")
     if render:
         backend.render(config, rows, output / "figure")
     return config, decisions

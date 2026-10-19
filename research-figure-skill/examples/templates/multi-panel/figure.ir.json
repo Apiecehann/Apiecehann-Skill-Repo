@@ -1,0 +1,52 @@
+{
+  "claim": "在两个模拟环境中保持相同系列顺序与配色。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series",
+    "panel": "panel"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "soft-outline",
+    "palette": "neutral-accent",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "method-a",
+    "method-b",
+    "ours"
+  ],
+  "axis": {
+    "y_label": "Score",
+    "y_format": ".0%"
+  },
+  "series_labels": {
+    "method-a": "A",
+    "method-b": "B",
+    "ours": "Ours"
+  },
+  "emphasis": [
+    {
+      "card": "focus-gray",
+      "series": "ours"
+    }
+  ]
+}
