@@ -1,0 +1,47 @@
+{
+  "chart": "radar",
+  "axes": [
+    "Accuracy",
+    "Robustness",
+    "Speed",
+    "Memory",
+    "Calibration",
+    "Generalization"
+  ],
+  "series_order": [
+    "baseline-a",
+    "baseline-b",
+    "ours"
+  ],
+  "colors": {
+    "baseline-a": "#66CCEE",
+    "baseline-b": "#AA3377",
+    "ours": "#BBBBBB"
+  },
+  "series_labels": {
+    "baseline-a": "Baseline A",
+    "baseline-b": "Baseline B",
+    "ours": "Ours"
+  },
+  "fill": true,
+  "grid": true,
+  "size_pt": [
+    330,
+    300
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "claim": "MOCK：三个方法在六个能力维度上的雷达图。",
+  "chart": "radar",
+  "data": "data.csv",
+  "encoding": {"axis": "axis", "series": "series", "value": "value"},
+  "series_order": ["baseline-a", "baseline-b", "ours"],
+  "series_labels": {"baseline-a": "Baseline A", "baseline-b": "Baseline B", "ours": "Ours"},
+  "fill": true,
+  "grid": true,
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "tol-bright", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true}
+}

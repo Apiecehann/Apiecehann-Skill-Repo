@@ -298,6 +298,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/treemap/figure.ir.json"
+    },
+    {
+      "id": "radar",
+      "family": "comparison",
+      "status": "implemented",
+      "requires": [
+        "axis",
+        "series",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/radar/figure.ir.json"
     }
   ]
 }

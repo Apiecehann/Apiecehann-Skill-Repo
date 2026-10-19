@@ -470,6 +470,33 @@ def render_ridgeline(config, rows, out_stem):
     return _save_fig(fig, out_stem)
 
 
+def render_radar(config, rows, out_stem):
+    axes = config["axes"]
+    series = config["series_order"]
+    angles = np.linspace(0, 2 * np.pi, len(axes), endpoint=False).tolist()
+    angles += angles[:1]
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72),
+                           subplot_kw={"projection": "polar"}, dpi=200)
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("white")
+    ax.set_theta_offset(np.pi / 2)
+    ax.set_theta_direction(-1)
+    ax.set_ylim(0, 100)
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(axes, fontsize=7)
+    ax.tick_params(axis="y", labelsize=5, colors="#9CA3AF")
+    ax.grid(config.get("grid", True))
+    for name in series:
+        values = [float(r["value"]) for r in rows if r["series"] == name]
+        values += values[:1]
+        color = config["colors"][name]
+        ax.plot(angles, values, color=color, linewidth=1.6, label=config.get("series_labels", {}).get(name, name))
+        if config.get("fill", True):
+            ax.fill(angles, values, color=color, alpha=.12)
+    ax.legend(frameon=False, fontsize=6.5, loc="upper right", bbox_to_anchor=(1.18, 1.1))
+    return _save_fig(fig, out_stem)
+
+
 def render_det(config, rows, out_stem):
     from statistics import NormalDist
     fig, ax = _setup(config)

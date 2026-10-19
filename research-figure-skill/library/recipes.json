@@ -401,6 +401,19 @@
       "ir": "examples/templates/grouped-bar-raw/figure.ir.json",
       "chart": "grouped-bar",
       "variant": "raw-points"
+    },
+    {
+      "id": "radar",
+      "title": "Radar chart",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "radar"
+      ],
+      "ir": "examples/templates/radar/figure.ir.json",
+      "chart": "radar",
+      "variant": "six-axis"
     }
   ]
 }

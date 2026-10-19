@@ -39,7 +39,8 @@
         "det",
         "node-link",
         "sankey",
-        "treemap"
+        "treemap",
+        "radar"
       ]
     }
   },
@@ -118,6 +119,9 @@
     ],
     "treemap": [
       "treemap"
+    ],
+    "radar": [
+      "radar"
     ]
   },
   "entries": [
@@ -1871,6 +1875,57 @@
         "axes": {},
         "log": [
           "treemap -> 4 items"
+        ]
+      }
+    },
+    {
+      "recipe": "radar",
+      "title": "Radar chart",
+      "chart": "radar",
+      "variant": "six-axis",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "radar"
+      ],
+      "files": {
+        "png": "radar/figure.png",
+        "pdf": "radar/figure.pdf",
+        "svg": "radar/figure.svg",
+        "config": "radar/config.json",
+        "data": "radar/data.csv",
+        "decisions": "radar/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：三个方法在六个能力维度上的雷达图。",
+        "chart": "radar",
+        "size": "single",
+        "size_pt": [
+          330,
+          300
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "radar"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "radar",
+        "emphasis": [],
+        "annotations": [],
+        "axes": [
+          "Accuracy",
+          "Robustness",
+          "Speed",
+          "Memory",
+          "Calibration",
+          "Generalization"
+        ],
+        "log": [
+          "radar -> 6 axes, 3 series"
         ]
       }
     }

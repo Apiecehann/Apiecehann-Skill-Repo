@@ -1,0 +1,31 @@
+{
+  "claim": "MOCK：三个方法在六个能力维度上的雷达图。",
+  "chart": "radar",
+  "size": "single",
+  "size_pt": [
+    330,
+    300
+  ],
+  "palette": "tol-bright",
+  "encoding": [
+    "radar"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "radar",
+  "emphasis": [],
+  "annotations": [],
+  "axes": [
+    "Accuracy",
+    "Robustness",
+    "Speed",
+    "Memory",
+    "Calibration",
+    "Generalization"
+  ],
+  "log": [
+    "radar -> 6 axes, 3 series"
+  ]
+}

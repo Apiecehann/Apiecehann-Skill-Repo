@@ -31,7 +31,8 @@
         "det",
         "node-link",
         "sankey",
-        "treemap"
+        "treemap",
+        "radar"
       ]
     },
     "data": {
@@ -161,6 +162,10 @@
           "minLength": 1
         },
         "replicate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "axis": {
           "type": "string",
           "minLength": 1
         },
@@ -513,6 +518,12 @@
     },
     "threshold": {
       "type": "number"
+    },
+    "fill": {
+      "type": "boolean"
+    },
+    "grid": {
+      "type": "boolean"
     }
   },
   "required": [
