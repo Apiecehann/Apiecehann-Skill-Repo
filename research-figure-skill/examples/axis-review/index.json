@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "sheets": [
+    "01-baseline-color.png",
+    "02-baseline-mark.png",
+    "03-baseline-matrix.png",
+    "04-accent.png",
+    "05-paired.png",
+    "06-categorical.png",
+    "07-grid.png",
+    "08-style.png",
+    "09-type.png",
+    "10-layout.png",
+    "11-size.png"
+  ],
+  "axes": [
+    "baseline color",
+    "baseline mark",
+    "baseline color x mark",
+    "accent",
+    "paired",
+    "categorical",
+    "grid",
+    "style",
+    "type",
+    "layout",
+    "size"
+  ]
+}

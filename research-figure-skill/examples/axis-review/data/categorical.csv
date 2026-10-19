@@ -1,0 +1,16 @@
+id,panel,group,series,value
+s1-a,main,Task A,full,0.81
+s2-a,main,Task A,no-a,0.71
+s3-a,main,Task A,no-b,0.73
+s4-a,main,Task A,no-c,0.66
+s5-a,main,Task A,no-d,0.69
+s1-b,main,Task B,full,0.76
+s2-b,main,Task B,no-a,0.64
+s3-b,main,Task B,no-b,0.66
+s4-b,main,Task B,no-c,0.61
+s5-b,main,Task B,no-d,0.63
+s1-c,main,Task C,full,0.86
+s2-c,main,Task C,no-a,0.73
+s3-c,main,Task C,no-b,0.75
+s4-c,main,Task C,no-c,0.68
+s5-c,main,Task C,no-d,0.70
