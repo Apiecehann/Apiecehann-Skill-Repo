@@ -48,7 +48,6 @@ GRIDS = {
     "none": {"kind": "none"},
     "h-hairline": {"kind": "lines", "axis": "value", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
     "h-dashed": {"kind": "lines", "axis": "value", "color": "#BFC7CF", "linewidth": .5, "linestyle": [0, [4, 4]], "alpha": 1},
-    "v-hairline": {"kind": "lines", "axis": "category", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
     "full-hairline": {"kind": "lines", "axis": "both", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
     "full-dashed": {"kind": "lines", "axis": "both", "color": "#BFC7CF", "linewidth": .5, "linestyle": [0, [4, 4]], "alpha": 1},
     "dots": {"kind": "dots", "color": "#BDBDBD", "spacing_pt": 10.5, "size": .75, "alpha": 1},
@@ -340,6 +339,9 @@ def sizes():
     for name, preset, size_pt, note in specs:
         cfg = config(rows, size=preset, colors=D_ORANGE + [ACCENTS["orange"]],
                      labels=LABELS4, figure_size=size_pt, legend=False)
+        if name == "tiny":
+            cfg["panel_defaults"].update(show_value_ticks=False, show_categories=False,
+                                         show_category_ticks=False, ylabel="")
         img = render_panel(rows, cfg, f"size-{name}")
         items.append({"image": img, "label": name, "note": note})
     make_sheet("size", "宽度、高度、长宽比都不同；不只是 single/double。", items, 3, "11-size.png")
@@ -373,8 +375,88 @@ def annotations():
                items, 3, "12-annotation.png")
 
 
+def color_structure():
+    focus = read("focus.csv")
+    paired = read("paired.csv")
+    categorical = read("categorical.csv")
+    items = []
+    specs = [
+        ("focus-neutral", focus, A_GRAY + [ACCENTS["orange"]], LABELS4,
+         "1 accent + neutral baselines"),
+        ("focus-tints", focus, D_ORANGE + [ACCENTS["orange"]], LABELS4,
+         "1 accent + accent tints"),
+        ("paired", paired, PAIRS["blue"], LABELS2,
+         "2 series, same hue light/dark"),
+        ("two-hue", paired, ["#5A9BD3", "#E07A2F"], LABELS2,
+         "2 series, two hues"),
+        ("focus-multi", focus, C_HUES + [ACCENTS["orange"]], LABELS4,
+         "1 accent + distinct baselines"),
+        ("multi-hue", categorical, CATEGORICAL["pastel-eight"], LABELS5,
+         "N distinct categories"),
+    ]
+    for name, rows, colors, labels, note in specs:
+        cfg = config(rows, colors=colors, labels=labels)
+        img = render_panel(rows, cfg, f"structure-{name}")
+        items.append({"image": img, "label": name, "note": note})
+    make_sheet("color structure", "先看 series 数：2 个还是 N 个；再决定用 accent、paired 还是 categorical。",
+               items, 3, "00-color-structure.png")
+
+
+def panel_gap():
+    rows = read("panels.csv")
+    panels = [{"id": "Environment A"}, {"id": "Environment B"}]
+    items = []
+    cfg = config(rows, layout="grouped", size="double",
+                 colors=[D_ORANGE[1], D_ORANGE[2], ACCENTS["orange"]],
+                 labels={"method-1": "Method 1", "method-2": "Method 2", "ours": "Ours"},
+                 panels=panels)
+    cfg["layout"] = {"columns": 2}
+    img = render_panel(rows, cfg, "gap-normal")
+    items.append({"image": img, "label": "normal gap", "note": "separate axes"})
+
+    cfg = config(rows, layout="grouped", size="double",
+                 colors=[D_ORANGE[1], D_ORANGE[2], ACCENTS["orange"]],
+                 labels={"method-1": "Method 1", "method-2": "Method 2", "ours": "Ours"},
+                 panels=panels)
+    cfg["layout"] = {"columns": 2, "column_gap_pt": 0}
+    img = render_panel(rows, cfg, "gap-zero")
+    items.append({"image": img, "label": "zero gap", "note": "axes touch, separate ticks"})
+
+    # A true composite: shared y axis, one y label, wspace=0, one legend.
+    groups = list(dict.fromkeys(r["group"] for r in rows))
+    series = list(dict.fromkeys(r["series"] for r in rows))
+    colors = {"method-1": D_ORANGE[1], "method-2": D_ORANGE[2], "ours": ACCENTS["orange"]}
+    fig, axes = backend.plt.subplots(1, 2, figsize=(6, 2.4), sharey=True,
+                                     gridspec_kw={"wspace": 0})
+    width = .26
+    for ax, panel in zip(axes, ["Environment A", "Environment B"]):
+        subset = [r for r in rows if r["panel"] == panel]
+        for k, name in enumerate(series):
+            vals = [float(r["value"]) for r in subset if r["series"] == name]
+            ax.bar([i + (k - 1) * width for i in range(len(groups))], vals,
+                   width=width, color=colors[name], label=name, linewidth=0)
+        ax.set_xticks(range(len(groups)))
+        ax.set_xticklabels(groups, fontsize=7)
+        ax.set_ylim(0, .9)
+        ax.set_yticks([0, .3, .6, .9])
+        ax.set_yticklabels(["0%", "30%", "60%", "90%"], fontsize=7)
+        for side in ("top", "right"):
+            ax.spines[side].set_visible(False)
+        ax.tick_params(length=2, labelsize=7)
+    axes[1].tick_params(labelleft=False)
+    axes[0].set_ylabel("Success rate", fontsize=8)
+    axes[0].legend(frameon=False, fontsize=6.5, ncol=3, loc="lower center",
+                   bbox_to_anchor=(1.0, 1.02), borderaxespad=0)
+    fig.savefig(HERE / "panels" / "gap-composite.png", dpi=180, bbox_inches="tight")
+    items.append({"image": HERE / "panels" / "gap-composite.png",
+                  "label": "composite", "note": "shared y, one label/legend"})
+    make_sheet("panel gap", "normal / zero gap / composite；无间距不等于复合子图。",
+               items, 3, "13-panel-gap.png")
+
+
 def main():
     (HERE / "panels").mkdir(exist_ok=True)
+    color_structure()
     baseline_color()
     baseline_mark()
     baseline_matrix()
@@ -387,14 +469,15 @@ def main():
     layouts()
     sizes()
     annotations()
+    panel_gap()
     index = {"version": 1,
-             "sheets": ["01-baseline-color.png", "02-baseline-mark.png", "03-baseline-matrix.png",
-                        "04-accent.png", "05-paired.png", "06-categorical.png", "07-grid.png",
-                        "08-style.png", "09-type.png", "10-layout.png", "11-size.png",
-                        "12-annotation.png"],
-             "axes": ["baseline color", "baseline mark", "baseline color x mark", "accent",
-                      "paired", "categorical", "grid", "style", "type", "layout", "size",
-                      "annotation"]}
+             "sheets": ["00-color-structure.png", "01-baseline-color.png", "02-baseline-mark.png",
+                        "03-baseline-matrix.png", "04-accent.png", "05-paired.png",
+                        "06-categorical.png", "07-grid.png", "08-style.png", "09-type.png",
+                        "10-layout.png", "11-size.png", "12-annotation.png", "13-panel-gap.png"],
+             "axes": ["color structure", "baseline color", "baseline mark",
+                      "baseline color x mark", "accent", "paired", "categorical", "grid",
+                      "style", "type", "layout", "size", "annotation", "panel gap"]}
     (HERE / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     print("wrote", HERE / "index.json")
 

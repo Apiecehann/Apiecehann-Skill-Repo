@@ -735,6 +735,82 @@
           "status": "implemented"
         }
       ]
+    },
+    "color_structure": {
+      "question": "先看 series 数：2 个还是 N 个；再决定 accent、paired 还是 categorical。",
+      "options": [
+        {
+          "id": "focus-neutral",
+          "label": "1 accent + neutral",
+          "when": [
+            "一个焦点",
+            "baseline 只作背景"
+          ],
+          "avoid": [
+            "baseline 需要颜色身份"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "focus-tints",
+          "label": "1 accent + tints",
+          "when": [
+            "一个焦点",
+            "希望整体同色相"
+          ],
+          "avoid": [
+            "baseline 需要强区分"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "paired",
+          "label": "2 series, same hue",
+          "when": [
+            "before/after",
+            "同一实体两个状态"
+          ],
+          "avoid": [
+            "两个不同方法"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "two-hue",
+          "label": "2 series, two hues",
+          "when": [
+            "A/B 两个方法",
+            "需要明确对比"
+          ],
+          "avoid": [
+            "颜色语义冲突"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "focus-multi",
+          "label": "1 accent + distinct",
+          "when": [
+            "一个焦点 + 多个可区分 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "multi-hue",
+          "label": "N distinct categories",
+          "when": [
+            "消融/多任务",
+            "类别无序"
+          ],
+          "avoid": [
+            "超过色板容量"
+          ],
+          "status": "implemented"
+        }
+      ]
     }
   }
 }

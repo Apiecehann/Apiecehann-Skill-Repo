@@ -1,6 +1,7 @@
 {
   "version": 1,
   "sheets": [
+    "00-color-structure.png",
     "01-baseline-color.png",
     "02-baseline-mark.png",
     "03-baseline-matrix.png",
@@ -12,9 +13,11 @@
     "09-type.png",
     "10-layout.png",
     "11-size.png",
-    "12-annotation.png"
+    "12-annotation.png",
+    "13-panel-gap.png"
   ],
   "axes": [
+    "color structure",
     "baseline color",
     "baseline mark",
     "baseline color x mark",
@@ -26,6 +29,7 @@
     "type",
     "layout",
     "size",
-    "annotation"
+    "annotation",
+    "panel gap"
   ]
 }
