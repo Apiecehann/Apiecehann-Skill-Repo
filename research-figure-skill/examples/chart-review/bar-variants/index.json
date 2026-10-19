@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "chart": "grouped-bar",
+  "sheet_kind": "variants",
+  "sheets": [
+    {
+      "id": "lollipop",
+      "title": "lollipop",
+      "panels": 4
+    },
+    {
+      "id": "bullet",
+      "title": "bullet",
+      "panels": 4
+    },
+    {
+      "id": "waterfall",
+      "title": "waterfall",
+      "panels": 4
+    },
+    {
+      "id": "funnel",
+      "title": "funnel",
+      "panels": 4
+    },
+    {
+      "id": "bump",
+      "title": "bump",
+      "panels": 4
+    }
+  ]
+}

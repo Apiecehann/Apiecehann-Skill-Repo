@@ -38,8 +38,9 @@
 - `hexbin/`：5 张，47
 - `clustermap/`：5 张，45
 - `calendar-heatmap/`：5 张，45
+- `bar-variants/`：5 张，每张 4 panel
 
-P2 已开始：已完成 14 个正式 chart 的 chart-review；剩余 layout 与 bar variants。
+P2 已开始：14 个正式 chart review + 5 个 bar variants 已完成；layout review 待补。
 
 Batch 1 = dumbbell / line-band / scatter。Batch 2 = distribution-overlap / kde / box / violin / ecdf。Batch 3 = heatmap / roc / pr / calibration。两 series 的图不做 `categorical`，heatmap 不做 color structure，所以不是每张都 11 张。
 
