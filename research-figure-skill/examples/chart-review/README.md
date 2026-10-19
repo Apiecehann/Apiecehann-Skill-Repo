@@ -31,8 +31,10 @@
 - `sunburst/`：5 张，45
 - `icicle/`：5 张，45
 - `alluvial/`：5 张，45
+- `qq/`：5 张，48
+- `eventplot/`：5 张，48
 
-P2 已开始：`radar`、`bar3d`、`mesh3d`、`quiver3d`、`sunburst`、`icicle`、`alluvial` 已完成；`chord` 完成正式图，review 待补。
+P2 已开始：`radar`、`bar3d`、`mesh3d`、`quiver3d`、`sunburst`、`icicle`、`alluvial`、`qq`、`eventplot` 已完成；`chord` 完成正式图，review 待补。
 
 Batch 1 = dumbbell / line-band / scatter。Batch 2 = distribution-overlap / kde / box / violin / ecdf。Batch 3 = heatmap / roc / pr / calibration。两 series 的图不做 `categorical`，heatmap 不做 color structure，所以不是每张都 11 张。
 
