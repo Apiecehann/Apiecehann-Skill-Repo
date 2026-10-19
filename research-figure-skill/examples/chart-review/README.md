@@ -36,8 +36,10 @@
 - `eventplot/`：5 张，48
 - `hist2d/`：5 张，47
 - `hexbin/`：5 张，47
+- `clustermap/`：5 张，45
+- `calendar-heatmap/`：5 张，45
 
-P2 已开始：`radar`、`bar3d`、`mesh3d`、`quiver3d`、`sunburst`、`icicle`、`alluvial`、`qq`、`eventplot`、`hist2d`、`hexbin` 已完成；`chord` review 待补。
+P2 已开始：已完成 14 个正式 chart 的 chart-review；剩余 layout 与 bar variants。
 
 Batch 1 = dumbbell / line-band / scatter。Batch 2 = distribution-overlap / kde / box / violin / ecdf。Batch 3 = heatmap / roc / pr / calibration。两 series 的图不做 `categorical`，heatmap 不做 color structure，所以不是每张都 11 张。
 
