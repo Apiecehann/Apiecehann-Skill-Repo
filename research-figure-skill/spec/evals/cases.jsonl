@@ -26,3 +26,4 @@
 {"id": "case-26", "request": "二分类置信度校准曲线，单栏", "recipe": "calibration", "data": "examples/templates/calibration/data.csv", "expect": {"chart": "calibration"}}
 {"id": "case-27", "request": "二维参数网格的 loss landscape，用 3D surface + 2D contour 投影", "recipe": "surface", "data": "examples/templates/surface/data.csv", "expect": {"chart": "surface"}}
 {"id": "case-28", "request": "三个方法在 accuracy/robustness/efficiency 三维空间的分布，3D 散点，单栏", "recipe": "scatter3d", "data": "examples/templates/scatter3d/data.csv", "expect": {"chart": "scatter3d"}}
+{"id": "case-29", "request": "7x7x7 三维体素密度场，单栏", "recipe": "voxel", "data": "examples/templates/voxel/data.csv", "expect": {"chart": "voxel"}}

@@ -25,7 +25,8 @@
         "pr",
         "calibration",
         "surface",
-        "scatter3d"
+        "scatter3d",
+        "voxel"
       ]
     },
     "data": {
@@ -488,6 +489,9 @@
       },
       "required": [],
       "additionalProperties": false
+    },
+    "threshold": {
+      "type": "number"
     }
   },
   "required": [

@@ -32,7 +32,8 @@
         "pr",
         "calibration",
         "surface",
-        "scatter3d"
+        "scatter3d",
+        "voxel"
       ]
     }
   },
@@ -92,6 +93,9 @@
     ],
     "scatter3d": [
       "scatter3d"
+    ],
+    "voxel": [
+      "voxel"
     ]
   },
   "entries": [
@@ -1480,6 +1484,78 @@
         },
         "log": [
           "scatter3d -> 75 points, 3 series"
+        ]
+      }
+    },
+    {
+      "recipe": "voxel",
+      "title": "3D voxel",
+      "chart": "voxel",
+      "variant": "density-field",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "voxel"
+      ],
+      "files": {
+        "png": "voxel/figure.png",
+        "pdf": "voxel/figure.pdf",
+        "svg": "voxel/figure.svg",
+        "config": "voxel/config.json",
+        "data": "voxel/data.csv",
+        "decisions": "voxel/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：三维体素密度场（voxel）。",
+        "chart": "voxel",
+        "size": "single",
+        "size_pt": [
+          420,
+          300
+        ],
+        "palette": "viridis",
+        "encoding": [
+          "voxel"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "voxel",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ],
+          "y": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ],
+          "z": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ]
+        },
+        "log": [
+          "voxel -> 7 x 7 x 7 grid"
         ]
       }
     }

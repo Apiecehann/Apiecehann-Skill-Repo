@@ -38,6 +38,40 @@ def render_scatter3d(config, rows, out_stem):
     return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
 
 
+def render_voxel(config, rows, out_stem):
+    width, height = config.get("size_pt", [420, 300])
+    fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)
+    fig.patch.set_facecolor("white")
+    ax = fig.add_subplot(111, projection="3d")
+    xs, ys, zs = config["xs"], config["ys"], config["zs"]
+    filled = np.zeros((len(xs), len(ys), len(zs)), dtype=bool)
+    values = np.zeros_like(filled, dtype=float)
+    for row in rows:
+        i, j, k = xs.index(row["x"]), ys.index(row["y"]), zs.index(row["z"])
+        values[i, j, k] = row["value"]
+        filled[i, j, k] = row["value"] > config.get("threshold", 0)
+    cmap = plt.get_cmap(config.get("colormap", "viridis"))
+    norm = plt.Normalize(values[filled].min() if filled.any() else 0,
+                         values[filled].max() if filled.any() else 1)
+    colors = np.empty(filled.shape, dtype=object)
+    for idx in np.ndindex(filled.shape):
+        if filled[idx]:
+            colors[idx] = cmap(norm(values[idx]))
+    ax.voxels(filled, facecolors=colors, edgecolors="white", linewidth=.15)
+    ax.set_xlabel(config.get("x_label", "x"), fontsize=7, labelpad=1)
+    ax.set_ylabel(config.get("y_label", "y"), fontsize=7, labelpad=1)
+    ax.set_zlabel(config.get("z_label", "z"), fontsize=7, labelpad=1)
+    ax.tick_params(labelsize=6, pad=1)
+    ax.view_init(elev=config.get("elev", 24), azim=config.get("azim", -55))
+    fig.tight_layout(pad=.2)
+    out_stem = Path(out_stem)
+    out_stem.parent.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
+    plt.close(fig)
+    return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
+
+
 def render_surface(config, rows, out_stem):
     width, height = config.get("size_pt", [504, 252])
     fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)

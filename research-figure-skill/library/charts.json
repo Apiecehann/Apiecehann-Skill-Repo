@@ -225,6 +225,19 @@
       ],
       "supports": [],
       "ir": "examples/templates/scatter3d/figure.ir.json"
+    },
+    {
+      "id": "voxel",
+      "family": "3d",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "z",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/voxel/figure.ir.json"
     }
   ]
 }

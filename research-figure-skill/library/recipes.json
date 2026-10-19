@@ -310,6 +310,19 @@
       "ir": "examples/templates/scatter3d/figure.ir.json",
       "chart": "scatter3d",
       "variant": "three-series"
+    },
+    {
+      "id": "voxel",
+      "title": "3D voxel",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "voxel"
+      ],
+      "ir": "examples/templates/voxel/figure.ir.json",
+      "chart": "voxel",
+      "variant": "density-field"
     }
   ]
 }

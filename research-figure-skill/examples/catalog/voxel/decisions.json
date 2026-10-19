@@ -1,0 +1,52 @@
+{
+  "claim": "MOCK：三维体素密度场（voxel）。",
+  "chart": "voxel",
+  "size": "single",
+  "size_pt": [
+    420,
+    300
+  ],
+  "palette": "viridis",
+  "encoding": [
+    "voxel"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "voxel",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0
+    ],
+    "y": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0
+    ],
+    "z": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0
+    ]
+  },
+  "log": [
+    "voxel -> 7 x 7 x 7 grid"
+  ]
+}

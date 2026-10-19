@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "chart": "voxel",
+  "sheets": [
+    {
+      "id": "00-style",
+      "title": "style",
+      "panels": 15,
+      "labels": [
+        "paper-clean",
+        "soft-outline",
+        "serif-emphasis",
+        "bold-slide",
+        "minimal-mono",
+        "hand-drawn",
+        "boxed-journal",
+        "grid-paper",
+        "editorial-serif",
+        "white-slide",
+        "technical-grid",
+        "poster-bold",
+        "compact-journal",
+        "high-contrast",
+        "pastel-poster"
+      ]
+    },
+    {
+      "id": "01-type",
+      "title": "type",
+      "panels": 15,
+      "labels": [
+        "Arial",
+        "Helvetica",
+        "Segoe UI",
+        "Calibri",
+        "Verdana",
+        "Tahoma",
+        "Trebuchet MS",
+        "Times New Roman",
+        "Georgia",
+        "Garamond",
+        "Cambria",
+        "Consolas",
+        "Courier New",
+        "Comic Sans MS",
+        "Segoe Script"
+      ]
+    },
+    {
+      "id": "02-view",
+      "title": "view angle",
+      "panels": 4,
+      "labels": [
+        "default",
+        "front",
+        "low",
+        "top"
+      ]
+    },
+    {
+      "id": "03-colormap",
+      "title": "colormap",
+      "panels": 4,
+      "labels": [
+        "viridis",
+        "magma",
+        "Blues",
+        "RdBu_r"
+      ]
+    },
+    {
+      "id": "04-size",
+      "title": "size",
+      "panels": 9,
+      "labels": [
+        "tiny",
+        "single",
+        "square",
+        "wide",
+        "medium",
+        "double",
+        "double-wide",
+        "slide",
+        "tall"
+      ]
+    }
+  ]
+}
