@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：四个模态之间的交叉流量（chord）。",
+  "chart": "chord",
+  "size": "single",
+  "size_pt": [
+    360,
+    280
+  ],
+  "palette": "tol-bright",
+  "encoding": [
+    "chord"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "chord",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "chord -> 10 items"
+  ]
+}

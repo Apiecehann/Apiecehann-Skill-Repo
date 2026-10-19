@@ -45,7 +45,8 @@
         "mesh3d",
         "quiver3d",
         "sunburst",
-        "icicle"
+        "icicle",
+        "chord"
       ]
     }
   },
@@ -142,6 +143,9 @@
     ],
     "icicle": [
       "icicle"
+    ],
+    "chord": [
+      "chord"
     ]
   },
   "entries": [
@@ -2212,6 +2216,50 @@
         "axes": {},
         "log": [
           "icicle -> 9 nodes"
+        ]
+      }
+    },
+    {
+      "recipe": "chord",
+      "title": "Chord diagram",
+      "chart": "chord",
+      "variant": "four-nodes",
+      "tags": [
+        "paper",
+        "single-column",
+        "flow",
+        "chord"
+      ],
+      "files": {
+        "png": "chord/figure.png",
+        "pdf": "chord/figure.pdf",
+        "svg": "chord/figure.svg",
+        "config": "chord/config.json",
+        "data": "chord/data.csv",
+        "decisions": "chord/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：四个模态之间的交叉流量（chord）。",
+        "chart": "chord",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "chord"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "chord",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "chord -> 10 items"
         ]
       }
     }

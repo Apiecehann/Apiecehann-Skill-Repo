@@ -479,6 +479,19 @@
       "ir": "examples/templates/icicle/figure.ir.json",
       "chart": "icicle",
       "variant": "two-level"
+    },
+    {
+      "id": "chord",
+      "title": "Chord diagram",
+      "tags": [
+        "paper",
+        "single-column",
+        "flow",
+        "chord"
+      ],
+      "ir": "examples/templates/chord/figure.ir.json",
+      "chart": "chord",
+      "variant": "four-nodes"
     }
   ]
 }

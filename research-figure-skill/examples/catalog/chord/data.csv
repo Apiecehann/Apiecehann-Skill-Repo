@@ -1,0 +1,11 @@
+source,target,value
+Vision,Language,18.0
+Vision,Audio,9.0
+Language,Vision,14.0
+Language,Audio,7.0
+Audio,Vision,5.0
+Audio,Language,11.0
+Vision,Sensor,6.0
+Sensor,Vision,4.0
+Language,Sensor,8.0
+Sensor,Language,3.0

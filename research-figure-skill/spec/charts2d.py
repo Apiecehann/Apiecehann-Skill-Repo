@@ -470,6 +470,39 @@ def render_ridgeline(config, rows, out_stem):
     return _save_fig(fig, out_stem)
 
 
+def render_chord(config, rows, out_stem):
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white"); ax.set_facecolor("white"); ax.axis("off")
+    nodes = list(dict.fromkeys([r["source"] for r in rows] + [r["target"] for r in rows]))
+    totals = {n: sum(r["value"] for r in rows if n in (r["source"], r["target"])) for n in nodes}
+    total = sum(totals.values())
+    angles, cursor = {}, 0.0
+    gap = .02
+    for node in nodes:
+        span = 2 * np.pi * totals[node] / total - gap
+        angles[node] = (cursor, cursor + span)
+        cursor += span + gap
+    radius = 1.0
+    for node, (a0, a1) in angles.items():
+        theta = np.linspace(a0, a1, 40)
+        ax.plot(radius * np.cos(theta), radius * np.sin(theta), color="#4B5563", linewidth=3)
+        mid = (a0 + a1) / 2
+        ax.text(1.15 * np.cos(mid), 1.15 * np.sin(mid), node, ha="center", va="center", fontsize=6.5)
+    max_v = max(r["value"] for r in rows)
+    colors = config["colors"]
+    for i, row in enumerate(rows):
+        a0 = sum(angles[row["source"]]) / 2
+        a1 = sum(angles[row["target"]]) / 2
+        p0 = (np.cos(a0), np.sin(a0)); p1 = (np.cos(a1), np.sin(a1))
+        verts = [p0, (0, 0), p1]
+        codes = [matplotlib.path.Path.MOVETO, matplotlib.path.Path.CURVE3, matplotlib.path.Path.CURVE3]
+        ax.add_patch(matplotlib.patches.PathPatch(matplotlib.path.Path(verts, codes), fill=False,
+                                                  edgecolor=colors[i % len(colors)],
+                                                  linewidth=.8 + 3 * row["value"] / max_v, alpha=.55))
+    ax.set_xlim(-1.35, 1.35); ax.set_ylim(-1.35, 1.35); ax.set_aspect("equal")
+    return _save_fig(fig, out_stem)
+
+
 def _tree(rows):
     by_parent = {}
     for row in rows:

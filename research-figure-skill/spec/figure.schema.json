@@ -37,7 +37,8 @@
         "mesh3d",
         "quiver3d",
         "sunburst",
-        "icicle"
+        "icicle",
+        "chord"
       ]
     },
     "data": {

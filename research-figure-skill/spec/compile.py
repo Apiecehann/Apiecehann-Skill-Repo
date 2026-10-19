@@ -999,7 +999,7 @@ def compile_flow(ir, ir_path, output, render=False):
     path = Path(ir_path).parent / ir["data"]
     with path.open(encoding="utf-8-sig", newline="") as stream:
         source = list(csv.DictReader(stream))
-    if chart == "sankey":
+    if chart in ("sankey", "chord"):
         missing = {"source", "target", "value"} - set(enc)
         if missing:
             raise ValueError(f"sankey encoding requires {sorted(missing)}")
@@ -1027,7 +1027,7 @@ def compile_flow(ir, ir_path, output, render=False):
                    "svg_text": ir["output"].get("svg_text", True)},
     }
     output.mkdir(parents=True, exist_ok=True)
-    fields = ["source", "target", "value"] if chart == "sankey" else ["label", "value"]
+    fields = ["source", "target", "value"] if chart in ("sankey", "chord") else ["label", "value"]
     with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields); writer.writeheader(); writer.writerows(rows)
     decisions = {
@@ -1039,7 +1039,7 @@ def compile_flow(ir, ir_path, output, render=False):
     (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     if render:
-        renderer = charts2d.render_sankey if chart == "sankey" else charts2d.render_treemap
+        renderer = charts2d.render_sankey if chart == "sankey" else (charts2d.render_chord if chart == "chord" else charts2d.render_treemap)
         renderer(config, rows, output / "figure")
     return config, decisions
 
@@ -1311,7 +1311,7 @@ def compile_ir(ir_path, output, render=False):
         return compile_voxel(ir, ir_path, output, render)
     if ir["chart"] == "node-link":
         return compile_node_link(ir, ir_path, output, render)
-    if ir["chart"] in ("sankey", "treemap"):
+    if ir["chart"] in ("sankey", "treemap", "chord"):
         return compile_flow(ir, ir_path, output, render)
     if ir["chart"] == "radar":
         return compile_radar(ir, ir_path, output, render)

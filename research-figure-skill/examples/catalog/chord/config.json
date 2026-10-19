@@ -1,0 +1,83 @@
+{
+  "chart": "chord",
+  "rows": [
+    {
+      "source": "Vision",
+      "target": "Language",
+      "value": 18.0
+    },
+    {
+      "source": "Vision",
+      "target": "Audio",
+      "value": 9.0
+    },
+    {
+      "source": "Language",
+      "target": "Vision",
+      "value": 14.0
+    },
+    {
+      "source": "Language",
+      "target": "Audio",
+      "value": 7.0
+    },
+    {
+      "source": "Audio",
+      "target": "Vision",
+      "value": 5.0
+    },
+    {
+      "source": "Audio",
+      "target": "Language",
+      "value": 11.0
+    },
+    {
+      "source": "Vision",
+      "target": "Sensor",
+      "value": 6.0
+    },
+    {
+      "source": "Sensor",
+      "target": "Vision",
+      "value": 4.0
+    },
+    {
+      "source": "Language",
+      "target": "Sensor",
+      "value": 8.0
+    },
+    {
+      "source": "Sensor",
+      "target": "Language",
+      "value": 3.0
+    }
+  ],
+  "colors": [
+    "#4477AA",
+    "#EE6677",
+    "#228833",
+    "#CCBB44",
+    "#66CCEE",
+    "#AA3377",
+    "#BBBBBB"
+  ],
+  "size_pt": [
+    360,
+    280
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

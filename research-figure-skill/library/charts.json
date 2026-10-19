@@ -373,6 +373,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/icicle/figure.ir.json"
+    },
+    {
+      "id": "chord",
+      "family": "flow",
+      "status": "implemented",
+      "requires": [
+        "source",
+        "target",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/chord/figure.ir.json"
     }
   ]
 }

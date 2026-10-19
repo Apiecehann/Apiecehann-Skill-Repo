@@ -1,0 +1,11 @@
+﻿source,target,value
+Vision,Language,18
+Vision,Audio,9
+Language,Vision,14
+Language,Audio,7
+Audio,Vision,5
+Audio,Language,11
+Vision,Sensor,6
+Sensor,Vision,4
+Language,Sensor,8
+Sensor,Language,3
