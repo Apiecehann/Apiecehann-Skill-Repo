@@ -61,7 +61,8 @@ DEFAULTS = {
         'capacity': {'field': None, 'linestyle': '--', 'edge_width': .7,
                      'alpha': .45, 'label_format': '{value}/{capacity}', 'show_percent': True},
         'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': 'auto',
-                 'value_stop': 'auto', 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000,
+                 'value_stop': 'auto', 'axis': 'value',
+                 'size': .75, 'color': '#bdbdbd', 'alpha': 1, 'max_points': 50000,
                  'linewidth': .5, 'linestyle': '-'},
         'tokens': {'mode': 'readable', 'size': 6.3, 'gap': 2.6, 'padding_em': [.16, .16],
                    'height_em': 1.333333, 'baseline_em': .405, 'rounding': .194444,
@@ -707,7 +708,10 @@ def build_figure(config, rows, font_dir=None):
                            color=grid['color'], alpha=grid['alpha'], edgecolors='none', zorder=0, clip_on=True)
             elif grid['kind'] == 'lines':
                 linestyle=tuple(grid['linestyle']) if isinstance(grid['linestyle'],list) else grid['linestyle']
-                ax.set_axisbelow(True); ax.grid(axis=value_axis,color=grid['color'],alpha=grid['alpha'],
+                grid_axis={'value':value_axis,'category':category_axis,'both':'both'}.get(grid.get('axis','value'))
+                if grid_axis is None:
+                    raise ValueError('grid.axis must be value, category or both')
+                ax.set_axisbelow(True); ax.grid(axis=grid_axis,color=grid['color'],alpha=grid['alpha'],
                                                linewidth=grid['linewidth'],linestyle=linestyle)
             elif grid['kind'] != 'none':
                 raise ValueError('grid.kind must be dots, lines, or none')

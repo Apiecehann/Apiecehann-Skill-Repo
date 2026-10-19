@@ -222,6 +222,15 @@ def test_reference_line_and_label_are_drawn():
     assert any(text.get_text()=='SOTA' for text in ax.texts)
 
 
+def test_grid_lines_can_target_both_axes():
+    rows=[{'id':'a','panel':'p','group':'A','series':'base','value':.6}]
+    config={'panels':[{'id':'p'}],'panel_defaults':{'grid':{'kind':'lines','axis':'both'}}}
+    fig,_=build_figure(config,rows)
+    ax=fig.axes[0]
+    assert any(line.get_visible() for line in ax.xaxis.get_gridlines())
+    assert any(line.get_visible() for line in ax.yaxis.get_gridlines())
+
+
 def test_fixed_panel_rectangles_do_not_require_auto_grid():
     panels=[{'id':str(i),'rect_pt':[i*10,0,10,10]} for i in range(5)]
     config={'figure':{'size_pt':[360,210]},'layout':{'columns':1},'panels':panels}

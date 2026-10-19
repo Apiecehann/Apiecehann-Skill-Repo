@@ -46,8 +46,11 @@ CATEGORICAL = {
 }
 GRIDS = {
     "none": {"kind": "none"},
-    "hairline": {"kind": "lines", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
-    "dashed": {"kind": "lines", "color": "#BFC7CF", "linewidth": .5, "linestyle": [0, [4, 4]], "alpha": 1},
+    "h-hairline": {"kind": "lines", "axis": "value", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
+    "h-dashed": {"kind": "lines", "axis": "value", "color": "#BFC7CF", "linewidth": .5, "linestyle": [0, [4, 4]], "alpha": 1},
+    "v-hairline": {"kind": "lines", "axis": "category", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
+    "full-hairline": {"kind": "lines", "axis": "both", "color": "#D9DEE3", "linewidth": .4, "linestyle": "-", "alpha": 1},
+    "full-dashed": {"kind": "lines", "axis": "both", "color": "#BFC7CF", "linewidth": .5, "linestyle": [0, [4, 4]], "alpha": 1},
     "dots": {"kind": "dots", "color": "#BDBDBD", "spacing_pt": 10.5, "size": .75, "alpha": 1},
 }
 
@@ -75,7 +78,7 @@ def config(rows, *, style="paper-clean", layout="grouped", size="single",
            font="sans", colors=None, labels=None, grid="none", legend=True,
            fill=None, edge=None, hatch=None, fonts=None, baseline_only=False,
            tick_format=".0%", ylabel="Success rate", panels=None, gains=None,
-           capacity=None, reference_lines=None):
+           capacity=None, reference_lines=None, figure_size=None):
     order = list(dict.fromkeys(row["series"] for row in rows))
     palette = {}
     if colors:
@@ -119,6 +122,8 @@ def config(rows, *, style="paper-clean", layout="grouped", size="single",
     }
     if panels:
         cfg["panels"] = panels
+    if figure_size:
+        cfg["figure"]["size_pt"] = figure_size
     if gains:
         cfg["gains"] = gains
     if fonts:
@@ -288,13 +293,25 @@ def fonts():
 
 def layouts():
     items = []
-    for layout in ("grouped", "horizontal", "paired"):
-        use = read("paired.csv") if layout == "paired" else read("focus.csv")
-        labels = LABELS2 if layout == "paired" else LABELS4
-        colors = PAIRS["blue"] if layout == "paired" else D_ORANGE + [ACCENTS["orange"]]
-        cfg = config(use, layout=layout, colors=colors, labels=labels)
-        img = render_panel(use, cfg, f"layout-{layout}")
-        items.append({"image": img, "label": layout, "note": ""})
+    cases = [
+        ("vertical-1series", "single.csv", "grouped", "single", ["Method"], [ACCENTS["orange"]],
+         {"method": "Method"}, 1),
+        ("vertical-2series", "paired.csv", "grouped", "single", ["Before", "After"], PAIRS["blue"],
+         LABELS2, 2),
+        ("vertical-4series", "focus.csv", "grouped", "single", ["Method 1", "Method 2", "Method 3", "Ours"],
+         D_ORANGE + [ACCENTS["orange"]], LABELS4, 1),
+        ("horizontal-1series", "single.csv", "horizontal", "single", ["Method"], [ACCENTS["orange"]],
+         {"method": "Method"}, 1),
+        ("horizontal-2series", "paired.csv", "horizontal", "single", ["Before", "After"], PAIRS["blue"],
+         LABELS2, 2),
+    ]
+    for name, data, layout, size, _, colors, labels, _ in cases:
+        rows = read(data)
+        cfg = config(rows, layout=layout, size=size, colors=colors, labels=labels)
+        if layout == "horizontal":
+            cfg["panel_defaults"]["group_gap"] = .06 if len(colors) == 1 else .12
+        img = render_panel(rows, cfg, f"layout-{name}")
+        items.append({"image": img, "label": name, "note": layout})
     use = read("panels.csv")
     cfg = config(use, layout="grouped", size="double",
                  colors=[D_ORANGE[1], D_ORANGE[2], ACCENTS["orange"]],
@@ -302,19 +319,30 @@ def layouts():
                  panels=[{"id": "Environment A"}, {"id": "Environment B"}])
     img = render_panel(use, cfg, "layout-multi-panel")
     items.append({"image": img, "label": "multi-panel", "note": "2 panels"})
-    make_sheet("layout", "grouped / horizontal / paired / multi-panel。",
+    make_sheet("layout", "orientation × series count × panel count；paired 只是 2-series 的情况。",
                items, 2, "10-layout.png")
 
 
 def sizes():
     rows = read("focus.csv")
+    specs = [
+        ("tiny", "single", [144, 100], "2.0 × 1.4 in"),
+        ("single", "single", [237.6, 169.7], "3.3 × 2.36 in"),
+        ("square", "single", [237.6, 237.6], "3.3 × 3.3 in"),
+        ("wide", "single", [237.6, 130], "3.3 × 1.8 in"),
+        ("medium", "medium", [324, 231.4], "4.5 × 3.2 in"),
+        ("double", "double", [504, 360], "7 × 5 in"),
+        ("double-wide", "double", [504, 260], "7 × 3.6 in"),
+        ("slide", "slide", [648, 364.5], "9 × 5.06 in"),
+        ("tall", "single", [180, 300], "2.5 × 4.2 in"),
+    ]
     items = []
-    for size, note in (("single", "3.3 in"), ("medium", "4.5 in"),
-                       ("double", "7 in"), ("slide", "9 in / 16:9")):
-        cfg = config(rows, size=size, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4)
-        img = render_panel(rows, cfg, f"size-{size}")
-        items.append({"image": img, "label": size, "note": note})
-    make_sheet("size", "同一份数据，只换最终物理宽度。", items, 2, "11-size.png")
+    for name, preset, size_pt, note in specs:
+        cfg = config(rows, size=preset, colors=D_ORANGE + [ACCENTS["orange"]],
+                     labels=LABELS4, figure_size=size_pt, legend=False)
+        img = render_panel(rows, cfg, f"size-{name}")
+        items.append({"image": img, "label": name, "note": note})
+    make_sheet("size", "宽度、高度、长宽比都不同；不只是 single/double。", items, 3, "11-size.png")
 
 
 def annotations():
@@ -328,7 +356,7 @@ def annotations():
 
     cap = read("capacity.csv")
     cfg = config(cap, colors=["#A3ACB9"], labels={"achieved": "Achieved"},
-                 tick_format=".0f", ylabel="Items", grid="hairline",
+                 tick_format=".0f", ylabel="Items", grid="h-hairline",
                  capacity={"field": "capacity", "label_format": "{value}/{capacity}",
                            "show_percent": True})
     cfg["panel_defaults"]["bar_width"] = .35
