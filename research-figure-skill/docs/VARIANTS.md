@@ -1,5 +1,7 @@
 # Chart families and variants
 
+> 修正：per-chart variant 不是拍脑袋几个变量，而是按轴覆盖。完整规则见 [AXIS_COVERAGE.md](AXIS_COVERAGE.md)。这份文档保留早期的 variant 命名草案。
+
 两层结构：
 
 1. **chart family**：几何形状（grouped-bar、dot-plot、dumbbell、box、surface…）
