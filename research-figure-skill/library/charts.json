@@ -13,7 +13,8 @@
       "supports": [
         "errorbar",
         "reference-line",
-        "delta"
+        "delta",
+        "raw-points"
       ],
       "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
     },
@@ -28,7 +29,8 @@
       ],
       "supports": [
         "errorbar",
-        "reference-line"
+        "reference-line",
+        "raw-points"
       ],
       "ir": "examples/templates/horizontal-percent/figure.ir.json"
     },

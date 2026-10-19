@@ -1,0 +1,7 @@
+id,panel,group,series,value,replicates
+Bench A-method-1-0,main,Bench A,method-1,69.63,63.43|74.64|78.96|68.41|62.7
+Bench A-ours-0,main,Bench A,ours,78.6,79.54|83.35|87.69|71.49|70.95
+Bench B-method-1-0,main,Bench B,method-1,66.03,65.94|64.32|71.74|67.88|60.29
+Bench B-ours-0,main,Bench B,ours,70.12,68.08|87.99|67.98|64.51|62.03
+Bench C-method-1-0,main,Bench C,method-1,55.15,55.67|56.02|52.59|54.56|56.91
+Bench C-ours-0,main,Bench C,ours,65.28,68.85|71.68|65.47|51.47|68.91

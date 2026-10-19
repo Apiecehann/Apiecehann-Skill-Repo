@@ -160,6 +160,10 @@
           "type": "string",
           "minLength": 1
         },
+        "replicate": {
+          "type": "string",
+          "minLength": 1
+        },
         "row": {
           "type": "string",
           "minLength": 1

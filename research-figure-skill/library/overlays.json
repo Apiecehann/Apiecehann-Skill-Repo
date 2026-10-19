@@ -68,7 +68,9 @@
       "supports": [
         "box",
         "violin",
-        "dot-plot"
+        "dot-plot",
+        "grouped-bar",
+        "horizontal-bar"
       ],
       "avoid": [
         "点太多，改用密度"

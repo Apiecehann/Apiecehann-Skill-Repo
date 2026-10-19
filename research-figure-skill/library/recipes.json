@@ -388,6 +388,19 @@
       "ir": "examples/templates/treemap/figure.ir.json",
       "chart": "treemap",
       "variant": "four-categories"
+    },
+    {
+      "id": "grouped-bar-raw",
+      "title": "Grouped bar with raw points",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "raw-points"
+      ],
+      "ir": "examples/templates/grouped-bar-raw/figure.ir.json",
+      "chart": "grouped-bar",
+      "variant": "raw-points"
     }
   ]
 }

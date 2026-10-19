@@ -14,6 +14,7 @@
     360,
     260
   ],
+  "operating_point": false,
   "x_label": "False positive rate",
   "y_label": "False negative rate",
   "legend": false,

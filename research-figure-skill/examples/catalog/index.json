@@ -17,6 +17,7 @@
         "multi-panel",
         "before-after",
         "print-bw",
+        "grouped-bar-raw",
         "slide-teaser",
         "dot-plot",
         "dumbbell",
@@ -52,6 +53,7 @@
       "multi-panel",
       "before-after",
       "print-bw",
+      "grouped-bar-raw",
       "slide-teaser"
     ],
     "dot-plot": [
@@ -667,6 +669,72 @@
           "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
           "palette grayscale -> method-a #D9D9D9, method-b #BFBFBF, method-c #A3A3A3",
           "axis main -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
+          "legend auto -> renderer measures columns at render time"
+        ]
+      }
+    },
+    {
+      "recipe": "grouped-bar-raw",
+      "title": "Grouped bar with raw points",
+      "chart": "grouped-bar",
+      "variant": "raw-points",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "raw-points"
+      ],
+      "files": {
+        "png": "grouped-bar-raw/figure.png",
+        "pdf": "grouped-bar-raw/figure.pdf",
+        "svg": "grouped-bar-raw/figure.svg",
+        "config": "grouped-bar-raw/config.json",
+        "data": "grouped-bar-raw/data.csv",
+        "decisions": "grouped-bar-raw/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：每个 benchmark 的重复观测，bar 上叠原始点。",
+        "chart": "grouped-bar",
+        "size": "single",
+        "size_pt": [
+          237.6,
+          169.7
+        ],
+        "palette": "d3-blue",
+        "layout": "grouped",
+        "encoding": [
+          "grouped-bar"
+        ],
+        "emphasis": [],
+        "annotations": [],
+        "labels": {
+          "values": true,
+          "legend": "top"
+        },
+        "axes": {
+          "main": {
+            "limits": [
+              0.0,
+              90
+            ],
+            "ticks": [
+              0.0,
+              10.0,
+              20.0,
+              30.0,
+              40.0,
+              50.0,
+              60.0,
+              70.0,
+              80.0,
+              90.0
+            ]
+          }
+        },
+        "log": [
+          "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+          "palette d3-blue -> method-1 #D6E4F0, ours #A8C8E8",
+          "axis main -> [0.0, 90]; ticks [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0]",
           "legend auto -> renderer measures columns at render time"
         ]
       }

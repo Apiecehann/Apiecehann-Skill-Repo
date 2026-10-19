@@ -1128,6 +1128,17 @@ def build_figure(config, rows, font_dir=None):
                                        fmt='none',ecolor=style['error_color'],elinewidth=style['error_width'],
                                        capsize=style['error_cap'],capthick=style['error_width'],
                                        alpha=opacity(style['error_alpha'],'error_alpha'),zorder=4)
+                if row.get('replicates'):
+                    values = row['replicates']
+                    if isinstance(values, str):
+                        values = [float(v) for v in values.split('|')]
+                    offsets = [(i - (len(values)-1)/2) * style['bar_width'] * .18 for i in range(len(values))]
+                    if vertical:
+                        ax.scatter([x + o for o in offsets], values, s=8, color=fill, edgecolors='white',
+                                   linewidths=.3, alpha=.75, zorder=5)
+                    else:
+                        ax.scatter(values, [x + o for o in offsets], s=8, color=fill, edgecolors='white',
+                                   linewidths=.3, alpha=.75, zorder=5)
                 label = None
                 if style['value_labels'] or increment:
                     anchor = row.get('high',row['value']) if style['value_anchor']=='high' else row['value']

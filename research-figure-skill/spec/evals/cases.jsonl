@@ -32,3 +32,4 @@
 {"id": "case-32", "request": "模型模块之间的连接关系，node-link 圆形布局，单栏", "recipe": "node-link", "data": "examples/templates/node-link/data.csv", "expect": {"chart": "node-link"}}
 {"id": "case-33", "request": "数据到模块的三阶段流向，sankey，单栏", "recipe": "sankey", "data": "examples/templates/sankey/data.csv", "expect": {"chart": "sankey"}}
 {"id": "case-34", "request": "四个类别的面积占比，treemap，单栏", "recipe": "treemap", "data": "examples/templates/treemap/data.csv", "expect": {"chart": "treemap"}}
+{"id": "case-35", "request": "每个 benchmark 有重复观测，bar 上叠原始点，单栏", "recipe": "grouped-bar-raw", "data": "examples/templates/grouped-bar-raw/data.csv", "expect": {"chart": "grouped-bar"}}

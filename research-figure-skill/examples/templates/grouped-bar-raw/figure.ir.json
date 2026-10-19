@@ -1,0 +1,14 @@
+{
+  "claim": "MOCK：每个 benchmark 的重复观测，bar 上叠原始点。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {"x": "group", "y": "value", "series": "series", "replicate": "replicate"},
+  "series_order": ["method-1", "ours"],
+  "series_labels": {"method-1": "Method 1", "ours": "Ours"},
+  "overlays": [{"kind": "raw-points"}],
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": true, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Benchmark", "y_label": "Success rate (%)"}
+}

@@ -129,6 +129,8 @@ def read_rows(ir, ir_path):
     if not source:
         raise ValueError(f"CSV {path}: no rows")
     rows, seen, cells = [], set(), set()
+    raw_mode = "replicate" in enc
+    by_cell = {}
     for i, raw in enumerate(source, 1):
         if None in raw or any(v is None for v in raw.values()):
             raise ValueError(f"CSV row {i}: column count does not match header")
@@ -144,8 +146,14 @@ def read_rows(ir, ir_path):
         seen.add(row_id)
         cell = (row["panel"], row["group"], row["series"])
         if cell in cells:
-            raise ValueError(f"CSV: duplicate panel/group/series {cell}; aggregate observations first")
+            if not raw_mode:
+                raise ValueError(f"CSV: duplicate panel/group/series {cell}; aggregate observations first")
+            by_cell[cell]["replicates"].append(numeric(raw[enc["replicate"]], enc["replicate"], row_id))
+            continue
         cells.add(cell)
+        if raw_mode:
+            row["replicates"] = [numeric(raw[enc["replicate"]], enc["replicate"], row_id)]
+        by_cell[cell] = row
         for key in ("low", "high", "label", "capacity", "base"):
             column = enc.get(key, key)
             if key in ("capacity", "base") and key not in enc:
@@ -1066,11 +1074,15 @@ def compile_ir(ir_path, output, render=False):
     config, decisions = translate(ir, rows, order)
     output.mkdir(parents=True, exist_ok=True)
     fields = ["id", "panel", "group", "series", "value"]
-    fields += [key for key in ("low", "high", "capacity", "base", "label") if any(key in r for r in rows)]
+    fields += [key for key in ("low", "high", "capacity", "base", "label", "replicates") if any(key in r for r in rows)]
     with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
-        writer.writerows(rows)
+        for row in rows:
+            record = dict(row)
+            if "replicates" in record:
+                record["replicates"] = "|".join(str(v) for v in record["replicates"])
+            writer.writerow(record)
     for name, content in (("config.json", config), ("decisions.json", decisions)):
         (output / name).write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     if render:
