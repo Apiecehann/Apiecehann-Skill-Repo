@@ -464,7 +464,7 @@ def compile_distribution(ir, ir_path, output, render=False):
 
 def compile_2d(ir, ir_path, output, render=False):
     chart = ir["chart"]
-    if chart not in ("dot-plot", "dumbbell"):
+    if chart not in ("dot-plot", "dumbbell", "line-band", "scatter"):
         raise ValueError(f"unsupported 2D chart {chart!r}")
     rows, order = read_rows(ir, ir_path)
     if chart == "dumbbell" and len(order) != 2:
@@ -477,6 +477,7 @@ def compile_2d(ir, ir_path, output, render=False):
         raise ValueError(f"Unknown palette {palette_name!r}")
     if len(palette["colors"]) < len(order):
         raise ValueError(f"Palette {palette_name!r} has {len(palette['colors'])} colors for {len(order)} series")
+    palette_colors = palette["colors"][-len(order):]
     groups = list(dict.fromkeys(r["group"] for r in rows))
     axis = ir.get("axis", {})
     size = ir["size"]["preset"]
@@ -486,13 +487,14 @@ def compile_2d(ir, ir_path, output, render=False):
         "chart": chart,
         "groups": groups,
         "series_order": order,
-        "colors": dict(zip(order, palette["colors"])),
+        "colors": dict(zip(order, palette_colors)),
         "series_labels": ir.get("series_labels", {}),
         "x_label": axis.get("x_label", ""),
         "y_label": axis.get("y_label", ""),
         "x_min": axis.get("x_min"),
         "x_max": axis.get("x_max"),
         "reference": ir.get("reference", []),
+        "stats": ir.get("stats", []),
         "legend": ir["labels"].get("legend", "top") == "top",
         "size_pt": size_pt,
         "formats": ir["output"]["formats"],
@@ -518,7 +520,8 @@ def compile_2d(ir, ir_path, output, render=False):
     (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     if render:
-        renderer = charts2d.render_dot if chart == "dot-plot" else charts2d.render_dumbbell
+        renderer = {"dot-plot": charts2d.render_dot, "dumbbell": charts2d.render_dumbbell,
+                    "line-band": charts2d.render_line_band, "scatter": charts2d.render_scatter}[chart]
         renderer(config, rows, output / "figure")
     return config, decisions
 
@@ -528,7 +531,7 @@ def compile_ir(ir_path, output, render=False):
     ir = load_ir(ir_path)
     if ir["chart"] == "distribution-overlap":
         return compile_distribution(ir, ir_path, output, render)
-    if ir["chart"] in ("dot-plot", "dumbbell"):
+    if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])
     if missing:

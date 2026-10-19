@@ -1,0 +1,57 @@
+{
+  "claim": "MOCK：两个方法在 5 个 step 上的成功率均值与 95% 区间。",
+  "chart": "line-band",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "paper-clean",
+    "palette": "d3-blue",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "axis": {
+    "x_label": "Training step",
+    "y_label": "Success rate (%)",
+    "x_min": 1,
+    "x_max": 5
+  },
+  "series_order": [
+    "method-1",
+    "ours"
+  ],
+  "series_labels": {
+    "method-1": "Method 1",
+    "ours": "Ours"
+  },
+  "stats": [
+    {
+      "kind": "ci-band"
+    }
+  ],
+  "reference": [
+    {
+      "axis": "y",
+      "value": 75,
+      "label": "SOTA"
+    }
+  ]
+}

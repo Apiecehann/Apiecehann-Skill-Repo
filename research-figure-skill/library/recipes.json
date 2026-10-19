@@ -130,6 +130,28 @@
         "paired"
       ],
       "ir": "examples/templates/dumbbell/figure.ir.json"
+    },
+    {
+      "id": "line-band",
+      "title": "Line with CI band",
+      "tags": [
+        "paper",
+        "single-column",
+        "time",
+        "band"
+      ],
+      "ir": "examples/templates/line-band/figure.ir.json"
+    },
+    {
+      "id": "scatter",
+      "title": "Scatter with trend and ellipse",
+      "tags": [
+        "paper",
+        "single-column",
+        "relationship",
+        "trend"
+      ],
+      "ir": "examples/templates/scatter/figure.ir.json"
     }
   ]
 }

@@ -70,7 +70,7 @@
     {
       "id": "line-band",
       "family": "time",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "x",
         "y"
@@ -84,7 +84,7 @@
     {
       "id": "scatter",
       "family": "relationship",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "x",
         "y"

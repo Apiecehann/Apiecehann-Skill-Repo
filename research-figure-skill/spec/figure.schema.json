@@ -13,7 +13,9 @@
         "grouped-bar",
         "distribution-overlap",
         "dot-plot",
-        "dumbbell"
+        "dumbbell",
+        "line-band",
+        "scatter"
       ]
     },
     "data": {
@@ -46,6 +48,29 @@
           }
         },
         "required": ["value"],
+        "additionalProperties": false
+      }
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["ci-band", "trend", "confidence-ellipse"]
+          },
+          "level": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 0.999
+          },
+          "method": {
+            "type": "string",
+            "enum": ["linear"]
+          }
+        },
+        "required": ["kind"],
         "additionalProperties": false
       }
     },
