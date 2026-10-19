@@ -11,7 +11,7 @@ import pytest
 from palette_audit import composite, contrast, evaluate, separation, simulate, study_board
 from render import build_figure, load_data
 
-ROOT=Path(__file__).parent.parent/'examples'/'palette-study'
+ROOT=Path(__file__).parents[3]/'reference/legacy-grouped-bar/examples/palette-study'
 SETTINGS=json.loads((ROOT/'config.json').read_text(encoding='utf8'))
 CANDIDATES=json.loads((ROOT/'candidates.json').read_text(encoding='utf8'))
 

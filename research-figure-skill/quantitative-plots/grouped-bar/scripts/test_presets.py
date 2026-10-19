@@ -16,7 +16,7 @@ from render import build_figure, load_data, read_config, resolve_config, preset_
 from catalog import compose_board
 
 SCRIPTS = Path(__file__).resolve().parent
-GUIDE = SCRIPTS.parent/'examples/style-guide'
+GUIDE = SCRIPTS.parents[2] / 'reference/legacy-grouped-bar/examples/style-guide'
 
 
 @pytest.fixture(autouse=True)

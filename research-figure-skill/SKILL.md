@@ -1,4 +1,4 @@
----
+﻿---
 name: research-figure-skill
 description: 用小型 figure IR 生成科研图。覆盖 comparison、distribution、relationship、matrix、classification、3D、hierarchy、flow、layout 与 bar variants；适用于从数据/claim 生成新图，或从模板复刻已有示例。
 ---
@@ -93,7 +93,7 @@ python spec/compile.py --ir templates/grouped-bar-raw/figure.ir.json \
 - [`reference/chart-review`](reference/chart-review)：每个 chart 的轴覆盖
 - [`reference/catalog`](reference/catalog)：成品 contact sheet
 
-已知实现边界见 [`docs/AXIS_COVERAGE.md`](docs/AXIS_COVERAGE.md)。
+已知实现边界见 [`docs/COVERAGE.md`](docs/COVERAGE.md)。
 
 ## 7. 目录
 
@@ -107,3 +107,4 @@ evals/            ← 语义到 IR 的回归用例
 tests/            ← 渲染与 schema 测试
 docs/             ← 架构与覆盖
 ```
+

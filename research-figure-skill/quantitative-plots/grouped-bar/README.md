@@ -18,41 +18,41 @@ IR 字段、`focus-gray` / `capacity` / `delta` 三张卡和限制见 [spec/READ
 
 | 示例与输入 | 布局 | 预览（点击放大） |
 |---|---|---|
-| **cue-comparison**<br>[配置](examples/cue-comparison/config.json) · [数据](examples/cue-comparison/data.csv) · [PDF](examples/cue-comparison/figure.pdf) | 主图 + 四个小面板；两组模型、三种条件；双层标签 | <a href="examples/cue-comparison/figure.png"><img src="examples/cue-comparison/figure.png" width="320" alt="主图与四个小面板"></a> |
-| **data-edit**<br>[配置](examples/data-edit/config.json) · [数据](examples/data-edit/data.csv) · [PDF](examples/data-edit/figure.pdf) | 三行比较；彩色 token、数值、区间和图标 | <a href="examples/data-edit/figure.png"><img src="examples/data-edit/figure.png" width="96" alt="三行数值图"></a> |
-| **teaser-strip**<br>[配置](examples/teaser-strip/config.json) · [数据](examples/teaser-strip/data.csv) · [PDF](examples/teaser-strip/figure.pdf) | 不等数量分组；下方分组线及条件说明 | <a href="examples/teaser-strip/figure.png"><img src="examples/teaser-strip/figure.png" width="320" alt="不等数量分组"></a> |
-| **zero-shot-execution**<br>[配置](examples/zero-shot-execution/config.json) · [数据](examples/zero-shot-execution/data.csv) · [PDF](examples/zero-shot-execution/figure.pdf) | 九任务、五系列、组中心标签、顶部图例和幻灯片标题 | <a href="examples/zero-shot-execution/figure.png"><img src="examples/zero-shot-execution/figure.png" width="280" alt="九任务多系列比较"></a> |
-| **affordance-distribution**<br>[配置](examples/affordance-distribution/config.json) · [数据](examples/affordance-distribution/data.csv) · [PDF](examples/affordance-distribution/figure.pdf) | 横向类别；半透明填充与粗体百分比 | <a href="examples/affordance-distribution/figure.png"><img src="examples/affordance-distribution/figure.png" width="144" alt="横向百分比分布"></a> |
-| **planning-gains**<br>[配置](examples/planning-gains/config.json) · [数据](examples/planning-gains/data.csv) · [PDF](examples/planning-gains/figure.pdf) | 非零基线、虚线网格及自动计算的增益箭头 | <a href="examples/planning-gains/figure.png"><img src="examples/planning-gains/figure.png" width="280" alt="前后对比与增益箭头"></a> |
+| **cue-comparison**<br>[配置](../../reference/legacy-grouped-bar/examples/cue-comparison/config.json) · [数据](../../reference/legacy-grouped-bar/examples/cue-comparison/data.csv) · [PDF](../../reference/legacy-grouped-bar/examples/cue-comparison/figure.pdf) | 主图 + 四个小面板；两组模型、三种条件；双层标签 | <a href="../../reference/legacy-grouped-bar/examples/cue-comparison/figure.png"><img src="../../reference/legacy-grouped-bar/examples/cue-comparison/figure.png" width="320" alt="主图与四个小面板"></a> |
+| **data-edit**<br>[配置](../../reference/legacy-grouped-bar/examples/data-edit/config.json) · [数据](../../reference/legacy-grouped-bar/examples/data-edit/data.csv) · [PDF](../../reference/legacy-grouped-bar/examples/data-edit/figure.pdf) | 三行比较；彩色 token、数值、区间和图标 | <a href="../../reference/legacy-grouped-bar/examples/data-edit/figure.png"><img src="../../reference/legacy-grouped-bar/examples/data-edit/figure.png" width="96" alt="三行数值图"></a> |
+| **teaser-strip**<br>[配置](../../reference/legacy-grouped-bar/examples/teaser-strip/config.json) · [数据](../../reference/legacy-grouped-bar/examples/teaser-strip/data.csv) · [PDF](../../reference/legacy-grouped-bar/examples/teaser-strip/figure.pdf) | 不等数量分组；下方分组线及条件说明 | <a href="../../reference/legacy-grouped-bar/examples/teaser-strip/figure.png"><img src="../../reference/legacy-grouped-bar/examples/teaser-strip/figure.png" width="320" alt="不等数量分组"></a> |
+| **zero-shot-execution**<br>[配置](../../reference/legacy-grouped-bar/examples/zero-shot-execution/config.json) · [数据](../../reference/legacy-grouped-bar/examples/zero-shot-execution/data.csv) · [PDF](../../reference/legacy-grouped-bar/examples/zero-shot-execution/figure.pdf) | 九任务、五系列、组中心标签、顶部图例和幻灯片标题 | <a href="../../reference/legacy-grouped-bar/examples/zero-shot-execution/figure.png"><img src="../../reference/legacy-grouped-bar/examples/zero-shot-execution/figure.png" width="280" alt="九任务多系列比较"></a> |
+| **affordance-distribution**<br>[配置](../../reference/legacy-grouped-bar/examples/affordance-distribution/config.json) · [数据](../../reference/legacy-grouped-bar/examples/affordance-distribution/data.csv) · [PDF](../../reference/legacy-grouped-bar/examples/affordance-distribution/figure.pdf) | 横向类别；半透明填充与粗体百分比 | <a href="../../reference/legacy-grouped-bar/examples/affordance-distribution/figure.png"><img src="../../reference/legacy-grouped-bar/examples/affordance-distribution/figure.png" width="144" alt="横向百分比分布"></a> |
+| **planning-gains**<br>[配置](../../reference/legacy-grouped-bar/examples/planning-gains/config.json) · [数据](../../reference/legacy-grouped-bar/examples/planning-gains/data.csv) · [PDF](../../reference/legacy-grouped-bar/examples/planning-gains/figure.pdf) | 非零基线、虚线网格及自动计算的增益箭头 | <a href="../../reference/legacy-grouped-bar/examples/planning-gains/figure.png"><img src="../../reference/legacy-grouped-bar/examples/planning-gains/figure.png" width="280" alt="前后对比与增益箭头"></a> |
 
 ## 选风格、布局和配色
 
-配置结构见 [配置共性、配色与字体索引](examples/style-guide/README.md) 或 [五页成图对照 PDF](examples/style-guide/catalog.pdf)。配色请同时看新的 [100 个候选研究与 10 组短名单](examples/palette-study/README.md)：它根据实际柱图、纹理及色觉模拟重新检查推荐范围，旧预设的存在不代表已获视觉认可。预设定义集中在 [`scripts/presets.json`](scripts/presets.json)。
+配置结构见 [配置共性、配色与字体索引](../../reference/legacy-grouped-bar/examples/style-guide/README.md) 或 [五页成图对照 PDF](../../reference/legacy-grouped-bar/examples/style-guide/catalog.pdf)。配色请同时看新的 [100 个候选研究与 10 组短名单](../../reference/legacy-grouped-bar/examples/palette-study/README.md)：它根据实际柱图、纹理及色觉模拟重新检查推荐范围，旧预设的存在不代表已获视觉认可。预设定义集中在 [`scripts/presets.json`](scripts/presets.json)。
 
 | 新的配色比较 | 预览（点击放大） |
 |---|---|
-| [筛选依据与使用限制](examples/palette-study/README.md) · [成图对照 PDF](examples/palette-study/shortlist.pdf) · [JSON 配方](examples/palette-study/selected-palettes.json)<br>[全部 100 个候选](examples/palette-study/overview.png) · [Illustrator 待验证 SVG 色卡](examples/palette-study/swatches.svg) | <a href="examples/palette-study/swatches.png"><img src="examples/palette-study/swatches.png" width="380" alt="10 组配色短名单及白底 HEX"></a> |
+| [筛选依据与使用限制](../../reference/legacy-grouped-bar/examples/palette-study/README.md) · [成图对照 PDF](../../reference/legacy-grouped-bar/examples/palette-study/shortlist.pdf) · [JSON 配方](../../reference/legacy-grouped-bar/examples/palette-study/selected-palettes.json)<br>[全部 100 个候选](../../reference/legacy-grouped-bar/examples/palette-study/overview.png) · [Illustrator 待验证 SVG 色卡](../../reference/legacy-grouped-bar/examples/palette-study/swatches.svg) | <a href="../../reference/legacy-grouped-bar/examples/palette-study/swatches.png"><img src="../../reference/legacy-grouped-bar/examples/palette-study/swatches.png" width="380" alt="10 组配色短名单及白底 HEX"></a> |
 
 | 选择 | 当前可用 | 成图对照 |
 |---|---|---|
-| `style` | `paper-clean`、`soft-outline`、`serif-emphasis` | [风格](examples/style-guide/styles.png) |
-| `layout` | `grouped`、`horizontal`、`paired` | [布局](examples/style-guide/layouts.png) |
+| `style` | `paper-clean`、`soft-outline`、`serif-emphasis` | [风格](../../reference/legacy-grouped-bar/examples/style-guide/styles.png) |
+| `layout` | `grouped`、`horizontal`、`paired` | [布局](../../reference/legacy-grouped-bar/examples/style-guide/layouts.png) |
 | `size` | `single`（3.3 in 单栏）、`double`（7 in 双栏）；同时设置画布、字号、留白、柱宽与自动图例 | — |
-| `palette` | `tol-bright`、`tol-muted`、`blue-orange`、`gray-purple`、`paired-blue-green` | [多系列配色](examples/style-guide/palettes.png) · [两色与成对配色](examples/style-guide/layouts.png) |
-| 可选 `font` | `sans`、`serif`、`mono`；默认随风格选择 | [字体](examples/style-guide/fonts.png) |
-| 精调透明度 | 填充、描边、网格、误差棒、文字独立控制 | [35% / 65% / 100% 填充](examples/style-guide/opacity.png) |
+| `palette` | `tol-bright`、`tol-muted`、`blue-orange`、`gray-purple`、`paired-blue-green` | [多系列配色](../../reference/legacy-grouped-bar/examples/style-guide/palettes.png) · [两色与成对配色](../../reference/legacy-grouped-bar/examples/style-guide/layouts.png) |
+| 可选 `font` | `sans`、`serif`、`mono`；默认随风格选择 | [字体](../../reference/legacy-grouped-bar/examples/style-guide/fonts.png) |
+| 精调透明度 | 填充、描边、网格、误差棒、文字独立控制 | [35% / 65% / 100% 填充](../../reference/legacy-grouped-bar/examples/style-guide/opacity.png) |
 
 以下命令从 `research-figure-skill` 目录运行；依赖安装见 [安装说明](../../README.md)。
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/style-guide/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/style-guide/config.json \
   --size single --style soft-outline --palette tol-muted --output output/my-figure
 ```
 
 输出 PNG、PDF、SVG。`--size single` 把画布设为 3.3 in 单栏，并按该宽度给字号、留白和柱宽；`--size double` 对应 7 in 双栏。换成自己的 CSV 时加 `--data my-data.csv`，并设置对应的系列名称、单位和坐标范围。预设不会继承参考图的截断基线，也不会编造误差区间。SVG 默认保留可编辑文字；投稿需要轮廓时加 `--svg-paths`。
 
-精简配置的核心选择如下，完整可运行示例见 [config.json](examples/style-guide/config.json)：
+精简配置的核心选择如下，完整可运行示例见 [config.json](../../reference/legacy-grouped-bar/examples/style-guide/config.json)：
 
 ```json
 {
@@ -65,14 +65,14 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 }
 ```
 
-未写 `panel_defaults.limits` / `ticks` 时，轴按数据自动取 nice 范围和刻度：0 基线、区间端点和数值范围都会纳入，不会静默截断。比例数据请显式设 `tick_format`（如 `.0%`）和 `ylabel`；复刻示例保留各自测得的轴范围。未指定 `panels` 时从 CSV 创建面板。颜色按 `series_order` 分配；建议明确保存该顺序，避免重排行时改变颜色。`gray-purple` 和 `paired-blue-green` 需要 `series_roles` 明确颜色含义，示例见 [配色索引](examples/style-guide/README.md#配色索引)。系列数超过色板容量时会报错，不循环复用颜色。
+未写 `panel_defaults.limits` / `ticks` 时，轴按数据自动取 nice 范围和刻度：0 基线、区间端点和数值范围都会纳入，不会静默截断。比例数据请显式设 `tick_format`（如 `.0%`）和 `ylabel`；复刻示例保留各自测得的轴范围。未指定 `panels` 时从 CSV 创建面板。颜色按 `series_order` 分配；建议明确保存该顺序，避免重排行时改变颜色。`gray-purple` 和 `paired-blue-green` 需要 `series_roles` 明确颜色含义，示例见 [配色索引](../../reference/legacy-grouped-bar/examples/style-guide/README.md#配色索引)。系列数超过色板容量时会报错，不循环复用颜色。
 
 六个复刻示例带 `frozen_config: true`，面板位置来自参考图。可以换 `--palette` 或 `--font`；`--style`、`--layout`、`--size` 会改变测量几何，CLI 会明确拒绝，请从 style-guide 模板开始。图例默认按图宽自动选择列数（`legend_defaults.columns: "auto"`），不再需要手调。
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py --list-presets
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/style-guide/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/style-guide/config.json \
   --resolved-config output/resolved.json --output output/figure
 ```
 
@@ -84,7 +84,7 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/cue-comparison/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/cue-comparison/config.json \
   --data my-data.csv --output output/my-figure
 ```
 
@@ -126,7 +126,7 @@ python quantitative-plots/grouped-bar/scripts/render.py --defaults
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/cue-comparison/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/cue-comparison/config.json \
   --set-file overrides.json \
   --output output/teal
 ```
@@ -156,7 +156,7 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/style-guide/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/style-guide/config.json \
   --style soft-outline \
   --set 'panel_defaults.bar_fill_alpha=0.45' \
   --set 'panel_defaults.bar_edge_alpha=1' \
@@ -182,7 +182,7 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/cue-comparison/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/cue-comparison/config.json \
   --set panel_defaults.tokens.mode=raw --output output/raw-tokens
 ```
 
@@ -194,7 +194,7 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
-  --config quantitative-plots/grouped-bar/examples/cue-comparison/config.json \
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/cue-comparison/config.json \
   --font-dir /path/to/licensed-fonts --output output/matched
 ```
 
@@ -208,7 +208,7 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/catalog.py \
-  --config quantitative-plots/grouped-bar/examples/style-guide/gallery.json
+  --config quantitative-plots/grouped-bar/../../reference/legacy-grouped-bar/examples/style-guide/gallery.json
 ```
 
 `catalog.py` 负责摆放对照面板，所有柱、网格、图例与箭头仍由 `render.py` 绘制。生成五张 PNG/PDF/SVG 和合并的 `catalog.pdf`，PDF/SVG 中保留矢量对象。目录继续只使用 `scripts + examples`；没有按某一张图命名的绘图脚本。

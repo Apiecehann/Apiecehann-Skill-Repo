@@ -1,6 +1,6 @@
 """Compare categorical palettes in actual render.py charts, not swatches alone.
 
-python scripts/palette_audit.py --config examples/palette-study/config.json
+python scripts/palette_audit.py --config reference/legacy-grouped-bar/examples/palette-study/config.json
 Metrics are diagnostics, not an aesthetic score or accessibility certification.
 """
 from __future__ import annotations

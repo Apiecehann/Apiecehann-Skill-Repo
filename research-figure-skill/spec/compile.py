@@ -14,8 +14,7 @@ sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import render as backend
 import distribution as distribution_backend
-import charts2d
-import charts3d
+from renderers import charts2d, charts3d
 
 
 def validate(value, schema, path="IR"):

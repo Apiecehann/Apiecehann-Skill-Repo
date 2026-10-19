@@ -13,7 +13,7 @@ from matplotlib.transforms import Affine2D
 from render import (DEFAULTS, build_figure, load_data, merge, apply_override,
                     apply_override_file, panel_rectangles, render)
 
-EXAMPLES=Path(__file__).resolve().parents[1]/'examples'
+EXAMPLES=Path(__file__).resolve().parents[3]/'reference/legacy-grouped-bar/examples'
 
 
 @pytest.fixture(autouse=True)

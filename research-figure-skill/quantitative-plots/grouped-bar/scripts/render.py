@@ -1,6 +1,6 @@
 """Configurable grouped bars. Data, layout, typography and colour are separate.
 
-Run with --config ../examples/cue-comparison/config.json. No reference image is
+Run with --config ../reference/legacy-grouped-bar/examples/cue-comparison/config.json. No reference image is
 opened by this renderer: every bar, interval, grid point and label is generated.
 """
 from __future__ import annotations
@@ -1252,7 +1252,7 @@ def main():
     config=read_config(args.config) if args.config else {'preset':{}}
     frozen=bool(config.get('frozen_config'))
     if frozen and any(getattr(args,key) is not None for key in ('style','layout','size')):
-        parser.error('This config preserves measured panel geometry; --style/--layout/--size would re-layout it. Use --palette/--font, or start from examples/style-guide.')
+        parser.error('This config preserves measured panel geometry; --style/--layout/--size would re-layout it. Use --palette/--font, or start from reference/legacy-grouped-bar/examples/style-guide.')
     if not frozen:
         for key in ('style','layout','size','palette','font'):
             if getattr(args,key) is not None: config.setdefault('preset',{})[key]=getattr(args,key)

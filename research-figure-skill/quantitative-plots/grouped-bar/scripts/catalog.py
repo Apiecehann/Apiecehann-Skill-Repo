@@ -1,6 +1,6 @@
 """Compose comparison pages with the same render.py artists, including vector PDFs.
 
-python scripts/catalog.py --config examples/style-guide/gallery.json
+python scripts/catalog.py --config reference/legacy-grouped-bar/examples/style-guide/gallery.json
 """
 from __future__ import annotations
 import argparse
