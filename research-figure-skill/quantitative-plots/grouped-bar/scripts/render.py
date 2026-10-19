@@ -22,7 +22,7 @@ from matplotlib.offsetbox import AnnotationBbox, DrawingArea
 from matplotlib.text import Text
 from matplotlib.textpath import TextToPath
 from matplotlib.path import Path as MplPath
-from matplotlib.patches import PathPatch, FancyBboxPatch, FancyArrowPatch, Patch
+from matplotlib.patches import PathPatch, FancyBboxPatch, FancyArrowPatch, Patch, Rectangle
 import numpy as np
 
 DEFAULTS = {
@@ -58,6 +58,9 @@ DEFAULTS = {
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
         'value_background_pad': .1, 'baseline': 0, 'allow_interval_clipping': False,
         'reference_lines': [],
+        'increment': {'field': None, 'hatch': '////', 'gap_pt': 1.5,
+                      'label_format': '{total}', 'delta_format': '+{delta:g}',
+                      'reference_line': False, 'hatch_color': None},
         'capacity': {'field': None, 'linestyle': '--', 'edge_width': .7,
                      'alpha': .45, 'label_format': '{value}/{capacity}', 'show_percent': True},
         'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': 'auto',
@@ -295,7 +298,7 @@ def load_data(path):
         if row['id'] in seen:
             raise ValueError(f'Duplicate row id: {row["id"]}')
         seen.add(row['id'])
-        for key in ('value', 'low', 'high', 'x', 'capacity'):
+        for key in ('value', 'low', 'high', 'x', 'capacity', 'base'):
             if row.get(key, '') != '':
                 row[key] = float(row[key])
                 if not math.isfinite(row[key]):
@@ -306,6 +309,7 @@ def load_data(path):
             raise ValueError('Supply both interval endpoints or neither')
         if 'low' in row and not row['low'] <= row['value'] <= row['high']:
             raise ValueError(f'Invalid interval in {row["id"]}')
+    validate_increment(rows, -math.inf)
     validate_capacity(rows, -math.inf)
     return rows
 
@@ -402,6 +406,114 @@ def validate_capacity(rows, baseline, field=None):
             if not row['capacity'] >= row['value'] >= baseline:
                 raise ValueError(f'Row {row["id"]}: require capacity >= value >= baseline ({baseline})')
     return rows
+
+
+def validate_increment(rows, baseline=0, orientation='vertical', field=None):
+    """Validate base data even when drawing is disabled; normalize custom fields."""
+    if field is not None:
+        if not isinstance(field, str) or not field:
+            raise ValueError('increment.field must be a column name or null')
+        normalized = []
+        for row in rows:
+            if row.get(field, '') == '':
+                raise ValueError(f'Missing base field {field!r} in {row["id"]}')
+            try:
+                base = float(row[field])
+            except (TypeError, ValueError):
+                raise ValueError(f'Invalid base in {row["id"]}: expected a finite number') from None
+            normalized.append({**row, 'base': base})
+        rows = normalized
+    for panel in dict.fromkeys(row['panel'] for row in rows):
+        members = [r for r in rows if r['panel'] == panel]
+        present = ['base' in r for r in members]
+        if any(present) and not all(present):
+            raise ValueError(f'Panel {panel}: all rows must supply base or none')
+        for row in members:
+            if 'base' not in row:
+                continue
+            if orientation != 'vertical':
+                raise ValueError('Base-plus-increment bars require vertical layout; horizontal is not supported')
+            if any(key in row for key in ('low', 'high', 'capacity')):
+                raise ValueError(f'Row {row["id"]}: base cannot be combined with intervals or capacity')
+            if any(type(row[k]) not in (int, float) or not math.isfinite(row[k]) for k in ('base', 'value')):
+                raise ValueError(f'Row {row["id"]}: base and value must be finite')
+            if not 0 <= row['base'] <= row['value']:
+                raise ValueError(f'Row {row["id"]}: require 0 <= base <= value')
+            if baseline > row['base']:
+                raise ValueError(f'Row {row["id"]}: baseline must not exceed base')
+    return rows
+
+
+def increment_text(row, template):
+    try:
+        if template == '{total}':
+            return f'{row["value"]:g}'
+        return template.format(total=row['value'], base=row['base'], delta=row['value']-row['base'])
+    except (ValueError, KeyError, AttributeError, IndexError, TypeError) as exc:
+        raise ValueError(f'Invalid increment label format {template!r}; use total, base or delta: {exc}') from None
+
+
+def draw_increment(ax, x, row, style, config, palette):
+    """Draw two segments; expose an invisible total-extent bar for legacy consumers."""
+    spec = style['increment']
+    gap = spec['gap_pt']
+    if type(gap) not in (int, float) or not math.isfinite(gap) or gap < 0:
+        raise ValueError('increment.gap_pt must be a finite nonnegative number')
+    fill, edge = bar_colors(palette, style)
+    hatch_edge = matplotlib.colors.to_rgba(spec['hatch_color'], edge[3]) if spec['hatch_color'] else edge
+    base_bar = ax.bar(x, row['base']-style['baseline'], width=style['bar_width'], bottom=style['baseline'],
+        facecolor=(*tint(palette['fill'], .7), fill[3]), edgecolor=hatch_edge,
+        linewidth=max(.5, style['bar_edge_width']), hatch=spec['hatch'], zorder=2)[0]
+    increment_bar = ax.bar(x, row['value']-row['base'], width=style['bar_width'], bottom=row['base'],
+        facecolor=fill, edgecolor='none', linewidth=0, hatch=None, zorder=2)[0]
+    # Never draw an extra full bar over the two actual segments.
+    total_bar = Rectangle((x-style['bar_width']/2, style['baseline']), style['bar_width'],
+                          row['value']-style['baseline'], visible=False)
+    ax.add_patch(total_bar)
+    separator = reference = None
+    if gap and style['baseline'] < row['base'] < row['value']:
+        separator, = ax.plot([x-style['bar_width']/2, x+style['bar_width']/2], [row['base']]*2,
+                             color=config['figure']['background'], linewidth=gap,
+                             solid_capstyle='butt', zorder=3)
+    if spec['reference_line']:
+        reference = ax.axhline(row['base'], color=palette['edge'], linewidth=.5, linestyle='--', zorder=1)
+    base_bar.set_gid('increment-'+row['id']+'-base')
+    increment_bar.set_gid('increment-'+row['id']+'-increment')
+    return dict(bar=total_bar, base_bar=base_bar, increment_bar=increment_bar,
+                increment_separator=separator, increment_reference=reference)
+
+
+def add_increment_label(fig, ax, x, row, item, style, config, palette, font_dir):
+    """Use measured segment bounds; a small increment gets an external leader label."""
+    text = increment_text(row, style['increment']['delta_format'])
+    middle = row['base'] + (row['value']-row['base'])/2
+    label = ax.text(x, middle, text, ha='center', va='center', zorder=5,
+                    color=style['value_color'] or palette.get('label', palette['edge']),
+                    fontproperties=font(config, style['value_font'], style['value_size'], font_dir))
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    box = label.get_window_extent(renderer)
+    segment = item['increment_bar'].get_window_extent(renderer)
+    pad = fig.dpi/72*2
+    gap = fig.dpi/72*style['increment']['gap_pt']/2
+    fits = (box.width + 2*pad <= segment.width and box.height + 2*pad + gap <= segment.height)
+    leader = None
+    if not fits:
+        total = item['label'].get_window_extent(renderer)
+        # Place above the total text, not over the nearly zero-height segment.
+        point = ax.transData.transform((x, row['value']))
+        point[1] = max(point[1], total.y1) + pad + box.height/2
+        left = x + style['bar_width']/2
+        label.set_position(ax.transData.inverted().transform(point))
+        anchor = ax.transData.transform((left, middle))
+        end = np.array([point[0] + box.width/2 + pad, point[1]])
+        elbow = np.array([max(anchor[0], end[0]) + pad, anchor[1]])
+        vertices = ax.transData.inverted().transform([anchor, elbow, [elbow[0], end[1]], end])
+        leader, = ax.plot(vertices[:, 0], vertices[:, 1], color=palette['edge'], linewidth=.5,
+                          clip_on=False, zorder=4)
+        leader.set_gid('increment-'+row['id']+'-leader')
+    label.set_gid('increment-'+row['id']+'-delta-label')
+    item.update(increment_label=label, increment_leader=leader, increment_label_inside=fits)
 
 
 def capacity_text(row, spec):
@@ -617,6 +729,7 @@ def build_figure(config, rows, font_dir=None):
             axes[panel['id']] = ax
             rr = [r for r in rows if r['panel'] == panel['id']]
             rr = validate_capacity(rr, style['baseline'], style['capacity']['field'])
+            rr = validate_increment(rr, style['baseline'], style['orientation'], style['increment']['field'])
             xx = positions(rr, style)
             limits = style['limits']
             ticks = style['ticks']
@@ -753,7 +866,11 @@ def build_figure(config, rows, font_dir=None):
                     capacity_label.set_gid('capacity-'+row['id']+'-label')
                 common = dict(color=fill, edgecolor=edge, linewidth=style['bar_edge_width'],
                               hatch=palette.get('hatch',style['hatch']),zorder=2)
-                if vertical:
+                increment = {}
+                if style['increment']['field'] is not None:
+                    increment = draw_increment(ax, x, row, style, config, palette)
+                    bar = increment['bar']
+                elif vertical:
                     bar = ax.bar(x,row['value']-style['baseline'],width=style['bar_width'],bottom=style['baseline'],**common)[0]
                 else:
                     bar = ax.barh(x,row['value']-style['baseline'],height=style['bar_width'],left=style['baseline'],**common)[0]
@@ -766,9 +883,10 @@ def build_figure(config, rows, font_dir=None):
                                        capsize=style['error_cap'],capthick=style['error_width'],
                                        alpha=opacity(style['error_alpha'],'error_alpha'),zorder=4)
                 label = None
-                if style['value_labels']:
+                if style['value_labels'] or increment:
                     anchor = row.get('high',row['value']) if style['value_anchor']=='high' else row['value']
-                    label=ax.annotate(format(row['value'],style['value_format']),
+                    value_text = increment_text(row, style['increment']['label_format']) if increment else format(row['value'],style['value_format'])
+                    label=ax.annotate(value_text,
                         (x,anchor) if vertical else (anchor,x),
                         xytext=(0,style['value_pad']) if vertical else (style['value_pad'],0),
                         textcoords='offset points',ha='center' if vertical else 'left',
@@ -784,6 +902,10 @@ def build_figure(config, rows, font_dir=None):
                 artists[row['id']] = {'bar':bar,'error':error,'label':label,'x':float(x),'axis':ax,
                                       'value':row['value'],'series':row['series'],'vertical':vertical,
                                       'capacity_bar':capacity_bar,'capacity_label':capacity_label}
+                if increment:
+                    artists[row['id']].update(increment, total_label=label)
+                    label.set_gid('increment-'+row['id']+'-total-label')
+                    add_increment_label(fig, ax, x, row, artists[row['id']], style, config, palette, font_dir)
             add_legend(fig,ax,panel,rr,style,config,font_dir)
         for spec in config['gains']:
             add_gain(fig,spec,artists,config,font_dir)

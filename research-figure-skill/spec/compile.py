@@ -137,9 +137,9 @@ def read_rows(ir, ir_path):
         if cell in cells:
             raise ValueError(f"CSV: duplicate panel/group/series {cell}; aggregate observations first")
         cells.add(cell)
-        for key in ("low", "high", "label", "capacity"):
+        for key in ("low", "high", "label", "capacity", "base"):
             column = enc.get(key, key)
-            if key == "capacity" and key not in enc:
+            if key in ("capacity", "base") and key not in enc:
                 continue
             if raw.get(column, "").strip():
                 row[key] = raw[column] if key == "label" else numeric(raw[column], column, row_id)
@@ -149,6 +149,8 @@ def read_rows(ir, ir_path):
             raise ValueError(f"CSV row {row_id}: supply both low/high interval endpoints")
         if "low" in row and not row["low"] <= row["value"] <= row["high"]:
             raise ValueError(f"CSV row {row_id}: interval must contain value")
+        if "base" in row and raw.get(enc.get("capacity", "capacity"), "").strip():
+            raise ValueError(f"CSV row {row_id}: base cannot be combined with capacity")
         if "capacity" in row:
             baseline = ir.get("axis", {}).get("baseline", 0)
             if "low" in row:
@@ -156,6 +158,8 @@ def read_rows(ir, ir_path):
             if not row["capacity"] >= row["value"] >= baseline:
                 raise ValueError(f"CSV row {row_id}: require capacity >= value >= baseline ({baseline})")
         rows.append(row)
+    backend.validate_increment(rows, ir.get("axis", {}).get("baseline", 0),
+                               "horizontal" if ir.get("layout") == "horizontal" else "vertical")
     present = list(dict.fromkeys(r["series"] for r in rows))
     order = ir.get("series_order", present)
     if not set(present).issubset(order):
@@ -175,7 +179,7 @@ def read_rows(ir, ir_path):
             format(0.5, fmt)
         except ValueError:
             raise ValueError(f"Invalid numeric format {fmt!r}") from None
-        if fmt.endswith("%") and any(not 0 <= r[k] <= 1 for r in rows for k in ("value", "low", "high", "capacity") if k in r):
+        if fmt.endswith("%") and any(not 0 <= r[k] <= 1 for r in rows for k in ("value", "low", "high", "capacity", "base") if k in r):
             raise ValueError("Percentage format requires CSV values and endpoints in [0, 1]; divide percentages by 100")
     return rows, order
 
@@ -188,6 +192,10 @@ def contrast_on_white(rgba):
 
 def apply_cards(ir, config, rows, log):
     library = json.loads((ROOT / "library/cards.json").read_text(encoding="utf8"))
+    if "base" in ir["encoding"]:
+        params = library["encoding"]["increment"]["params"]
+        config["panel_defaults"]["increment"].update(params, field="base")
+        log.append(f"encoding increment -> {ir['encoding']['base']} normalized to base; value is total")
     if "capacity" in ir["encoding"]:
         params = library["encoding"]["capacity"]["params"]
         config["panel_defaults"]["capacity"].update(params, field="capacity")
@@ -361,7 +369,7 @@ def translate(ir, rows, order):
     log.append("legend auto -> renderer measures columns at render time" if labels["legend"] == "top" else "legend -> hidden")
     decisions = {"claim": ir["claim"], "chart": ir["chart"], "size": ir["size"]["preset"],
                  "size_pt": [width, height], "palette": theme["palette"], "layout": layout,
-                 "encoding": ["capacity"] if "capacity" in ir["encoding"] else ["grouped-bar"],
+                 "encoding": ["increment"] if "base" in ir["encoding"] else (["capacity"] if "capacity" in ir["encoding"] else ["grouped-bar"]),
                  "emphasis": [c["card"] for c in ir.get("emphasis", [])],
                  "annotations": [c["card"] for c in ir.get("annotations", [])],
                  "labels": labels, "axes": axes, "log": log}
@@ -375,7 +383,7 @@ def compile_ir(ir_path, output, render=False):
     config, decisions = translate(ir, rows, order)
     output.mkdir(parents=True, exist_ok=True)
     fields = ["id", "panel", "group", "series", "value"]
-    fields += [key for key in ("low", "high", "capacity", "label") if any(key in r for r in rows)]
+    fields += [key for key in ("low", "high", "capacity", "base", "label") if any(key in r for r in rows)]
     with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()

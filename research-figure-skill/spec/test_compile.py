@@ -300,3 +300,14 @@ def test_axes_catalog_declares_when_and_avoid_for_every_option():
             assert option["id"] and option["label"], (name, option)
             assert option["when"] and option["avoid"], (name, option)
             assert option.get("status") in ("implemented", "planned"), (name, option)
+
+
+def test_increment_ir_normalizes_custom_column_and_uses_existing_backend(source, tmp_path):
+    source[1]["encoding"]["base"] = "previous"
+    (tmp_path / "source.csv").write_text("task,method,previous,score\nA,base,.3,.5\nA,ours,.5,.8\n")
+    config, decisions = compile_ir(save(source), tmp_path / "build", render=True)
+    assert config["panel_defaults"]["increment"]["field"] == "base"
+    assert config["panel_defaults"]["increment"]["gap_pt"] == 1.5
+    assert decisions["encoding"] == ["increment"]
+    assert backend.load_data(tmp_path / "build/data.csv")[0]["base"] == .3
+    assert (tmp_path / "build/figure.svg").is_file()

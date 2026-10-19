@@ -337,3 +337,78 @@ def test_zero_capacity_has_no_fabricated_percentage():
     _, artists = build_figure({"panels": [{"id": "p"}],
                               "panel_defaults": {"capacity": {"field": "capacity"}}}, [row])
     assert artists["a"]["capacity_label"].get_text() == "0 / 0 (n/a)"
+
+
+def increment_case(base=60., value=90., baseline=10.):
+    rows = [{"id": "a", "panel": "p", "group": "A", "series": "base", "base": base, "value": value}]
+    cfg = {"figure": {"size_pt": [360, 240]}, "layout": {"columns": 1, "top_pt": 40},
+           "panels": [{"id": "p"}],
+           "panel_defaults": {"baseline": baseline, "increment": {"field": "base"}, "grid": {"kind": "none"}}}
+    return cfg, rows
+
+
+def test_increment_segments_total_metadata_and_labels():
+    cfg, rows = increment_case()
+    fig, a = build_figure(cfg, rows)
+    item = a["a"]
+    assert item["base_bar"].get_height() == 50
+    assert item["increment_bar"].get_height() == 30
+    assert item["base_bar"].get_height() + item["increment_bar"].get_height() == 90 - 10
+    assert item["base_bar"].get_hatch() == "////"
+    assert not item["increment_bar"].get_hatch()
+    assert not item["bar"].get_visible()
+    assert item["bar"].get_y() == 10 and item["bar"].get_height() == 80
+    assert item["label"] is item["total_label"]
+    assert item["total_label"].get_text() == "90"
+    assert item["increment_label"].get_text() == "+30"
+    assert item["increment_label_inside"]
+    assert item["increment_leader"] is None
+    assert item["increment_separator"].get_linewidth() == 1.5
+    assert fig.axes[0].get_ylim()[1] >= 90
+
+
+def test_tiny_increment_label_uses_leader_without_hiding_total():
+    cfg, rows = increment_case(base=89.99)
+    cfg["panel_defaults"]["limits"] = [0, 120]
+    fig, a = build_figure(cfg, rows)
+    item = a["a"]
+    assert not item["increment_label_inside"]
+    assert item["increment_leader"] is not None
+    renderer = fig.canvas.get_renderer()
+    assert not item["total_label"].get_window_extent(renderer).overlaps(item["increment_label"].get_window_extent(renderer))
+
+
+@pytest.mark.parametrize("change, message", [
+    ({"base": 91}, "0 <= base <= value"),
+    ({"base": -1}, "0 <= base <= value"),
+    ({"base": float("nan")}, "finite"),
+    ({"value": float("inf")}, "finite"),
+    ({"low": 80, "high": 95}, "intervals or capacity"),
+    ({"capacity": 100}, "intervals or capacity"),
+])
+def test_increment_invalid_data_rejected(change, message):
+    cfg, rows = increment_case()
+    rows[0].update(change)
+    with pytest.raises(ValueError, match=message):
+        build_figure(cfg, rows)
+
+
+def test_increment_horizontal_and_missing_base_rejected():
+    cfg, rows = increment_case()
+    cfg["panel_defaults"]["orientation"] = "horizontal"
+    with pytest.raises(ValueError, match="vertical.*horizontal"):
+        build_figure(cfg, rows)
+    cfg["panel_defaults"]["orientation"] = "vertical"
+    cfg["panel_defaults"]["increment"]["field"] = None
+    rows.append({"id": "b", "panel": "p", "group": "B", "series": "base", "value": 80})
+    with pytest.raises(ValueError, match="all rows must supply base"):
+        build_figure(cfg, rows)
+
+
+def test_increment_csv_base_parsed_and_validated(tmp_path):
+    path = tmp_path / "base.csv"
+    path.write_text("id,panel,group,series,base,value\na,p,A,base,60,90\n")
+    assert load_data(path)[0]["base"] == 60.
+    path.write_text("id,panel,group,series,base,value\na,p,A,base,91,90\n")
+    with pytest.raises(ValueError, match="0 <= base <= value"):
+        load_data(path)

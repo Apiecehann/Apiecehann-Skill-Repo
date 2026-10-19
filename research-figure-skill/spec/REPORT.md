@@ -63,3 +63,13 @@
 - horizontal 单系列 `group_gap` 降到 0.06，并关闭网格；横向条更紧凑。
 - 新增 `examples/palette-shootout/`：4 种 baseline 策略 × 3 个 accent 的真实成图对照，附 `stage1.png` 和 `index.json`，用于用户选色。
 - 回归测试增加到 140 passed。
+
+## increment/delta 能力任务
+
+起点为 feat/pattern-library 的 8e09c1b（包含并行新增的 axes catalog），基线完整测试 141 passed in 29.57s。按任务书三阶段提交，作者统一为 Apiecehann & Codex <1507392430@qq.com>。不修改色板、风格、字体、library/axes.json、palette-shootout 或原模板颜色。
+
+阶段 1 实现 base CSV／IR／编码卡及纵向基数加增量：value 始终是总值；两段高度之和为 value - baseline。base 同面板必须齐全，要求 0 <= base <= value 且 baseline <= base，禁止区间、容量及横向。基数填充是现有系列色混入 70% 白色，不新增色板。
+
+兼容约定：artists[row_id]["bar"] 是不绘制的完整总值矩形，仅保留几何元数据；base_bar 与 increment_bar 是实际两段。total_label／increment_label／increment_leader 暴露标签与引线。增量卡总值标签独立于普通 value_labels 开关；放不下的增量标签置于总值标签上方并加引线。新模板、注册与扩展几何覆盖将在阶段 3 完成。
+
+阶段 1 验收：完整测试 152 passed in 26.83s；/tmp/increment-base 中立预览已导出 PNG/PDF/SVG 并人工查看，三组的基数、增量、分隔与标签均正常。

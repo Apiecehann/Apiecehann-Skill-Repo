@@ -28,6 +28,41 @@
         "灰度下仍可辨认空心轮廓"
       ],
       "example": "examples/templates/capacity-88-of-96/figure.ir.json"
+    },
+    "increment": {
+      "layer": "encoding",
+      "intent": "在一根柱中显示今年基数与明年增量",
+      "when": [
+        "存在真实基数",
+        "增量是要表达的信息",
+        "纵向分组柱"
+      ],
+      "avoid": [
+        "负增量",
+        "区间",
+        "容量",
+        "横向布局"
+      ],
+      "params": {
+        "field": "base",
+        "hatch": "////",
+        "gap_pt": 1.5,
+        "label_format": "{total}",
+        "delta_format": "+{delta:g}",
+        "reference_line": false
+      },
+      "operations": [
+        "从 baseline 到 base 画带纹理的浅色基数",
+        "从 base 到 value 画正常系列填充的实心增量",
+        "在边界留一条背景色细缝",
+        "总值标在柱顶；增量能放下时标在内部，否则用引线标在外部"
+      ],
+      "qa": [
+        "基数段加增量段等于 value - baseline",
+        "纹理在灰度下可见",
+        "增量文字不与总值重叠"
+      ],
+      "example": "examples/templates/increment-base/figure.ir.json"
     }
   },
   "emphasis": {
