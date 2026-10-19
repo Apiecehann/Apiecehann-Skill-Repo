@@ -108,6 +108,28 @@
         "overlap"
       ],
       "ir": "examples/templates/distribution-overlap/figure.ir.json"
+    },
+    {
+      "id": "dot-plot",
+      "title": "Dot plot",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "dot"
+      ],
+      "ir": "examples/templates/dot-plot/figure.ir.json"
+    },
+    {
+      "id": "dumbbell",
+      "title": "Dumbbell",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "paired"
+      ],
+      "ir": "examples/templates/dumbbell/figure.ir.json"
     }
   ]
 }

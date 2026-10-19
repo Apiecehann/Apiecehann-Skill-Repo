@@ -1,0 +1,13 @@
+id,panel,group,series,value
+a1,main,Bench A,method-1,62
+a2,main,Bench A,method-2,74
+a3,main,Bench A,method-3,58
+a4,main,Bench A,ours,82
+b1,main,Bench B,method-1,48
+b2,main,Bench B,method-2,66
+b3,main,Bench B,method-3,52
+b4,main,Bench B,ours,79
+c1,main,Bench C,method-1,71
+c2,main,Bench C,method-2,69
+c3,main,Bench C,method-3,63
+c4,main,Bench C,ours,88

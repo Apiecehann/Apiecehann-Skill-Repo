@@ -1,0 +1,45 @@
+{
+  "claim": "MOCK：三个任务的改动前后差异，用 dumbbell 同时看两端和差值。",
+  "chart": "dumbbell",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "paper-clean",
+    "palette": "d3-blue",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "axis": {
+    "x_label": "Success rate (%)",
+    "y_label": "Task",
+    "x_min": 0,
+    "x_max": 100
+  },
+  "series_order": [
+    "before",
+    "after"
+  ],
+  "series_labels": {
+    "before": "Before",
+    "after": "After"
+  }
+}

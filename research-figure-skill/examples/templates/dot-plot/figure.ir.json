@@ -1,0 +1,49 @@
+{
+  "claim": "MOCK：四种方法在三个 benchmark 上的成功率，用 dot plot 替代 grouped bar。",
+  "chart": "dot-plot",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series"
+  },
+  "size": {
+    "preset": "single"
+  },
+  "theme": {
+    "style": "paper-clean",
+    "palette": "d3-orange",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "axis": {
+    "x_label": "Success rate (%)",
+    "y_label": "Benchmark",
+    "x_min": 40,
+    "x_max": 95
+  },
+  "series_order": [
+    "method-1",
+    "method-2",
+    "method-3",
+    "ours"
+  ],
+  "series_labels": {
+    "method-1": "Method 1",
+    "method-2": "Method 2",
+    "method-3": "Method 3",
+    "ours": "Ours"
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "charts": [
+    {
+      "id": "grouped-bar",
+      "family": "comparison",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [
+        "errorbar",
+        "raw-points",
+        "reference-line",
+        "significance-bracket",
+        "delta"
+      ],
+      "ir": "examples/templates/ours-vs-baselines/figure.ir.json"
+    },
+    {
+      "id": "horizontal-bar",
+      "family": "comparison",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [
+        "errorbar",
+        "raw-points",
+        "reference-line",
+        "significance-bracket"
+      ],
+      "ir": "examples/templates/horizontal-percent/figure.ir.json"
+    },
+    {
+      "id": "dot-plot",
+      "family": "comparison",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [
+        "errorbar",
+        "raw-points",
+        "reference-line",
+        "significance-bracket",
+        "delta"
+      ]
+    },
+    {
+      "id": "dumbbell",
+      "family": "comparison",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [
+        "reference-line",
+        "delta"
+      ]
+    },
+    {
+      "id": "line-band",
+      "family": "time",
+      "status": "planned",
+      "requires": [
+        "x",
+        "y"
+      ],
+      "supports": [
+        "ci-band",
+        "reference-line",
+        "trend"
+      ]
+    },
+    {
+      "id": "scatter",
+      "family": "relationship",
+      "status": "planned",
+      "requires": [
+        "x",
+        "y"
+      ],
+      "supports": [
+        "raw-points",
+        "reference-line",
+        "trend",
+        "confidence-ellipse",
+        "ci-band"
+      ]
+    },
+    {
+      "id": "distribution-overlap",
+      "family": "distribution",
+      "status": "implemented",
+      "requires": [
+        "panel",
+        "series",
+        "value"
+      ],
+      "supports": [
+        "reference-line"
+      ]
+    },
+    {
+      "id": "kde",
+      "family": "distribution",
+      "status": "planned",
+      "requires": [
+        "panel",
+        "series",
+        "value"
+      ],
+      "supports": [
+        "reference-line",
+        "raw-points"
+      ]
+    },
+    {
+      "id": "box",
+      "family": "distribution",
+      "status": "planned",
+      "requires": [
+        "x",
+        "y"
+      ],
+      "supports": [
+        "raw-points",
+        "reference-line",
+        "significance-bracket"
+      ]
+    },
+    {
+      "id": "violin",
+      "family": "distribution",
+      "status": "planned",
+      "requires": [
+        "x",
+        "y"
+      ],
+      "supports": [
+        "raw-points",
+        "reference-line",
+        "significance-bracket"
+      ]
+    },
+    {
+      "id": "ecdf",
+      "family": "distribution",
+      "status": "planned",
+      "requires": [
+        "panel",
+        "series",
+        "value"
+      ],
+      "supports": [
+        "reference-line"
+      ]
+    },
+    {
+      "id": "heatmap",
+      "family": "matrix",
+      "status": "planned",
+      "requires": [
+        "row",
+        "col",
+        "value"
+      ],
+      "supports": [
+        "reference-line"
+      ]
+    },
+    {
+      "id": "roc",
+      "family": "classification",
+      "status": "planned",
+      "requires": [
+        "score",
+        "label"
+      ],
+      "supports": [
+        "ci-band",
+        "reference-line",
+        "operating-point"
+      ]
+    },
+    {
+      "id": "pr",
+      "family": "classification",
+      "status": "planned",
+      "requires": [
+        "score",
+        "label"
+      ],
+      "supports": [
+        "ci-band",
+        "reference-line",
+        "operating-point"
+      ]
+    },
+    {
+      "id": "calibration",
+      "family": "classification",
+      "status": "planned",
+      "requires": [
+        "score",
+        "label"
+      ],
+      "supports": [
+        "reference-line"
+      ]
+    },
+    {
+      "id": "surface",
+      "family": "3d",
+      "status": "planned",
+      "requires": [
+        "x",
+        "y",
+        "z"
+      ],
+      "supports": [
+        "reference-line"
+      ]
+    }
+  ]
+}

@@ -157,7 +157,7 @@ def test_every_recipe_renders_without_warnings_and_matches_decisions(name, tmp_p
     with warnings.catch_warnings():
         warnings.simplefilter("error")
         config, decisions = compile_ir(TEMPLATES / name / "figure.ir.json", path, render=True)
-        if decisions["chart"] == "distribution-overlap":
+        if decisions["chart"] != "grouped-bar":
             for ext in ("png", "pdf", "svg"):
                 assert (path / f"figure.{ext}").stat().st_size > 1000
             assert "<text" in (path / "figure.svg").read_text()
@@ -241,8 +241,8 @@ def test_catalog_indexes_generated_artifacts(tmp_path):
     subprocess.run([sys.executable, str(SPEC / "catalog.py"), "--output", str(output)],
                    check=True, capture_output=True, text=True)
     index = json.loads((output / "index.json").read_text())
-    assert len(index["entries"]) == 10
-    assert len({e["recipe"] for e in index["entries"]}) == 10
+    assert len(index["entries"]) == 12
+    assert len({e["recipe"] for e in index["entries"]}) == 12
     for entry in index["entries"]:
         assert entry["tags"]
         assert entry["decisions"]["size"] in ("single", "medium", "double")
@@ -259,7 +259,7 @@ def test_eval_templates_pass_and_produced_ir_is_checked(tmp_path):
     cases = SPEC / "evals/cases.jsonl"
     result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--check-templates"],
                             check=True, capture_output=True, text=True)
-    assert "PASS 14" in result.stdout
+    assert "PASS 16" in result.stdout
     result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--case", "case-01",
                              "--ir", str(TEMPLATES / "ours-vs-baselines/figure.ir.json")],
                             check=True, capture_output=True, text=True)
@@ -324,3 +324,18 @@ def test_palette_library_has_120_unique_four_color_cards():
     assert len(library["palettes"]) == 120
     assert len({tuple(p["colors"]) for p in library["palettes"]}) == 120
     assert all(len(p["colors"]) == 4 for p in library["palettes"])
+
+
+def test_chart_and_overlay_registries_are_consistent():
+    charts = json.loads((SPEC.parent / "library/charts.json").read_text(encoding="utf8"))["charts"]
+    overlays = json.loads((SPEC.parent / "library/overlays.json").read_text(encoding="utf8"))["overlays"]
+    chart_ids = [c["id"] for c in charts]
+    overlay_ids = [o["id"] for o in overlays]
+    assert len(chart_ids) == len(set(chart_ids))
+    assert len(overlay_ids) == len(set(overlay_ids))
+    for chart in charts:
+        assert chart["family"] and chart["requires"]
+        assert all(o in overlay_ids or o == "*" for o in chart["supports"])
+    for overlay in overlays:
+        assert overlay["layer"] in ("stat", "reference", "annotation")
+        assert all(c in chart_ids or c == "*" for c in overlay["supports"])

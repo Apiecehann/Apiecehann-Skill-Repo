@@ -14,6 +14,7 @@ sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import render as backend
 import distribution as distribution_backend
+import charts2d
 
 
 def validate(value, schema, path="IR"):
@@ -461,11 +462,74 @@ def compile_distribution(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_2d(ir, ir_path, output, render=False):
+    chart = ir["chart"]
+    if chart not in ("dot-plot", "dumbbell"):
+        raise ValueError(f"unsupported 2D chart {chart!r}")
+    rows, order = read_rows(ir, ir_path)
+    if chart == "dumbbell" and len(order) != 2:
+        raise ValueError("dumbbell requires exactly two series")
+    theme = ir["theme"]
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette_name = theme.get("palette", "d3-orange")
+    palette = presets["palettes"].get(palette_name)
+    if palette is None:
+        raise ValueError(f"Unknown palette {palette_name!r}")
+    if len(palette["colors"]) < len(order):
+        raise ValueError(f"Palette {palette_name!r} has {len(palette['colors'])} colors for {len(order)} series")
+    groups = list(dict.fromkeys(r["group"] for r in rows))
+    axis = ir.get("axis", {})
+    size = ir["size"]["preset"]
+    size_pt = {"single": [360, 240], "medium": [420, 260], "double": [504, 320],
+               "slide": [648, 360]}[size]
+    config = {
+        "chart": chart,
+        "groups": groups,
+        "series_order": order,
+        "colors": dict(zip(order, palette["colors"])),
+        "series_labels": ir.get("series_labels", {}),
+        "x_label": axis.get("x_label", ""),
+        "y_label": axis.get("y_label", ""),
+        "x_min": axis.get("x_min"),
+        "x_max": axis.get("x_max"),
+        "reference": ir.get("reference", []),
+        "legend": ir["labels"].get("legend", "top") == "top",
+        "size_pt": size_pt,
+        "formats": ir["output"]["formats"],
+        "dpi": ir["output"]["dpi"],
+        "svg_text": ir["output"].get("svg_text", True),
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        fields = ["id", "panel", "group", "series", "value"]
+        fields += [key for key in ("low", "high", "label") if any(key in r for r in rows)]
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": chart, "size": size, "size_pt": size_pt,
+        "palette": palette_name, "encoding": [chart],
+        "labels": ir["labels"], "layout": chart, "emphasis": [], "annotations": [],
+        "axes": {"x": [axis.get("x_min"), axis.get("x_max")]},
+        "log": [f"{chart} -> {len(groups)} groups, {len(order)} series"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        renderer = charts2d.render_dot if chart == "dot-plot" else charts2d.render_dumbbell
+        renderer(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_ir(ir_path, output, render=False):
     ir_path, output = Path(ir_path), Path(output)
     ir = load_ir(ir_path)
     if ir["chart"] == "distribution-overlap":
         return compile_distribution(ir, ir_path, output, render)
+    if ir["chart"] in ("dot-plot", "dumbbell"):
+        return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])
     if missing:
         raise ValueError(f"grouped-bar encoding requires {sorted(missing)}")

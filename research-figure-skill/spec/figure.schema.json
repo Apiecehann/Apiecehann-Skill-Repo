@@ -11,7 +11,9 @@
       "type": "string",
       "enum": [
         "grouped-bar",
-        "distribution-overlap"
+        "distribution-overlap",
+        "dot-plot",
+        "dumbbell"
       ]
     },
     "data": {
@@ -20,6 +22,32 @@
     },
     "title_prefix": {
       "type": "string"
+    },
+    "reference": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "axis": {
+            "type": "string",
+            "enum": ["x", "y"]
+          },
+          "value": {
+            "type": "number"
+          },
+          "label": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "linestyle": {
+            "type": "string"
+          }
+        },
+        "required": ["value"],
+        "additionalProperties": false
+      }
     },
     "encoding": {
       "type": "object",
