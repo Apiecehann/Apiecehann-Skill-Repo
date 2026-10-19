@@ -14,14 +14,14 @@
 | `05-paired.png` | paired palette | before/after 用哪组同色相浅深 |
 | `06-categorical.png` | categorical palette | 5 个等权类别用哪组 |
 | `07-grid.png` | grid | none / h-hairline / h-dashed / full-hairline / full-dashed / dots |
-| `08-style.png` | style | 15 个白底风格：paper / soft / serif / bold-slide / minimal-mono / hand-drawn / boxed / grid / editorial / white-slide / technical-grid / poster / compact / high-contrast / pastel |
-| `09-type.png` | type | 15 个字体：Arial / Helvetica / Segoe UI / Calibri / Verdana / Tahoma / Trebuchet / Times / Georgia / Garamond / Cambria / Consolas / Courier / Comic / Segoe Script |
+| `08-style.png` | style | 15 个白底风格；已全部 promote 到 presets |
+| `09-type.png` | type | 15 个字体；已全部 promote 到 presets |
 | `10-layout.png` | layout | 竖/横 × 1/2/4 series × 单/多面板 |
 | `11-size.png` | size | 9 种宽度/高度/长宽比 |
 | `12-annotation.png` | annotation | 只保留两类：curved delta / distribution overlap |
 | `13-panel-gap.png` | panel gap | normal / zero gap / composite |
 | `14-bar-spacing.png` | bar spacing | spaced / touching / tight-groups / touching-all |
-| `15-color-pairing.png` | color pairing | 固定 accent = orange，24 组 baseline 配色 |
+| `15-color-pairing.png` | color pairing | 固定 accent = orange，24 组 baseline 配色；5 组已 promote |
 | `16-palette-library.png` | palette library | 120 组 4-color 色卡（100 生成 + 20 策展） |
 
 ## 关于 outline / alpha / hatch
@@ -83,7 +83,7 @@ palette_library: 120 组里筛 3–5 组
 - `implemented`：当前 renderer/compiler 能直接出图；
 - `planned`：类别先定，代码后续补。
 
-`08-style` / `09-type` 现在都画了 15 个选项；`12-annotation` 里的 increment 已按 Codex 的 base+increment 实现，bracket / direct-label 仍是 planned。
+`08-style` / `09-type` 现在 15 个都已是正式 preset；`12-annotation` 里的 distribution overlap 仍是独立 chart family 示例。
 
 ## 生成
 

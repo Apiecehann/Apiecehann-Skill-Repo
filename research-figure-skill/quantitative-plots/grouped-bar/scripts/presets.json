@@ -446,6 +446,210 @@
           "handletextpad": 0.4
         }
       }
+    },
+    "boxed-journal": {
+      "description": "四边 spine、内向刻度；白底，适合传统期刊版式。",
+      "font": "sans",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "spines": [
+            "left",
+            "bottom",
+            "top",
+            "right"
+          ],
+          "grid": {
+            "kind": "none"
+          },
+          "axis_width": 0.7,
+          "bar_edge_width": 0.4
+        }
+      }
+    },
+    "grid-paper": {
+      "description": "白底 + 全二维 hairline grid；技术报告。",
+      "font": "sans",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "grid": {
+            "kind": "lines",
+            "axis": "both",
+            "color": "#D9DEE3",
+            "linewidth": 0.4,
+            "linestyle": "-"
+          }
+        }
+      }
+    },
+    "editorial-serif": {
+      "description": "serif、无网格、细轴线；编辑/杂志风。",
+      "font": "serif",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "grid": {
+            "kind": "none"
+          },
+          "axis_width": 0.5,
+          "tick_size": 8,
+          "label_size": 10
+        }
+      }
+    },
+    "white-slide": {
+      "description": "白底、大字号、serif 标题；幻灯片。",
+      "font": "serif",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "grid": {
+            "kind": "none"
+          },
+          "axis_width": 1.2,
+          "baseline_width": 1.6,
+          "tick_size": 11,
+          "category_size": 11,
+          "label_size": 13,
+          "value_size": 10,
+          "spines": [
+            "bottom"
+          ]
+        }
+      }
+    },
+    "technical-grid": {
+      "description": "白底、mono、全二维 grid、四边 spine；技术报告。",
+      "font": "mono",
+      "palette": "tableau10",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "grid": {
+            "kind": "lines",
+            "axis": "both",
+            "color": "#D9DEE3",
+            "linewidth": 0.4,
+            "linestyle": "-"
+          },
+          "spines": [
+            "left",
+            "bottom",
+            "top",
+            "right"
+          ],
+          "axis_width": 0.6,
+          "bar_edge_width": 0.5
+        }
+      }
+    },
+    "poster-bold": {
+      "description": "白底、粗轴线、大字号；海报/答辩。",
+      "font": "sans",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "tick_size": 10,
+          "category_size": 11,
+          "label_size": 13,
+          "value_size": 10,
+          "axis_width": 2,
+          "baseline_width": 2.4,
+          "grid": {
+            "kind": "none"
+          },
+          "spines": [
+            "bottom"
+          ]
+        }
+      }
+    },
+    "compact-journal": {
+      "description": "白底、密集小字号、细轴线；多组紧凑版式。",
+      "font": "sans",
+      "palette": "tol-muted",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "tick_size": 7,
+          "category_size": 7,
+          "label_size": 8,
+          "value_size": 6.5,
+          "axis_width": 0.5,
+          "baseline_width": 0.8,
+          "grid": {
+            "kind": "none"
+          },
+          "spines": [
+            "bottom"
+          ]
+        }
+      }
+    },
+    "high-contrast": {
+      "description": "白底、黑轴线、高对比；投影/打印。",
+      "font": "sans",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "text_color": "#030712",
+          "axis_color": "#030712",
+          "tick_color": "#111827",
+          "axis_width": 1.5,
+          "baseline_width": 1.8,
+          "grid": {
+            "kind": "none"
+          },
+          "tick_size": 9,
+          "label_size": 11
+        }
+      }
+    },
+    "pastel-poster": {
+      "description": "白底、pastel、大字号；海报。",
+      "font": "sans",
+      "palette": "pastel-eight",
+      "config": {
+        "figure": {
+          "background": "white"
+        },
+        "panel_defaults": {
+          "tick_size": 12,
+          "category_size": 12,
+          "label_size": 14,
+          "axis_width": 1.0,
+          "baseline_width": 1.4,
+          "grid": {
+            "kind": "none"
+          },
+          "spines": [
+            "bottom"
+          ]
+        }
+      }
     }
   },
   "layouts": {
@@ -881,6 +1085,61 @@
         "#C44E6E"
       ],
       "background": "white"
+    },
+    "d3-orange": {
+      "description": "D3 orange 浅深四阶，accent 在最后。",
+      "kind": "categorical",
+      "colors": [
+        "#F6D3B5",
+        "#E9A875",
+        "#D98A48",
+        "#E07A2F"
+      ],
+      "background": "white"
+    },
+    "d3-blue": {
+      "description": "D3 blue 浅深四阶，accent 在最后。",
+      "kind": "categorical",
+      "colors": [
+        "#D6E4F0",
+        "#A8C8E8",
+        "#6FA3D2",
+        "#2F80C9"
+      ],
+      "background": "white"
+    },
+    "d3-teal": {
+      "description": "D3 teal 浅深四阶，accent 在最后。",
+      "kind": "categorical",
+      "colors": [
+        "#B7E0DA",
+        "#7FC8C0",
+        "#2A9D8F",
+        "#1F9E89"
+      ],
+      "background": "white"
+    },
+    "d3-rose": {
+      "description": "D3 rose 浅深四阶，accent 在最后。",
+      "kind": "categorical",
+      "colors": [
+        "#F2C6CE",
+        "#D98FA1",
+        "#C44E6E",
+        "#A83E58"
+      ],
+      "background": "white"
+    },
+    "neutral-slate": {
+      "description": "中性 slate 四阶；baseline 背景。",
+      "kind": "categorical",
+      "colors": [
+        "#CBD5E1",
+        "#94A3B8",
+        "#64748B",
+        "#475569"
+      ],
+      "background": "white"
     }
   },
   "fonts": {
@@ -993,17 +1252,32 @@
       "description": "humanist sans：Segoe UI / Arial / Liberation Sans 回退。",
       "roles": {
         "light": {
-          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "family": [
+            "Segoe UI",
+            "Arial",
+            "Liberation Sans",
+            "DejaVu Sans"
+          ],
           "weight": "normal",
           "file": null
         },
         "regular": {
-          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "family": [
+            "Segoe UI",
+            "Arial",
+            "Liberation Sans",
+            "DejaVu Sans"
+          ],
           "weight": "normal",
           "file": null
         },
         "bold": {
-          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "family": [
+            "Segoe UI",
+            "Arial",
+            "Liberation Sans",
+            "DejaVu Sans"
+          ],
           "weight": "bold",
           "file": null
         },
@@ -1013,12 +1287,22 @@
           "file": null
         },
         "heading": {
-          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "family": [
+            "Segoe UI",
+            "Arial",
+            "Liberation Sans",
+            "DejaVu Sans"
+          ],
           "weight": "normal",
           "file": null
         },
         "heading_bold": {
-          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "family": [
+            "Segoe UI",
+            "Arial",
+            "Liberation Sans",
+            "DejaVu Sans"
+          ],
           "weight": "bold",
           "file": null
         }
@@ -1028,17 +1312,29 @@
       "description": "手写体：Comic Sans MS / Segoe Script 回退；只用于 talk/博客。",
       "roles": {
         "light": {
-          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "family": [
+            "Comic Sans MS",
+            "Segoe Script",
+            "DejaVu Sans"
+          ],
           "weight": "normal",
           "file": null
         },
         "regular": {
-          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "family": [
+            "Comic Sans MS",
+            "Segoe Script",
+            "DejaVu Sans"
+          ],
           "weight": "normal",
           "file": null
         },
         "bold": {
-          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "family": [
+            "Comic Sans MS",
+            "Segoe Script",
+            "DejaVu Sans"
+          ],
           "weight": "bold",
           "file": null
         },
@@ -1048,12 +1344,370 @@
           "file": null
         },
         "heading": {
-          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "family": [
+            "Comic Sans MS",
+            "Segoe Script",
+            "DejaVu Sans"
+          ],
           "weight": "normal",
           "file": null
         },
         "heading_bold": {
-          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "family": [
+            "Comic Sans MS",
+            "Segoe Script",
+            "DejaVu Sans"
+          ],
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "helvetica": {
+      "description": "Helvetica（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Helvetica",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Helvetica",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Helvetica",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Helvetica",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Helvetica",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Helvetica",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "calibri": {
+      "description": "Calibri（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Calibri",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Calibri",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Calibri",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Calibri",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Calibri",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Calibri",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "verdana": {
+      "description": "Verdana（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Verdana",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Verdana",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Verdana",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Verdana",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Verdana",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Verdana",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "tahoma": {
+      "description": "Tahoma（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Tahoma",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Tahoma",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Tahoma",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Tahoma",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Tahoma",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Tahoma",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "trebuchet": {
+      "description": "Trebuchet MS（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Trebuchet MS",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Trebuchet MS",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Trebuchet MS",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Trebuchet MS",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Trebuchet MS",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Trebuchet MS",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "georgia": {
+      "description": "Georgia（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Georgia",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Georgia",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Georgia",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Georgia",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Georgia",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Georgia",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "garamond": {
+      "description": "Garamond（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Garamond",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Garamond",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Garamond",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Garamond",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Garamond",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Garamond",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "cambria": {
+      "description": "Cambria（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Cambria",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Cambria",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Cambria",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Cambria",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Cambria",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Cambria",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "courier": {
+      "description": "Courier New（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Courier New",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Courier New",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Courier New",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Courier New",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Courier New",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Courier New",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "segoe-script": {
+      "description": "Segoe Script（缺失时回退 DejaVu）",
+      "roles": {
+        "light": {
+          "family": "Segoe Script",
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": "Segoe Script",
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": "Segoe Script",
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "Segoe Script",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": "Segoe Script",
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": "Segoe Script",
           "weight": "bold",
           "file": null
         }

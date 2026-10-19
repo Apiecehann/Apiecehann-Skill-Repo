@@ -1341,7 +1341,14 @@
         }
       ],
       "library": "library/palettes-120.json",
-      "library_count": 120
+      "library_count": 120,
+      "promoted": [
+        "d3-orange",
+        "d3-blue",
+        "d3-teal",
+        "d3-rose",
+        "neutral-slate"
+      ]
     }
   }
 }
