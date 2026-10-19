@@ -97,6 +97,17 @@
         "base"
       ],
       "ir": "examples/templates/increment-base/figure.ir.json"
+    },
+    {
+      "id": "distribution-overlap",
+      "title": "Distribution overlap",
+      "tags": [
+        "paper",
+        "double-column",
+        "distribution",
+        "overlap"
+      ],
+      "ir": "examples/templates/distribution-overlap/figure.ir.json"
     }
   ]
 }

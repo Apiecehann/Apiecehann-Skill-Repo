@@ -83,7 +83,7 @@ palette_library: 120 组里筛 3–5 组
 - `implemented`：当前 renderer/compiler 能直接出图；
 - `planned`：类别先定，代码后续补。
 
-`08-style` / `09-type` 现在 15 个都已是正式 preset；`12-annotation` 里的 distribution overlap 仍是独立 chart family 示例。
+`08-style` / `09-type` 现在 15 个都已是正式 preset；`12-annotation` 里的 distribution overlap 已作为正式 chart family 接入 IR/compiler。
 
 ## 生成
 

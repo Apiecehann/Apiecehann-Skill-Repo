@@ -11,7 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "quantitative-plots/grouped-bar/scripts"
 sys.path.insert(0, str(SCRIPTS))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import render as backend
+import distribution as distribution_backend
 
 
 def validate(value, schema, path="IR"):
@@ -372,9 +374,99 @@ def translate(ir, rows, order):
     return config, decisions
 
 
+def distribution_rows(ir, ir_path):
+    enc = ir["encoding"]
+    value_col = enc.get("value", "value")
+    series_col = enc.get("series", "series")
+    panel_col = enc.get("panel", "panel")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    if not source:
+        raise ValueError("Distribution CSV is empty")
+    rows, seen = [], set()
+    for index, raw in enumerate(source, 2):
+        panel = raw.get(panel_col, "main")
+        series = raw.get(series_col, "")
+        if not panel or not series:
+            raise ValueError(f"CSV row {index}: panel and series are required")
+        value = numeric(raw.get(value_col), value_col, f"{index} ({panel}/{series})")
+        key = (panel, series, raw.get(enc.get("id", "id"), str(index)))
+        if key in seen:
+            raise ValueError(f"CSV row {index}: duplicate observation {key}")
+        seen.add(key)
+        rows.append({"id": key[2], "panel": panel, "series": series, "value": value})
+    return rows
+
+
+def compile_distribution(ir, ir_path, output, render=False):
+    output = Path(output)
+    rows = distribution_rows(ir, ir_path)
+    panels = list(dict.fromkeys(r["panel"] for r in rows))
+    present = list(dict.fromkeys(r["series"] for r in rows))
+    order = ir.get("series_order", present)
+    if set(order) != set(present) or len(order) != len(present):
+        raise ValueError("series_order must list every distribution series exactly once")
+    if not 1 <= len(order) <= 4:
+        raise ValueError("Distribution-overlap supports 1 to 4 series")
+    axis = ir.get("axis", {})
+    x_min, x_max = axis.get("x_min", 0.0), axis.get("x_max", 1.0)
+    if not x_max > x_min:
+        raise ValueError("axis.x_max must exceed axis.x_min")
+    theme = ir["theme"]
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette_name = theme.get("palette", "blue-orange")
+    palette = presets["palettes"].get(palette_name)
+    if palette is None:
+        raise ValueError(f"Unknown palette {palette_name!r}")
+    colors = palette["colors"]
+    if len(colors) < len(order):
+        raise ValueError(f"Palette {palette_name!r} has {len(colors)} colors for {len(order)} series")
+    color_map = dict(zip(order, colors))
+    size = ir["size"]["preset"]
+    size_pt = {"single": [360, 216], "medium": [420, 234], "double": [504, 252],
+               "slide": [648, 300]}[size]
+    config = {
+        "chart": "distribution-overlap", "panels": panels, "series_order": order,
+        "series_labels": ir.get("series_labels", {}), "colors": color_map,
+        "x_label": axis.get("x_label", "Value"), "y_label": axis.get("y_label", "Density"),
+        "x_min": x_min, "x_max": x_max, "bins": axis.get("bins", 20),
+        "title_prefix": ir.get("title_prefix", "Figure 4 | "),
+        "size_pt": size_pt, "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "svg_text": ir["output"].get("svg_text", True),
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["id", "panel", "series", "value"])
+        writer.writeheader()
+        writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": "distribution-overlap", "size": size,
+        "size_pt": size_pt, "palette": palette_name,
+        "encoding": ["distribution-overlap"], "labels": ir["labels"],
+        "layout": "distribution-overlap", "emphasis": [], "annotations": [],
+        "axes": {"x": [x_min, x_max], "bins": config["bins"]},
+        "log": [f"distribution -> {len(panels)} panel(s), {len(order)} series, "
+                f"x [{x_min}, {x_max}], {config['bins']} bins",
+                f"palette {palette_name} -> {', '.join(order)}"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        distribution_backend.render(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_ir(ir_path, output, render=False):
     ir_path, output = Path(ir_path), Path(output)
     ir = load_ir(ir_path)
+    if ir["chart"] == "distribution-overlap":
+        return compile_distribution(ir, ir_path, output, render)
+    missing = {"x", "y", "series"} - set(ir["encoding"])
+    if missing:
+        raise ValueError(f"grouped-bar encoding requires {sorted(missing)}")
     rows, order = read_rows(ir, ir_path)
     config, decisions = translate(ir, rows, order)
     output.mkdir(parents=True, exist_ok=True)

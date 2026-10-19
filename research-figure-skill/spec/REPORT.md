@@ -90,4 +90,4 @@
 
 补充（用户收敛）：annotation 轴只保留 curved delta 与 distribution overlap；后者新增 examples/distribution-overlap/（两 panel 重叠直方图，白底 + 双向 grid）。颜色筛选新增 library/palettes-120.json 与 16-palette-library.png（120 组 4-color 卡）。
 
-Promote：15 个 style、15 个 font、5 个 palette（d3-orange / d3-blue / d3-teal / d3-rose / neutral-slate）已写入 presets；review 图仍保留作对照。curved delta 仍是变体，默认 route。Distribution Overlap 仍是独立 chart family 示例，尚未接 IR。
+Promote：15 个 style、15 个 font、5 个 palette（d3-orange / d3-blue / d3-teal / d3-rose / neutral-slate）已写入 presets；review 图仍保留作对照。curved delta 仍是变体，默认 route。Distribution Overlap 已接入 IR：chart 枚举、encoding.value、compile_distribution、library/recipes.json、evals case-14；模板 examples/templates/distribution-overlap/ 可导出 PNG/PDF/SVG。

@@ -9,7 +9,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from compile import ROOT, compile_ir, load_ir, load_recipes, read_rows
+from compile import ROOT, compile_ir, distribution_rows, load_ir, load_recipes, read_rows
 
 
 def read_cases(path):
@@ -40,9 +40,10 @@ def projection(ir):
     result["layout"] = ir.get("layout", "grouped")
     result["emphasis"] = [c["card"] for c in ir.get("emphasis", [])]
     result["annotations"] = [c["card"] for c in ir.get("annotations", [])]
-    result["encoding_cards"] = [name for name, key in
-                                (("increment", "base"), ("capacity", "capacity"))
-                                if key in ir["encoding"]]
+    result["encoding_cards"] = (["distribution"] if ir["chart"] == "distribution-overlap"
+                                else [name for name, key in
+                                      (("increment", "base"), ("capacity", "capacity"))
+                                      if key in ir["encoding"]])
     result["theme"] = {"hatch": False, "type_scale": 1, **ir["theme"]}
     return result
 
@@ -71,8 +72,12 @@ def check_case(case, ir_path):
         raise ValueError(f"{case['id']}: missing case data {case['data']}")
     # Compare parsed records, not machine-dependent paths or newline encodings.
     expected_ir = {**ir, "data": str(expected_data)}
-    actual_rows, _ = read_rows(ir, ir_path)
-    expected_rows, _ = read_rows(expected_ir, ir_path)
+    if ir["chart"] == "distribution-overlap":
+        actual_rows = distribution_rows(ir, ir_path)
+        expected_rows = distribution_rows(expected_ir, ir_path)
+    else:
+        actual_rows, _ = read_rows(ir, ir_path)
+        expected_rows, _ = read_rows(expected_ir, ir_path)
     if actual_rows != expected_rows:
         errors.append("IR.data: rows do not match the case data")
     with tempfile.TemporaryDirectory(prefix="figure-eval-") as temp:

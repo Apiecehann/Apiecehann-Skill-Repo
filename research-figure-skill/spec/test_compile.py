@@ -157,6 +157,11 @@ def test_every_recipe_renders_without_warnings_and_matches_decisions(name, tmp_p
     with warnings.catch_warnings():
         warnings.simplefilter("error")
         config, decisions = compile_ir(TEMPLATES / name / "figure.ir.json", path, render=True)
+        if decisions["chart"] == "distribution-overlap":
+            for ext in ("png", "pdf", "svg"):
+                assert (path / f"figure.{ext}").stat().st_size > 1000
+            assert "<text" in (path / "figure.svg").read_text()
+            return
         rows = backend.load_data(path / "data.csv")
         fig, artists = backend.build_figure(config, rows)
     try:
@@ -236,8 +241,8 @@ def test_catalog_indexes_generated_artifacts(tmp_path):
     subprocess.run([sys.executable, str(SPEC / "catalog.py"), "--output", str(output)],
                    check=True, capture_output=True, text=True)
     index = json.loads((output / "index.json").read_text())
-    assert len(index["entries"]) == 9
-    assert len({e["recipe"] for e in index["entries"]}) == 9
+    assert len(index["entries"]) == 10
+    assert len({e["recipe"] for e in index["entries"]}) == 10
     for entry in index["entries"]:
         assert entry["tags"]
         assert entry["decisions"]["size"] in ("single", "medium", "double")
@@ -254,7 +259,7 @@ def test_eval_templates_pass_and_produced_ir_is_checked(tmp_path):
     cases = SPEC / "evals/cases.jsonl"
     result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--check-templates"],
                             check=True, capture_output=True, text=True)
-    assert "PASS 13" in result.stdout
+    assert "PASS 14" in result.stdout
     result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--case", "case-01",
                              "--ir", str(TEMPLATES / "ours-vs-baselines/figure.ir.json")],
                             check=True, capture_output=True, text=True)

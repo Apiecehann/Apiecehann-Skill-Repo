@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Grouped-bar figure IR",
+  "title": "Figure IR",
   "type": "object",
   "properties": {
     "claim": {
@@ -8,12 +8,18 @@
       "minLength": 1
     },
     "chart": {
-      "const": "grouped-bar",
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "grouped-bar",
+        "distribution-overlap"
+      ]
     },
     "data": {
       "type": "string",
       "minLength": 1
+    },
+    "title_prefix": {
+      "type": "string"
     },
     "encoding": {
       "type": "object",
@@ -27,6 +33,10 @@
           "minLength": 1
         },
         "series": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
           "type": "string",
           "minLength": 1
         },
@@ -60,8 +70,6 @@
         }
       },
       "required": [
-        "x",
-        "y",
         "series"
       ],
       "additionalProperties": false
@@ -302,8 +310,22 @@
     "axis": {
       "type": "object",
       "properties": {
+        "x_label": {
+          "type": "string"
+        },
         "y_label": {
           "type": "string"
+        },
+        "x_min": {
+          "type": "number"
+        },
+        "x_max": {
+          "type": "number"
+        },
+        "bins": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 100
         },
         "y_format": {
           "type": "string",
