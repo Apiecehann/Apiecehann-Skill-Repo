@@ -290,6 +290,8 @@ def translate(ir, rows, order):
                             "labels": ir.get("series_labels", {})},
         "palette": theme.get("series_styles", {}),
     }
+    if "value_size" in labels:
+        config["panel_defaults"]["value_size"] = labels["value_size"]
     config = backend.resolve_config(config, rows)
     log = []
     scale = theme.get("type_scale", 1)

@@ -59,7 +59,7 @@ DEFAULTS = {
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
         'value_background_pad': .1, 'baseline': 0, 'allow_interval_clipping': False,
         'reference_lines': [],
-        'increment': {'field': None, 'hatch': '////', 'gap_pt': 1.5,
+        'increment': {'field': None, 'hatch': '////', 'gap_pt': 1.5, 'pad_pt': 1.5,
                       'label_format': '{total}', 'delta_format': '+{delta:g}',
                       'reference_line': False, 'hatch_color': None},
         'capacity': {'field': None, 'linestyle': '--', 'edge_width': .7,
@@ -498,7 +498,7 @@ def add_increment_label(fig, ax, x, row, item, style, config, palette, font_dir)
     renderer = fig.canvas.get_renderer()
     box = label.get_window_extent(renderer)
     segment = item['increment_bar'].get_window_extent(renderer)
-    pad = fig.dpi/72*2
+    pad = fig.dpi/72*style['increment'].get('pad_pt', 1.5)
     gap = fig.dpi/72*style['increment']['gap_pt']/2
     fits = (box.width + 2*pad <= segment.width and box.height + 2*pad + gap <= segment.height)
     leader = None

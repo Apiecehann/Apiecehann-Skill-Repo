@@ -18,7 +18,8 @@
   },
   "labels": {
     "values": false,
-    "legend": "none"
+    "legend": "none",
+    "value_size": 6.5
   },
   "output": {
     "formats": [
