@@ -4,6 +4,18 @@
 
 目录沿用 `grouped-bar`；横向单系列柱图和前后对比图复用同一个入口。日常选风格、布局和配色；精确复刻时使用下面六份完整配置。
 
+## IR 快速开始
+
+新图优先从 [figure IR](../../spec/README.md) 起，不直接写 164 个 renderer 参数：
+
+```bash
+python spec/compile.py \
+  --ir examples/templates/ours-vs-baselines/figure.ir.json \
+  --output output/ours-vs-baselines --render
+```
+
+IR 字段、`focus-gray` / `capacity` / `delta` 三张卡和限制见 [spec/README.md](../../spec/README.md) 与 [library/README.md](../../library/README.md)。下面的六份配置用于精确复刻和低层精调；它们带 `frozen_config`，不参与 IR 重排。
+
 | 示例与输入 | 布局 | 预览（点击放大） |
 |---|---|---|
 | **cue-comparison**<br>[配置](examples/cue-comparison/config.json) · [数据](examples/cue-comparison/data.csv) · [PDF](examples/cue-comparison/figure.pdf) | 主图 + 四个小面板；两组模型、三种条件；双层标签 | <a href="examples/cue-comparison/figure.png"><img src="examples/cue-comparison/figure.png" width="320" alt="主图与四个小面板"></a> |

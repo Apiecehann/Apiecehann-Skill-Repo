@@ -37,7 +37,7 @@
 
 ## 生成资产与未完成项
 
-阶段 1–3 完成。容量模板的三种导出位于 /tmp/pattern-library-stage3；阶段 4 将统一生成带索引的目录资产。阶段 4–5 待完成。没有需要用户回答的问题；具体歧义按以上假设执行。
+阶段 1–4 完成。Stage 4 生成 8 个 recipe 的目录资产、contact sheet 和 index.json；测试 137 passed。Stage 5 文档在验收阶段补齐。没有需要用户回答的问题；具体歧义按以上假设执行。
 
 阶段 2：完整测试 `103 passed in 19.47s`。七份非容量模板成功导出 PNG/PDF/SVG；修正多面板标题顶部留白后无越界警告。
 
@@ -46,3 +46,12 @@
 阶段 3：完整测试 `114 passed`（最终无警告）。容量模板成功导出 PNG/PDF/SVG，自动轴 [0, 100]，标签 88 / 96 (92%)。验证横纵向几何、容量柱层级、非零基线、自定义格式、CSV 解析、混合行拒绝、区间冲突、轴截断和零容量。
 
 容量默认百分比为 value / capacity，与基线位置无关；0 / 0 显示 n/a，不编造比例。field=null 保持低层容量绘制关闭；已提供的容量数据仍需满足验证且纳入轴范围。
+
+## 阶段 4–5 收尾（验收记录）
+
+- Stage 4 的实现由 Codex 完成，验收时统一提交为 `f625cc2 test(spec): add compiler and catalog coverage`。包含 `catalog.py`、`evals/`、8 个 catalog 资产、`index.json` 和扩充后的 `test_compile.py`；完整测试 `137 passed`。
+- 视觉检查：`examples/catalog/contact-sheet.png` 覆盖 8 个 recipe；`capacity-88-of-96` 的空心总量/实心完成值、`ours-vs-baselines` 的灰底 + focus、`before-after` 的 delta 均正常。
+- 已知限制：`multi-panel` 在 `single` 下两面板较拥挤，建议改用 `double`；这是尺寸选择问题，不是渲染错误。
+- Stage 5 文档：新增 `spec/README.md`、`library/README.md`；`SKILL.md` 改为 IR 主入口；`grouped-bar/README.md` 增加 IR quickstart；本报告补齐阶段 4–5。
+- 最终验收命令：`../.venv/bin/python -m pytest quantitative-plots/grouped-bar/scripts spec -q`。
+- 分支 `feat/pattern-library` 目前只在服务器本地；推送由验收方在本地完成，推送后再把服务器对齐到 origin。

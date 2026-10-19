@@ -20,6 +20,16 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 
 输出 `output/my-figure.png`、`.pdf`、`.svg`。日常使用只需选择风格、布局、尺寸和配色；需要精调时展开底层参数。`--size single` / `double` 分别对应 3.3 in 单栏和 7 in 双栏；未写轴范围时按数据自动取 nice limits，SVG 默认保留可编辑文字（投稿用 `--svg-paths`）。查看 [配置共性、配色与字体索引](quantitative-plots/grouped-bar/examples/style-guide/README.md) 和 [五页成图对照 PDF](quantitative-plots/grouped-bar/examples/style-guide/catalog.pdf)。原始复刻所用的 Graphik 商业字体不随仓库提供；精确字体入口仍为 `--font-dir`，详见图型 README。
 
+新图优先从 [figure IR](spec/README.md) 起，让编译器展开尺寸、色板和卡片：
+
+```bash
+python spec/compile.py \
+  --ir examples/templates/ours-vs-baselines/figure.ir.json \
+  --output output/ours-vs-baselines --render
+```
+
+上面的 `render.py` 命令仍保留，作为复刻和低层精调入口。
+
 重新选配色时看 [100 个候选研究与 10 组短名单](quantitative-plots/grouped-bar/examples/palette-study/README.md)：包含普通柱图、下层纹理、色觉模拟和灰度对照，以及可供 Illustrator 检查的 SVG / PDF 色卡。短名单标注适用系列数与限制，尚未替换现有预设。
 
 图件生成依赖脚本、配置、CSV 和随附的开放字体，不需要访问小红书或原始参考图片。来源与数值恢复方式记录在各示例配置的 `provenance` 中。示例数据用于图件复刻，不代表使用者的实验结果。
