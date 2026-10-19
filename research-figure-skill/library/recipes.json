@@ -200,6 +200,12 @@
       "title": "Calibration curve",
       "tags": ["paper", "single-column", "classification", "calibration"],
       "ir": "examples/templates/calibration/figure.ir.json"
+    },
+    {
+      "id": "surface",
+      "title": "3D surface and contour",
+      "tags": ["paper", "double-column", "3d", "surface"],
+      "ir": "examples/templates/surface/figure.ir.json"
     }
   ]
 }

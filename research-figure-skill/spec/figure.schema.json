@@ -23,7 +23,8 @@
         "heatmap",
         "roc",
         "pr",
-        "calibration"
+        "calibration",
+        "surface"
       ]
     },
     "data": {
@@ -110,6 +111,10 @@
           "minLength": 1
         },
         "score": {
+          "type": "string",
+          "minLength": 1
+        },
+        "z": {
           "type": "string",
           "minLength": 1
         },
@@ -395,6 +400,9 @@
       "type": "object",
       "properties": {
         "x_label": {
+          "type": "string"
+        },
+        "z_label": {
           "type": "string"
         },
         "y_label": {

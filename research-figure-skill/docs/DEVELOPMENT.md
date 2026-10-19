@@ -48,7 +48,7 @@ P0 的目标是覆盖 CS 论文里最常见的 80% 图，不是覆盖所有 Matp
 | 13 | `roc` | classification | 二分类阈值表现 | 已实现 |
 | 14 | `pr` | classification | 不平衡分类 | 已实现 |
 | 15 | `calibration` | classification | 置信度校准 | 已实现 |
-| 16 | `surface` | 3D | loss landscape、超参响应面 | 待做 |
+| 16 | `surface` | 3D | loss landscape、超参响应面 | 已实现 |
 
 说明：
 

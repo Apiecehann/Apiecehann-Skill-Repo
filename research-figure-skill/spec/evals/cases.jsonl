@@ -24,3 +24,4 @@
 {"id": "case-24", "request": "二分类 ROC，带 AUC 图例，单栏", "recipe": "roc", "data": "examples/templates/roc/data.csv", "expect": {"chart": "roc"}}
 {"id": "case-25", "request": "不平衡二分类的 precision-recall，单栏", "recipe": "pr", "data": "examples/templates/pr/data.csv", "expect": {"chart": "pr"}}
 {"id": "case-26", "request": "二分类置信度校准曲线，单栏", "recipe": "calibration", "data": "examples/templates/calibration/data.csv", "expect": {"chart": "calibration"}}
+{"id": "case-27", "request": "二维参数网格的 loss landscape，用 3D surface + 2D contour 投影", "recipe": "surface", "data": "examples/templates/surface/data.csv", "expect": {"chart": "surface"}}

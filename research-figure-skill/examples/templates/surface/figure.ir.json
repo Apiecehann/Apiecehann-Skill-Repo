@@ -1,0 +1,11 @@
+﻿{
+  "claim": "MOCK：二维参数网格上的响应面（loss landscape）。",
+  "chart": "surface",
+  "data": "data.csv",
+  "encoding": {"x": "x", "y": "y", "z": "z"},
+  "size": {"preset": "double"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans", "colormap": "viridis"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Learning rate", "y_label": "Weight decay", "z_label": "Loss"}
+}
