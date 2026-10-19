@@ -176,6 +176,30 @@
       "title": "KDE density",
       "tags": ["paper", "single-column", "distribution", "kde"],
       "ir": "examples/templates/kde/figure.ir.json"
+    },
+    {
+      "id": "heatmap",
+      "title": "Heatmap",
+      "tags": ["paper", "single-column", "matrix", "heatmap"],
+      "ir": "examples/templates/heatmap/figure.ir.json"
+    },
+    {
+      "id": "roc",
+      "title": "ROC curve",
+      "tags": ["paper", "single-column", "classification", "roc"],
+      "ir": "examples/templates/roc/figure.ir.json"
+    },
+    {
+      "id": "pr",
+      "title": "Precision-recall curve",
+      "tags": ["paper", "single-column", "classification", "pr"],
+      "ir": "examples/templates/pr/figure.ir.json"
+    },
+    {
+      "id": "calibration",
+      "title": "Calibration curve",
+      "tags": ["paper", "single-column", "classification", "calibration"],
+      "ir": "examples/templates/calibration/figure.ir.json"
     }
   ]
 }

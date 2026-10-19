@@ -20,3 +20,7 @@
 {"id": "case-20", "request": "两个方法在三个 benchmark 上的 latency 分布形状，用 violin", "recipe": "violin", "data": "examples/templates/violin/data.csv", "expect": {"chart": "violin", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
 {"id": "case-21", "request": "两个方法的 latency ECDF，比较尾部，单栏", "recipe": "ecdf", "data": "examples/templates/ecdf/data.csv", "expect": {"chart": "ecdf"}}
 {"id": "case-22", "request": "两个方法的 confidence KDE，比较 overlap，单栏", "recipe": "kde", "data": "examples/templates/kde/data.csv", "expect": {"chart": "kde"}}
+{"id": "case-23", "request": "四层五任务的指标矩阵，用 heatmap 并标 cell 数值", "recipe": "heatmap", "data": "examples/templates/heatmap/data.csv", "expect": {"chart": "heatmap", "labels": {"values": true, "legend": "none"}}}
+{"id": "case-24", "request": "二分类 ROC，带 AUC 图例，单栏", "recipe": "roc", "data": "examples/templates/roc/data.csv", "expect": {"chart": "roc"}}
+{"id": "case-25", "request": "不平衡二分类的 precision-recall，单栏", "recipe": "pr", "data": "examples/templates/pr/data.csv", "expect": {"chart": "pr"}}
+{"id": "case-26", "request": "二分类置信度校准曲线，单栏", "recipe": "calibration", "data": "examples/templates/calibration/data.csv", "expect": {"chart": "calibration"}}

@@ -327,3 +327,129 @@ def _finish_handles(fig, ax, config, out_stem, handles):
         fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
     plt.close(fig)
     return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
+
+
+def render_heatmap(config, rows, out_stem):
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white")
+    matrix = np.array(config["matrix"], dtype=float)
+    image = ax.imshow(matrix, aspect="auto", cmap=plt.get_cmap(config.get("colormap", "Blues")))
+    ax.set_xticks(range(len(config["cols"])))
+    ax.set_xticklabels(config["cols"], fontsize=7)
+    ax.set_yticks(range(len(config["rows"])))
+    ax.set_yticklabels(config["rows"], fontsize=7)
+    ax.tick_params(length=0)
+    for side in ax.spines.values():
+        side.set_visible(False)
+    if config.get("cell_values"):
+        for i in range(matrix.shape[0]):
+            for j in range(matrix.shape[1]):
+                ax.text(j, i, f"{matrix[i, j]:g}", ha="center", va="center",
+                        fontsize=6.5, color="#111827")
+    cbar = fig.colorbar(image, ax=ax, fraction=.046, pad=.04)
+    cbar.ax.tick_params(labelsize=6.5, length=2)
+    ax.set_xlabel(config.get("x_label", ""), fontsize=8)
+    ax.set_ylabel(config.get("y_label", ""), fontsize=8)
+    fig.subplots_adjust(left=.18, right=.95, top=.96, bottom=.16)
+    return _save_fig(fig, out_stem)
+
+
+def _save_fig(fig, out_stem):
+    out_stem = Path(out_stem)
+    out_stem.parent.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
+    plt.close(fig)
+    return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
+
+
+def _roc_points(scores, labels):
+    scores = np.asarray(scores, dtype=float)
+    labels = np.asarray(labels, dtype=int)
+    order = np.argsort(-scores)
+    scores, labels = scores[order], labels[order]
+    tp = np.cumsum(labels == 1)
+    fp = np.cumsum(labels == 0)
+    pos, neg = max(1, int((labels == 1).sum())), max(1, int((labels == 0).sum()))
+    tpr = np.r_[0, tp / pos]
+    fpr = np.r_[0, fp / neg]
+    auc = float(np.sum((fpr[1:] - fpr[:-1]) * (tpr[1:] + tpr[:-1]) / 2)) if len(fpr) > 1 else 0.0
+    return fpr, tpr, auc
+
+
+def render_roc(config, rows, out_stem):
+    fig, ax = _setup(config)
+    colors = config["colors"]
+    labels = config.get("series_labels", {})
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        fpr, tpr, auc = _roc_points([r["score"] for r in subset], [r["label"] for r in subset])
+        ax.plot(fpr, tpr, color=colors[name], linewidth=1.8, drawstyle="steps-post",
+                label=f"{labels.get(name, name)} (AUC={auc:.3f})")
+    ax.plot([0, 1], [0, 1], color="#9CA3AF", linestyle="--", linewidth=.8)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1.02)
+    ax.set_xlabel("False positive rate", fontsize=8)
+    ax.set_ylabel("True positive rate", fontsize=8)
+    ax.legend(frameon=False, fontsize=7, loc="lower right")
+    fig.subplots_adjust(left=.16, right=.98, top=.84, bottom=.18)
+    return _save_fig(fig, out_stem)
+
+
+def _pr_points(scores, labels):
+    scores = np.asarray(scores, dtype=float)
+    labels = np.asarray(labels, dtype=int)
+    order = np.argsort(-scores)
+    labels = labels[order]
+    tp = np.cumsum(labels == 1)
+    fp = np.cumsum(labels == 0)
+    precision = tp / np.maximum(tp + fp, 1)
+    recall = tp / max(1, int((labels == 1).sum()))
+    baseline = float(labels.mean()) if len(labels) else 0.0
+    return np.r_[0, recall], np.r_[1, precision], baseline
+
+
+def render_pr(config, rows, out_stem):
+    fig, ax = _setup(config)
+    colors = config["colors"]
+    labels = config.get("series_labels", {})
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        recall, precision, baseline = _pr_points([r["score"] for r in subset], [r["label"] for r in subset])
+        ax.step(recall, precision, where="post", color=colors[name], linewidth=1.8,
+                label=labels.get(name, name))
+        ax.axhline(baseline, color=colors[name], linestyle=":", linewidth=.8, alpha=.7)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1.02)
+    ax.set_xlabel("Recall", fontsize=8)
+    ax.set_ylabel("Precision", fontsize=8)
+    ax.legend(frameon=False, fontsize=7, loc="lower left")
+    fig.subplots_adjust(left=.16, right=.98, top=.84, bottom=.18)
+    return _save_fig(fig, out_stem)
+
+
+def render_calibration(config, rows, out_stem):
+    fig, ax = _setup(config)
+    colors = config["colors"]
+    labels = config.get("series_labels", {})
+    edges = np.linspace(0, 1, int(config.get("bins", 10)) + 1)
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        scores = np.array([r["score"] for r in subset])
+        targets = np.array([r["label"] for r in subset])
+        xs, ys = [], []
+        for lo, hi in zip(edges[:-1], edges[1:]):
+            mask = (scores >= lo) & (scores < hi if hi < 1 else scores <= hi)
+            if mask.any():
+                xs.append(scores[mask].mean())
+                ys.append(targets[mask].mean())
+        ax.plot(xs, ys, marker="o", markersize=3, color=colors[name], linewidth=1.6,
+                label=labels.get(name, name))
+    ax.plot([0, 1], [0, 1], color="#9CA3AF", linestyle="--", linewidth=.8)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1.02)
+    ax.set_xlabel("Confidence", fontsize=8)
+    ax.set_ylabel("Accuracy", fontsize=8)
+    ax.legend(frameon=False, fontsize=7, loc="upper left")
+    fig.subplots_adjust(left=.16, right=.98, top=.84, bottom=.18)
+    return _save_fig(fig, out_stem)

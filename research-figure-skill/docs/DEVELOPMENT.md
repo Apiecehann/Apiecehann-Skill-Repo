@@ -35,19 +35,19 @@ P0 的目标是覆盖 CS 论文里最常见的 80% 图，不是覆盖所有 Matp
 |---|---|---|---|---|
 | 1 | `grouped-bar` | comparison | benchmark 多方法 | 已有 |
 | 2 | `horizontal-bar` | comparison | 类别名长/排序 | 用 grouped-bar + layout |
-| 3 | `dot-plot` | comparison | 多方法多任务，比 grouped 更干净 | 待做 |
-| 4 | `dumbbell` | comparison | 两个方法/两个版本差值 | 待做 |
-| 5 | `line-band` | time | 多种子均值 ± std/CI | 待做 |
-| 6 | `scatter` | relationship | latency/throughput、score/size、embedding | 待做 |
+| 3 | `dot-plot` | comparison | 多方法多任务，比 grouped 更干净 | 已实现 |
+| 4 | `dumbbell` | comparison | 两个方法/两个版本差值 | 已实现 |
+| 5 | `line-band` | time | 多种子均值 ± std/CI | 已实现 |
+| 6 | `scatter` | relationship | latency/throughput、score/size、embedding | 已实现 |
 | 7 | `histogram` | distribution | confidence/误差分布 | 已有 `distribution-overlap` |
-| 8 | `kde` | distribution | 平滑分布/overlap | 待做 |
-| 9 | `box` | distribution | 多种子/多任务分布 | 待做 |
-| 10 | `violin` | distribution | 分布形状 + 中位数 | 待做 |
-| 11 | `ecdf` | distribution | latency CDF、误差累积 | 待做 |
-| 12 | `heatmap` | matrix | 超参网格、层间指标 | 待做 |
-| 13 | `roc` | classification | 二分类阈值表现 | 待做 |
-| 14 | `pr` | classification | 不平衡分类 | 待做 |
-| 15 | `calibration` | classification | 置信度校准 | 待做 |
+| 8 | `kde` | distribution | 平滑分布/overlap | 已实现 |
+| 9 | `box` | distribution | 多种子/多任务分布 | 已实现 |
+| 10 | `violin` | distribution | 分布形状 + 中位数 | 已实现 |
+| 11 | `ecdf` | distribution | latency CDF、误差累积 | 已实现 |
+| 12 | `heatmap` | matrix | 超参网格、层间指标 | 已实现 |
+| 13 | `roc` | classification | 二分类阈值表现 | 已实现 |
+| 14 | `pr` | classification | 不平衡分类 | 已实现 |
+| 15 | `calibration` | classification | 置信度校准 | 已实现 |
 | 16 | `surface` | 3D | loss landscape、超参响应面 | 待做 |
 
 说明：

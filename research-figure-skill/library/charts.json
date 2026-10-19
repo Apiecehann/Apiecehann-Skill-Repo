@@ -168,7 +168,7 @@
     {
       "id": "heatmap",
       "family": "matrix",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "row",
         "col",
@@ -181,7 +181,7 @@
     {
       "id": "roc",
       "family": "classification",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "score",
         "label"
@@ -195,7 +195,7 @@
     {
       "id": "pr",
       "family": "classification",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "score",
         "label"
@@ -209,7 +209,7 @@
     {
       "id": "calibration",
       "family": "classification",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "score",
         "label"

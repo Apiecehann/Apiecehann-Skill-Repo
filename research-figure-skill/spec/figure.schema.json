@@ -19,7 +19,11 @@
         "box",
         "violin",
         "ecdf",
-        "kde"
+        "kde",
+        "heatmap",
+        "roc",
+        "pr",
+        "calibration"
       ]
     },
     "data": {
@@ -97,6 +101,22 @@
           "type": "string",
           "minLength": 1
         },
+        "row": {
+          "type": "string",
+          "minLength": 1
+        },
+        "col": {
+          "type": "string",
+          "minLength": 1
+        },
+        "score": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
         "panel": {
           "type": "string",
           "minLength": 1
@@ -126,9 +146,7 @@
           "minLength": 1
         }
       },
-      "required": [
-        "series"
-      ],
+      "required": [],
       "additionalProperties": false
     },
     "size": {
@@ -161,6 +179,10 @@
           "minLength": 1
         },
         "font": {
+          "type": "string",
+          "minLength": 1
+        },
+        "colormap": {
           "type": "string",
           "minLength": 1
         },

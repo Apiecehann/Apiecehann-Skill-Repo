@@ -1,0 +1,12 @@
+{
+  "claim": "MOCK：不平衡二分类的 precision-recall 曲线。",
+  "chart": "pr",
+  "data": "data.csv",
+  "encoding": {"score": "score", "label": "label", "series": "series"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-orange", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "series_order": ["all"],
+  "series_labels": {"all": "Ours"}
+}

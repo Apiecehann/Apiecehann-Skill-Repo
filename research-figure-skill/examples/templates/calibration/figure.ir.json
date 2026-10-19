@@ -1,0 +1,13 @@
+{
+  "claim": "MOCK：二分类置信度校准曲线。",
+  "chart": "calibration",
+  "data": "data.csv",
+  "encoding": {"score": "score", "label": "label", "series": "series"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-teal", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"bins": 10},
+  "series_order": ["all"],
+  "series_labels": {"all": "Ours"}
+}
