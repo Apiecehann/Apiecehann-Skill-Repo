@@ -93,12 +93,12 @@ def ridgeline(rows, colors, **config):
     grid = np.linspace(values.min(), values.max(), 220)
     for i, group in enumerate(groups):
         subset = [float(r["value"]) for r in rows if r["group"] == group]
-        density = gaussian(subset, grid); density = density / density.max() * .9
+        density = gaussian(subset, grid); density = density / density.max() * .55
         base = len(groups) - 1 - i
         ax.fill_between(grid, base, base + density, color=colors[0], alpha=.55, linewidth=0)
         ax.plot(grid, base + density, color="white", linewidth=1.4)
-        ax.text(grid.min(), base + .05, group, fontsize=7, va="bottom")
-    ax.set_yticks([]); ax.set_ylim(-.1, len(groups))
+        ax.text(grid.min(), base + .02, group, fontsize=7, va="bottom")
+    ax.set_yticks([]); ax.set_ylim(-.12, len(groups) - .1)
     ax.set_xlabel("Success rate (%)", fontsize=config.get("tick", 8) + 1)
     ax.set_ylabel("Difficulty", fontsize=config.get("tick", 8) + 1)
     setup(ax, config)

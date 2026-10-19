@@ -447,6 +447,7 @@ def render_ridgeline(config, rows, out_stem):
     groups = config["groups"]
     all_values = np.array([r["value"] for r in rows])
     grid = np.linspace(all_values.min(), all_values.max(), 240)
+    overlap = config.get("overlap", .55)
     for i, group in enumerate(groups):
         subset = [r for r in rows if r["group"] == group]
         if len(subset) < 2:
@@ -454,16 +455,16 @@ def render_ridgeline(config, rows, out_stem):
         name = subset[0]["series"]
         values = [r["value"] for r in subset]
         density = _gaussian_kde(values, grid)
-        density = density / density.max() * .9
+        density = density / density.max() * overlap
         base = len(groups) - 1 - i
         ax.fill_between(grid, base, base + density, color=colors.get(name, "#2F80C9"), alpha=.55,
                         linewidth=0)
         ax.plot(grid, base + density, color="#ffffff", linewidth=1.4)
-        ax.text(grid.min(), base + .06, group, ha="left", va="bottom", fontsize=7)
+        ax.text(grid.min(), base + .02, group, ha="left", va="bottom", fontsize=7)
     ax.set_yticks([])
     if config.get("x_min") is not None or config.get("x_max") is not None:
         ax.set_xlim(config.get("x_min"), config.get("x_max"))
-    ax.set_ylim(-.1, len(groups))
+    ax.set_ylim(-.12, len(groups) - .1)
     ax.set_ylabel(config.get("y_label", "Group"), fontsize=8)
     ax.set_xlabel(config.get("x_label", ""), fontsize=8)
     return _save_fig(fig, out_stem)
