@@ -54,4 +54,4 @@
 - 已知限制：`multi-panel` 在 `single` 下两面板较拥挤，建议改用 `double`；这是尺寸选择问题，不是渲染错误。
 - Stage 5 文档：新增 `spec/README.md`、`library/README.md`；`SKILL.md` 改为 IR 主入口；`grouped-bar/README.md` 增加 IR quickstart；本报告补齐阶段 4–5。
 - 最终验收命令：`../.venv/bin/python -m pytest quantitative-plots/grouped-bar/scripts spec -q`。
-- 分支 `feat/pattern-library` 目前只在服务器本地；推送由验收方在本地完成，推送后再把服务器对齐到 origin。
+- 分支已推送到 `origin/feat/pattern-library`；服务器 `git fetch` 后已对齐到同一 commit，并复跑 137 passed。
