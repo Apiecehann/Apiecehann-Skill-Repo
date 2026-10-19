@@ -100,15 +100,23 @@ python quantitative-plots/grouped-bar/scripts/render.py --defaults
 | `legend_defaults` / `panels[].legend` | 图例顺序、文字、字体、列数、位置、边框及色块尺寸 |
 | `gain_defaults` / `gains` | 关联行 ID、箭头曲率与端点偏移、箭头尺寸、差值格式与文字位置 |
 
-配置优先级：默认值 → 风格 → 布局 → 字体／配色 → 明确的全局配置 → 面板局部配置。没有 `preset` 时保留原来的默认值 → 全局 → 局部流程。`--set` 在配置展开后按 JSON 类型覆盖指定字段；修改 `panel_defaults` 不会越过已有面板局部覆盖：
+配置优先级：默认值 → 风格 → 布局 → 字体／配色 → 明确的全局配置 → 面板局部配置。没有 `preset` 时保留原来的默认值 → 全局 → 局部流程。`--set` 在配置展开后覆盖指定字段；标量可以直接写（`panel_defaults.value_size=9`、`panel_defaults.tokens.mode=raw`），JSON 类型会按需解析。嵌套对象或列表在 Windows PowerShell 下不要用 `--set`（PowerShell 会吞掉 JSON 的引号），改用 `--set-file`：
+
+```json
+{
+  "palette": {"cue": {"fill": "#86c6ba", "edge": "#347f71", "label": "#1f574e"}},
+  "panel_defaults": {"value_size": 9}
+}
+```
 
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
   --config quantitative-plots/grouped-bar/examples/cue-comparison/config.json \
-  --set 'palette.cue={"fill":"#86c6ba","edge":"#347f71","label":"#1f574e"}' \
-  --set 'panel_defaults.value_size=9' \
+  --set-file overrides.json \
   --output output/teal
 ```
+
+`--set-file` 先合并，随后出现的 `--set` 覆盖同名字段；未知参数会报错，不会静默写入。修改 `panel_defaults` 不会越过已有面板局部覆盖。
 
 所有尺寸按物理点数定义（72 pt = 1 inch）。示例的 `rect_pt` 固定面板位置；省略它时采用自动网格。`figure.size_pt` 改变画布，固定的 `rect_pt` 不会自动拉伸。预设布局设置 `position_mode=auto`，按组重新排列，不使用 CSV 的 `x`；原始配置默认 `position_mode=data`，保留显式位置。字体、标签和数据都可以改，但新增面板、长文字或大幅改动组数后仍应查看成图。
 
@@ -160,7 +168,7 @@ python quantitative-plots/grouped-bar/scripts/render.py \
 ```bash
 python quantitative-plots/grouped-bar/scripts/render.py \
   --config quantitative-plots/grouped-bar/examples/cue-comparison/config.json \
-  --set 'panel_defaults.tokens.mode="raw"' --output output/raw-tokens
+  --set panel_defaults.tokens.mode=raw --output output/raw-tokens
 ```
 
 `raw` 使用原来的 `tokens` 和精细位置参数；两种模式均不改变数值。

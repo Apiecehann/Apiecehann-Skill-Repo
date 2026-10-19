@@ -187,12 +187,32 @@ def read_config(path):
     return config
 
 
+def parse_override_value(path, raw):
+    """Parse a --set value, falling back to a plain string.
+
+    PowerShell strips double quotes from native arguments, so
+    --set 'tokens.mode="raw"' arrives as tokens.mode=raw. Treating a bare value
+    as a string keeps that command working. A value that still looks like a JSON
+    object/array gets a targeted error instead of a raw JSONDecodeError.
+    """
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        if raw[:1] in ('{', '[', '"'):
+            raise ValueError(
+                f'{path}: value looks like JSON but could not be parsed: {raw!r}. '
+                'On PowerShell, quotes are stripped from native arguments; '
+                'use --set-file overrides.json for nested values.'
+            ) from None
+        return raw
+
+
 def apply_override(config, assignment):
-    """--set panel_defaults.value_size=9 or --set palette.cue.fill='"#12abcf"'."""
+    """--set panel_defaults.value_size=9, --set tokens.mode=raw, or --set figure.svg_text=true."""
     path, sep, value = assignment.partition('=')
     if not sep:
-        raise ValueError('Overrides must be dotted.path=JSON_VALUE')
-    value = json.loads(value)
+        raise ValueError('Overrides must be dotted.path=VALUE')
+    value = parse_override_value(path, value)
     keys = path.split('.')
     target = config
     for key in keys[:-1]:
@@ -201,6 +221,24 @@ def apply_override(config, assignment):
     if isinstance(target, dict) and key not in target:
         raise ValueError(f'Unknown parameter: {path}')
     target[key] = value
+
+
+def check_override_keys(target, overrides, prefix=''):
+    for key, value in overrides.items():
+        if not isinstance(target, dict) or key not in target:
+            raise ValueError(f'Unknown parameter in override file: {prefix}{key}')
+        if isinstance(value, dict):
+            check_override_keys(target[key], value, prefix + key + '.')
+
+
+def apply_override_file(config, path):
+    """Merge a JSON object of overrides; later --set values still win."""
+    path = Path(path)
+    overrides = json.loads(path.read_text(encoding='utf-8-sig'))
+    if not isinstance(overrides, dict):
+        raise ValueError(f'Override file {path} must contain a JSON object')
+    check_override_keys(config, overrides)
+    return merge(config, overrides)
 
 
 def load_data(path):
@@ -588,7 +626,8 @@ def main():
     parser.add_argument('--data',type=Path,help='Replace CSV; otherwise resolve config.data relative to config file')
     parser.add_argument('--output',type=Path,help='Output stem; defaults to figure next to config')
     parser.add_argument('--font-dir',type=Path,help='Optional directory with locally licensed font files')
-    parser.add_argument('--set',action='append',default=[],metavar='PATH=JSON',help='Override any declared parameter')
+    parser.add_argument('--set',action='append',default=[],metavar='PATH=VALUE',help='Override one parameter; bare values are strings, JSON types are parsed')
+    parser.add_argument('--set-file',action='append',default=[],type=Path,metavar='JSON',help='Merge a JSON object of overrides; use for nested values and on PowerShell')
     parser.add_argument('--defaults',action='store_true',help='Print complete default parameter groups')
     parser.add_argument('--list-presets',action='store_true',help='List styles, layouts, palettes and font profiles')
     for key in ('style','layout','palette','font'):
@@ -608,6 +647,7 @@ def main():
     data=args.data or args.config.parent/config['data']
     rows=load_data(data)
     config=resolve_config(config,rows)
+    for path in args.set_file: config=apply_override_file(config,path)
     for assignment in args.set: apply_override(config,assignment)
     if args.resolved_config:
         args.resolved_config.parent.mkdir(parents=True,exist_ok=True)

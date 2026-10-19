@@ -169,6 +169,20 @@ def test_cli_selection_and_resolved_config_replay(tmp_path):
     assert (tmp_path/'selected.png').read_bytes() == (tmp_path/'replayed.png').read_bytes()
 
 
+def test_cli_set_file_applies_before_set_and_records_resolved(tmp_path):
+    override = tmp_path/'overrides.json'
+    override.write_text(json.dumps({'panel_defaults':{'bar_fill_alpha':.3},
+                                    'palette':{'dp3':{'fill':'#123456'}}}),encoding='utf8')
+    snapshot = tmp_path/'resolved.json'
+    subprocess.run([sys.executable,str(SCRIPTS/'render.py'),'--config',str(GUIDE/'config.json'),
+                    '--set-file',str(override),'--set','panel_defaults.bar_fill_alpha=0.7',
+                    '--resolved-config',str(snapshot),'--output',str(tmp_path/'out')],
+                   check=True,capture_output=True,text=True,encoding='utf8')
+    resolved = json.loads(snapshot.read_text(encoding='utf8'))
+    assert resolved['panel_defaults']['bar_fill_alpha'] == .7
+    assert resolved['palette']['dp3']['fill'] == '#123456'
+
+
 def test_catalog_cli_embeds_fonts_and_preserves_vector_pages(tmp_path):
     subprocess.run([sys.executable,str(SCRIPTS/'catalog.py'),'--config',str(GUIDE/'gallery.json'),
                     '--output',str(tmp_path)],check=True,capture_output=True)

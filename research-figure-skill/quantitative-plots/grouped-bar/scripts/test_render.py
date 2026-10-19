@@ -7,7 +7,8 @@ import numpy as np
 import pytest
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
-from render import DEFAULTS, build_figure, load_data, merge, apply_override, render
+from render import (DEFAULTS, build_figure, load_data, merge, apply_override,
+                    apply_override_file, render)
 
 EXAMPLES=Path(__file__).resolve().parents[1]/'examples'
 
@@ -101,6 +102,42 @@ def test_overrides_are_typed_and_unknown_parameter_rejected():
     apply_override(config,'panel_defaults.bar_width=0.9')
     assert config['panel_defaults']['bar_width']==.9
     with pytest.raises(ValueError):apply_override(config,'panel_defaults.bra_width=0.9')
+
+
+def test_bare_override_value_is_a_string_and_json_keeps_its_type():
+    config=merge(DEFAULTS,{})
+    # PowerShell arrives without the quotes: tokens.mode="raw" -> tokens.mode=raw
+    apply_override(config,'panel_defaults.tokens.mode=raw')
+    apply_override(config,'panel_defaults.value_labels=false')
+    apply_override(config,'panel_defaults.value_size=9')
+    assert config['panel_defaults']['tokens']['mode']=='raw'
+    assert config['panel_defaults']['value_labels'] is False
+    assert config['panel_defaults']['value_size']==9
+
+
+def test_stripped_json_override_points_to_set_file():
+    config=merge(DEFAULTS,{})
+    with pytest.raises(ValueError,match='set-file'):
+        apply_override(config,'palette.cue={fill:#86c6ba}')
+
+
+def test_override_file_merges_nested_values_without_mutating_base(tmp_path):
+    config=merge(DEFAULTS,{})
+    path=tmp_path/'overrides.json'
+    path.write_text(json.dumps({'palette':{'cue':{'fill':'#86c6ba'}},
+                                'panel_defaults':{'value_size':9}}),encoding='utf8')
+    merged=apply_override_file(config,path)
+    assert merged['palette']['cue']['fill']=='#86c6ba'
+    assert merged['panel_defaults']['value_size']==9
+    assert config['palette']['cue']['fill']=='#fabc00'
+
+
+def test_override_file_rejects_unknown_parameter(tmp_path):
+    config=merge(DEFAULTS,{})
+    path=tmp_path/'overrides.json'
+    path.write_text('{"panel_defaults": {"bra_width": 0.9}}',encoding='utf8')
+    with pytest.raises(ValueError,match='Unknown parameter'):
+        apply_override_file(config,path)
 
 
 def test_group_labels_are_centered_and_legend_matches_series():
