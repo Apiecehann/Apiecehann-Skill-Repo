@@ -416,7 +416,7 @@ def annotations():
     cfg = config(paired, layout="paired", colors=PAIRS["blue"], labels=LABELS2)
     cfg["gains"] = [{"from": "b-b", "to": "a-b", "label_format": "+.0f",
                      "label_scale": 100, "label_suffix": " pp"}]
-    cfg["gain_defaults"] = {"arrow_style": "curved"}
+    cfg["gain_defaults"] = {"arrow_style": "curved", "label_size": 10, "linewidth": 1.8}
     img = render_panel(paired, cfg, "annotation-delta")
     items.append({"image": img, "label": "curved delta", "note": "arrow between paired bars"})
 

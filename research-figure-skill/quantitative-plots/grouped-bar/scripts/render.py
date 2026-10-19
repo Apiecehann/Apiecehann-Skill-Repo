@@ -736,9 +736,19 @@ def gain_route(start, end, ceiling, lift):
 
 
 def gain_route_arc(start, end, ceiling):
-    """One smooth cubic arch; used when gain.arrow_style == 'curved'."""
+    """One smooth cubic arch; kept for compatibility with the first curved draft."""
     vertices = [start, [start[0], ceiling], [end[0], ceiling], end]
     return MplPath(vertices, [MplPath.MOVETO, MplPath.CURVE4, MplPath.CURVE4, MplPath.CURVE4])
+
+
+def gain_route_curved(start, end, rise):
+    """A rising cubic whose end tangent points up-right instead of hooking down."""
+    dx, dy = end[0]-start[0], end[1]-start[1]
+    sign = 1 if dy >= 0 else -1
+    c1 = [start[0]+dx*.55, start[1]+sign*rise]
+    c2 = [end[0]-dx*.18, end[1]-sign*rise]
+    return MplPath([start, c1, c2, end],
+                   [MplPath.MOVETO, MplPath.CURVE4, MplPath.CURVE4, MplPath.CURVE4])
 
 
 def add_auto_gain(fig, spec, artists, config, font_dir):
@@ -783,6 +793,10 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
                 y = max(y, obstacle.y1+clearance)
         return np.array([x, y])
     start, end = anchor(before, spec['tail_anchor']), anchor(after, spec['tip_anchor'])
+    if spec.get('arrow_style') == 'curved':
+        # End above the bar top; otherwise the rising tip has to enter the bar to point up-right.
+        start = start + np.array([0, 2])
+        end = end + np.array([0, 4])
     left, right = sorted((start[0], end[0]))
     across, change = abs(end[0]-start[0]), end[1]-start[1]
     lift = min(3., across*.06)
@@ -793,8 +807,10 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
     style = spec.get('arrow_style', 'route')
     if style not in ('route', 'curved'):
         raise ValueError('gain.arrow_style must be route or curved')
+    rise = max(4., abs(across)*.12, abs(change)*.25)
     for attempt in range(8):
-        path = gain_route_arc(start, end, ceiling) if style == 'curved' else gain_route(start, end, ceiling, lift)
+        path = (gain_route_curved(start, end, rise) if style == 'curved'
+                else gain_route(start, end, ceiling, lift))
         points = sample_cubic_path(path)
         bad = (np.any(points[:, 0] < inner.x0) or np.any(points[:, 0] > inner.x1) or
                np.any(points[:, 1] < inner.y0) or np.any(points[:, 1] > inner.y1) or
@@ -803,7 +819,7 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
             break
         if style != 'curved' or attempt == 7:
             raise ValueError('No collision-free delta path inside panel; increase y_max or figure height')
-        ceiling += 2
+        rise += 3
 
     color = spec['color'] or config['palette'][after['series']][spec['palette_part']]
     value = (after['value']-before['value'])*spec['label_scale']
