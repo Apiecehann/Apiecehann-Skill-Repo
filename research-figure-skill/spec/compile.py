@@ -1,0 +1,290 @@
+"""Translate a semantic grouped-bar IR into the existing renderer configuration."""
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import math
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = ROOT / "quantitative-plots/grouped-bar/scripts"
+sys.path.insert(0, str(SCRIPTS))
+import render as backend
+
+
+def validate(value, schema, path="IR"):
+    """Validate the subset of draft 2020-12 used by figure.schema.json.
+
+    The schema is the source of truth for shape, including nested unknown keys.
+    Cross-field and CSV semantics are checked below. No optional dependency is needed.
+    """
+    kinds = schema.get("type", [])
+    kinds = [kinds] if isinstance(kinds, str) else kinds
+    checks = {
+        "object": lambda v: isinstance(v, dict),
+        "array": lambda v: isinstance(v, list),
+        "string": lambda v: isinstance(v, str),
+        "boolean": lambda v: isinstance(v, bool),
+        "number": lambda v: type(v) in (int, float) and math.isfinite(v),
+        "integer": lambda v: type(v) in (int, float) and math.isfinite(v) and int(v) == v,
+        "null": lambda v: v is None,
+    }
+    if kinds and not any(checks[k](value) for k in kinds):
+        raise ValueError(f"{path}: expected {' or '.join(kinds)}")
+    if "const" in schema and value != schema["const"]:
+        raise ValueError(f"{path}: expected {schema['const']!r}")
+    if "enum" in schema and value not in schema["enum"]:
+        raise ValueError(f"{path}: choose from {schema['enum']}")
+    if isinstance(value, dict):
+        props = schema.get("properties", {})
+        for key in schema.get("required", []):
+            if key not in value:
+                raise ValueError(f"{path}: missing required field {key!r}")
+        for key, item in value.items():
+            rule = props.get(key, schema.get("additionalProperties", True))
+            if rule is False:
+                raise ValueError(f"{path}: unknown field {key!r}")
+            if isinstance(rule, dict):
+                validate(item, rule, f"{path}.{key}")
+    elif isinstance(value, list):
+        if len(value) < schema.get("minItems", 0):
+            raise ValueError(f"{path}: needs at least {schema['minItems']} item(s)")
+        if schema.get("uniqueItems") and len({json.dumps(v, sort_keys=True) for v in value}) != len(value):
+            raise ValueError(f"{path}: entries must be unique")
+        for i, item in enumerate(value):
+            validate(item, schema.get("items", {}), f"{path}[{i}]")
+    elif isinstance(value, str):
+        if len(value.strip()) < schema.get("minLength", 0):
+            raise ValueError(f"{path}: must not be empty")
+    elif type(value) in (int, float):
+        if value < schema.get("minimum", -math.inf) or value > schema.get("maximum", math.inf):
+            raise ValueError(f"{path}: outside allowed range")
+
+
+def load_ir(path):
+    path = Path(path)
+    ir = json.loads(path.read_text(encoding="utf-8-sig"))
+    schema = json.loads((Path(__file__).parent / "figure.schema.json").read_text(encoding="utf8"))
+    validate(ir, schema)
+    return ir
+
+
+def numeric(raw, field, row_id):
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        raise ValueError(f"CSV row {row_id}: {field} must be a number, got {raw!r}") from None
+    if not math.isfinite(value):
+        raise ValueError(f"CSV row {row_id}: {field} must be finite")
+    return value
+
+
+def read_rows(ir, ir_path):
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        reader = csv.DictReader(stream)
+        columns = reader.fieldnames or []
+        if len(set(columns)) != len(columns):
+            raise ValueError("CSV: duplicate column names")
+        enc = ir["encoding"]
+        missing = set(enc.values()) - set(columns)
+        if missing:
+            raise ValueError(f"CSV {path}: missing columns {sorted(missing)}; fix encoding or CSV")
+        source = list(reader)
+    if not source:
+        raise ValueError(f"CSV {path}: no rows")
+    rows, seen, cells = [], set(), set()
+    for i, raw in enumerate(source, 1):
+        if None in raw or any(v is None for v in raw.values()):
+            raise ValueError(f"CSV row {i}: column count does not match header")
+        row_id = raw.get(enc.get("id", "id"), f"row-{i:04d}").strip()
+        row = {"id": row_id, "panel": raw[enc["panel"]].strip() if "panel" in enc else "main",
+               "group": raw[enc["x"]].strip(), "series": raw[enc["series"]].strip(),
+               "value": numeric(raw[enc["y"]], enc["y"], row_id)}
+        for key in ("id", "panel", "group", "series"):
+            if not row[key]:
+                raise ValueError(f"CSV row {i}: empty {key}")
+        if row_id in seen:
+            raise ValueError(f"CSV: duplicate row id {row_id!r}")
+        seen.add(row_id)
+        cell = (row["panel"], row["group"], row["series"])
+        if cell in cells:
+            raise ValueError(f"CSV: duplicate panel/group/series {cell}; aggregate observations first")
+        cells.add(cell)
+        for key in ("low", "high", "label", "capacity"):
+            column = enc.get(key, key)
+            if key == "capacity" and key not in enc:
+                continue
+            if raw.get(column, "").strip():
+                row[key] = raw[column] if key == "label" else numeric(raw[column], column, row_id)
+            elif key in enc:
+                raise ValueError(f"CSV row {row_id}: missing {column}")
+        if ("low" in row) != ("high" in row):
+            raise ValueError(f"CSV row {row_id}: supply both low/high interval endpoints")
+        if "low" in row and not row["low"] <= row["value"] <= row["high"]:
+            raise ValueError(f"CSV row {row_id}: interval must contain value")
+        if "capacity" in row:
+            baseline = ir.get("axis", {}).get("baseline", 0)
+            if "low" in row:
+                raise ValueError(f"CSV row {row_id}: interval + capacity is not supported")
+            if not row["capacity"] >= row["value"] >= baseline:
+                raise ValueError(f"CSV row {row_id}: require capacity >= value >= baseline ({baseline})")
+        rows.append(row)
+    present = list(dict.fromkeys(r["series"] for r in rows))
+    order = ir.get("series_order", present)
+    if not set(present).issubset(order):
+        raise ValueError("series_order must contain every plotted series")
+    for key in ("series_labels", "series_roles"):
+        if set(ir.get(key, {})) - set(order):
+            raise ValueError(f"{key}: unknown series; add it to series_order or correct the name")
+    if set(ir["theme"].get("series_styles", {})) - set(order):
+        raise ValueError("theme.series_styles: unknown series")
+    # Sorting affects only category placement; row ids remain tied to original rows.
+    panels = list(dict.fromkeys(r["panel"] for r in rows))
+    groups = {p: list(dict.fromkeys(r["group"] for r in rows if r["panel"] == p)) for p in panels}
+    rows.sort(key=lambda r: (panels.index(r["panel"]), groups[r["panel"]].index(r["group"]), order.index(r["series"])))
+    formats = [ir.get("axis", {}).get("y_format", ".2g"), ir["labels"].get("value_format", ".2g")]
+    for fmt in formats:
+        try:
+            format(0.5, fmt)
+        except ValueError:
+            raise ValueError(f"Invalid numeric format {fmt!r}") from None
+        if fmt.endswith("%") and any(not 0 <= r[k] <= 1 for r in rows for k in ("value", "low", "high", "capacity") if k in r):
+            raise ValueError("Percentage format requires CSV values and endpoints in [0, 1]; divide percentages by 100")
+    return rows, order
+
+
+def apply_cards(ir, config, rows, log):
+    requests = [*ir.get("emphasis", []), *ir.get("annotations", [])]
+    if requests:
+        raise ValueError(f"Unknown or not yet installed card {requests[0]['card']!r}")
+    if "capacity" in ir["encoding"]:
+        raise ValueError("capacity card is not yet installed")
+
+
+def translate(ir, rows, order):
+    theme = ir["theme"]
+    layout = ir.get("layout", "grouped")
+    axis = ir.get("axis", {})
+    labels = ir["labels"]
+    value_format = labels.get("value_format", axis.get("y_format", ".2g"))
+    config = {
+        "data": "data.csv",
+        "preset": {"style": theme["style"], "layout": layout, "size": ir["size"]["preset"],
+                   "palette": theme["palette"], "font": theme["font"]},
+        "series_order": order, "series_roles": ir.get("series_roles", {}),
+        "figure": ir["output"],
+        "panel_defaults": {"limits": "auto", "ticks": "auto", "baseline": axis.get("baseline", 0),
+                           "tick_format": axis.get("y_format", ".2g"), "ylabel": axis.get("y_label", ""),
+                           "value_labels": labels["values"], "value_format": value_format,
+                           "category_mode": "group"},
+        "legend_defaults": {"show": labels["legend"] == "top", "columns": "auto",
+                            "labels": ir.get("series_labels", {})},
+        "palette": theme.get("series_styles", {}),
+    }
+    config = backend.resolve_config(config, rows)
+    log = []
+    scale = theme.get("type_scale", 1)
+    for key in ("tick_size", "category_size", "label_size", "value_size"):
+        config["panel_defaults"][key] *= scale
+    config["legend_defaults"]["size"] *= scale
+    config["gain_defaults"]["label_size"] = config["panel_defaults"]["label_size"]
+    # An annotation scales with the type hierarchy, not with the number of bars.
+    config["gain_defaults"].update(linewidth=1, head_length_pt=3, head_width_pt=3,
+                                   tail_dx_pt=0, tip_dx_pt=0, tip_anchor="center",
+                                   label_offset_pt=[0, 5])
+    if scale != 1:
+        for key in ("left_pt", "right_pt", "top_pt", "bottom_pt", "row_gap_pt"):
+            config["layout"][key] *= scale
+        log.append(f"type scale -> {scale:g}")
+    if theme.get("hatch"):
+        hatches = ["/", "\\", "x", ".", "+"]
+        if len(order) > len(hatches):
+            raise ValueError("theme.hatch supports at most 5 series")
+        for key, hatch in zip(order, hatches):
+            config["palette"][key].setdefault("hatch", hatch)
+        config["panel_defaults"]["bar_edge_width"] = max(.7, config["panel_defaults"]["bar_edge_width"])
+    if layout == "horizontal":
+        # Size presets override layout margins; reserve room for semantic group labels.
+        longest = max(len(r["group"]) for r in rows)
+        config["layout"]["left_pt"] = max(config["layout"]["left_pt"], min(90, longest * 4 + 12))
+        config["layout"]["right_pt"] = max(config["layout"]["right_pt"], 30 if labels["values"] else 10)
+    panel_count = len(config["panels"])
+    if panel_count > 1:
+        config["figure"]["size_pt"][1] *= panel_count
+        config["layout"]["row_gap_pt"] = max(config["layout"]["row_gap_pt"], 48 * scale)
+    if "y_max" in axis and axis["y_max"] is not None:
+        upper = axis["y_max"]
+        lower = axis.get("baseline", 0)
+        if upper <= lower:
+            raise ValueError("axis.y_max must exceed baseline")
+        for row in rows:
+            if min(row.get("low", row["value"]), row["value"]) < lower or max(row.get("high", row["value"]), row.get("capacity", row["value"])) > upper:
+                raise ValueError("axis.y_max/baseline would clip CSV values, intervals or capacity")
+        config["panel_defaults"]["limits"] = [lower, upper]
+    apply_cards(ir, config, rows, log)
+    width, height = config["figure"]["size_pt"]
+    style = config["panel_defaults"]
+    log.insert(0, f"size {ir['size']['preset']} -> {width:g} x {height:g} pt; type {style['tick_size']:g}/{style['label_size']:g}/{config['legend_defaults']['size']:g} pt")
+    log.append(f"palette {theme['palette']} -> " + ", ".join(f"{s} {config['palette'][s]['fill']}" for s in order))
+    axes = {}
+    for panel, rect in zip(config["panels"], backend.panel_rectangles(config)):
+        members = [r for r in rows if r["panel"] == panel["id"]]
+        limits = style["limits"]
+        if limits == "auto":
+            limits, ticks = backend.auto_axis(members, style["baseline"])
+        else:
+            ticks = backend.nice_ticks(limits)
+        axes[panel["id"]] = {"limits": limits, "ticks": ticks}
+        log.append(f"axis {panel['id']} -> {limits}; ticks {ticks}")
+        if panel_count > 1:
+            config["annotations"].append({"text": panel["id"], "position_pt": [rect[0], rect[1] + rect[3] + 24 * scale],
+                                           "size": style["label_size"], "font": "bold"})
+    log.append("legend auto -> renderer measures columns at render time" if labels["legend"] == "top" else "legend -> hidden")
+    decisions = {"claim": ir["claim"], "chart": ir["chart"], "size": ir["size"]["preset"],
+                 "size_pt": [width, height], "palette": theme["palette"], "layout": layout,
+                 "encoding": ["capacity"] if "capacity" in ir["encoding"] else ["grouped-bar"],
+                 "emphasis": [c["card"] for c in ir.get("emphasis", [])],
+                 "annotations": [c["card"] for c in ir.get("annotations", [])],
+                 "labels": labels, "axes": axes, "log": log}
+    return config, decisions
+
+
+def compile_ir(ir_path, output, render=False):
+    ir_path, output = Path(ir_path), Path(output)
+    ir = load_ir(ir_path)
+    rows, order = read_rows(ir, ir_path)
+    config, decisions = translate(ir, rows, order)
+    output.mkdir(parents=True, exist_ok=True)
+    fields = ["id", "panel", "group", "series", "value"]
+    fields += [key for key in ("low", "high", "capacity", "label") if any(key in r for r in rows)]
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+    for name, content in (("config.json", config), ("decisions.json", decisions)):
+        (output / name).write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        backend.render(config, rows, output / "figure")
+    return config, decisions
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--ir", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--render", action="store_true")
+    mode.add_argument("--dry-run", action="store_true", help="Write config, normalized data and decisions only")
+    args = parser.parse_args()
+    try:
+        _, decisions = compile_ir(args.ir, args.output, render=args.render)
+    except (ValueError, OSError) as exc:
+        parser.error(str(exc))
+    print("\n".join(decisions["log"]))
+
+
+if __name__ == "__main__":
+    main()
