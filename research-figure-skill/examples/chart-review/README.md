@@ -8,8 +8,17 @@
 - `dumbbell/`：6 张轴图，51 个 panel
 - `line-band/`：6 张轴图，52 个 panel
 - `scatter/`：6 张轴图，52 个 panel
+- `distribution-overlap/`：6 张，51
+- `kde/`：6 张，50
+- `box/`：6 张，51
+- `violin/`：6 张，51
+- `ecdf/`：6 张，51
+- `heatmap/`：5 张，45
+- `roc/`：6 张，51
+- `pr/`：6 张，51
+- `calibration/`：6 张，52
 
-Batch 1 = dumbbell / line-band / scatter。两 series 的图不做 `categorical`，所以不是每张都 11 张。
+Batch 1 = dumbbell / line-band / scatter。Batch 2 = distribution-overlap / kde / box / violin / ecdf。Batch 3 = heatmap / roc / pr / calibration。两 series 的图不做 `categorical`，heatmap 不做 color structure，所以不是每张都 11 张。
 
 ## 结构
 

@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "chart": "box",
+  "sheets": [
+    {
+      "id": "00-color",
+      "title": "color",
+      "panels": 5,
+      "labels": [
+        "blue",
+        "green",
+        "teal",
+        "orange",
+        "rose"
+      ]
+    },
+    {
+      "id": "01-style",
+      "title": "style",
+      "panels": 15,
+      "labels": [
+        "paper-clean",
+        "soft-outline",
+        "serif-emphasis",
+        "bold-slide",
+        "minimal-mono",
+        "hand-drawn",
+        "boxed-journal",
+        "grid-paper",
+        "editorial-serif",
+        "white-slide",
+        "technical-grid",
+        "poster-bold",
+        "compact-journal",
+        "high-contrast",
+        "pastel-poster"
+      ]
+    },
+    {
+      "id": "02-type",
+      "title": "type",
+      "panels": 15,
+      "labels": [
+        "Arial",
+        "Helvetica",
+        "Segoe UI",
+        "Calibri",
+        "Verdana",
+        "Tahoma",
+        "Trebuchet MS",
+        "Times New Roman",
+        "Georgia",
+        "Garamond",
+        "Cambria",
+        "Consolas",
+        "Courier New",
+        "Comic Sans MS",
+        "Segoe Script"
+      ]
+    },
+    {
+      "id": "03-annotation",
+      "title": "annotation",
+      "panels": 2,
+      "labels": [
+        "raw points",
+        "significance"
+      ]
+    },
+    {
+      "id": "04-grid",
+      "title": "grid",
+      "panels": 5,
+      "labels": [
+        "none",
+        "hairline",
+        "dashed",
+        "dots",
+        "both"
+      ]
+    },
+    {
+      "id": "05-size",
+      "title": "size",
+      "panels": 9,
+      "labels": [
+        "tiny",
+        "single",
+        "square",
+        "wide",
+        "medium",
+        "double",
+        "double-wide",
+        "slide",
+        "tall"
+      ]
+    }
+  ]
+}
