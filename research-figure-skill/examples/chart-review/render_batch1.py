@@ -47,7 +47,7 @@ STYLE_SPECS = [
     ("minimal-mono", {"tick": 7, "axis_width": .4, "grid": "none"}),
     ("hand-drawn", {"font": "comic", "grid": "none"}),
     ("boxed-journal", {"all_spines": True, "grid": "none"}),
-    ("grid-paper", {"grid": "both"}),
+    ("grid-paper", {"grid": "hairline"}),
     ("editorial-serif", {"font": "times", "grid": "none", "axis_width": .5}),
     ("white-slide", {"font": "times", "tick": 11, "axis_width": 1.2, "grid": "none"}),
     ("technical-grid", {"font": "consolas", "grid": "both", "all_spines": True}),
@@ -265,7 +265,7 @@ def main():
         ], 3),
         ("03-annotation", "annotation", "该图支持的标注", specific, 2),
         ("04-grid", "grid", "背景参考线", [
-            (rows, PAIRS["blue"], name, {"grid": name}) for name in ("none", "hairline", "dashed", "dots", "both")
+            (rows, PAIRS["blue"], name, {"grid": name}) for name in ("none", "hairline", "dashed", "dots")
         ], 3),
         ("05-size", "size", "物理尺寸与长宽比", [
             (rows, PAIRS["blue"], name, {"figsize": size}) for name, size in SIZES

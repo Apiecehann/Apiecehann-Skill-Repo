@@ -61,13 +61,12 @@
     {
       "id": "03-grid",
       "title": "grid",
-      "panels": 5,
+      "panels": 4,
       "labels": [
         "none",
         "hairline",
         "dashed",
-        "dots",
-        "both"
+        "dots"
       ]
     },
     {

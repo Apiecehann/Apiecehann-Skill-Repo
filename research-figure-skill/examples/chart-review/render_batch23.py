@@ -47,7 +47,7 @@ STYLE_SPECS = [
     ("minimal-mono", {"tick": 7, "axis_width": .4, "grid": "none"}),
     ("hand-drawn", {"font": "comic", "grid": "none"}),
     ("boxed-journal", {"all_spines": True, "grid": "none"}),
-    ("grid-paper", {"grid": "both"}),
+    ("grid-paper", {"grid": "hairline"}),
     ("editorial-serif", {"font": "times", "grid": "none", "axis_width": .5}),
     ("white-slide", {"font": "times", "tick": 11, "axis_width": 1.2, "grid": "none"}),
     ("technical-grid", {"font": "consolas", "grid": "both", "all_spines": True}),
@@ -61,7 +61,7 @@ SIZES = [
     ("wide", (3.3, 1.8)), ("medium", (4.5, 3.2)), ("double", (7, 5)),
     ("double-wide", (7, 3.6)), ("slide", (9, 5.06)), ("tall", (2.5, 4.2)),
 ]
-CMAPS = ["Blues", "viridis", "magma", "RdBu_r"]
+CMAPS = ["Blues", "viridis", "magma", "RdBu_r", "coolwarm", "Greys"]
 
 
 def read(name):
@@ -158,15 +158,23 @@ def box_violin(rows, colors, kind="box", **config):
         positions = np.arange(len(groups)) + (i - .5) * width
         if kind == "box":
             bp = ax.boxplot(data, positions=positions, widths=width * .8, patch_artist=True,
-                            showfliers=False, medianprops={"color": color, "linewidth": 1})
+                            showfliers=config.get("outliers", False),
+                            showmeans=config.get("means", False),
+                            meanprops={"marker": "D", "markersize": 3,
+                                       "markerfacecolor": "white", "markeredgecolor": color},
+                            medianprops={"color": color, "linewidth": 1})
             for patch in bp["boxes"]:
                 patch.set_facecolor(color); patch.set_alpha(.45); patch.set_edgecolor(color)
         else:
             vp = ax.violinplot(data, positions=positions, widths=width * .85,
-                               showmeans=False, showmedians=True, showextrema=False)
+                               showmeans=config.get("means", False), showmedians=True,
+                               showextrema=config.get("outliers", False))
             for body in vp["bodies"]:
                 body.set_facecolor(color); body.set_edgecolor(color); body.set_alpha(.38)
             vp["cmedians"].set_color(color)
+            if config.get("means", False):
+                vp["cmeans"].set_color(color)
+                vp["cmeans"].set_linewidth(1)
         handles.append(matplotlib.patches.Patch(facecolor=color, alpha=.45, edgecolor=color, label=name.title()))
         if config.get("raw"):
             rng = np.random.default_rng(0)
@@ -180,6 +188,11 @@ def box_violin(rows, colors, kind="box", **config):
     ax.legend(handles=handles, frameon=False, fontsize=6.5, loc="lower center",
               bbox_to_anchor=(.5, 1.01), ncol=2, borderaxespad=0)
     setup(ax, config)
+    if config.get("reference") is not None:
+        ax.axhline(config["reference"], color="#9CA3AF", linestyle="--", linewidth=.8)
+        ax.text(1.0, config["reference"], "target", transform=ax.get_yaxis_transform(),
+                ha="right", va="bottom", fontsize=6.5, color="#6B7280",
+                bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
     if config.get("bracket"):
         ax.plot([0, 0, len(groups) - 1, len(groups) - 1],
                 [ax.get_ylim()[1] * .92, ax.get_ylim()[1] * .96, ax.get_ylim()[1] * .96, ax.get_ylim()[1] * .92],
@@ -204,7 +217,11 @@ def heatmap(rows, colors, **config):
     if config.get("cells", True):
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
-                ax.text(j, i, f"{matrix[i, j]:.2f}", ha="center", va="center", fontsize=5.8, color="#111827")
+                rgba = image.cmap(image.norm(matrix[i, j]))
+                luminance = .2126 * rgba[0] + .7152 * rgba[1] + .0722 * rgba[2]
+                color = "white" if luminance < .55 else "#111827"
+                ax.text(j, i, f"{matrix[i, j]:.2f}", ha="center", va="center",
+                        fontsize=6.2, fontweight="bold", color=color)
     if config.get("colorbar", True):
         cbar = fig.colorbar(image, ax=ax, fraction=.046, pad=.04)
         cbar.ax.tick_params(labelsize=6, length=2)
@@ -229,8 +246,11 @@ def roc(rows, colors, **config):
     if config.get("operating"):
         idx = int(np.argmin(np.abs(fpr - .1)))
         ax.scatter([fpr[idx]], [tpr[idx]], s=28, color=color, zorder=4)
-        ax.annotate("operating", (fpr[idx], tpr[idx]), xytext=(8, 6), textcoords="offset points",
-                    fontsize=6.5, color="#374151")
+        ax.annotate("operating", (fpr[idx], tpr[idx]), xytext=(14, -16),
+                    textcoords="offset points", fontsize=6.5, color="#374151",
+                    bbox={"facecolor": "white", "edgecolor": "none", "pad": 1.2},
+                    arrowprops={"arrowstyle": "-", "color": "#6B7280", "linewidth": .6},
+                    zorder=5)
     ax.set_xlim(0, 1); ax.set_ylim(0, 1.02)
     ax.set_xlabel("False positive rate", fontsize=config.get("tick", 8) + 1)
     ax.set_ylabel("True positive rate", fontsize=config.get("tick", 8) + 1)
@@ -329,7 +349,7 @@ def common(rows, specific):
         ("01-style", "style", "15 个白底风格", [(rows, PAIRS["blue"], name, kwargs) for name, kwargs in STYLE_SPECS], 3),
         ("02-type", "type", "15 个字体", [(rows, PAIRS["blue"], label, {"font": font}) for label, font in TYPE_SPECS], 3),
         ("03-annotation", "annotation", "该图支持的标注", specific, 2),
-        ("04-grid", "grid", "背景参考线", [(rows, PAIRS["blue"], name, {"grid": name}) for name in ("none", "hairline", "dashed", "dots", "both")], 3),
+        ("04-grid", "grid", "背景参考线", [(rows, PAIRS["blue"], name, {"grid": name}) for name in ("none", "hairline", "dashed", "dots")], 3),
         ("05-size", "size", "物理尺寸", [(rows, PAIRS["blue"], name, {"figsize": size}) for name, size in SIZES], 3),
     ]
 
@@ -350,7 +370,7 @@ def main():
         ("00-color", "color", "两组分布的颜色", [(hist, PAIRS[n], n, {}) for n in ("blue", "green", "teal", "orange", "rose")], 3),
         ("01-style", "style", "15 个白底风格", [(hist, PAIRS["blue"], n, k) for n, k in STYLE_SPECS], 3),
         ("02-type", "type", "15 个字体", [(hist, PAIRS["blue"], l, {"font": f}) for l, f in TYPE_SPECS], 3),
-        ("03-grid", "grid", "背景参考线", [(hist, PAIRS["blue"], n, {"grid": n}) for n in ("none", "hairline", "dashed", "dots", "both")], 3),
+        ("03-grid", "grid", "背景参考线", [(hist, PAIRS["blue"], n, {"grid": n}) for n in ("none", "hairline", "dashed", "dots")], 3),
         ("04-size", "size", "物理尺寸", [(hist, PAIRS["blue"], n, {"figsize": s}) for n, s in SIZES], 3),
         ("05-panel-count", "panel count", "1 panel / 2 panels", [
             (hist_single, PAIRS["blue"], "1 panel", {}), (hist, PAIRS["blue"], "2 panels", {})], 2),
@@ -362,7 +382,7 @@ def main():
         ("02-type", "type", "15 个字体", [(kde_rows, PAIRS["blue"], l, {"font": f, "mode": "kde"}) for l, f in TYPE_SPECS], 3),
         ("03-annotation", "annotation", "density 支持", [
             (kde_rows, PAIRS["blue"], "single series", {"mode": "kde"})], 1),
-        ("04-grid", "grid", "背景参考线", [(kde_rows, PAIRS["blue"], n, {"grid": n, "mode": "kde"}) for n in ("none", "hairline", "dashed", "dots", "both")], 3),
+        ("04-grid", "grid", "背景参考线", [(kde_rows, PAIRS["blue"], n, {"grid": n, "mode": "kde"}) for n in ("none", "hairline", "dashed", "dots")], 3),
         ("05-size", "size", "物理尺寸", [(kde_rows, PAIRS["blue"], n, {"figsize": s, "mode": "kde"}) for n, s in SIZES], 3),
     ])
 
@@ -374,8 +394,11 @@ def main():
             ("03-annotation", "annotation", "该图支持", [
                 (rows, PAIRS["blue"], "raw points", {"kind": kind, "raw": True}),
                 (rows, PAIRS["blue"], "significance", {"kind": kind, "bracket": True}),
-            ], 2),
-            ("04-grid", "grid", "背景参考线", [(rows, PAIRS["blue"], n, {"grid": n, "kind": kind}) for n in ("none", "hairline", "dashed", "dots", "both")], 3),
+                (rows, PAIRS["blue"], "reference", {"kind": kind, "reference": 90}),
+                (rows, PAIRS["blue"], "means", {"kind": kind, "means": True}),
+                (rows, PAIRS["blue"], "outliers", {"kind": kind, "outliers": True}),
+            ], 3),
+            ("04-grid", "grid", "背景参考线", [(rows, PAIRS["blue"], n, {"grid": n, "kind": kind}) for n in ("none", "hairline", "dashed", "dots")], 3),
             ("05-size", "size", "物理尺寸", [(rows, PAIRS["blue"], n, {"figsize": s, "kind": kind}) for n, s in SIZES], 3),
         ])
 
@@ -391,7 +414,8 @@ def main():
         ("03-annotation", "annotation", "cell labels / colorbar", [
             (heat_rows, ["#2F80C9"], "cells on", {"cells": True}),
             (heat_rows, ["#2F80C9"], "cells off", {"cells": False}),
-        ], 2),
+            (heat_rows, ["#2F80C9"], "no colorbar", {"colorbar": False}),
+        ], 3),
         ("04-size", "size", "物理尺寸", [(heat_rows, ["#2F80C9"], n, {"figsize": s}) for n, s in SIZES], 3),
     ])
 
@@ -402,7 +426,7 @@ def main():
             ("02-type", "type", "15 个字体", [(rows, [ACCENTS["blue"]], l, {"font": f}) for l, f in TYPE_SPECS], 3),
             ("03-annotation", "annotation", "operating point", [
                 (rows, [ACCENTS["blue"]], "none", {}), (rows, [ACCENTS["blue"]], extra, {extra: True})], 2),
-            ("04-grid", "grid", "背景参考线", [(rows, [ACCENTS["blue"]], n, {"grid": n}) for n in ("none", "hairline", "dashed", "dots", "both")], 3),
+            ("04-grid", "grid", "背景参考线", [(rows, [ACCENTS["blue"]], n, {"grid": n}) for n in ("none", "hairline", "dashed", "dots")], 3),
             ("05-size", "size", "物理尺寸", [(rows, [ACCENTS["blue"]], n, {"figsize": s}) for n, s in SIZES], 3),
         ])
 
@@ -415,7 +439,7 @@ def main():
             (cal_rows, [ACCENTS["blue"]], "10 bins", {"bins": 10}),
             (cal_rows, [ACCENTS["blue"]], "20 bins", {"bins": 20}),
         ], 3),
-        ("04-grid", "grid", "背景参考线", [(cal_rows, [ACCENTS["blue"]], n, {"grid": n}) for n in ("none", "hairline", "dashed", "dots", "both")], 3),
+        ("04-grid", "grid", "背景参考线", [(cal_rows, [ACCENTS["blue"]], n, {"grid": n}) for n in ("none", "hairline", "dashed", "dots")], 3),
         ("05-size", "size", "物理尺寸", [(cal_rows, [ACCENTS["blue"]], n, {"figsize": s}) for n, s in SIZES], 3),
     ])
 

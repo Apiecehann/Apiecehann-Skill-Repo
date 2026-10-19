@@ -49,21 +49,24 @@
     {
       "id": "02-colormap",
       "title": "colormap",
-      "panels": 4,
+      "panels": 6,
       "labels": [
         "Blues",
         "viridis",
         "magma",
-        "RdBu_r"
+        "RdBu_r",
+        "coolwarm",
+        "Greys"
       ]
     },
     {
       "id": "03-annotation",
       "title": "annotation",
-      "panels": 2,
+      "panels": 3,
       "labels": [
         "cells on",
-        "cells off"
+        "cells off",
+        "no colorbar"
       ]
     },
     {

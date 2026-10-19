@@ -198,8 +198,7 @@ def main():
         ((rows, groups, D_ORANGE), "hairline", {"grid": "hairline"}),
         ((rows, groups, D_ORANGE), "dashed", {"grid": "dashed"}),
         ((rows, groups, D_ORANGE), "dots", {"grid": "dots"}),
-        ((rows, groups, D_ORANGE), "full 2D", {"grid": "both"}),
-    ], 3)
+    ], 2)
 
     style_specs = [
         ("paper-clean", {}), ("soft-outline", {"alpha": .8, "marker": 28}),
@@ -208,10 +207,10 @@ def main():
         ("minimal-mono", {"tick": 7, "axis_width": .4, "marker": 26, "grid": "none"}),
         ("hand-drawn", {"font": "comic", "grid": "none"}),
         ("boxed-journal", {"all_spines": True, "grid": "none"}),
-        ("grid-paper", {"grid": "both"}),
+        ("grid-paper", {"grid": "hairline"}),
         ("editorial-serif", {"font": "times", "grid": "none", "axis_width": .5}),
         ("white-slide", {"font": "times", "tick": 11, "axis_width": 1.2, "grid": "none"}),
-        ("technical-grid", {"font": "consolas", "grid": "both", "all_spines": True}),
+        ("technical-grid", {"font": "consolas", "grid": "hairline", "all_spines": True}),
         ("poster-bold", {"tick": 10, "axis_width": 2, "grid": "none"}),
         ("compact-journal", {"tick": 7, "axis_width": .5, "grid": "none"}),
         ("high-contrast", {"axis_width": 1.5, "grid": "none", "bold": True}),

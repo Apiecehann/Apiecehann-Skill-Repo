@@ -61,22 +61,24 @@
     {
       "id": "03-annotation",
       "title": "annotation",
-      "panels": 2,
+      "panels": 5,
       "labels": [
         "raw points",
-        "significance"
+        "significance",
+        "reference",
+        "means",
+        "outliers"
       ]
     },
     {
       "id": "04-grid",
       "title": "grid",
-      "panels": 5,
+      "panels": 4,
       "labels": [
         "none",
         "hairline",
         "dashed",
-        "dots",
-        "both"
+        "dots"
       ]
     },
     {
