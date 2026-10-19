@@ -47,3 +47,4 @@
 {"id": "case-47", "request": "两个指标的六边形分箱密度，hexbin，单栏", "recipe": "hexbin", "data": "examples/templates/hexbin/data.csv", "expect": {"chart": "hexbin"}}
 {"id": "case-48", "request": "行/列按总量排序的 clustered heatmap，单栏", "recipe": "clustermap", "data": "examples/templates/clustermap/data.csv", "expect": {"chart": "clustermap"}}
 {"id": "case-49", "request": "每天的活动量日历热力图，单栏", "recipe": "calendar-heatmap", "data": "examples/templates/calendar-heatmap/data.csv", "expect": {"chart": "calendar-heatmap"}}
+{"id": "case-50", "request": "100 格中的类别占比，waffle，单栏", "recipe": "waffle", "data": "examples/templates/waffle/data.csv", "expect": {"chart": "waffle"}}

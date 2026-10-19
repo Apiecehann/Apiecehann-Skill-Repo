@@ -45,7 +45,8 @@
         "hist2d",
         "hexbin",
         "clustermap",
-        "calendar-heatmap"
+        "calendar-heatmap",
+        "waffle"
       ]
     },
     "data": {

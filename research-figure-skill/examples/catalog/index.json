@@ -53,7 +53,8 @@
         "hist2d",
         "hexbin",
         "clustermap",
-        "calendar-heatmap"
+        "calendar-heatmap",
+        "waffle"
       ]
     }
   },
@@ -174,6 +175,9 @@
     ],
     "calendar-heatmap": [
       "calendar-heatmap"
+    ],
+    "waffle": [
+      "waffle"
     ]
   },
   "entries": [
@@ -2620,6 +2624,50 @@
         "axes": {},
         "log": [
           "calendar-heatmap -> 120 days"
+        ]
+      }
+    },
+    {
+      "recipe": "waffle",
+      "title": "Waffle",
+      "chart": "waffle",
+      "variant": "100-cells",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "waffle"
+      ],
+      "files": {
+        "png": "waffle/figure.png",
+        "pdf": "waffle/figure.pdf",
+        "svg": "waffle/figure.svg",
+        "config": "waffle/config.json",
+        "data": "waffle/data.csv",
+        "decisions": "waffle/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：100 格中的类别占比（waffle）。",
+        "chart": "waffle",
+        "size": "single",
+        "size_pt": [
+          360,
+          360
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "waffle"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "waffle",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "waffle -> 4 categories"
         ]
       }
     }

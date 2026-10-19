@@ -698,6 +698,26 @@ def _finish_handles(fig, ax, config, out_stem, handles):
     return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
 
 
+def render_waffle(config, rows, out_stem):
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white"); ax.set_facecolor("white")
+    total = sum(r["value"] for r in rows)
+    cells = 100
+    index = 0
+    colors = config["colors"]
+    for i, row in enumerate(rows):
+        count = round(row["value"] / total * cells) if i < len(rows) - 1 else cells - index
+        for _ in range(count):
+            x, y = index % 10, 9 - index // 10
+            ax.add_patch(matplotlib.patches.Rectangle((x, y), .9, .9, color=colors[i % len(colors)]))
+            index += 1
+    ax.set_xlim(0, 10); ax.set_ylim(0, 10); ax.axis("off")
+    ax.legend([matplotlib.patches.Patch(color=colors[i % len(colors)]) for i in range(len(rows))],
+              [r["label"] for r in rows], frameon=False, fontsize=7, loc="upper center",
+              bbox_to_anchor=(.5, -.02), ncol=min(4, len(rows)))
+    return _save_fig(fig, out_stem)
+
+
 def render_calendar_heatmap(config, rows, out_stem):
     from datetime import date
     fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)

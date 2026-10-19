@@ -466,6 +466,17 @@
       ],
       "supports": [],
       "ir": "examples/templates/calendar-heatmap/figure.ir.json"
+    },
+    {
+      "id": "waffle",
+      "family": "comparison",
+      "status": "implemented",
+      "requires": [
+        "label",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/waffle/figure.ir.json"
     }
   ]
 }

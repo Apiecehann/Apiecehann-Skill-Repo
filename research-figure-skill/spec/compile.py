@@ -1045,6 +1045,40 @@ def compile_flow(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_waffle(ir, ir_path, output, render=False):
+    enc = ir["encoding"]
+    if "label" not in enc or "value" not in enc:
+        raise ValueError("waffle encoding requires label,value")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    rows = [{"label": raw[enc["label"]].strip(), "value": numeric(raw[enc["value"]], enc["value"], str(i))}
+            for i, raw in enumerate(source, 1)]
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette = presets["palettes"].get(ir["theme"].get("palette", "d3-blue"))
+    if palette is None:
+        raise ValueError("Unknown palette")
+    size = ir["size"]["preset"]
+    size_pt = {"single": [360, 360], "medium": [420, 420], "double": [504, 504],
+               "slide": [600, 600]}[size]
+    config = {"chart": "waffle", "rows": rows, "colors": palette["colors"], "size_pt": size_pt,
+              "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+              "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                         "svg_text": ir["output"].get("svg_text", True)}}
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["label", "value"]); writer.writeheader(); writer.writerows(rows)
+    decisions = {"claim": ir["claim"], "chart": "waffle", "size": size, "size_pt": size_pt,
+                 "palette": ir["theme"].get("palette", "d3-blue"), "encoding": ["waffle"],
+                 "labels": ir["labels"], "layout": "waffle", "emphasis": [], "annotations": [],
+                 "axes": {}, "log": [f"waffle -> {len(rows)} categories"]}
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        charts2d.render_waffle(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_calendar(ir, ir_path, output, render=False):
     enc = ir["encoding"]
     if "date" not in enc or "value" not in enc:
@@ -1403,6 +1437,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_density2d(ir, ir_path, output, render)
     if ir["chart"] == "calendar-heatmap":
         return compile_calendar(ir, ir_path, output, render)
+    if ir["chart"] == "waffle":
+        return compile_waffle(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

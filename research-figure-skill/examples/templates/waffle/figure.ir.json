@@ -1,0 +1,10 @@
+{
+  "claim": "MOCK：100 格中的类别占比（waffle）。",
+  "chart": "waffle",
+  "data": "data.csv",
+  "encoding": {"label": "label", "value": "value"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "tol-bright", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true}
+}

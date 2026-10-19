@@ -1,0 +1,49 @@
+{
+  "chart": "waffle",
+  "rows": [
+    {
+      "label": "Vision",
+      "value": 38.0
+    },
+    {
+      "label": "Language",
+      "value": 31.0
+    },
+    {
+      "label": "Audio",
+      "value": 18.0
+    },
+    {
+      "label": "Sensor",
+      "value": 13.0
+    }
+  ],
+  "colors": [
+    "#4477AA",
+    "#EE6677",
+    "#228833",
+    "#CCBB44",
+    "#66CCEE",
+    "#AA3377",
+    "#BBBBBB"
+  ],
+  "size_pt": [
+    360,
+    360
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}
