@@ -570,7 +570,7 @@ def read_distribution_rows(ir, ir_path):
 
 def compile_distribution_2d(ir, ir_path, output, render=False):
     chart = ir["chart"]
-    if chart not in ("box", "violin", "ecdf", "kde"):
+    if chart not in ("box", "violin", "ecdf", "kde", "ridgeline"):
         raise ValueError(f"unsupported distribution chart {chart!r}")
     missing = {"x", "y", "series"} - set(ir["encoding"])
     if missing:
@@ -619,7 +619,8 @@ def compile_distribution_2d(ir, ir_path, output, render=False):
     (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     if render:
         renderer = {"box": charts2d.render_box, "violin": charts2d.render_violin,
-                    "ecdf": charts2d.render_ecdf, "kde": charts2d.render_kde}[chart]
+                    "ecdf": charts2d.render_ecdf, "kde": charts2d.render_kde,
+                    "ridgeline": charts2d.render_ridgeline}[chart]
         renderer(config, rows, output / "figure")
     return config, decisions
 
@@ -755,7 +756,7 @@ def compile_classification(ir, ir_path, output, render=False):
     (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     if render:
         renderer = {"roc": charts2d.render_roc, "pr": charts2d.render_pr,
-                    "calibration": charts2d.render_calibration}[chart]
+                    "calibration": charts2d.render_calibration, "det": charts2d.render_det}[chart]
         renderer(config, rows, output / "figure")
     return config, decisions
 
@@ -933,11 +934,11 @@ def compile_ir(ir_path, output, render=False):
     ir = load_ir(ir_path)
     if ir["chart"] == "distribution-overlap":
         return compile_distribution(ir, ir_path, output, render)
-    if ir["chart"] in ("box", "violin", "ecdf", "kde"):
+    if ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline"):
         return compile_distribution_2d(ir, ir_path, output, render)
     if ir["chart"] == "heatmap":
         return compile_heatmap(ir, ir_path, output, render)
-    if ir["chart"] in ("roc", "pr", "calibration"):
+    if ir["chart"] in ("roc", "pr", "calibration", "det"):
         return compile_classification(ir, ir_path, output, render)
     if ir["chart"] == "surface":
         return compile_surface(ir, ir_path, output, render)

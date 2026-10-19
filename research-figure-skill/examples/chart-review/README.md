@@ -19,8 +19,10 @@
 - `calibration/`：6 张，51
 - `scatter3d/`：5 张，47
 - `voxel/`：5 张，47
+- `ridgeline/`：6 张，49
+- `det/`：6 张，50
 
-P1 已开始：`scatter3d`、`voxel` 已完成，其余 P1 图继续按同一格式。
+P1 已开始：`scatter3d`、`voxel`、`ridgeline`、`det` 已完成，其余 P1 图继续按同一格式。
 
 Batch 1 = dumbbell / line-band / scatter。Batch 2 = distribution-overlap / kde / box / violin / ecdf。Batch 3 = heatmap / roc / pr / calibration。两 series 的图不做 `categorical`，heatmap 不做 color structure，所以不是每张都 11 张。
 

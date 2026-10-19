@@ -1,0 +1,36 @@
+{
+  "chart": "det",
+  "series_order": [
+    "all"
+  ],
+  "colors": {
+    "all": "#2F80C9"
+  },
+  "series_labels": {
+    "all": "Detector"
+  },
+  "bins": 10,
+  "size_pt": [
+    360,
+    260
+  ],
+  "x_label": "False positive rate",
+  "y_label": "False negative rate",
+  "legend": false,
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

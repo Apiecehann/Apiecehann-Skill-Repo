@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：四个难度分组上的成功率分布（ridgeline）。",
+  "chart": "ridgeline",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "ridgeline"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "ridgeline",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      null,
+      null
+    ]
+  },
+  "log": [
+    "ridgeline -> 4 groups, 1 series, 160 observations"
+  ]
+}

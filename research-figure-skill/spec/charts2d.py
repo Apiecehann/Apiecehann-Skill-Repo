@@ -342,6 +342,58 @@ def render_ecdf(config, rows, out_stem):
     return _finish(fig, ax, config, out_stem)
 
 
+def render_ridgeline(config, rows, out_stem):
+    fig, ax = _setup(config)
+    colors, labels = config["colors"], config.get("series_labels", {})
+    groups = config["groups"]
+    all_values = np.array([r["value"] for r in rows])
+    grid = np.linspace(all_values.min(), all_values.max(), 240)
+    for i, group in enumerate(groups):
+        subset = [r for r in rows if r["group"] == group]
+        if len(subset) < 2:
+            continue
+        name = subset[0]["series"]
+        values = [r["value"] for r in subset]
+        density = _gaussian_kde(values, grid)
+        density = density / density.max() * .9
+        base = len(groups) - 1 - i
+        ax.fill_between(grid, base, base + density, color=colors.get(name, "#2F80C9"), alpha=.55,
+                        linewidth=0)
+        ax.plot(grid, base + density, color="#ffffff", linewidth=1.4)
+        ax.text(grid.min(), base + .06, group, ha="left", va="bottom", fontsize=7)
+    ax.set_yticks([])
+    if config.get("x_min") is not None or config.get("x_max") is not None:
+        ax.set_xlim(config.get("x_min"), config.get("x_max"))
+    ax.set_ylim(-.1, len(groups))
+    ax.set_ylabel(config.get("y_label", "Group"), fontsize=8)
+    ax.set_xlabel(config.get("x_label", ""), fontsize=8)
+    return _save_fig(fig, out_stem)
+
+
+def render_det(config, rows, out_stem):
+    from statistics import NormalDist
+    fig, ax = _setup(config)
+    colors = config["colors"]
+    labels = config.get("series_labels", {})
+    norm = NormalDist()
+    ticks = [0.01, 0.2, 0.5, 0.8]
+    z = lambda p: [norm.inv_cdf(float(np.clip(v, 1e-4, 1 - 1e-4))) for v in p]
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        fpr, tpr, _ = _roc_points([r["score"] for r in subset], [r["label"] for r in subset])
+        fnr = 1 - tpr
+        ax.plot(z(fpr), z(fnr), color=colors.get(name, "#2F80C9"), linewidth=1.8,
+                label=labels.get(name, name))
+    ax.plot(z(ticks), z(ticks), color="#9CA3AF", linestyle="--", linewidth=.8)
+    ax.set_xticks(z(ticks)); ax.set_xticklabels([f"{t:g}" for t in ticks], fontsize=7)
+    ax.set_yticks(z(ticks)); ax.set_yticklabels([f"{t:g}" for t in ticks], fontsize=7)
+    ax.set_xlabel(config.get("x_label", "False positive rate"), fontsize=8)
+    ax.set_ylabel(config.get("y_label", "False negative rate"), fontsize=8)
+    if config.get("legend", True):
+        ax.legend(frameon=False, fontsize=7, loc="upper right")
+    return _save_fig(fig, out_stem)
+
+
 def render_kde(config, rows, out_stem):
     fig, ax = _setup(config)
     colors, labels = config["colors"], config.get("series_labels", {})

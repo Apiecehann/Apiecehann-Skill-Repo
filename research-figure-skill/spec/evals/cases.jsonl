@@ -27,3 +27,5 @@
 {"id": "case-27", "request": "二维参数网格的 loss landscape，用 3D surface + 2D contour 投影", "recipe": "surface", "data": "examples/templates/surface/data.csv", "expect": {"chart": "surface"}}
 {"id": "case-28", "request": "三个方法在 accuracy/robustness/efficiency 三维空间的分布，3D 散点，单栏", "recipe": "scatter3d", "data": "examples/templates/scatter3d/data.csv", "expect": {"chart": "scatter3d"}}
 {"id": "case-29", "request": "7x7x7 三维体素密度场，单栏", "recipe": "voxel", "data": "examples/templates/voxel/data.csv", "expect": {"chart": "voxel"}}
+{"id": "case-30", "request": "四个难度分组的成功率分布，ridgeline 山脊图，单栏", "recipe": "ridgeline", "data": "examples/templates/ridgeline/data.csv", "expect": {"chart": "ridgeline"}}
+{"id": "case-31", "request": "二分类检测错误权衡 DET 曲线，单栏", "recipe": "det", "data": "examples/templates/det/data.csv", "expect": {"chart": "det"}}

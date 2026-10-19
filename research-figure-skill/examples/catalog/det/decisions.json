@@ -1,0 +1,26 @@
+{
+  "claim": "MOCK：二分类的 detection error tradeoff（DET）。",
+  "chart": "det",
+  "size": "single",
+  "size_pt": [
+    360,
+    260
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "det"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "det",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "bins": 10
+  },
+  "log": [
+    "det -> 240 observations, 1 series"
+  ]
+}

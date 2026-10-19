@@ -33,7 +33,9 @@
         "calibration",
         "surface",
         "scatter3d",
-        "voxel"
+        "voxel",
+        "ridgeline",
+        "det"
       ]
     }
   },
@@ -96,6 +98,12 @@
     ],
     "voxel": [
       "voxel"
+    ],
+    "ridgeline": [
+      "ridgeline"
+    ],
+    "det": [
+      "det"
     ]
   },
   "entries": [
@@ -1556,6 +1564,101 @@
         },
         "log": [
           "voxel -> 7 x 7 x 7 grid"
+        ]
+      }
+    },
+    {
+      "recipe": "ridgeline",
+      "title": "Ridgeline",
+      "chart": "ridgeline",
+      "variant": "four-groups",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "ridgeline"
+      ],
+      "files": {
+        "png": "ridgeline/figure.png",
+        "pdf": "ridgeline/figure.pdf",
+        "svg": "ridgeline/figure.svg",
+        "config": "ridgeline/config.json",
+        "data": "ridgeline/data.csv",
+        "decisions": "ridgeline/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：四个难度分组上的成功率分布（ridgeline）。",
+        "chart": "ridgeline",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "ridgeline"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "ridgeline",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "log": [
+          "ridgeline -> 4 groups, 1 series, 160 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "det",
+      "title": "DET curve",
+      "chart": "det",
+      "variant": "single-series",
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "det"
+      ],
+      "files": {
+        "png": "det/figure.png",
+        "pdf": "det/figure.pdf",
+        "svg": "det/figure.svg",
+        "config": "det/config.json",
+        "data": "det/data.csv",
+        "decisions": "det/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：二分类的 detection error tradeoff（DET）。",
+        "chart": "det",
+        "size": "single",
+        "size_pt": [
+          360,
+          260
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "det"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "det",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "bins": 10
+        },
+        "log": [
+          "det -> 240 observations, 1 series"
         ]
       }
     }

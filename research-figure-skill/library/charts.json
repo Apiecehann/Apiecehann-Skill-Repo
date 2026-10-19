@@ -238,6 +238,29 @@
       ],
       "supports": [],
       "ir": "examples/templates/voxel/figure.ir.json"
+    },
+    {
+      "id": "ridgeline",
+      "family": "distribution",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/ridgeline/figure.ir.json"
+    },
+    {
+      "id": "det",
+      "family": "classification",
+      "status": "implemented",
+      "requires": [
+        "score",
+        "label"
+      ],
+      "supports": [],
+      "ir": "examples/templates/det/figure.ir.json"
     }
   ]
 }

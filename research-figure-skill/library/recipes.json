@@ -323,6 +323,32 @@
       "ir": "examples/templates/voxel/figure.ir.json",
       "chart": "voxel",
       "variant": "density-field"
+    },
+    {
+      "id": "ridgeline",
+      "title": "Ridgeline",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "ridgeline"
+      ],
+      "ir": "examples/templates/ridgeline/figure.ir.json",
+      "chart": "ridgeline",
+      "variant": "four-groups"
+    },
+    {
+      "id": "det",
+      "title": "DET curve",
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "det"
+      ],
+      "ir": "examples/templates/det/figure.ir.json",
+      "chart": "det",
+      "variant": "single-series"
     }
   ]
 }

@@ -76,10 +76,10 @@ def check_case(case, ir_path):
     if ir["chart"] == "distribution-overlap":
         actual_rows = distribution_rows(ir, ir_path)
         expected_rows = distribution_rows(expected_ir, ir_path)
-    elif ir["chart"] in ("box", "violin", "ecdf", "kde"):
+    elif ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline"):
         actual_rows, _ = read_distribution_rows(ir, ir_path)
         expected_rows, _ = read_distribution_rows(expected_ir, ir_path)
-    elif ir["chart"] in ("heatmap", "roc", "pr", "calibration", "surface", "scatter3d", "voxel"):
+    elif ir["chart"] in ("heatmap", "roc", "pr", "calibration", "surface", "scatter3d", "voxel", "det"):
         with (ir_path.parent / ir["data"]).open(encoding="utf-8-sig", newline="") as stream:
             actual_rows = list(csv.DictReader(stream))
         with Path(expected_data).open(encoding="utf-8-sig", newline="") as stream:
