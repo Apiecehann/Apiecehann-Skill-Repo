@@ -31,6 +31,7 @@
 - `sunburst/`：5 张，45
 - `icicle/`：5 张，45
 - `alluvial/`：5 张，45
+- `chord/`：5 张，45
 - `qq/`：5 张，48
 - `eventplot/`：5 张，48
 - `hist2d/`：5 张，47
