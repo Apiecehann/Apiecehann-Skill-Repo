@@ -1,4 +1,4 @@
-"""Bar3d axis-review: color / style / type / view / size."""
+"""Mesh3d axis-review: color / style / type / view / size."""
 from __future__ import annotations
 
 import csv
@@ -10,12 +10,13 @@ import matplotlib
 matplotlib.use("Agg")
 matplotlib.rcParams["svg.fonttype"] = "none"
 import matplotlib.pyplot as plt
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 LABEL_FONT = r"C:\Windows\Fonts\msyh.ttc"
-DATA = ROOT / "examples" / "templates" / "bar3d" / "data.csv"
+DATA = ROOT / "examples" / "templates" / "mesh3d" / "data.csv"
 FONTS = {
     "arial": r"C:\Windows\Fonts\arial.ttf", "helvetica": r"C:\Windows\Fonts\arial.ttf",
     "segoe": r"C:\Windows\Fonts\segoeui.ttf", "calibri": r"C:\Windows\Fonts\calibri.ttf",
@@ -26,20 +27,15 @@ FONTS = {
     "courier": r"C:\Windows\Fonts\cour.ttf", "comic": r"C:\Windows\Fonts\comic.ttf",
     "script": r"C:\Windows\Fonts\segoesc.ttf",
 }
-PALETTES = {
-    "tol-bright": ["#4477AA", "#EE6677"],
-    "d3-orange": ["#D98A48", "#E07A2F"],
-    "pastel": ["#A8D5E5", "#F2C6CE"],
-    "tableau": ["#4E79A7", "#F28E2B"],
-}
+COLORS = ["#2F80C9", "#E07A2F", "#1F9E89", "#C44E6E"]
 STYLES = [
-    ("paper-clean", {}), ("soft-outline", {"alpha": .75}), ("serif-emphasis", {"font": "times"}),
-    ("bold-slide", {"tick": 9, "bold": True}), ("minimal-mono", {"tick": 6}),
+    ("paper-clean", {}), ("soft-outline", {"alpha": .7}), ("serif-emphasis", {"font": "times"}),
+    ("bold-slide", {"tick": 9, "bold": True}), ("minimal-mono", {"tick": 6, "width": .5}),
     ("hand-drawn", {"font": "comic"}), ("boxed-journal", {"pane": True}),
     ("grid-paper", {"grid": True}), ("editorial-serif", {"font": "times"}),
     ("white-slide", {"font": "times", "tick": 9}), ("technical-grid", {"font": "consolas", "grid": True}),
-    ("poster-bold", {"tick": 10}), ("compact-journal", {"tick": 6}),
-    ("high-contrast", {"bold": True, "alpha": 1}), ("pastel-poster", {"tick": 10, "alpha": .7}),
+    ("poster-bold", {"tick": 10, "width": 1.4}), ("compact-journal", {"tick": 6}),
+    ("high-contrast", {"width": 1.4, "bold": True}), ("pastel-poster", {"tick": 10, "alpha": .6}),
 ]
 TYPES = [
     ("Arial", "arial"), ("Helvetica", "helvetica"), ("Segoe UI", "segoe"), ("Calibri", "calibri"),
@@ -58,26 +54,22 @@ def load():
     with DATA.open(encoding="utf-8-sig", newline="") as stream:
         rows = list(csv.DictReader(stream))
     for row in rows:
-        row["value"] = float(row["value"])
+        row["x"], row["y"], row["z"] = float(row["x"]), float(row["y"]), float(row["z"])
     return rows
 
 
-def draw(rows, colors, *, font="arial", tick=7, alpha=.9, bold=False,
+def draw(rows, color, *, font="arial", tick=7, alpha=1, width=.7, bold=False,
          grid=True, pane=False, view=(24, -55), figsize=(3.3, 2.5)):
     plt.rcParams["font.family"] = matplotlib.font_manager.FontProperties(fname=FONTS[font]).get_name()
     fig = plt.figure(figsize=figsize, dpi=180)
     fig.patch.set_facecolor("white")
     ax = fig.add_subplot(111, projection="3d")
-    groups = list(dict.fromkeys(r["group"] for r in rows))
-    series = list(dict.fromkeys(r["series"] for r in rows))
-    for j, name in enumerate(series):
-        for i, group in enumerate(groups):
-            value = next(r["value"] for r in rows if r["group"] == group and r["series"] == name)
-            ax.bar3d(i - .22, j - .22, 0, .36, .36, value, color=colors[j],
-                     edgecolor="white", linewidth=.3, alpha=alpha)
-    ax.set_xticks(range(len(groups))); ax.set_xticklabels(groups, fontsize=max(5, tick - 1))
-    ax.set_yticks(range(len(series))); ax.set_yticklabels(series, fontsize=max(5, tick - 1))
-    ax.set_zlabel("Success rate (%)", fontsize=tick, labelpad=1)
+    xs = sorted({r["x"] for r in rows}); ys = sorted({r["y"] for r in rows})
+    Z = np.array([[next(r["z"] for r in rows if r["x"] == x and r["y"] == y) for x in xs] for y in ys])
+    X, Y = np.meshgrid(xs, ys)
+    ax.plot_wireframe(X, Y, Z, color=color, linewidth=width, alpha=alpha)
+    ax.set_xlabel("Learning rate", fontsize=tick); ax.set_ylabel("Weight decay", fontsize=tick)
+    ax.set_zlabel("Loss", fontsize=tick)
     ax.tick_params(labelsize=max(5, tick - 1), pad=0)
     ax.view_init(elev=view[0], azim=view[1])
     ax.grid(grid)
@@ -109,12 +101,12 @@ def sheet(title, subtitle, panels, columns, out, cell=(380, 300)):
 
 def main():
     rows = load(); (HERE / "panels").mkdir(exist_ok=True)
-    index = {"version": 1, "chart": "bar3d", "sheets": []}
+    index = {"version": 1, "chart": "mesh3d", "sheets": []}
 
     def add(sheet_id, title, subtitle, items, columns):
         panels = []
-        for i, (colors, label, kwargs) in enumerate(items):
-            fig = draw(rows, colors, **kwargs)
+        for i, (label, kwargs) in enumerate(items):
+            fig = draw(rows, **kwargs)
             path = HERE / "panels" / f"{sheet_id}-{i:02d}.png"
             fig.savefig(path, dpi=180, facecolor="white"); plt.close(fig)
             panels.append((path, label))
@@ -122,11 +114,11 @@ def main():
         index["sheets"].append({"id": sheet_id, "title": title, "panels": len(panels),
                                 "labels": [p[1] for p in panels]})
 
-    add("00-color", "color", "两系列色板", [(c, n, {}) for n, c in PALETTES.items()], 2)
-    add("01-style", "style", "15 个白底风格", [(PALETTES["tol-bright"], n, k) for n, k in STYLES], 3)
-    add("02-type", "type", "15 个字体", [(PALETTES["tol-bright"], n, {"font": f}) for n, f in TYPES], 3)
-    add("03-view", "view angle", "三维视角", [(PALETTES["tol-bright"], n, {"view": v}) for n, v in VIEWS], 2)
-    add("04-size", "size", "物理尺寸", [(PALETTES["tol-bright"], n, {"figsize": s}) for n, s in SIZES], 3)
+    add("00-color", "color", "wireframe 颜色", [(f"color-{i}", {"color": c}) for i, c in enumerate(COLORS)], 2)
+    add("01-style", "style", "15 个白底风格", [(n, {"color": COLORS[0], **k}) for n, k in STYLES], 3)
+    add("02-type", "type", "15 个字体", [(n, {"color": COLORS[0], "font": f}) for n, f in TYPES], 3)
+    add("03-view", "view angle", "三维视角", [(n, {"color": COLORS[0], "view": v}) for n, v in VIEWS], 2)
+    add("04-size", "size", "物理尺寸", [(n, {"color": COLORS[0], "figsize": s}) for n, s in SIZES], 3)
     (HERE / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
 
 
