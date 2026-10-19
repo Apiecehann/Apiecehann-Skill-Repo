@@ -190,6 +190,9 @@ def main():
     build("sankey", read("sankey"), sankey,
           [(read("sankey"), PALETTES["d3-blue"], "curve", {}),
            (read("sankey"), PALETTES["d3-blue"], "compact", {"alpha": .6})])
+    build("alluvial", read("alluvial"), sankey,
+          [(read("alluvial"), PALETTES["d3-blue"], "flow", {}),
+           (read("alluvial"), PALETTES["d3-blue"], "compact", {"alpha": .6})])
     build("treemap", read("treemap"), treemap,
           [(read("treemap"), PALETTES["d3-blue"], "slice", {}),
            (read("treemap"), PALETTES["d3-blue"], "rows", {"layout": "rows"})])

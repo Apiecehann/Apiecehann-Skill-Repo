@@ -385,6 +385,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/chord/figure.ir.json"
+    },
+    {
+      "id": "alluvial",
+      "family": "flow",
+      "status": "implemented",
+      "requires": [
+        "source",
+        "target",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/alluvial/figure.ir.json"
     }
   ]
 }

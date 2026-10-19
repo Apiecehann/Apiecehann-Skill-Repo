@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：数据到模块的三阶段流向（alluvial）。",
+  "chart": "alluvial",
+  "size": "single",
+  "size_pt": [
+    360,
+    280
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "alluvial"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "alluvial",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "alluvial -> 5 items"
+  ]
+}

@@ -46,7 +46,8 @@
         "quiver3d",
         "sunburst",
         "icicle",
-        "chord"
+        "chord",
+        "alluvial"
       ]
     }
   },
@@ -146,6 +147,9 @@
     ],
     "chord": [
       "chord"
+    ],
+    "alluvial": [
+      "alluvial"
     ]
   },
   "entries": [
@@ -2260,6 +2264,50 @@
         "axes": {},
         "log": [
           "chord -> 10 items"
+        ]
+      }
+    },
+    {
+      "recipe": "alluvial",
+      "title": "Alluvial flow",
+      "chart": "alluvial",
+      "variant": "three-stage",
+      "tags": [
+        "paper",
+        "single-column",
+        "flow",
+        "alluvial"
+      ],
+      "files": {
+        "png": "alluvial/figure.png",
+        "pdf": "alluvial/figure.pdf",
+        "svg": "alluvial/figure.svg",
+        "config": "alluvial/config.json",
+        "data": "alluvial/data.csv",
+        "decisions": "alluvial/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：数据到模块的三阶段流向（alluvial）。",
+        "chart": "alluvial",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "alluvial"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "alluvial",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "alluvial -> 5 items"
         ]
       }
     }

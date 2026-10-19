@@ -492,6 +492,19 @@
       "ir": "examples/templates/chord/figure.ir.json",
       "chart": "chord",
       "variant": "four-nodes"
+    },
+    {
+      "id": "alluvial",
+      "title": "Alluvial flow",
+      "tags": [
+        "paper",
+        "single-column",
+        "flow",
+        "alluvial"
+      ],
+      "ir": "examples/templates/alluvial/figure.ir.json",
+      "chart": "alluvial",
+      "variant": "three-stage"
     }
   ]
 }

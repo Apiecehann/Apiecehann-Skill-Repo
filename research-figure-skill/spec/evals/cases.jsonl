@@ -40,3 +40,4 @@
 {"id": "case-40", "request": "模型模块的两层占比，sunburst，单栏", "recipe": "sunburst", "data": "examples/templates/sunburst/data.csv", "expect": {"chart": "sunburst"}}
 {"id": "case-41", "request": "模型模块的两层占比，icicle，单栏", "recipe": "icicle", "data": "examples/templates/icicle/data.csv", "expect": {"chart": "icicle"}}
 {"id": "case-42", "request": "四个模态之间的交叉流量，chord，单栏", "recipe": "chord", "data": "examples/templates/chord/data.csv", "expect": {"chart": "chord"}}
+{"id": "case-43", "request": "数据到模块的三阶段 alluvial 流向，单栏", "recipe": "alluvial", "data": "examples/templates/alluvial/data.csv", "expect": {"chart": "alluvial"}}

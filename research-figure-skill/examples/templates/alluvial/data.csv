@@ -1,0 +1,6 @@
+﻿source,target,value
+Data,Encoder,40
+Data,Augment,15
+Encoder,Fusion,40
+Augment,Fusion,15
+Fusion,Output,55

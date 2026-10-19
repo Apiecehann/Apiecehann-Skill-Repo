@@ -38,7 +38,8 @@
         "quiver3d",
         "sunburst",
         "icicle",
-        "chord"
+        "chord",
+        "alluvial"
       ]
     },
     "data": {
