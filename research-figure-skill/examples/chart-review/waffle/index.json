@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "chart": "waffle",
+  "sheets": [
+    {
+      "id": "00-color",
+      "panels": 3
+    },
+    {
+      "id": "01-style",
+      "panels": 15
+    },
+    {
+      "id": "02-type",
+      "panels": 15
+    },
+    {
+      "id": "03-size",
+      "panels": 9
+    }
+  ]
+}
