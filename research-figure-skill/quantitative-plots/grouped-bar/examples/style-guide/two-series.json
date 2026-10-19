@@ -1,0 +1,44 @@
+{
+  "data": "paired-data.csv",
+  "preset": {
+    "style": "paper-clean",
+    "layout": "grouped",
+    "palette": "blue-orange"
+  },
+  "series_order": [
+    "before",
+    "after"
+  ],
+  "panel_defaults": {
+    "limits": [
+      0,
+      90
+    ],
+    "ticks": [
+      0,
+      30,
+      60,
+      90
+    ],
+    "tick_format": ".0f",
+    "ylabel": "Success (%)",
+    "value_labels": true,
+    "value_format": ".1f"
+  },
+  "legend_defaults": {
+    "labels": {
+      "before": "Before",
+      "after": "After"
+    },
+    "columns": 2
+  },
+  "panels": [
+    {
+      "id": "pretraining",
+      "group_labels": {
+        "Integrated-VLA": "Integrated",
+        "Hierarchical-VLA": "Hierarchical"
+      }
+    }
+  ]
+}

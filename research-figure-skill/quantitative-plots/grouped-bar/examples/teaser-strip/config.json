@@ -1,0 +1,397 @@
+{
+  "data": "data.csv",
+  "figure": {
+    "size_pt": [
+      463.8454284667969,
+      87.65125274658203
+    ],
+    "dpi": 300
+  },
+  "panel_defaults": {
+    "category_pad": 3.5
+  },
+  "palette": {
+    "base": {
+      "fill": [
+        0.6312962770462036,
+        0.6314030885696411,
+        0.6312962770462036
+      ],
+      "edge": [
+        0.32155337929725647,
+        0.32161441445350647,
+        0.32155337929725647
+      ],
+      "label": "#404040"
+    },
+    "answer": {
+      "fill": [
+        0.6509804129600525,
+        0.5254902243614197,
+        1.0
+      ],
+      "edge": [
+        0.49803921580314636,
+        0.13333334028720856,
+        0.9960784316062927
+      ],
+      "label": "#7008e7",
+      "token_fill": [
+        0.9098039269447327,
+        0.8666666746139526,
+        1.0
+      ],
+      "token_edge": [
+        0.6509804129600525,
+        0.5254902243614197,
+        1.0
+      ]
+    },
+    "cue": {
+      "fill": [
+        0.9803921580314636,
+        0.7372549176216125,
+        0.0
+      ],
+      "edge": [
+        0.8549019694328308,
+        0.46666666865348816,
+        0.0
+      ],
+      "label": "#b55200",
+      "token_fill": [
+        0.9921568632125854,
+        0.9254902005195618,
+        0.800000011920929
+      ],
+      "token_edge": [
+        0.9803921580314636,
+        0.7372549176216125,
+        0.0
+      ]
+    },
+    "edit": {
+      "fill": [
+        1.0,
+        0.3960784375667572,
+        0.40784314274787903
+      ],
+      "edge": [
+        0.8941176533699036,
+        0.0,
+        0.08627451211214066
+      ],
+      "label": "#bf000f",
+      "token_fill": [
+        0.9960784316062927,
+        0.8352941274642944,
+        0.843137264251709
+      ],
+      "token_edge": [
+        1.0,
+        0.3960784375667572,
+        0.40784314274787903
+      ]
+    },
+    "rl": {
+      "fill": [
+        0.33725491166114807,
+        0.6352941393852234,
+        1.0
+      ],
+      "edge": [
+        0.08235294371843338,
+        0.364705890417099,
+        0.9882352948188782
+      ],
+      "label": "#1447e6"
+    }
+  },
+  "panels": [
+    {
+      "id": "strip",
+      "rect_pt": [
+        47.685436,
+        33.626876746582035,
+        414.71999,
+        52.199996999999996
+      ],
+      "category_limits": [
+        0,
+        414.71999
+      ],
+      "style": {
+        "limits": [
+          0,
+          1.12
+        ],
+        "ticks": [
+          0,
+          0.5,
+          1
+        ],
+        "value_labels": true,
+        "show_categories": true,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 5.824999999999989,
+          "value_step": 0.125,
+          "value_stop": 1,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 9.9,
+        "category_size": 8.4,
+        "value_size": 9.9,
+        "value_pad": 4,
+        "show_category_ticks": false,
+        "category_pad": 3.5,
+        "tokens": {
+          "size": 6.4,
+          "tint": true,
+          "offset_pt": 2.881774817871097,
+          "gap": 2.4,
+          "rounding": 0.19444444444444448,
+          "edge_width": 0.3911111056804657
+        },
+        "bar_width": 34.746795654296875
+      },
+      "tokens": {
+        "strip-1": [
+          {
+            "runs": [
+              {
+                "text": ".\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.1817631721496582,
+              0.17268114089965786
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.4304962158203125
+          },
+          {
+            "runs": [
+              {
+                "text": "Answer",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.14130353927612305,
+              0.12314186096191337
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "strip-2": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.15479087829589844,
+              0.13965415954589833
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.4292449951171875
+          },
+          {
+            "runs": [
+              {
+                "text": "Okay",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.1682758331298828,
+              0.15616884231567374
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "strip-3": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.15479087829589844,
+              0.1396517753601073
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.6881866455078125
+          },
+          {
+            "runs": [
+              {
+                "text": "Chicken",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.12781858444213867,
+              0.10662479400634695
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "strip-5": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.15479087829589844,
+              0.13965415954589833
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.688201904296875
+          },
+          {
+            "runs": [
+              {
+                "text": "Chicken",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.12781620025634766,
+              0.10662479400634695
+            ],
+            "height_em": 1.3333332538604736,
+            "baseline_em": 0.40909886360168457,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ]
+      },
+      "token_shift_pt": {
+        "strip-1": -0.12759017944335938,
+        "strip-2": 0.04441070556640625,
+        "strip-3": -0.0841217041015625,
+        "strip-5": -0.084136962890625
+      },
+      "readable_tokens": {
+        "strip-1": [
+          "Answer"
+        ],
+        "strip-2": [
+          "Okay"
+        ],
+        "strip-3": [
+          "Chicken"
+        ],
+        "strip-5": [
+          "Chicken"
+        ]
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "text": "MATH-500",
+      "position_pt": [
+        9.1743745803833,
+        33.24250030517578
+      ],
+      "size": 10.421052932739258,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "pass@1",
+      "position_pt": [
+        20.214906692504883,
+        42.30500030517578
+      ],
+      "size": 10.421052932739258,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 90
+    }
+  ],
+  "bands": [
+    {
+      "first": "strip-0",
+      "last": "strip-3",
+      "text": "Base model",
+      "palette": null,
+      "extend_pt": 23.53816,
+      "offset_pt": 18.14,
+      "text_offset_pt": 12.23438,
+      "size": 9.9
+    },
+    {
+      "first": "strip-4",
+      "last": "strip-4",
+      "text": "After RL",
+      "palette": "rl",
+      "extend_pt": 23.53816,
+      "offset_pt": 18.14,
+      "text_offset_pt": 12.23438,
+      "size": 9.9
+    },
+    {
+      "first": "strip-5",
+      "last": "strip-5",
+      "text": "After data edit",
+      "palette": "edit",
+      "extend_pt": 23.53816,
+      "offset_pt": 18.14,
+      "text_offset_pt": 12.23438,
+      "size": 9.9
+    }
+  ],
+  "icons": [],
+  "provenance": {
+    "note_id": "6ace9bd9000000001a02bf03",
+    "source": "https://www.sophielwang.com/blog/paper-writing",
+    "paper": "https://arxiv.org/abs/2610.06851v1",
+    "source_figure": "teaser_strip.pdf",
+    "data_status": "Recovered from published vector bar and interval geometry; not author raw trials.",
+    "reference_images_distributed": false,
+    "label_display": "Readable token labels by default; panel_defaults.tokens.mode=raw restores the original literal-token labels."
+  },
+  "fonts": {
+    "symbol": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    }
+  }
+}

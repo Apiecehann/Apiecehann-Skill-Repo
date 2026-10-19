@@ -1,0 +1,565 @@
+{
+  "data": "data.csv",
+  "figure": {
+    "size_pt": [
+      541.5894775390625,
+      168.11219787597656
+    ],
+    "dpi": 300
+  },
+  "panel_defaults": {
+    "category_pad": 3.5
+  },
+  "palette": {
+    "base": {
+      "fill": [
+        0.6312962770462036,
+        0.6314030885696411,
+        0.6312962770462036
+      ],
+      "edge": [
+        0.32155337929725647,
+        0.32161441445350647,
+        0.32155337929725647
+      ],
+      "label": "#404040"
+    },
+    "cue": {
+      "fill": [
+        0.9803921580314636,
+        0.7372549176216125,
+        0.0
+      ],
+      "edge": [
+        0.8549019694328308,
+        0.46666666865348816,
+        0.0
+      ],
+      "label": "#b55200",
+      "token_fill": [
+        0.9646143317222595,
+        0.9647669196128845,
+        0.9645838141441345
+      ],
+      "token_edge": [
+        0.06668192893266678,
+        0.06668192893266678,
+        0.06668192893266678
+      ]
+    },
+    "rl": {
+      "fill": [
+        0.33725491166114807,
+        0.6352941393852234,
+        1.0
+      ],
+      "edge": [
+        0.08235294371843338,
+        0.364705890417099,
+        0.9882352948188782
+      ],
+      "label": "#1447e6"
+    }
+  },
+  "panels": [
+    {
+      "id": "math",
+      "rect_pt": [
+        40.037498,
+        39.566878875976556,
+        262.07999500000005,
+        112.46399000000001
+      ],
+      "category_limits": [
+        0,
+        262.07999500000005
+      ],
+      "style": {
+        "limits": [
+          0,
+          1.07
+        ],
+        "ticks": [
+          0,
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1
+        ],
+        "value_labels": true,
+        "show_categories": true,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 10.510999999999996,
+          "value_step": 0.1,
+          "value_stop": 1,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "bar_width": 20.0604248046875,
+        "tokens": {
+          "offset_pt": 6.448440155273431,
+          "rounding": 0.19444444444444448,
+          "edge_width": 0.38499999046325684,
+          "background": [
+            0.9646143317222595,
+            0.9647669196128845,
+            0.9645838141441345
+          ],
+          "edge": [
+            0.06668192893266678,
+            0.06668192893266678,
+            0.06668192893266678
+          ]
+        }
+      },
+      "tokens": {
+        "math-1": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.16011798192584326,
+              0.1343255421471972
+            ],
+            "height_em": 1.3333347865513394,
+            "baseline_em": 0.4050118582589286,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.5917510986328125
+          },
+          {
+            "runs": [
+              {
+                "text": "Okay",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.17253936283172122,
+              0.1519056532118057
+            ],
+            "height_em": 1.3333347865513394,
+            "baseline_em": 0.4050118582589286,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "math-4": [
+          {
+            "runs": [
+              {
+                "text": "␣",
+                "font": "symbol"
+              },
+              {
+                "text": "Alright",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.14641898018973215,
+              0.10597534179687446
+            ],
+            "height_em": 1.3333347865513394,
+            "baseline_em": 0.40377177889384924,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.6126861572265625
+          },
+          {
+            "runs": [
+              {
+                "text": ",",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.20980108351934523,
+              0.20464235336061512
+            ],
+            "height_em": 1.3333347865513394,
+            "baseline_em": 0.4050118582589286,
+            "y_offset_em": 0.008680555555555556,
+            "gap_after_pt": 0
+          }
+        ]
+      },
+      "token_shift_pt": {
+        "math-1": -0.11587142944335938,
+        "math-4": 0.1609039306640625
+      },
+      "readable_tokens": {
+        "math-1": [
+          "Okay"
+        ],
+        "math-4": [
+          "Alright"
+        ]
+      }
+    },
+    {
+      "id": "gsm8k",
+      "rect_pt": [
+        354.533508,
+        108.77548987597656,
+        65.51998900000001,
+        43.255379000000005
+      ],
+      "category_limits": [
+        0,
+        65.51998900000001
+      ],
+      "style": {
+        "limits": [
+          0,
+          1.0
+        ],
+        "ticks": [
+          0,
+          0.5,
+          1
+        ],
+        "value_labels": false,
+        "show_categories": false,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 10.813499999999976,
+          "value_step": 0.25,
+          "value_stop": 1,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 9.5,
+        "tick_length": 3,
+        "bar_width": 5.015106201171875
+      },
+      "tokens": {}
+    },
+    {
+      "id": "amc23",
+      "rect_pt": [
+        472.469513,
+        108.77548987597656,
+        65.51998900000001,
+        43.255379000000005
+      ],
+      "category_limits": [
+        0,
+        65.51998900000001
+      ],
+      "style": {
+        "limits": [
+          0,
+          1.0
+        ],
+        "ticks": [
+          0,
+          0.5,
+          1
+        ],
+        "value_labels": false,
+        "show_categories": false,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 10.813999999999965,
+          "value_step": 0.25,
+          "value_stop": 1,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 9.5,
+        "tick_length": 3,
+        "bar_width": 5.01507568359375
+      },
+      "tokens": {}
+    },
+    {
+      "id": "aime2024",
+      "rect_pt": [
+        354.533508,
+        39.566878875976556,
+        65.51998900000001,
+        43.255379000000005
+      ],
+      "category_limits": [
+        0,
+        65.51998900000001
+      ],
+      "style": {
+        "limits": [
+          0,
+          1.0
+        ],
+        "ticks": [
+          0,
+          0.5,
+          1
+        ],
+        "value_labels": false,
+        "show_categories": false,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 10.813499999999976,
+          "value_step": 0.25,
+          "value_stop": 1,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 9.5,
+        "tick_length": 3,
+        "bar_width": 5.015106201171875
+      },
+      "tokens": {}
+    },
+    {
+      "id": "humaneval",
+      "rect_pt": [
+        472.469513,
+        39.566878875976556,
+        65.51998900000001,
+        43.255379000000005
+      ],
+      "category_limits": [
+        0,
+        65.51998900000001
+      ],
+      "style": {
+        "limits": [
+          0,
+          1.0
+        ],
+        "ticks": [
+          0,
+          0.5,
+          1
+        ],
+        "value_labels": false,
+        "show_categories": false,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 10.813999999999965,
+          "value_step": 0.25,
+          "value_stop": 1,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 9.5,
+        "tick_length": 3,
+        "bar_width": 5.01507568359375
+      },
+      "tokens": {}
+    }
+  ],
+  "annotations": [
+    {
+      "text": "MATH-500 ",
+      "position_pt": [
+        12.304374694824219,
+        45.68949890136719
+      ],
+      "size": 11.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "pass@1",
+      "position_pt": [
+        12.304374694824219,
+        107.42387390136719
+      ],
+      "size": 11.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "Olmo-3-7B",
+      "position_pt": [
+        80.0448989868164,
+        156.91844177246094
+      ],
+      "size": 9.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 0,
+      "box": {
+        "boxstyle": "square,pad=0.08",
+        "facecolor": "white",
+        "edgecolor": "#111111",
+        "linewidth": 0.4
+      }
+    },
+    {
+      "text": "Qwen3-14B",
+      "position_pt": [
+        214.399169921875,
+        156.91844177246094
+      ],
+      "size": 9.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 0,
+      "box": {
+        "boxstyle": "square,pad=0.08",
+        "facecolor": "white",
+        "edgecolor": "#111111",
+        "linewidth": 0.4
+      }
+    },
+    {
+      "text": "MATH-500 ",
+      "position_pt": [
+        12.304374694824219,
+        45.68949890136719
+      ],
+      "size": 11.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "pass@1",
+      "position_pt": [
+        12.304374694824219,
+        107.42387390136719
+      ],
+      "size": 11.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "GSM8K",
+      "position_pt": [
+        328.28350830078125,
+        113.90318298339844
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "AMC 23",
+      "position_pt": [
+        446.2195129394531,
+        112.90318298339844
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "AIME 2024",
+      "position_pt": [
+        328.28350830078125,
+        37.23362731933594
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "HumanEval",
+      "position_pt": [
+        446.2195129394531,
+        36.17112731933594
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    }
+  ],
+  "bands": [
+    {
+      "first": "math-0",
+      "last": "math-1",
+      "text": "Base model",
+      "palette": null,
+      "extend_pt": 13.58933,
+      "offset_pt": 21.92,
+      "text_offset_pt": 11.92,
+      "size": 9.5
+    },
+    {
+      "first": "math-2",
+      "last": "math-2",
+      "text": "After RL",
+      "palette": "rl",
+      "extend_pt": 13.58933,
+      "offset_pt": 21.92,
+      "text_offset_pt": 11.92,
+      "size": 9.5
+    },
+    {
+      "first": "math-3",
+      "last": "math-4",
+      "text": "Base model",
+      "palette": null,
+      "extend_pt": 13.58933,
+      "offset_pt": 21.92,
+      "text_offset_pt": 11.92,
+      "size": 9.5
+    },
+    {
+      "first": "math-5",
+      "last": "math-5",
+      "text": "After RL",
+      "palette": "rl",
+      "extend_pt": 13.58933,
+      "offset_pt": 21.92,
+      "text_offset_pt": 11.92,
+      "size": 9.5
+    }
+  ],
+  "icons": [],
+  "provenance": {
+    "note_id": "6ace9bd9000000001a02bf03",
+    "source": "https://www.sophielwang.com/blog/paper-writing",
+    "paper": "https://arxiv.org/abs/2610.06851v1",
+    "source_figure": "prefix_acc.pdf",
+    "data_status": "Recovered from published vector bar and interval geometry; not author raw trials.",
+    "reference_images_distributed": false,
+    "label_display": "Readable token labels by default; panel_defaults.tokens.mode=raw restores the original literal-token labels."
+  },
+  "fonts": {
+    "symbol": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    }
+  }
+}

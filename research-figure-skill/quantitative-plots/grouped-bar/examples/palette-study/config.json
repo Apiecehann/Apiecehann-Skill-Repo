@@ -1,0 +1,27 @@
+{
+  "candidates": "candidates.json",
+  "data": "data.csv",
+  "background": "#ffffff",
+  "outline": "#4b5058",
+  "text": "#20252c",
+  "gates": {
+    "normal_min": 10,
+    "cvd_min": 5,
+    "fill_background_min": 1.2,
+    "outline_contrast": 3,
+    "text_contrast": 4.5,
+    "hatch_contrast": 3
+  },
+  "shortlist": [
+    {"id":"P002","recommended_series":3,"layered":true,"reason":"薄荷绿、杏橙、灰蓝接近参考图的柔和面积色；五色版有色觉模拟近邻。"},
+    {"id":"P015","recommended_series":3,"layered":true,"reason":"粉、蓝、浅绿适合细描边与斜线纹理；不再降低透明度，避免过淡。"},
+    {"id":"P022","recommended_series":3,"layered":true,"reason":"青、沙黄、桃色明度较均衡，纹理清晰；五色版需额外区分。"},
+    {"id":"P040","recommended_series":5,"layered":true,"reason":"浅蓝、杏橙、沙黄的前三色适合分层图；五色诊断也通过本轮阈值。"},
+    {"id":"P026","recommended_series":5,"layered":true,"reason":"珊瑚、青、绿的前三色保留强调感；五色可用，但第四色较深，五系列纹理需调整。"},
+    {"id":"P098","recommended_series":5,"layered":true,"reason":"天蓝、珊瑚、芥黄、橄榄与中灰层次明确；适合五系列普通柱图。"},
+    {"id":"P018","recommended_series":3,"layered":false,"reason":"灰紫、沙金、陶土色较克制；适合普通三系列，当前深灰纹理对比不足。"},
+    {"id":"P086","recommended_series":3,"layered":false,"reason":"陶红、蓝、橙对比清楚；五色中有色觉模拟近邻，当前纹理需调深。"},
+    {"id":"P028","recommended_series":3,"layered":false,"reason":"橙、靛蓝、青绿适合重点比较；完整五色更活跃，只作为有条件备选。"},
+    {"id":"P034","recommended_series":5,"layered":false,"reason":"五色的色觉模拟分离较稳；深紫让纹理不清楚，保留作普通柱图备选。"}
+  ]
+}

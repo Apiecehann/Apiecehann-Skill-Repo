@@ -1,0 +1,622 @@
+[
+  {
+    "id": "P002",
+    "source_id": "colorbrewer--Set2",
+    "name": "Set2",
+    "family": "ColorBrewer",
+    "colors": [
+      "#66c2a5",
+      "#fc8d62",
+      "#8da0cb",
+      "#e78ac3",
+      "#a6d854"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Set2",
+    "recommended_series": 3,
+    "layered": true,
+    "reason": "薄荷绿、杏橙、灰蓝接近参考图的柔和面积色；五色版有色觉模拟近邻。",
+    "effective_colors_on_white": [
+      "#91d3be",
+      "#fdad8e",
+      "#adbbda",
+      "#eeabd4",
+      "#bfe384"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#91d3be",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#fdad8e",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#adbbda",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#eeabd4",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#bfe384",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P015",
+    "source_id": "colorbrewer--Pastel1",
+    "name": "Pastel1",
+    "family": "ColorBrewer",
+    "colors": [
+      "#fbb4ae",
+      "#b3cde3",
+      "#ccebc5",
+      "#decbe4",
+      "#fed9a6"
+    ],
+    "fill_alpha": 1.0,
+    "source": "https://colorbrewer2.org/",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "Apache-2.0",
+    "display_name": "Pastel1",
+    "recommended_series": 3,
+    "layered": true,
+    "reason": "粉、蓝、浅绿适合细描边与斜线纹理；不再降低透明度，避免过淡。",
+    "effective_colors_on_white": [
+      "#fbb4ae",
+      "#b3cde3",
+      "#ccebc5",
+      "#decbe4",
+      "#fed9a6"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#fbb4ae",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#b3cde3",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#ccebc5",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#decbe4",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#fed9a6",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P022",
+    "source_id": "carto--Pastel",
+    "name": "Pastel",
+    "family": "CARTO",
+    "colors": [
+      "#66C5CC",
+      "#F6CF71",
+      "#F89C74",
+      "#DCB0F2",
+      "#87C55F"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Pastel",
+    "recommended_series": 3,
+    "layered": true,
+    "reason": "青、沙黄、桃色明度较均衡，纹理清晰；五色版需额外区分。",
+    "effective_colors_on_white": [
+      "#91d5da",
+      "#f9dc99",
+      "#fab89b",
+      "#e6c6f6",
+      "#a9d58c"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#91d5da",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#f9dc99",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#fab89b",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#e6c6f6",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#a9d58c",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P040",
+    "source_id": "paul-tol--light",
+    "name": "light",
+    "family": "Paul Tol",
+    "colors": [
+      "#77AADD",
+      "#EE8866",
+      "#EEDD88",
+      "#FFAABB",
+      "#99DDFF"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "light",
+    "recommended_series": 5,
+    "layered": true,
+    "reason": "浅蓝、杏橙、沙黄的前三色适合分层图；五色诊断也通过本轮阈值。",
+    "effective_colors_on_white": [
+      "#9dc2e7",
+      "#f3a991",
+      "#f3e7a9",
+      "#ffc2ce",
+      "#b6e7ff"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#9dc2e7",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#f3a991",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#f3e7a9",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#ffc2ce",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#b6e7ff",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P026",
+    "source_id": "ggsci--npg",
+    "name": "NPG",
+    "family": "ggsci",
+    "colors": [
+      "#E64B35",
+      "#4DBBD5",
+      "#00A087",
+      "#3C5488",
+      "#F39B7F"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://nanx.me/ggsci/reference/pal_npg.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "NPG",
+    "recommended_series": 5,
+    "layered": true,
+    "reason": "珊瑚、青、绿的前三色保留强调感；五色可用，但第四色较深，五系列纹理需调整。",
+    "effective_colors_on_white": [
+      "#ed7d6e",
+      "#7fcee1",
+      "#47bba9",
+      "#7384a9",
+      "#f6b7a3"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#ed7d6e",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#7fcee1",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#47bba9",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#7384a9",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#f6b7a3",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P098",
+    "source_id": "colorcet--glasbey_hv",
+    "name": "glasbey_hv",
+    "family": "Colorcet",
+    "colors": [
+      "#2FA1DA",
+      "#FB4F2F",
+      "#E4AE38",
+      "#6D904F",
+      "#8A8A8A"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://colorcet.holoviz.org/",
+    "selection": "first five in author categorical order",
+    "attribution": "CC-BY-4.0 (maps); BSD-3-Clause (package)",
+    "display_name": "glasbey_hv",
+    "recommended_series": 5,
+    "layered": true,
+    "reason": "天蓝、珊瑚、芥黄、橄榄与中灰层次明确；适合五系列普通柱图。",
+    "effective_colors_on_white": [
+      "#69bbe4",
+      "#fc8069",
+      "#ecc570",
+      "#96af80",
+      "#ababab"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#69bbe4",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#fc8069",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#ecc570",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#96af80",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#ababab",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P018",
+    "source_id": "carto--Antique",
+    "name": "Antique",
+    "family": "CARTO",
+    "colors": [
+      "#855C75",
+      "#D9AF6B",
+      "#AF6458",
+      "#736F4C",
+      "#526A83"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Antique",
+    "recommended_series": 3,
+    "layered": false,
+    "reason": "灰紫、沙金、陶土色较克制；适合普通三系列，当前深灰纹理对比不足。",
+    "effective_colors_on_white": [
+      "#a78a9c",
+      "#e4c594",
+      "#c58f87",
+      "#9a977e",
+      "#8294a6"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#a78a9c",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#e4c594",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#c58f87",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#9a977e",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#8294a6",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P086",
+    "source_id": "ggsci--nejm",
+    "name": "NEJM",
+    "family": "ggsci",
+    "colors": [
+      "#BC3C29",
+      "#0072B5",
+      "#E18727",
+      "#20854E",
+      "#7876B1"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://nanx.me/ggsci/reference/pal_nejm.html",
+    "selection": "first five from ggsci 5.2.0; journal-inspired, not a journal standard",
+    "attribution": "Nan Xiao, ggsci 5.2.0; colour coordinates only, no source code copied",
+    "display_name": "NEJM",
+    "recommended_series": 3,
+    "layered": false,
+    "reason": "陶红、蓝、橙对比清楚；五色中有色觉模拟近邻，当前纹理需调深。",
+    "effective_colors_on_white": [
+      "#cf7365",
+      "#4799ca",
+      "#e9a963",
+      "#5ea780",
+      "#9e9cc7"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#cf7365",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#4799ca",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#e9a963",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#5ea780",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#9e9cc7",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P028",
+    "source_id": "carto--Vivid",
+    "name": "Vivid",
+    "family": "CARTO",
+    "colors": [
+      "#E58606",
+      "#5D69B1",
+      "#52BCA3",
+      "#99C945",
+      "#CC61B0"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://github.com/CartoDB/CartoColor",
+    "selection": "author five-class variant (other/NA grey excluded)",
+    "attribution": "CC-BY-4.0",
+    "display_name": "Vivid",
+    "recommended_series": 3,
+    "layered": false,
+    "reason": "橙、靛蓝、青绿适合重点比较；完整五色更活跃，只作为有条件备选。",
+    "effective_colors_on_white": [
+      "#eca84c",
+      "#8a93c7",
+      "#82cfbd",
+      "#b6d879",
+      "#da8dc6"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#eca84c",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#8a93c7",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#82cfbd",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#b6d879",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#da8dc6",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  },
+  {
+    "id": "P034",
+    "source_id": "paul-tol--muted",
+    "name": "muted",
+    "family": "Paul Tol",
+    "colors": [
+      "#CC6677",
+      "#332288",
+      "#DDCC77",
+      "#117733",
+      "#88CCEE"
+    ],
+    "fill_alpha": 0.72,
+    "source": "https://sronpersonalpages.nl/~pault/",
+    "selection": "first five in author categorical order",
+    "attribution": "作者网页配方；Python 模块 BSD-3-Clause",
+    "display_name": "muted",
+    "recommended_series": 5,
+    "layered": false,
+    "reason": "五色的色觉模拟分离较稳；深紫让纹理不清楚，保留作普通柱图备选。",
+    "effective_colors_on_white": [
+      "#da919d",
+      "#6c60a9",
+      "#e7da9d",
+      "#549d6c",
+      "#a9daf3"
+    ],
+    "render_override": {
+      "panel_defaults": {
+        "bar_fill_alpha": 1,
+        "bar_edge_alpha": 1,
+        "bar_edge_width": 0.45
+      },
+      "palette": {
+        "S1": {
+          "fill": "#da919d",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S2": {
+          "fill": "#6c60a9",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S3": {
+          "fill": "#e7da9d",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S4": {
+          "fill": "#549d6c",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        },
+        "S5": {
+          "fill": "#a9daf3",
+          "edge": "#4b5058",
+          "label": "#20252c"
+        }
+      }
+    }
+  }
+]

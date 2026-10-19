@@ -1,0 +1,9 @@
+id,panel,group,series,x,value,label
+grasp,distribution,grasp,grasp,0,0.715,grasp
+place,distribution,place,place,1,0.611,place
+walk_to,distribution,walk_to,walk_to,2,0.325,walk_to
+direct_c.,distribution,direct_c.,direct_c.,3,0.19,direct_c.
+indirect_c.,distribution,indirect_c.,indirect_c.,4,0.187,indirect_c.
+function,distribution,function,function,5,0.187,function
+avoid,distribution,avoid,avoid,6,0.083,avoid
+step_on,distribution,step_on,step_on,7,0.079,step_on

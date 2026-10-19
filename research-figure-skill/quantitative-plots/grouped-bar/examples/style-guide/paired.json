@@ -1,0 +1,55 @@
+{
+  "data": "../planning-gains/data.csv",
+  "preset": {
+    "style": "serif-emphasis",
+    "layout": "paired",
+    "palette": "paired-blue-green"
+  },
+  "series_order": [
+    "integrated-before",
+    "integrated-after",
+    "hierarchical-before",
+    "hierarchical-after"
+  ],
+  "series_roles": {
+    "integrated-before": "a-before",
+    "integrated-after": "a-after",
+    "hierarchical-before": "b-before",
+    "hierarchical-after": "b-after"
+  },
+  "panel_defaults": {
+    "limits": [
+      70,
+      84
+    ],
+    "baseline": 70,
+    "ticks": [
+      70,
+      73,
+      76,
+      79,
+      82
+    ],
+    "tick_format": ".0f",
+    "ylabel": "Success (%)"
+  },
+  "panels": [
+    {
+      "id": "pretraining",
+      "group_labels": {
+        "Integrated-VLA": "Integrated",
+        "Hierarchical-VLA": "Hierarchical"
+      }
+    }
+  ],
+  "gains": [
+    {
+      "from": "integrated-before",
+      "to": "integrated-after"
+    },
+    {
+      "from": "hierarchical-before",
+      "to": "hierarchical-after"
+    }
+  ]
+}

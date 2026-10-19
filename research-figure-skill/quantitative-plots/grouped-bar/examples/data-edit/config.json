@@ -1,0 +1,598 @@
+{
+  "data": "data.csv",
+  "figure": {
+    "size_pt": [
+      191.5,
+      311.985748
+    ],
+    "dpi": 300
+  },
+  "panel_defaults": {
+    "category_pad": 3.5
+  },
+  "palette": {
+    "base": {
+      "fill": [
+        0.6312962770462036,
+        0.6314030885696411,
+        0.6312962770462036
+      ],
+      "edge": [
+        0.32155337929725647,
+        0.32161441445350647,
+        0.32155337929725647
+      ],
+      "label": "#404040"
+    },
+    "cue": {
+      "fill": [
+        0.9803921580314636,
+        0.7372549176216125,
+        0.0
+      ],
+      "edge": [
+        0.8549019694328308,
+        0.46666666865348816,
+        0.0
+      ],
+      "label": "#b55200",
+      "token_fill": [
+        0.9921568632125854,
+        0.9254902005195618,
+        0.800000011920929
+      ],
+      "token_edge": [
+        0.9803921580314636,
+        0.7372549176216125,
+        0.0
+      ]
+    },
+    "edit": {
+      "fill": [
+        1.0,
+        0.3960784375667572,
+        0.40784314274787903
+      ],
+      "edge": [
+        0.8941176533699036,
+        0.0,
+        0.08627451211214066
+      ],
+      "label": "#bf000f",
+      "token_fill": [
+        0.9960784316062927,
+        0.8352941274642944,
+        0.843137264251709
+      ],
+      "token_edge": [
+        1.0,
+        0.3960784375667572,
+        0.40784314274787903
+      ]
+    }
+  },
+  "panels": [
+    {
+      "id": "base",
+      "rect_pt": [
+        44.727982,
+        214.91999800000002,
+        145.151992,
+        59.75999399999999
+      ],
+      "category_limits": [
+        0,
+        145.151992
+      ],
+      "style": {
+        "limits": [
+          0,
+          0.52
+        ],
+        "ticks": [
+          0,
+          0.2,
+          0.4
+        ],
+        "value_labels": true,
+        "show_categories": true,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 5.746153846153846,
+          "value_step": 0.05,
+          "value_stop": 0.5,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 8,
+        "category_size": 7.8,
+        "value_size": 8,
+        "value_pad": 5,
+        "show_category_ticks": true,
+        "category_pad": 3.5,
+        "tokens": {
+          "size": 5.4,
+          "tint": true,
+          "offset_pt": 4.0249940185547075,
+          "gap": 2.4,
+          "rounding": 0.19444444444444448,
+          "edge_width": 0.33000001311302185
+        },
+        "bar_width": 29.998077392578125
+      },
+      "tokens": {
+        "base-1": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.15185320818865738,
+              0.142593948929398
+            ],
+            "height_em": 1.3333327681929976,
+            "baseline_em": 0.41203534161603006,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.333984375
+          },
+          {
+            "runs": [
+              {
+                "text": "Okay",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.16592520254629628,
+              0.15852344654224518
+            ],
+            "height_em": 1.3333327681929976,
+            "baseline_em": 0.41203534161603006,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "base-2": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.1518475567853009,
+              0.142593948929398
+            ],
+            "height_em": 1.3333327681929976,
+            "baseline_em": 0.41203534161603006,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.56201171875
+          },
+          {
+            "runs": [
+              {
+                "text": "Chicken",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.12370356807002314,
+              0.11074060510705946
+            ],
+            "height_em": 1.3333327681929976,
+            "baseline_em": 0.41203534161603006,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ]
+      },
+      "token_shift_pt": {
+        "base-1": 0.01800537109375,
+        "base-2": -0.110992431640625
+      },
+      "readable_tokens": {
+        "base-1": [
+          "Okay"
+        ],
+        "base-2": [
+          "Chicken"
+        ]
+      }
+    },
+    {
+      "id": "rename",
+      "rect_pt": [
+        44.727982,
+        117.720001,
+        145.151992,
+        59.759994000000006
+      ],
+      "category_limits": [
+        0,
+        145.151992
+      ],
+      "style": {
+        "limits": [
+          0,
+          0.52
+        ],
+        "ticks": [
+          0,
+          0.2,
+          0.4
+        ],
+        "value_labels": true,
+        "show_categories": true,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 5.746153846153846,
+          "value_step": 0.05,
+          "value_stop": 0.5,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 8,
+        "category_size": 7.8,
+        "value_size": 8,
+        "value_pad": 5,
+        "show_category_ticks": true,
+        "category_pad": 3.5,
+        "tokens": {
+          "size": 5.4,
+          "tint": true,
+          "offset_pt": 4.02499396679687,
+          "gap": 2.4,
+          "rounding": 0.19444444444444448,
+          "edge_width": 0.33000001311302185
+        },
+        "bar_width": 29.998077392578125
+      },
+      "tokens": {
+        "rename-1": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.15185320818865738,
+              0.142593948929398
+            ],
+            "height_em": 1.3333355938946758,
+            "baseline_em": 0.4120381673177083,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.333984375
+          },
+          {
+            "runs": [
+              {
+                "text": "Okay",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.16592520254629628,
+              0.15852344654224518
+            ],
+            "height_em": 1.3333355938946758,
+            "baseline_em": 0.4120381673177083,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "rename-2": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.1518475567853009,
+              0.142593948929398
+            ],
+            "height_em": 1.3333355938946758,
+            "baseline_em": 0.4120381673177083,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.56201171875
+          },
+          {
+            "runs": [
+              {
+                "text": "Chicken",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.12370356807002314,
+              0.11074060510705946
+            ],
+            "height_em": 1.3333355938946758,
+            "baseline_em": 0.4120381673177083,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ]
+      },
+      "token_shift_pt": {
+        "rename-1": 0.01800537109375,
+        "rename-2": -0.110992431640625
+      },
+      "readable_tokens": {
+        "rename-1": [
+          "Okay"
+        ],
+        "rename-2": [
+          "Chicken"
+        ]
+      }
+    },
+    {
+      "id": "redirect",
+      "rect_pt": [
+        44.727982,
+        20.51998900000001,
+        145.151992,
+        59.760009
+      ],
+      "category_limits": [
+        0,
+        145.151992
+      ],
+      "style": {
+        "limits": [
+          0,
+          0.52
+        ],
+        "ticks": [
+          0,
+          0.2,
+          0.4
+        ],
+        "value_labels": true,
+        "show_categories": true,
+        "category_margin": 0,
+        "grid": {
+          "spacing_pt": 5.746153846153846,
+          "value_step": 0.05,
+          "value_stop": 0.5,
+          "color": [
+            0.7058060765266418,
+            0.7059281468391418,
+            0.7057908177375793
+          ],
+          "alpha": 1.0
+        },
+        "ylabel": "",
+        "tick_size": 8,
+        "category_size": 7.8,
+        "value_size": 8,
+        "value_pad": 5,
+        "show_category_ticks": true,
+        "category_pad": 3.5,
+        "tokens": {
+          "size": 5.4,
+          "tint": true,
+          "offset_pt": 4.024994173828134,
+          "gap": 2.4,
+          "rounding": 0.19444444444444448,
+          "edge_width": 0.33000001311302185
+        },
+        "bar_width": 29.998077392578125,
+        "allow_interval_clipping": true
+      },
+      "tokens": {
+        "redirect-1": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.15185320818865738,
+              0.142593948929398
+            ],
+            "height_em": 1.3333299424913194,
+            "baseline_em": 0.4120325159143518,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.333984375
+          },
+          {
+            "runs": [
+              {
+                "text": "Okay",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.16592520254629628,
+              0.15852344654224518
+            ],
+            "height_em": 1.3333299424913194,
+            "baseline_em": 0.4120325159143518,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ],
+        "redirect-2": [
+          {
+            "runs": [
+              {
+                "text": ".\\n\\n",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.1518475567853009,
+              0.142593948929398
+            ],
+            "height_em": 1.3333299424913194,
+            "baseline_em": 0.4120325159143518,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 2.56201171875
+          },
+          {
+            "runs": [
+              {
+                "text": "Chicken",
+                "font": "mono"
+              }
+            ],
+            "padding_em": [
+              0.12370356807002314,
+              0.11074060510705946
+            ],
+            "height_em": 1.3333299424913194,
+            "baseline_em": 0.4120325159143518,
+            "y_offset_em": 0.0,
+            "gap_after_pt": 0
+          }
+        ]
+      },
+      "token_shift_pt": {
+        "redirect-1": 0.01800537109375,
+        "redirect-2": -0.110992431640625
+      },
+      "readable_tokens": {
+        "redirect-1": [
+          "Okay"
+        ],
+        "redirect-2": [
+          "Chicken"
+        ]
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "text": "pass@1",
+      "position_pt": [
+        20.134231567382812,
+        228.8859402607422
+      ],
+      "size": 9.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "pass@1",
+      "position_pt": [
+        20.134231567382812,
+        131.6859433125
+      ],
+      "size": 9.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "pass@1",
+      "position_pt": [
+        20.134231567382812,
+        34.48593110546875
+      ],
+      "size": 9.5,
+      "font": "light",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "MATH-500",
+      "position_pt": [
+        10.944915771484375,
+        220.5500027607422
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "MATH-500",
+      "position_pt": [
+        10.944915771484375,
+        123.3500058125
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "MATH-500",
+      "position_pt": [
+        10.944915771484375,
+        26.14999360546875
+      ],
+      "size": 9.5,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 90
+    },
+    {
+      "text": "Effect on Accuracy",
+      "position_pt": [
+        47.77978515625,
+        299.7919918964844
+      ],
+      "size": 11.0,
+      "font": "regular",
+      "color": "#111111",
+      "rotation": 0
+    }
+  ],
+  "bands": [],
+  "icons": [
+    {
+      "row": "rename-2",
+      "image": "chicken.png",
+      "width_pt": 16.56,
+      "height_pt": 16.56,
+      "height_fraction": 0.6505380243202443
+    },
+    {
+      "row": "redirect-2",
+      "image": "chicken.png",
+      "width_pt": 16.56,
+      "height_pt": 16.56,
+      "height_fraction": 0.6758042696125915
+    }
+  ],
+  "provenance": {
+    "note_id": "6ace9bd9000000001a02bf03",
+    "source": "https://www.sophielwang.com/blog/paper-writing",
+    "paper": "https://arxiv.org/abs/2610.06851v1",
+    "source_figure": "counterfactuals.pdf",
+    "data_status": "Recovered from published vector bar and interval geometry; not author raw trials.",
+    "reference_images_distributed": false,
+    "original_interval_clipping": "redirect/cue has a recovered lower endpoint of -0.0004; the reference clips it at the zero baseline. Retained explicitly for reproduction.",
+    "label_display": "Readable token labels by default; panel_defaults.tokens.mode=raw restores the original literal-token labels."
+  },
+  "fonts": {
+    "symbol": {
+      "family": "DejaVu Sans Mono",
+      "weight": "normal",
+      "file": null
+    }
+  }
+}

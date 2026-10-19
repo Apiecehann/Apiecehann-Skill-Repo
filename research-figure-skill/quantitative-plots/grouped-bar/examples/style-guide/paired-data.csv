@@ -1,0 +1,5 @@
+id,panel,group,series,x,value,label
+integrated-before,pretraining,Integrated-VLA,before,36.25,73.3,
+integrated-after,pretraining,Integrated-VLA,after,79,79.1,
+hierarchical-before,pretraining,Hierarchical-VLA,before,162,74.2,
+hierarchical-after,pretraining,Hierarchical-VLA,after,205,79.8,
