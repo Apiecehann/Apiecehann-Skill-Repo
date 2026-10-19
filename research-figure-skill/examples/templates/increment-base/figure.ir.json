@@ -1,0 +1,43 @@
+{
+  "claim": "模拟 2023-2025 三年任务成功率：hatched 部分是当年基数，实色部分是下一年增量。",
+  "chart": "grouped-bar",
+  "data": "data.csv",
+  "encoding": {
+    "x": "group",
+    "y": "value",
+    "series": "series",
+    "base": "base"
+  },
+  "size": {
+    "preset": "medium"
+  },
+  "theme": {
+    "style": "paper-clean",
+    "palette": "blue-orange",
+    "font": "sans"
+  },
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "output": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  },
+  "series_order": [
+    "ours"
+  ],
+  "axis": {
+    "y_label": "Success rate",
+    "y_format": ".0%",
+    "y_max": 1.0
+  },
+  "series_labels": {
+    "ours": "Ours"
+  }
+}

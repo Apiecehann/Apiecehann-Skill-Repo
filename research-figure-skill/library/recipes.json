@@ -86,6 +86,17 @@
         "focus"
       ],
       "ir": "examples/templates/slide-teaser/figure.ir.json"
+    },
+    {
+      "id": "increment-base",
+      "title": "Base plus increment",
+      "tags": [
+        "paper",
+        "1.5-column",
+        "increment",
+        "base"
+      ],
+      "ir": "examples/templates/increment-base/figure.ir.json"
     }
   ]
 }

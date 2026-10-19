@@ -83,3 +83,7 @@
 并行协作记录：共享检出被其他进程 reset 到 c9e7579，保留其 axis-review 提交，在 /tmp/increment-delta-work 独立检出恢复阶段 1 并完成阶段 2，再将两个能力提交整合回 feat/pattern-library。没有改动并行的色板／风格／字体／axes.json／palette-shootout。上下文轮换后按用户要求在阶段 2 绿灯提交处停下；阶段 3 尚需 increment-base 模板、recipes/evals 注册、相关验收与文档。
 
 阶段 2 最终验收：完整测试 173 passed in 30.04s，无警告；git diff --check 通过。冻结 gain 的坐标与标签快照逐一一致。
+
+阶段 3 完成 increment-base 模板与注册：`examples/templates/increment-base/` 含 3 年 MOCK 数据、`encoding.base` 的 IR、中文 README；`library/recipes.json` 与 `spec/evals/cases.jsonl` 各加一条，check.py 的 `encoding_cards` 识别 increment。模板导出 PNG/PDF/SVG。测试从 173 增至 179 passed（含 curved delta 与白底 style 的回归）。
+
+附加：gain 增加 `arrow_style: "curved"`，用单段三次弧线并在碰撞时抬高 ceiling；默认仍为 `route`，冻结 gain 不变。`12-annotation` 使用 curved 版本；新增 `14-bar-spacing` 与 `15-color-pairing`（固定 orange accent，24 组 baseline）。

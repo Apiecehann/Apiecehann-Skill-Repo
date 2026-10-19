@@ -40,7 +40,9 @@ def projection(ir):
     result["layout"] = ir.get("layout", "grouped")
     result["emphasis"] = [c["card"] for c in ir.get("emphasis", [])]
     result["annotations"] = [c["card"] for c in ir.get("annotations", [])]
-    result["encoding_cards"] = ["capacity"] if "capacity" in ir["encoding"] else []
+    result["encoding_cards"] = [name for name, key in
+                                (("increment", "base"), ("capacity", "capacity"))
+                                if key in ir["encoding"]]
     result["theme"] = {"hatch": False, "type_scale": 1, **ir["theme"]}
     return result
 
