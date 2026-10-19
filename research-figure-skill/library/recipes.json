@@ -596,6 +596,32 @@
       "ir": "examples/templates/waffle/figure.ir.json",
       "chart": "waffle",
       "variant": "100-cells"
+    },
+    {
+      "id": "broken-axis",
+      "title": "Broken axis",
+      "tags": [
+        "paper",
+        "single-column",
+        "layout",
+        "broken-axis"
+      ],
+      "ir": "examples/templates/broken-axis/figure.ir.json",
+      "chart": "broken-axis",
+      "variant": "split-x"
+    },
+    {
+      "id": "inset-zoom",
+      "title": "Inset zoom",
+      "tags": [
+        "paper",
+        "single-column",
+        "layout",
+        "inset"
+      ],
+      "ir": "examples/templates/inset-zoom/figure.ir.json",
+      "chart": "inset-zoom",
+      "variant": "corner-inset"
     }
   ]
 }

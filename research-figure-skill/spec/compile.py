@@ -1045,6 +1045,52 @@ def compile_flow(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_focus(ir, ir_path, output, render=False):
+    chart = ir["chart"]
+    enc = ir["encoding"]
+    missing = {"x", "y", "series"} - set(enc)
+    if missing:
+        raise ValueError(f"{chart} encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    rows = [{"panel": "main", "series": raw[enc["series"]].strip(),
+             "x": numeric(raw[enc["x"]], enc["x"], str(i)),
+             "value": numeric(raw[enc["y"]], enc["y"], str(i))} for i, raw in enumerate(source, 1)]
+    series = list(dict.fromkeys(r["series"] for r in rows))
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette = presets["palettes"].get(ir["theme"].get("palette", "d3-blue"))
+    if palette is None:
+        raise ValueError("Unknown palette")
+    colors = dict(zip(series, palette["colors"][-len(series):]))
+    size = ir["size"]["preset"]
+    size_pt = {"single": [420, 280], "medium": [480, 300], "double": [560, 340],
+               "slide": [680, 380]}[size]
+    axis = ir.get("axis", {})
+    config = {"chart": chart, "rows": rows, "series_order": series, "colors": colors,
+              "series_labels": ir.get("series_labels", {}), "size_pt": size_pt,
+              "x_min": axis.get("x_min"), "x_max": axis.get("x_max"),
+              "break": ir.get("break", 50), "zoom_x": ir.get("zoom_x", [55, 75]),
+              "zoom_y": ir.get("zoom_y", [55, 75]),
+              "x_label": axis.get("x_label", "x"), "y_label": axis.get("y_label", "y"),
+              "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+              "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                         "svg_text": ir["output"].get("svg_text", True)}}
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["panel", "series", "x", "value"])
+        writer.writeheader(); writer.writerows(rows)
+    decisions = {"claim": ir["claim"], "chart": chart, "size": size, "size_pt": size_pt,
+                 "palette": ir["theme"].get("palette", "d3-blue"), "encoding": [chart],
+                 "labels": ir["labels"], "layout": chart, "emphasis": [], "annotations": [],
+                 "axes": {}, "log": [f"{chart} -> {len(rows)} points"]}
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        (charts2d.render_broken_axis if chart == "broken-axis" else charts2d.render_inset_zoom)(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_waffle(ir, ir_path, output, render=False):
     enc = ir["encoding"]
     if "label" not in enc or "value" not in enc:
@@ -1439,6 +1485,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_calendar(ir, ir_path, output, render)
     if ir["chart"] == "waffle":
         return compile_waffle(ir, ir_path, output, render)
+    if ir["chart"] in ("broken-axis", "inset-zoom"):
+        return compile_focus(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

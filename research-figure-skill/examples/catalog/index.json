@@ -54,7 +54,9 @@
         "hexbin",
         "clustermap",
         "calendar-heatmap",
-        "waffle"
+        "waffle",
+        "broken-axis",
+        "inset-zoom"
       ]
     }
   },
@@ -178,6 +180,12 @@
     ],
     "waffle": [
       "waffle"
+    ],
+    "broken-axis": [
+      "broken-axis"
+    ],
+    "inset-zoom": [
+      "inset-zoom"
     ]
   },
   "entries": [
@@ -2668,6 +2676,94 @@
         "axes": {},
         "log": [
           "waffle -> 4 categories"
+        ]
+      }
+    },
+    {
+      "recipe": "broken-axis",
+      "title": "Broken axis",
+      "chart": "broken-axis",
+      "variant": "split-x",
+      "tags": [
+        "paper",
+        "single-column",
+        "layout",
+        "broken-axis"
+      ],
+      "files": {
+        "png": "broken-axis/figure.png",
+        "pdf": "broken-axis/figure.pdf",
+        "svg": "broken-axis/figure.svg",
+        "config": "broken-axis/config.json",
+        "data": "broken-axis/data.csv",
+        "decisions": "broken-axis/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：x 轴在 50 附近断开的趋势对比（broken axis）。",
+        "chart": "broken-axis",
+        "size": "single",
+        "size_pt": [
+          420,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "broken-axis"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "broken-axis",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "broken-axis -> 22 points"
+        ]
+      }
+    },
+    {
+      "recipe": "inset-zoom",
+      "title": "Inset zoom",
+      "chart": "inset-zoom",
+      "variant": "corner-inset",
+      "tags": [
+        "paper",
+        "single-column",
+        "layout",
+        "inset"
+      ],
+      "files": {
+        "png": "inset-zoom/figure.png",
+        "pdf": "inset-zoom/figure.pdf",
+        "svg": "inset-zoom/figure.svg",
+        "config": "inset-zoom/config.json",
+        "data": "inset-zoom/data.csv",
+        "decisions": "inset-zoom/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：散点主图 + 局部放大 inset（inset zoom）。",
+        "chart": "inset-zoom",
+        "size": "single",
+        "size_pt": [
+          420,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "inset-zoom"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "inset-zoom",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "inset-zoom -> 22 points"
         ]
       }
     }

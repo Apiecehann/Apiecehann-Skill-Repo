@@ -1,0 +1,181 @@
+{
+  "chart": "inset-zoom",
+  "rows": [
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 12.0,
+      "value": 38.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 18.0,
+      "value": 44.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 25.0,
+      "value": 51.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 33.0,
+      "value": 55.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 40.0,
+      "value": 62.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 48.0,
+      "value": 65.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 55.0,
+      "value": 70.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 62.0,
+      "value": 72.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 70.0,
+      "value": 78.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 80.0,
+      "value": 81.0
+    },
+    {
+      "panel": "main",
+      "series": "method-1",
+      "x": 90.0,
+      "value": 84.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 10.0,
+      "value": 44.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 16.0,
+      "value": 52.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 22.0,
+      "value": 58.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 30.0,
+      "value": 64.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 37.0,
+      "value": 70.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 45.0,
+      "value": 74.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 52.0,
+      "value": 79.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 60.0,
+      "value": 82.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 70.0,
+      "value": 86.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 80.0,
+      "value": 89.0
+    },
+    {
+      "panel": "main",
+      "series": "ours",
+      "x": 92.0,
+      "value": 93.0
+    }
+  ],
+  "series_order": [
+    "method-1",
+    "ours"
+  ],
+  "colors": {
+    "method-1": "#6FA3D2",
+    "ours": "#2F80C9"
+  },
+  "series_labels": {
+    "method-1": "Method 1",
+    "ours": "Ours"
+  },
+  "size_pt": [
+    420,
+    280
+  ],
+  "x_min": null,
+  "x_max": null,
+  "break": 50,
+  "zoom_x": [
+    55,
+    75
+  ],
+  "zoom_y": [
+    55,
+    75
+  ],
+  "x_label": "Latency (ms)",
+  "y_label": "Throughput",
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

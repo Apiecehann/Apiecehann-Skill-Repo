@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：x 轴在 50 附近断开的趋势对比（broken axis）。",
+  "chart": "broken-axis",
+  "size": "single",
+  "size_pt": [
+    420,
+    280
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "broken-axis"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "broken-axis",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "broken-axis -> 22 points"
+  ]
+}

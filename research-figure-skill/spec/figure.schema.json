@@ -46,7 +46,9 @@
         "hexbin",
         "clustermap",
         "calendar-heatmap",
-        "waffle"
+        "waffle",
+        "broken-axis",
+        "inset-zoom"
       ]
     },
     "data": {
@@ -558,6 +560,21 @@
     },
     "grid": {
       "type": "boolean"
+    },
+    "break": {
+      "type": "number"
+    },
+    "zoom_x": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "zoom_y": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 2,
+      "maxItems": 2
     }
   },
   "required": [

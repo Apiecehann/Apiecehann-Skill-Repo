@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：散点主图 + 局部放大 inset（inset zoom）。",
+  "chart": "inset-zoom",
+  "size": "single",
+  "size_pt": [
+    420,
+    280
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "inset-zoom"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "inset-zoom",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "inset-zoom -> 22 points"
+  ]
+}

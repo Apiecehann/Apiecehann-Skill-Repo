@@ -698,6 +698,49 @@ def _finish_handles(fig, ax, config, out_stem, handles):
     return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
 
 
+def render_broken_axis(config, rows, out_stem):
+    fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(config["size_pt"][0] / 72,
+                                                               config["size_pt"][1] / 72),
+                                   gridspec_kw={"width_ratios": [1.4, 1]})
+    fig.patch.set_facecolor("white")
+    for ax in (ax1, ax2):
+        ax.set_facecolor("white")
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        xs = [r["x"] for r in subset]; ys = [r["value"] for r in subset]
+        ax1.plot(xs, ys, color=config["colors"][name], linewidth=1.6, label=config["series_labels"].get(name, name))
+        ax2.plot(xs, ys, color=config["colors"][name], linewidth=1.6)
+    ax1.set_xlim(config.get("x_min", min(r["x"] for r in rows)), config.get("break", 50))
+    ax2.set_xlim(config.get("break", 50), config.get("x_max", max(r["x"] for r in rows)))
+    ax1.spines["right"].set_visible(False); ax2.spines["left"].set_visible(False)
+    ax1.tick_params(labelright=False); ax2.tick_params(left=False)
+    ax1.set_ylabel(config.get("y_label", "Value"), fontsize=8)
+    ax1.legend(frameon=False, fontsize=7, loc="upper left")
+    fig.text(.5, .02, config.get("x_label", "x"), ha="center", fontsize=8)
+    return _save_fig(fig, out_stem)
+
+
+def render_inset_zoom(config, rows, out_stem):
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white"); ax.set_facecolor("white")
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        ax.scatter([r["x"] for r in subset], [r["value"] for r in subset], s=14,
+                   color=config["colors"][name], edgecolors="white", linewidths=.3,
+                   label=config["series_labels"].get(name, name))
+    ax.set_xlabel(config.get("x_label", "x"), fontsize=8); ax.set_ylabel(config.get("y_label", "y"), fontsize=8)
+    ax.legend(frameon=False, fontsize=7, loc="upper left")
+    inset = ax.inset_axes([.56, .55, .38, .35])
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        inset.scatter([r["x"] for r in subset], [r["value"] for r in subset], s=8,
+                      color=config["colors"][name], edgecolors="white", linewidths=.2)
+    inset.set_xlim(config.get("zoom_x", [55, 75]))
+    inset.set_ylim(config.get("zoom_y", [55, 75]))
+    inset.tick_params(labelsize=5)
+    return _save_fig(fig, out_stem)
+
+
 def render_waffle(config, rows, out_stem):
     fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
     fig.patch.set_facecolor("white"); ax.set_facecolor("white")

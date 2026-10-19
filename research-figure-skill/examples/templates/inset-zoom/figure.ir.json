@@ -1,0 +1,15 @@
+{
+  "claim": "MOCK：散点主图 + 局部放大 inset（inset zoom）。",
+  "chart": "inset-zoom",
+  "data": "data.csv",
+  "encoding": {"x": "group", "y": "value", "series": "series"},
+  "series_order": ["method-1", "ours"],
+  "series_labels": {"method-1": "Method 1", "ours": "Ours"},
+  "zoom_x": [55, 75],
+  "zoom_y": [55, 75],
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Latency (ms)", "y_label": "Throughput"}
+}

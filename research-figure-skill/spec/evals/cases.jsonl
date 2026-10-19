@@ -48,3 +48,5 @@
 {"id": "case-48", "request": "行/列按总量排序的 clustered heatmap，单栏", "recipe": "clustermap", "data": "examples/templates/clustermap/data.csv", "expect": {"chart": "clustermap"}}
 {"id": "case-49", "request": "每天的活动量日历热力图，单栏", "recipe": "calendar-heatmap", "data": "examples/templates/calendar-heatmap/data.csv", "expect": {"chart": "calendar-heatmap"}}
 {"id": "case-50", "request": "100 格中的类别占比，waffle，单栏", "recipe": "waffle", "data": "examples/templates/waffle/data.csv", "expect": {"chart": "waffle"}}
+{"id": "case-51", "request": "x 轴在 50 附近断开的趋势对比，broken axis，单栏", "recipe": "broken-axis", "data": "examples/templates/broken-axis/data.csv", "expect": {"chart": "broken-axis"}}
+{"id": "case-52", "request": "散点主图 + 局部放大 inset，单栏", "recipe": "inset-zoom", "data": "examples/templates/inset-zoom/data.csv", "expect": {"chart": "inset-zoom"}}

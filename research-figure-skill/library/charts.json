@@ -477,6 +477,30 @@
       ],
       "supports": [],
       "ir": "examples/templates/waffle/figure.ir.json"
+    },
+    {
+      "id": "broken-axis",
+      "family": "layout",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/broken-axis/figure.ir.json"
+    },
+    {
+      "id": "inset-zoom",
+      "family": "layout",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/inset-zoom/figure.ir.json"
     }
   ]
 }
