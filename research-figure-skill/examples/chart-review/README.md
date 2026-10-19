@@ -5,6 +5,11 @@
 ## 已完成
 
 - `dot-plot/`：11 张轴图，75 个 panel
+- `dumbbell/`：6 张轴图，51 个 panel
+- `line-band/`：6 张轴图，52 个 panel
+- `scatter/`：6 张轴图，52 个 panel
+
+Batch 1 = dumbbell / line-band / scatter。两 series 的图不做 `categorical`，所以不是每张都 11 张。
 
 ## 结构
 
