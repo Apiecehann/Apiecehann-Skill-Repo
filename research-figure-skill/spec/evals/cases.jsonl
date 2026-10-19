@@ -36,3 +36,4 @@
 {"id": "case-36", "request": "三个方法在六个能力维度上的雷达图，单栏", "recipe": "radar", "data": "examples/templates/radar/data.csv", "expect": {"chart": "radar"}}
 {"id": "case-37", "request": "四个 benchmark 两个系列的 3D 柱状比较，单栏", "recipe": "bar3d", "data": "examples/templates/bar3d/data.csv", "expect": {"chart": "bar3d"}}
 {"id": "case-38", "request": "二维参数网格的 wireframe mesh，单栏", "recipe": "mesh3d", "data": "examples/templates/mesh3d/data.csv", "expect": {"chart": "mesh3d"}}
+{"id": "case-39", "request": "三维空间中的向量场，quiver3d，单栏", "recipe": "quiver3d", "data": "examples/templates/quiver3d/data.csv", "expect": {"chart": "quiver3d"}}

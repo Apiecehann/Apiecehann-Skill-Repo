@@ -1,0 +1,12 @@
+{
+  "claim": "MOCK：三维空间中的向量场（quiver3d）。",
+  "chart": "quiver3d",
+  "data": "data.csv",
+  "encoding": {"x": "x", "y": "y", "z": "z", "u": "u", "v": "v", "w": "w"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "x", "y_label": "y", "z_label": "z"},
+  "view": {"elev": 24, "azim": -55}
+}

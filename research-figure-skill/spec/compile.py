@@ -1044,6 +1044,48 @@ def compile_flow(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_quiver3d(ir, ir_path, output, render=False):
+    enc = ir["encoding"]
+    missing = {"x", "y", "z", "u", "v", "w"} - set(enc)
+    if missing:
+        raise ValueError(f"quiver3d encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    rows = []
+    for i, raw in enumerate(source, 1):
+        rows.append({k: numeric(raw[enc[k]], enc[k], str(i)) for k in ("x", "y", "z", "u", "v", "w")})
+    axis = ir.get("axis", {}); view = ir.get("view", {})
+    size = ir["size"]["preset"]
+    size_pt = {"single": [420, 300], "medium": [480, 320], "double": [560, 340],
+               "slide": [680, 380]}[size]
+    config = {
+        "chart": "quiver3d", "rows": rows,
+        "x_label": axis.get("x_label", "x"), "y_label": axis.get("y_label", "y"),
+        "z_label": axis.get("z_label", "z"), "elev": view.get("elev", 24),
+        "azim": view.get("azim", -55), "size_pt": size_pt,
+        "color": "#2F80C9", "width": .8, "normalize": ir.get("normalize", False),
+        "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["x", "y", "z", "u", "v", "w"])
+        writer.writeheader(); writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": "quiver3d", "size": size, "size_pt": size_pt,
+        "palette": ir["theme"].get("palette", "d3-blue"), "encoding": ["quiver3d"],
+        "labels": ir["labels"], "layout": "quiver3d", "emphasis": [], "annotations": [],
+        "axes": {}, "log": [f"quiver3d -> {len(rows)} vectors"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        charts3d.render_quiver3d(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_mesh3d(ir, ir_path, output, render=False):
     enc = ir["encoding"]
     missing = {"x", "y", "z"} - set(enc)
@@ -1224,6 +1266,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_bar3d(ir, ir_path, output, render)
     if ir["chart"] == "mesh3d":
         return compile_mesh3d(ir, ir_path, output, render)
+    if ir["chart"] == "quiver3d":
+        return compile_quiver3d(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

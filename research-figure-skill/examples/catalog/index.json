@@ -42,7 +42,8 @@
         "treemap",
         "radar",
         "bar3d",
-        "mesh3d"
+        "mesh3d",
+        "quiver3d"
       ]
     }
   },
@@ -130,6 +131,9 @@
     ],
     "mesh3d": [
       "mesh3d"
+    ],
+    "quiver3d": [
+      "quiver3d"
     ]
   },
   "entries": [
@@ -2068,6 +2072,50 @@
         },
         "log": [
           "mesh3d -> 15 x 15 grid"
+        ]
+      }
+    },
+    {
+      "recipe": "quiver3d",
+      "title": "3D vector field",
+      "chart": "quiver3d",
+      "variant": "vector-field",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "quiver"
+      ],
+      "files": {
+        "png": "quiver3d/figure.png",
+        "pdf": "quiver3d/figure.pdf",
+        "svg": "quiver3d/figure.svg",
+        "config": "quiver3d/config.json",
+        "data": "quiver3d/data.csv",
+        "decisions": "quiver3d/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：三维空间中的向量场（quiver3d）。",
+        "chart": "quiver3d",
+        "size": "single",
+        "size_pt": [
+          420,
+          300
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "quiver3d"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "quiver3d",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "quiver3d -> 75 vectors"
         ]
       }
     }

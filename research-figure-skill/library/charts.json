@@ -334,6 +334,21 @@
       ],
       "supports": [],
       "ir": "examples/templates/mesh3d/figure.ir.json"
+    },
+    {
+      "id": "quiver3d",
+      "family": "3d",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "z",
+        "u",
+        "v",
+        "w"
+      ],
+      "supports": [],
+      "ir": "examples/templates/quiver3d/figure.ir.json"
     }
   ]
 }

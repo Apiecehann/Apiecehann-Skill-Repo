@@ -440,6 +440,19 @@
       "ir": "examples/templates/mesh3d/figure.ir.json",
       "chart": "mesh3d",
       "variant": "loss-landscape"
+    },
+    {
+      "id": "quiver3d",
+      "title": "3D vector field",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "quiver"
+      ],
+      "ir": "examples/templates/quiver3d/figure.ir.json",
+      "chart": "quiver3d",
+      "variant": "vector-field"
     }
   ]
 }
