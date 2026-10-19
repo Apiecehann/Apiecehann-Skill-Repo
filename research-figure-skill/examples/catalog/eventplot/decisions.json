@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法的延迟事件序列（eventplot）。",
+  "chart": "eventplot",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "eventplot"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "eventplot",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      null,
+      null
+    ]
+  },
+  "log": [
+    "eventplot -> 1 groups, 2 series, 60 observations"
+  ]
+}

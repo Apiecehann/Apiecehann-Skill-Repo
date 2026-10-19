@@ -41,3 +41,5 @@
 {"id": "case-41", "request": "模型模块的两层占比，icicle，单栏", "recipe": "icicle", "data": "examples/templates/icicle/data.csv", "expect": {"chart": "icicle"}}
 {"id": "case-42", "request": "四个模态之间的交叉流量，chord，单栏", "recipe": "chord", "data": "examples/templates/chord/data.csv", "expect": {"chart": "chord"}}
 {"id": "case-43", "request": "数据到模块的三阶段 alluvial 流向，单栏", "recipe": "alluvial", "data": "examples/templates/alluvial/data.csv", "expect": {"chart": "alluvial"}}
+{"id": "case-44", "request": "样本分位数对正态理论分位数的 QQ 图，单栏", "recipe": "qq", "data": "examples/templates/qq/data.csv", "expect": {"chart": "qq"}}
+{"id": "case-45", "request": "两个方法的延迟事件序列 eventplot，单栏", "recipe": "eventplot", "data": "examples/templates/eventplot/data.csv", "expect": {"chart": "eventplot"}}

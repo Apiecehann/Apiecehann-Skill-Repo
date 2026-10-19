@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：样本分位数对正态理论分位数的 QQ 图。",
+  "chart": "qq",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "qq"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "qq",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      null,
+      null
+    ]
+  },
+  "log": [
+    "qq -> 1 groups, 1 series, 120 observations"
+  ]
+}

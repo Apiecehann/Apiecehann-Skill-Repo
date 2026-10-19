@@ -503,6 +503,34 @@ def render_chord(config, rows, out_stem):
     return _save_fig(fig, out_stem)
 
 
+def render_qq(config, rows, out_stem):
+    from statistics import NormalDist
+    fig, ax = _setup(config)
+    norm = NormalDist()
+    for name in config["series_order"]:
+        values = np.sort(np.array([r["value"] for r in rows if r["series"] == name]))
+        probs = (np.arange(1, len(values) + 1) - .5) / len(values)
+        theoretical = np.array([norm.inv_cdf(float(p)) for p in probs])
+        ax.scatter(theoretical, values, s=10, color=config["colors"][name],
+                   edgecolors="white", linewidths=.2, alpha=.8, label=config.get("series_labels", {}).get(name, name))
+    ax.set_xlabel("Theoretical quantiles", fontsize=8)
+    ax.set_ylabel("Sample quantiles", fontsize=8)
+    if config.get("legend", True):
+        ax.legend(frameon=False, fontsize=7, loc="upper left")
+    return _save_fig(fig, out_stem)
+
+
+def render_eventplot(config, rows, out_stem):
+    fig, ax = _setup(config)
+    for i, name in enumerate(config["series_order"]):
+        values = [r["value"] for r in rows if r["series"] == name]
+        ax.eventplot(values, lineoffsets=i, colors=config["colors"][name], linewidths=1.4)
+    ax.set_yticks(range(len(config["series_order"])))
+    ax.set_yticklabels(config["series_order"], fontsize=7)
+    ax.set_xlabel(config.get("x_label", "Event time"), fontsize=8)
+    return _save_fig(fig, out_stem)
+
+
 def _tree(rows):
     by_parent = {}
     for row in rows:

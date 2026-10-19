@@ -397,6 +397,30 @@
       ],
       "supports": [],
       "ir": "examples/templates/alluvial/figure.ir.json"
+    },
+    {
+      "id": "qq",
+      "family": "diagnostic",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/qq/figure.ir.json"
+    },
+    {
+      "id": "eventplot",
+      "family": "diagnostic",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/eventplot/figure.ir.json"
     }
   ]
 }

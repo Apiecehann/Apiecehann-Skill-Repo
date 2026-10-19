@@ -39,7 +39,9 @@
         "sunburst",
         "icicle",
         "chord",
-        "alluvial"
+        "alluvial",
+        "qq",
+        "eventplot"
       ]
     },
     "data": {

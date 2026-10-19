@@ -1,0 +1,42 @@
+{
+  "chart": "qq",
+  "groups": [
+    "all"
+  ],
+  "series_order": [
+    "ours"
+  ],
+  "colors": {
+    "ours": "#2F80C9"
+  },
+  "series_labels": {
+    "ours": "Ours"
+  },
+  "x_label": "Theoretical quantiles",
+  "y_label": "Sample quantiles",
+  "x_min": null,
+  "x_max": null,
+  "reference": [],
+  "overlays": [],
+  "legend": false,
+  "size_pt": [
+    360,
+    240
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

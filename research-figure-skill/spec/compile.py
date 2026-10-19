@@ -578,7 +578,7 @@ def read_distribution_rows(ir, ir_path):
 
 def compile_distribution_2d(ir, ir_path, output, render=False):
     chart = ir["chart"]
-    if chart not in ("box", "violin", "ecdf", "kde", "ridgeline"):
+    if chart not in ("box", "violin", "ecdf", "kde", "ridgeline", "qq", "eventplot"):
         raise ValueError(f"unsupported distribution chart {chart!r}")
     missing = {"x", "y", "series"} - set(ir["encoding"])
     if missing:
@@ -628,7 +628,7 @@ def compile_distribution_2d(ir, ir_path, output, render=False):
     if render:
         renderer = {"box": charts2d.render_box, "violin": charts2d.render_violin,
                     "ecdf": charts2d.render_ecdf, "kde": charts2d.render_kde,
-                    "ridgeline": charts2d.render_ridgeline}[chart]
+                    "ridgeline": charts2d.render_ridgeline, "qq": charts2d.render_qq, "eventplot": charts2d.render_eventplot}[chart]
         renderer(config, rows, output / "figure")
     return config, decisions
 
@@ -1297,7 +1297,7 @@ def compile_ir(ir_path, output, render=False):
     ir = load_ir(ir_path)
     if ir["chart"] == "distribution-overlap":
         return compile_distribution(ir, ir_path, output, render)
-    if ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline"):
+    if ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline", "qq", "eventplot"):
         return compile_distribution_2d(ir, ir_path, output, render)
     if ir["chart"] == "heatmap":
         return compile_heatmap(ir, ir_path, output, render)

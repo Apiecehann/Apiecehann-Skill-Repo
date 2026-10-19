@@ -505,6 +505,32 @@
       "ir": "examples/templates/alluvial/figure.ir.json",
       "chart": "alluvial",
       "variant": "three-stage"
+    },
+    {
+      "id": "qq",
+      "title": "QQ plot",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "qq"
+      ],
+      "ir": "examples/templates/qq/figure.ir.json",
+      "chart": "qq",
+      "variant": "normal"
+    },
+    {
+      "id": "eventplot",
+      "title": "Event plot",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "eventplot"
+      ],
+      "ir": "examples/templates/eventplot/figure.ir.json",
+      "chart": "eventplot",
+      "variant": "two-series"
     }
   ]
 }

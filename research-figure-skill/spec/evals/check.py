@@ -76,7 +76,7 @@ def check_case(case, ir_path):
     if ir["chart"] == "distribution-overlap":
         actual_rows = distribution_rows(ir, ir_path)
         expected_rows = distribution_rows(expected_ir, ir_path)
-    elif ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline"):
+    elif ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline", "qq", "eventplot"):
         actual_rows, _ = read_distribution_rows(ir, ir_path)
         expected_rows, _ = read_distribution_rows(expected_ir, ir_path)
     elif ir["chart"] in ("heatmap", "roc", "pr", "calibration", "surface", "scatter3d", "voxel", "det", "node-link", "sankey", "treemap", "radar", "bar3d", "mesh3d", "quiver3d", "sunburst", "icicle", "chord", "alluvial"):

@@ -1,0 +1,13 @@
+{
+  "claim": "MOCK：样本分位数对正态理论分位数的 QQ 图。",
+  "chart": "qq",
+  "data": "data.csv",
+  "encoding": {"x": "group", "y": "value", "series": "series"},
+  "series_order": ["ours"],
+  "series_labels": {"ours": "Ours"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Theoretical quantiles", "y_label": "Sample quantiles"}
+}

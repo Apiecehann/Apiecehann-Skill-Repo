@@ -47,7 +47,9 @@
         "sunburst",
         "icicle",
         "chord",
-        "alluvial"
+        "alluvial",
+        "qq",
+        "eventplot"
       ]
     }
   },
@@ -150,6 +152,12 @@
     ],
     "alluvial": [
       "alluvial"
+    ],
+    "qq": [
+      "qq"
+    ],
+    "eventplot": [
+      "eventplot"
     ]
   },
   "entries": [
@@ -2308,6 +2316,104 @@
         "axes": {},
         "log": [
           "alluvial -> 5 items"
+        ]
+      }
+    },
+    {
+      "recipe": "qq",
+      "title": "QQ plot",
+      "chart": "qq",
+      "variant": "normal",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "qq"
+      ],
+      "files": {
+        "png": "qq/figure.png",
+        "pdf": "qq/figure.pdf",
+        "svg": "qq/figure.svg",
+        "config": "qq/config.json",
+        "data": "qq/data.csv",
+        "decisions": "qq/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：样本分位数对正态理论分位数的 QQ 图。",
+        "chart": "qq",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "qq"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "qq",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "log": [
+          "qq -> 1 groups, 1 series, 120 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "eventplot",
+      "title": "Event plot",
+      "chart": "eventplot",
+      "variant": "two-series",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "eventplot"
+      ],
+      "files": {
+        "png": "eventplot/figure.png",
+        "pdf": "eventplot/figure.pdf",
+        "svg": "eventplot/figure.svg",
+        "config": "eventplot/config.json",
+        "data": "eventplot/data.csv",
+        "decisions": "eventplot/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法的延迟事件序列（eventplot）。",
+        "chart": "eventplot",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "eventplot"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "eventplot",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "log": [
+          "eventplot -> 1 groups, 2 series, 60 observations"
         ]
       }
     }

@@ -1,0 +1,13 @@
+{
+  "claim": "MOCK：两个方法的延迟事件序列（eventplot）。",
+  "chart": "eventplot",
+  "data": "data.csv",
+  "encoding": {"x": "group", "y": "value", "series": "series"},
+  "series_order": ["method-1", "ours"],
+  "series_labels": {"method-1": "Method 1", "ours": "Ours"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Latency (ms)"}
+}
