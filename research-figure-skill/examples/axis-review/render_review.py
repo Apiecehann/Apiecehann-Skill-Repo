@@ -79,7 +79,8 @@ def humanist_roles():
         bold = role in ("bold", "heading_bold")
         roles[role] = {"family": ["Segoe UI", "Arial", "DejaVu Sans"],
                        "weight": "bold" if bold else "normal", "file": None}
-    roles["gain"] = roles["regular"]
+    roles["gain"] = {"family": ["Segoe UI Semibold", "Segoe UI", "Arial", "DejaVu Sans"],
+                     "weight": "bold", "file": None}
     return roles
 
 

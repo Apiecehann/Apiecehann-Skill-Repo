@@ -902,7 +902,7 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
     arrow.set_gid(key+'-arrow')
     fig.add_artist(arrow)
     leader_artist = None
-    if leader_points is not None:
+    if leader_points is not None and side != 'left':
         leader_artist = plt.Line2D(leader_points[:, 0]/width, leader_points[:, 1]/height,
                                   transform=fig.transFigure, color=color, linewidth=.5, zorder=6)
         leader_artist.set_gid(key+'-leader')
