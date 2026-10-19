@@ -75,7 +75,7 @@ def mix(color, t):
     return "#" + "".join(f"{round(c + (255 - c) * t):02x}" for c in rgb)
 
 
-def setup(ax, config):
+def setup(ax, config, axis=None):
     ax.set_facecolor("white")
     for side in ("left", "bottom", "top", "right"):
         ax.spines[side].set_visible(config.get("all_spines", False) or side in ("left", "bottom"))
@@ -84,8 +84,8 @@ def setup(ax, config):
     grid = config.get("grid", "hairline")
     if grid != "none":
         style = ":" if grid == "dots" else ("--" if grid == "dashed" else "-")
-        axis = "both" if grid == "both" else "x"
-        ax.grid(True, axis=axis, color="#D9DEE3", linewidth=.6, linestyle=style, zorder=0)
+        grid_axis = axis or config.get("grid_axis", "y")
+        ax.grid(True, axis=grid_axis, color="#D9DEE3", linewidth=.6, linestyle=style, zorder=0)
         ax.set_axisbelow(True)
     tick = config.get("tick", 8)
     ax.tick_params(labelsize=tick, length=3, color="#6B7280")
@@ -142,7 +142,7 @@ def dumbbell(rows, colors, **config):
     ax.set_ylabel("Task", fontsize=config.get("tick", 8) + 1)
     ax.legend(frameon=False, fontsize=6.5, loc="lower center", bbox_to_anchor=(.5, 1.01), ncol=2,
               borderaxespad=0)
-    setup(ax, config)
+    setup(ax, config, axis="x")
     reference(ax, config)
     fig.tight_layout(pad=.3)
     return fig

@@ -83,8 +83,8 @@ def setup(ax, config):
     grid = config.get("grid", "hairline")
     if grid != "none":
         style = ":" if grid == "dots" else ("--" if grid == "dashed" else "-")
-        axis = "both" if grid == "both" else "x"
-        ax.grid(True, axis=axis, color="#D9DEE3", linewidth=.6, linestyle=style, zorder=0)
+        grid_axis = config.get("grid_axis", "y")
+        ax.grid(True, axis=grid_axis, color="#D9DEE3", linewidth=.6, linestyle=style, zorder=0)
         ax.set_axisbelow(True)
     tick = config.get("tick", 8)
     ax.tick_params(labelsize=tick, length=3, color="#6B7280")
