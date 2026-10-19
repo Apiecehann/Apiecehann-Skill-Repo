@@ -43,9 +43,10 @@ def load():
 
 
 def draw(rows, groups, *, colors, title, font="sans", tick=8, axis_width=.7,
-         marker=32, grid=True, errorbar=False, reference=None, bold=False):
+         marker=32, grid=True, errorbar=False, reference=None, bold=False,
+         figsize=(3.6, 2.4)):
     plt.rcParams["font.family"] = matplotlib.font_manager.FontProperties(fname=FONTS[font]).get_name()
-    fig, ax = plt.subplots(figsize=(3.6, 2.4), dpi=180)
+    fig, ax = plt.subplots(figsize=figsize, dpi=180)
     fig.patch.set_facecolor("white")
     ax.set_facecolor("white")
     y = {g: i for i, g in enumerate(groups)}
@@ -76,7 +77,8 @@ def draw(rows, groups, *, colors, title, font="sans", tick=8, axis_width=.7,
         ax.spines[side].set_color("#9CA3AF")
         ax.spines[side].set_linewidth(axis_width)
     if grid:
-        ax.grid(True, axis="x", color="#D9DEE3", linewidth=.6, zorder=0)
+        ax.grid(True, axis="x", color="#D9DEE3", linewidth=.6,
+                linestyle="--" if grid == "dashed" else "-", zorder=0)
         ax.set_axisbelow(True)
     ax.legend(frameon=False, fontsize=6.5, loc="lower center", bbox_to_anchor=(.5, 1.01),
               ncol=4, handletextpad=.4, columnspacing=1.0, borderaxespad=0)
@@ -96,10 +98,18 @@ def main():
                                     tick=10, axis_width=1.2, marker=46, grid=False, bold=True)),
         ("style / minimal-mono", dict(colors=D_ORANGE, title="style / minimal-mono",
                                       tick=7, axis_width=.4, marker=26, grid=False)),
+        ("style / serif-emphasis", dict(colors=D_ORANGE, title="style / serif-emphasis",
+                                        font="serif", grid="dashed")),
+        ("type / sans", dict(colors=D_ORANGE, title="type / sans", font="sans")),
         ("type / serif", dict(colors=D_ORANGE, title="type / serif", font="serif")),
+        ("type / humanist", dict(colors=D_ORANGE, title="type / humanist", font="humanist")),
         ("type / mono", dict(colors=D_ORANGE, title="type / mono", font="mono")),
         ("annotation / errorbar", dict(colors=D_ORANGE, title="annotation / errorbar", errorbar=True)),
         ("annotation / reference", dict(colors=D_ORANGE, title="annotation / reference", reference=.85)),
+        ("grid / hairline", dict(colors=D_ORANGE, title="grid / hairline", grid=True)),
+        ("grid / dashed", dict(colors=D_ORANGE, title="grid / dashed", grid="dashed")),
+        ("size / single", dict(colors=D_ORANGE, title="size / single", figsize=(3.6, 2.4))),
+        ("size / double", dict(colors=D_ORANGE, title="size / double", figsize=(5.0, 3.3))),
     ]
     OUT.mkdir(parents=True, exist_ok=True)
     panels = []
@@ -117,7 +127,7 @@ def main():
     draw_ctx = ImageDraw.Draw(sheet)
     draw_ctx.text((24, 18), "dot plot / axis coverage", fill="#20252c",
                   font=ImageFont.truetype(LABEL_FONT, 30))
-    draw_ctx.text((24, 50), "each panel changes one axis; grouped-bar has 9 recipes, this has 10 panels",
+    draw_ctx.text((24, 50), f"each panel changes one axis; grouped-bar has 9 recipes, this has {len(specs)} panels",
                   fill="#57606c", font=ImageFont.truetype(LABEL_FONT, 14))
     for i, (path, label) in enumerate(panels):
         x = 20 + (i % cols) * cell_w

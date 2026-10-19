@@ -4,13 +4,14 @@
 
 原则：**每个 chart 按轴覆盖，而不是拍脑袋挑几个变量**。
 
-用户优先级修正（2026-10-19）：
+用户优先级修正（2026-10-19，第二版）：
 
 - 颜色结构：重要，必做。
-- 风格 / 字体：重要，各做 2 个对比，不做 15×15。
+- 风格 / 字体：重要；全局各扩到 **20 个**，每个 chart 的 sheet 用 6–8 个代表，完整 20 个放在全局 style/type 表。
 - 标注：保留。
-- 网格：**低优先，可不做**；不再强制每个 chart 做 grid panel。
-- 每 chart 目标从 7–14 收敛到 **9–11 个 panel**。
+- 网格：**加回来，必做**。
+- 每 chart 目标：**12–18 个 panel**，不是 5 个，也不是 150 个。
+- **允许新增 chart-specific 轴**；删掉不适用的轴后，要补上这个图真正需要的轴。
 
 ## 1. 先分两类轴
 
@@ -18,14 +19,14 @@
 
 这些轴对所有 chart 都适用，已经有独立 reference 表：
 
-- `style`：15 个
-- `type`：15 个
+- `style`：全局 **20 个**（当前 15，补 5 个）
+- `type`：全局 **20 个**（当前 15，补 5 个）
 - `accent` / `categorical` / `paired` / `color_pairing`：全局色板
 - `grid`：全局网格策略
 - `size`：4 个物理尺寸
 - `panel_gap` / `bar_spacing`：布局级
 
-它们不进入每个 chart 的 variant 列表；否则 16 charts × 15 styles 会爆炸。
+它们不进入每个 chart 的全量列表；每个 chart 只取 6–8 个代表，完整 20 个放在全局 style/type 表。
 
 ### 每 chart 轴（需要按 chart 覆盖）
 
@@ -36,7 +37,25 @@
 3. **annotation**：reference / errorbar / bracket / delta / trend / ellipse / operating point
 4. **layout**：vertical / horizontal / paired / multi-panel（只选适用的）
 5. **size**：single / medium / double / slide（选 2–3 个代表）
-6. **style/type contrast**：1–2 个对比，不重复 15 个
+6. **style/type contrast**：6–8 个代表，不重复 20 个
+
+### Chart-specific 轴（新增）
+
+删掉不适用的轴后，要补上这个图真正需要的轴。它们不是“额外装饰”，而是该图的语义维度：
+
+| chart | 新增轴 |
+|---|---|
+| scatter | `trend`（趋势）、`confidence-ellipse`（置信椭圆）、`density`（密度） |
+| box | `raw-points`（原始点）、`significance-bracket`（显著性括号） |
+| violin | `raw-points`、`split`（分组半小提琴） |
+| line-band | `uncertainty`（CI/分位带）、`trend` |
+| heatmap | `cell-labels`、`colorbar`、`clustering` |
+| roc / pr | `operating-point`、`auc-label`、`baseline` |
+| calibration | `bin-count`、`reliability-band` |
+| surface | `view-angle`、`contour-projection`、`colorbar` |
+| grouped-bar | `capacity`、`increment`、`delta`、`significance-bracket` |
+
+这些轴进入 `examples/chart-review/<chart>/` 的 sheet，不写进全局 `axes.json` 的 13 轴。
 
 ## 2. 覆盖规则
 
@@ -48,7 +67,7 @@
 
 ## 3. 每 chart 目标
 
-> 下表里的 grid 列是候选；按最新优先级，grid 可以不做。实际先按 9–11 panels 控制。
+> grid 已加回；每 chart 目标 **12–18 panels**，style/type 各取 6–8 个代表。下表是早期估算，按新目标会略增。
 
 | chart | color | grid | annotation | layout | size | style/type | 目标 panels |
 |---|---|---|---|---|---|---|---|

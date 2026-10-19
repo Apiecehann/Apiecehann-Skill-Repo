@@ -4,22 +4,19 @@
 
 ## dot-plot
 
-`dot-plot.png` 有 10 个 panel：
+`dot-plot.png` 有 17 个 panel：
 
 | 轴 | panel |
 |---|---|
 | canonical | focus-tints |
-| color | focus-neutral |
-| color | focus-multi |
-| color | multi-hue |
-| style | bold-slide |
-| style | minimal-mono |
-| type | serif |
-| type | mono |
-| annotation | errorbar |
-| annotation | reference |
+| color | focus-neutral / focus-multi / multi-hue |
+| style | bold-slide / minimal-mono / serif-emphasis |
+| type | sans / serif / humanist / mono |
+| annotation | errorbar / reference |
+| grid | hairline / dashed |
+| size | single / double |
 
-没有做 grid，因为 grid 优先级低；style/type 只做 2 个对比，不做 15×15。
+没有新增 chart-specific 轴（dot-plot 本身没有额外语义轴）；grid 已加回；style/type 各取 4 个代表，不重复 20 个。
 
 生成：
 
