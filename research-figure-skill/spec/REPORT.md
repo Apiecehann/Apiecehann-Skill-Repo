@@ -101,3 +101,5 @@ M3：kde/box/violin/ecdf 已实现；distribution 数据允许重复观测；rec
 M4：heatmap / roc / pr / calibration 已实现；heatmap 支持 cell labels + colorbar，ROC/PR 自动算 AUC/基线，calibration 分箱；recipes/evals 22/26，tests 207 passed。
 
 M5：surface 已实现；3D surface + 2D contour 投影 + 共用 colorbar；recipes/evals 23/27，tests 209 passed。P0 chart family 16/16 完成；剩余 overlay 收口（raw-points / significance-bracket / delta 通用化）。
+
+M6（部分）：raw-points 与 significance-bracket 已接入 box/violin；IR 新增 overlays 数组；dot/bar 的 overlay 与 delta 通用化仍待做。tests 209 passed。

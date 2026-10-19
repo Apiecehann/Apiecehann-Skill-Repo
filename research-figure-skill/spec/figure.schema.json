@@ -83,6 +83,45 @@
         "additionalProperties": false
       }
     },
+    "overlays": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["raw-points", "significance-bracket"]
+          },
+          "jitter": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 0.5
+          },
+          "alpha": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "label": {
+            "type": "string"
+          },
+          "y": {
+            "type": "number"
+          }
+        },
+        "required": ["kind"],
+        "additionalProperties": false
+      }
+    },
     "encoding": {
       "type": "object",
       "properties": {

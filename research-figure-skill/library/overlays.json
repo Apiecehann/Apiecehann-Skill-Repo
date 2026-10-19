@@ -4,83 +4,215 @@
     {
       "id": "errorbar",
       "layer": "stat",
-      "requires": ["x", "y"],
-      "optional": ["low", "high", "replicate"],
-      "params": {"kind": "std", "level": 0.95, "cap_pt": 2},
-      "supports": ["grouped-bar", "horizontal-bar", "dot-plot", "scatter", "line-band"],
-      "avoid": ["只有单个观测"]
+      "requires": [
+        "x",
+        "y"
+      ],
+      "optional": [
+        "low",
+        "high",
+        "replicate"
+      ],
+      "params": {
+        "kind": "std",
+        "level": 0.95,
+        "cap_pt": 2
+      },
+      "supports": [
+        "grouped-bar",
+        "horizontal-bar",
+        "dot-plot",
+        "scatter",
+        "line-band"
+      ],
+      "avoid": [
+        "只有单个观测"
+      ]
     },
     {
       "id": "ci-band",
       "layer": "stat",
-      "requires": ["x", "y"],
-      "optional": ["low", "high", "replicate"],
-      "params": {"level": 0.95, "alpha": 0.18},
-      "supports": ["line-band", "scatter", "roc", "pr"],
-      "avoid": ["没有重复观测也没有 low/high"]
+      "requires": [
+        "x",
+        "y"
+      ],
+      "optional": [
+        "low",
+        "high",
+        "replicate"
+      ],
+      "params": {
+        "level": 0.95,
+        "alpha": 0.18
+      },
+      "supports": [
+        "line-band",
+        "scatter",
+        "roc",
+        "pr"
+      ],
+      "avoid": [
+        "没有重复观测也没有 low/high"
+      ]
     },
     {
       "id": "raw-points",
       "layer": "stat",
-      "requires": ["x", "y"],
-      "optional": ["replicate"],
-      "params": {"jitter": 0.08, "alpha": 0.55, "size": 10},
-      "supports": ["grouped-bar", "dot-plot", "box", "violin"],
-      "avoid": ["点太多，改用密度"]
+      "requires": [
+        "x",
+        "y"
+      ],
+      "optional": [
+        "replicate"
+      ],
+      "params": {
+        "jitter": 0.08,
+        "alpha": 0.55,
+        "size": 10
+      },
+      "supports": [
+        "box",
+        "violin"
+      ],
+      "avoid": [
+        "点太多，改用密度"
+      ]
     },
     {
       "id": "reference-line",
       "layer": "reference",
-      "requires": ["value"],
-      "optional": ["axis", "label"],
-      "params": {"axis": "y", "linestyle": "--", "linewidth": 0.8},
-      "supports": ["*"],
-      "avoid": ["参考值没有来源"]
+      "requires": [
+        "value"
+      ],
+      "optional": [
+        "axis",
+        "label"
+      ],
+      "params": {
+        "axis": "y",
+        "linestyle": "--",
+        "linewidth": 0.8
+      },
+      "supports": [
+        "*"
+      ],
+      "avoid": [
+        "参考值没有来源"
+      ]
     },
     {
       "id": "trend",
       "layer": "stat",
-      "requires": ["x", "y"],
-      "optional": ["series"],
-      "params": {"method": "linear", "ci": 0.95},
-      "supports": ["scatter", "line-band"],
-      "avoid": ["类别轴", "明显非线性但不声明"]
+      "requires": [
+        "x",
+        "y"
+      ],
+      "optional": [
+        "series"
+      ],
+      "params": {
+        "method": "linear",
+        "ci": 0.95
+      },
+      "supports": [
+        "scatter",
+        "line-band"
+      ],
+      "avoid": [
+        "类别轴",
+        "明显非线性但不声明"
+      ]
     },
     {
       "id": "confidence-ellipse",
       "layer": "stat",
-      "requires": ["x", "y", "series"],
+      "requires": [
+        "x",
+        "y",
+        "series"
+      ],
       "optional": [],
-      "params": {"level": 0.95, "alpha": 0.12},
-      "supports": ["scatter"],
-      "avoid": ["少于 3 个点", "类别轴"]
+      "params": {
+        "level": 0.95,
+        "alpha": 0.12
+      },
+      "supports": [
+        "scatter"
+      ],
+      "avoid": [
+        "少于 3 个点",
+        "类别轴"
+      ]
     },
     {
       "id": "significance-bracket",
       "layer": "annotation",
-      "requires": ["x", "y"],
-      "optional": ["p", "label"],
-      "params": {"label": "auto", "offset_pt": 8},
-      "supports": ["grouped-bar", "dot-plot", "box", "violin"],
-      "avoid": ["没有统计检验"]
+      "requires": [
+        "x",
+        "y"
+      ],
+      "optional": [
+        "p",
+        "label"
+      ],
+      "params": {
+        "label": "auto",
+        "offset_pt": 8
+      },
+      "supports": [
+        "box",
+        "violin"
+      ],
+      "avoid": [
+        "没有统计检验"
+      ]
     },
     {
       "id": "operating-point",
       "layer": "annotation",
-      "requires": ["x", "y"],
-      "optional": ["label"],
-      "params": {"label": "auto", "size": 5},
-      "supports": ["roc", "pr", "calibration"],
-      "avoid": ["没有选定阈值"]
+      "requires": [
+        "x",
+        "y"
+      ],
+      "optional": [
+        "label"
+      ],
+      "params": {
+        "label": "auto",
+        "size": 5
+      },
+      "supports": [
+        "roc",
+        "pr",
+        "calibration"
+      ],
+      "avoid": [
+        "没有选定阈值"
+      ]
     },
     {
       "id": "delta",
       "layer": "annotation",
-      "requires": ["from", "to"],
-      "optional": ["group", "label_format"],
-      "params": {"arrow_style": "curved", "label_side": "left"},
-      "supports": ["grouped-bar", "dot-plot", "dumbbell"],
-      "avoid": ["两个值不在同一 panel"]
+      "requires": [
+        "from",
+        "to"
+      ],
+      "optional": [
+        "group",
+        "label_format"
+      ],
+      "params": {
+        "arrow_style": "curved",
+        "label_side": "left"
+      },
+      "supports": [
+        "grouped-bar",
+        "dot-plot",
+        "dumbbell"
+      ],
+      "avoid": [
+        "两个值不在同一 panel"
+      ]
     }
   ]
 }

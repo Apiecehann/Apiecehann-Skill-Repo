@@ -205,6 +205,49 @@ def _category_grid(ax):
     ax.set_axisbelow(True)
 
 
+def _raw_points(ax, config, rows, groups, series, colors, width):
+    spec = next((o for o in config.get("overlays", []) if o["kind"] == "raw-points"), None)
+    if spec is None:
+        return
+    n = max(1, len(series))
+    rng = np.random.default_rng(0)
+    for i, name in enumerate(series):
+        offset = (i - (n - 1) / 2) * width
+        for gi, group in enumerate(groups):
+            values = [r["value"] for r in rows if r["group"] == group and r["series"] == name]
+            if not values:
+                continue
+            jitter = rng.uniform(-spec.get("jitter", 0.06), spec.get("jitter", 0.06), len(values))
+            ax.scatter(np.full(len(values), gi + offset) + jitter, values, s=7,
+                       color=colors[name], alpha=spec.get("alpha", .55), linewidths=0, zorder=2)
+
+
+def _significance(ax, config, groups, tops):
+    spec = next((o for o in config.get("overlays", []) if o["kind"] == "significance-bracket"), None)
+    if spec is None:
+        return
+    pair = spec.get("groups", groups[:2])
+    if len(pair) != 2 or pair[0] not in groups or pair[1] not in groups:
+        return
+    x1, x2 = groups.index(pair[0]), groups.index(pair[1])
+    lo, hi = sorted((x1, x2))
+    top = max(tops.get(pair[0], 0), tops.get(pair[1], 0))
+    span = max(tops.values()) - min(tops.values()) if tops else 1
+    y = spec.get("y", top + max(span * .08, 2))
+    h = max(span * .03, 1)
+    ax.plot([lo, lo, hi, hi], [y - h, y, y, y - h], color="#4B5563", linewidth=.8, zorder=5)
+    ax.text((lo + hi) / 2, y + h * .2, spec.get("label", "*"), ha="center", va="bottom",
+            fontsize=7, color="#374151", zorder=5)
+
+
+def _tops(rows, groups, series):
+    tops = {}
+    for group in groups:
+        vals = [r["value"] for r in rows if r["group"] == group and r["series"] in series]
+        tops[group] = max(vals) if vals else 0
+    return tops
+
+
 def _series_values(rows, groups, series):
     return [[r["value"] for r in rows if r["group"] == group and r["series"] == series]
             for group in groups]
@@ -232,8 +275,10 @@ def render_box(config, rows, out_stem):
             patch.set_linewidth(.8)
         handles.append(matplotlib.patches.Patch(facecolor=colors[name], alpha=.45,
                                                 edgecolor=colors[name], label=labels.get(name, name)))
+    _raw_points(ax, config, rows, groups, series, colors, width)
     ax.set_xticks(range(len(groups)))
     ax.set_xticklabels(groups)
+    _significance(ax, config, groups, _tops(rows, groups, series))
     _reference(ax, config)
     if config.get("y_min") is not None or config.get("y_max") is not None:
         ax.set_ylim(config.get("y_min"), config.get("y_max"))
@@ -261,8 +306,10 @@ def render_violin(config, rows, out_stem):
         vp["cmedians"].set_linewidth(1.1)
         handles.append(matplotlib.patches.Patch(facecolor=colors[name], alpha=.38,
                                                 edgecolor=colors[name], label=labels.get(name, name)))
+    _raw_points(ax, config, rows, groups, series, colors, width)
     ax.set_xticks(range(len(groups)))
     ax.set_xticklabels(groups)
+    _significance(ax, config, groups, _tops(rows, groups, series))
     _reference(ax, config)
     return _finish_handles(fig, ax, config, out_stem, handles)
 
