@@ -530,41 +530,8 @@
           "status": "implemented"
         },
         {
-          "id": "dark-slide",
-          "label": "dark-slide",
-          "when": [
-            "review variant"
-          ],
-          "avoid": [
-            "期刊 default 需先 promote"
-          ],
-          "status": "implemented"
-        },
-        {
-          "id": "blueprint",
-          "label": "blueprint",
-          "when": [
-            "review variant"
-          ],
-          "avoid": [
-            "期刊 default 需先 promote"
-          ],
-          "status": "implemented"
-        },
-        {
           "id": "poster-bold",
           "label": "poster-bold",
-          "when": [
-            "review variant"
-          ],
-          "avoid": [
-            "期刊 default 需先 promote"
-          ],
-          "status": "implemented"
-        },
-        {
-          "id": "notebook",
-          "label": "notebook",
           "when": [
             "review variant"
           ],
@@ -587,6 +554,39 @@
         {
           "id": "pastel-poster",
           "label": "pastel-poster",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "white-slide",
+          "label": "white background, large type",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "technical-grid",
+          "label": "white background, mono, 2D grid",
+          "when": [
+            "review variant"
+          ],
+          "avoid": [
+            "期刊 default 需先 promote"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "compact-journal",
+          "label": "white background, dense compact",
           "when": [
             "review variant"
           ],
@@ -779,6 +779,17 @@
           "avoid": [
             "区间穿过箭头",
             "横向布局"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "delta-curved",
+          "label": "curved delta",
+          "when": [
+            "参考图弧线箭头"
+          ],
+          "avoid": [
+            "空间极窄"
           ],
           "status": "implemented"
         },
@@ -1115,6 +1126,275 @@
           ],
           "avoid": [
             "默认"
+          ],
+          "status": "implemented"
+        }
+      ]
+    },
+    "color_pairing": {
+      "question": "固定一个 accent 基准色，筛 baseline 的配色关系。",
+      "options": [
+        {
+          "id": "accent-tints",
+          "label": "accent-tints",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "accent-shades",
+          "label": "accent-shades",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "cool-gray",
+          "label": "cool-gray",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "warm-gray",
+          "label": "warm-gray",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "slate",
+          "label": "slate",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "blue-tints",
+          "label": "blue-tints",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "blue-strong",
+          "label": "blue-strong",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "teal",
+          "label": "teal",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "green",
+          "label": "green",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "rose",
+          "label": "rose",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "violet",
+          "label": "violet",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "amber",
+          "label": "amber",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "brown",
+          "label": "brown",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "pastel-mix",
+          "label": "pastel-mix",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tol-muted",
+          "label": "tol-muted",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "npg",
+          "label": "npg",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tableau",
+          "label": "tableau",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "grayscale",
+          "label": "grayscale",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "split-comp",
+          "label": "split-comp",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "triadic",
+          "label": "triadic",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "low-sat",
+          "label": "low-sat",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "dark-neutral",
+          "label": "dark-neutral",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "cool-pastel",
+          "label": "cool-pastel",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "warm-pastel",
+          "label": "warm-pastel",
+          "when": [
+            "固定 accent 后筛 baseline"
+          ],
+          "avoid": [
+            "超过 4 个 baseline"
           ],
           "status": "implemented"
         }

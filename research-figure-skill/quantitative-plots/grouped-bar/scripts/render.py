@@ -82,7 +82,7 @@ DEFAULTS = {
                         'handletextpad': .8, 'borderaxespad': .5},
     'gain_defaults': {'auto_layout': True, 'clearance_pt': 5,
                      'label_collision_pad_pt': 2, 'label_leader_pt': 8, 'color': None, 'palette_part': 'edge', 'linewidth': 2.5,
-                     'alpha': 1, 'label_alpha': 1,
+                     'alpha': 1, 'label_alpha': 1, 'arrow_style': 'route',
                      'head_length_pt': 7, 'head_width_pt': 6, 'tail_pad_pt': 5, 'tip_pad_pt': 9,
                      'tail_dx_pt': -12, 'tip_dx_pt': -16,
                      'tail_anchor': 'center', 'tip_anchor': 'center',
@@ -735,6 +735,12 @@ def gain_route(start, end, ceiling, lift):
     return MplPath(vertices, [MplPath.MOVETO]+[MplPath.CURVE4]*9)
 
 
+def gain_route_arc(start, end, ceiling):
+    """One smooth cubic arch; used when gain.arrow_style == 'curved'."""
+    vertices = [start, [start[0], ceiling], [end[0], ceiling], end]
+    return MplPath(vertices, [MplPath.MOVETO, MplPath.CURVE4, MplPath.CURVE4, MplPath.CURVE4])
+
+
 def add_auto_gain(fig, spec, artists, config, font_dir):
     """Route above obstacles and place measured text inside the panel's free space."""
     before, after = artists[spec['from']], artists[spec['to']]
@@ -784,12 +790,20 @@ def add_auto_gain(fig, spec, artists, config, font_dir):
     for box in obstacles:
         if box.x0 <= right and box.x1 >= left:
             ceiling = max(ceiling, box.y1+clearance)
-    path = gain_route(start, end, ceiling, lift)
-    points = sample_cubic_path(path)
-    if (np.any(points[:, 0] < inner.x0) or np.any(points[:, 0] > inner.x1) or
-            np.any(points[:, 1] < inner.y0) or np.any(points[:, 1] > inner.y1) or
-            any(points_hit_box(points, box) for box in obstacles)):
-        raise ValueError('No collision-free delta path inside panel; increase y_max or figure height')
+    style = spec.get('arrow_style', 'route')
+    if style not in ('route', 'curved'):
+        raise ValueError('gain.arrow_style must be route or curved')
+    for attempt in range(8):
+        path = gain_route_arc(start, end, ceiling) if style == 'curved' else gain_route(start, end, ceiling, lift)
+        points = sample_cubic_path(path)
+        bad = (np.any(points[:, 0] < inner.x0) or np.any(points[:, 0] > inner.x1) or
+               np.any(points[:, 1] < inner.y0) or np.any(points[:, 1] > inner.y1) or
+               any(points_hit_box(points, box) for box in obstacles))
+        if not bad:
+            break
+        if style != 'curved' or attempt == 7:
+            raise ValueError('No collision-free delta path inside panel; increase y_max or figure height')
+        ceiling += 2
 
     color = spec['color'] or config['palette'][after['series']][spec['palette_part']]
     value = (after['value']-before['value'])*spec['label_scale']
@@ -1039,10 +1053,12 @@ def build_figure(config, rows, font_dir=None):
                            linewidth=ref.get('linewidth', .8),
                            alpha=opacity(ref.get('alpha', 1), 'reference.alpha'), zorder=1)
                 if ref.get('label'):
-                    ax.text(0.98, value, ref['label'], transform=ax.get_yaxis_transform(),
-                            ha='right', va='bottom', color=color,
+                    ax.text(ref.get('label_x', .98), value, ref['label'], transform=ax.get_yaxis_transform(),
+                            ha=ref.get('label_ha', 'right'), va='bottom', color=color,
+                            bbox={'facecolor': config['figure']['background'], 'edgecolor': 'none',
+                                  'pad': 1.2, 'alpha': .9},
                             fontproperties=font(config, ref.get('font', 'regular'), ref.get('size', 7), font_dir),
-                            zorder=5, clip_on=False)
+                            zorder=6, clip_on=False)
             for x, row in zip(xx, rr):
                 palette = config['palette'][row['series']]
                 fill, edge = bar_colors(palette, style)

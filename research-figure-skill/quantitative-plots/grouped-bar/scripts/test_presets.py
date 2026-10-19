@@ -30,6 +30,13 @@ def recipe(name='config.json'):
     return config,load_data(GUIDE/config['data'])
 
 
+def test_every_style_preset_has_a_white_background():
+    presets = json.loads((SCRIPTS/'presets.json').read_text(encoding='utf8'))
+    for name, spec in presets['styles'].items():
+        background = spec.get('config', {}).get('figure', {}).get('background', 'white')
+        assert str(background).lower() in ('white', '#fff', '#ffffff'), name
+
+
 @pytest.mark.parametrize('style',['paper-clean','soft-outline','serif-emphasis'])
 @pytest.mark.parametrize('name',['config.json','horizontal.json','paired.json','two-series.json'])
 def test_styles_transfer_across_layouts_without_changing_data(style,name):

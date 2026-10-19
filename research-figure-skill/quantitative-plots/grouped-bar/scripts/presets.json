@@ -384,12 +384,12 @@
       }
     },
     "hand-drawn": {
-      "description": "sketch 线条、纸色背景、手写字体；只用于博客/教学/talk，不进期刊。",
+      "description": "sketch 线条、白色背景、手写字体；只用于博客/教学/talk，不进期刊。",
       "font": "handwritten",
       "palette": "tol-muted",
       "config": {
         "figure": {
-          "background": "#FAF7F0",
+          "background": "white",
           "dpi": 200
         },
         "rc": {

@@ -265,7 +265,7 @@ def styles():
         ("minimal-mono", "minimal-mono", D_ORANGE + [ACCENTS["orange"]], None, "thin axes, no grid"),
         ("hand-drawn", "hand-drawn", D_ORANGE + [ACCENTS["orange"]],
          {"fonts": font_roles(str(Path(r"C:\Windows\Fonts") / "comic.ttf"), "Comic Sans MS")},
-         "sketch + paper"),
+         "sketch + white"),
         ("boxed-journal", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
          {"panel_defaults": {"spines": ["left", "bottom", "top", "right"],
                              "grid": {"kind": "none"}, "axis_width": .7, "bar_edge_width": .4}},
@@ -278,30 +278,29 @@ def styles():
          {"preset": {"font": "serif"}, "panel_defaults": {"grid": {"kind": "none"}, "axis_width": .5,
                                                           "tick_size": 8, "label_size": 10}},
          "serif, no grid, airy"),
-        ("dark-slide", "paper-clean", ["#60A5FA", "#F59E0B", "#34D399", "#F472B6"],
-         {"figure": {"background": "#0F172A"},
-          "panel_defaults": {"text_color": "#E5E7EB", "axis_color": "#E5E7EB", "tick_color": "#CBD5E1",
-                             "grid": {"kind": "none"}, "bar_edge_width": 0,
-                             "tick_size": 10, "category_size": 10, "label_size": 12}},
-         "dark background"),
-        ("blueprint", "paper-clean", ["#38BDF8", "#22D3EE", "#818CF8", "#A5F3FC"],
-         {"preset": {"font": "mono"}, "figure": {"background": "#0B1F33"},
-          "panel_defaults": {"text_color": "#A5D8FF", "axis_color": "#3B82F6", "tick_color": "#93C5FD",
-                             "grid": {"kind": "lines", "axis": "both", "color": "#1E4D6B",
+        ("white-slide", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
+         {"preset": {"font": "serif"},
+          "panel_defaults": {"grid": {"kind": "none"}, "axis_width": 1.2, "baseline_width": 1.6,
+                             "tick_size": 11, "category_size": 11, "label_size": 13,
+                             "value_size": 10, "spines": ["bottom"]}},
+         "white, large type"),
+        ("technical-grid", "paper-clean", ["#2F6B9A", "#2A9D8F", "#7C5CBF", "#4F8FC0"],
+         {"preset": {"font": "mono"},
+          "panel_defaults": {"grid": {"kind": "lines", "axis": "both", "color": "#D9DEE3",
                                       "linewidth": .4, "linestyle": "-"},
-                             "spines": ["bottom"], "axis_width": .6, "bar_edge_width": .5}},
-         "technical blueprint"),
+                             "spines": ["left", "bottom", "top", "right"], "axis_width": .6,
+                             "bar_edge_width": .5}},
+         "white technical grid"),
         ("poster-bold", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
          {"panel_defaults": {"tick_size": 10, "category_size": 11, "label_size": 13, "value_size": 10,
                              "axis_width": 2, "baseline_width": 2.4,
                              "grid": {"kind": "none"}, "spines": ["bottom"]}},
          "huge type, poster"),
-        ("notebook", "paper-clean", ["#E8B4A0", "#C9A227", "#7FA6A0", "#5B6C8F"],
-         {"font": "humanist", "figure": {"background": "#FFFDF5"},
-          "panel_defaults": {"text_color": "#4B4237", "axis_color": "#4B4237", "tick_color": "#6B5F4E",
-                             "grid": {"kind": "lines", "axis": "value", "color": "#E5DEC9",
-                                      "linewidth": .4, "linestyle": "-"}}},
-         "warm notebook"),
+        ("compact-journal", "paper-clean", D_ORANGE + [ACCENTS["orange"]],
+         {"panel_defaults": {"tick_size": 7, "category_size": 7, "label_size": 8, "value_size": 6.5,
+                             "axis_width": .5, "baseline_width": .8,
+                             "grid": {"kind": "none"}, "spines": ["bottom"]}},
+         "dense compact"),
         ("high-contrast", "paper-clean", ["#111827", "#374151", "#6B7280", ACCENTS["orange"]],
          {"panel_defaults": {"text_color": "#030712", "axis_color": "#030712", "tick_color": "#111827",
                              "axis_width": 1.5, "baseline_width": 1.8, "grid": {"kind": "none"},
@@ -315,9 +314,7 @@ def styles():
     ]
     for name, preset, colors, overrides, note in specs:
         cfg = config(rows, style=preset, colors=colors, labels=LABELS4,
-                     fill=None if name not in ("dark-slide", "blueprint") else 1,
-                     edge=None if name not in ("dark-slide", "blueprint") else 0,
-                     grid=None)
+                     fill=None, edge=None, grid=None)
         if overrides:
             cfg = backend.merge(cfg, overrides)
         img = render_panel(rows, cfg, f"style-{name}")
@@ -419,6 +416,7 @@ def annotations():
     cfg = config(paired, layout="paired", colors=PAIRS["blue"], labels=LABELS2)
     cfg["gains"] = [{"from": "b-b", "to": "a-b", "label_format": "+.0f",
                      "label_scale": 100, "label_suffix": " pp"}]
+    cfg["gain_defaults"] = {"arrow_style": "curved"}
     img = render_panel(paired, cfg, "annotation-delta")
     items.append({"image": img, "label": "delta", "note": "same-panel pair"})
 
@@ -427,14 +425,15 @@ def annotations():
                  tick_format=".0f", ylabel="Items", grid="h-hairline",
                  capacity={"field": "capacity", "label_format": "{value}/{capacity}",
                            "show_percent": True})
-    cfg["panel_defaults"]["bar_width"] = .35
-    cfg["panel_defaults"]["category_margin"] = .55
+    cfg["panel_defaults"]["bar_width"] = .25
+    cfg["panel_defaults"]["category_margin"] = .9
     img = render_panel(cap, cfg, "annotation-capacity")
     items.append({"image": img, "label": "capacity", "note": "88 / 96"})
 
     focus = read("focus.csv")
     cfg = config(focus, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
-                 reference_lines=[{"value": .8, "label": "SOTA", "color": "#6B7280"}])
+                 reference_lines=[{"value": .8, "label": "SOTA", "color": "#6B7280",
+                                   "label_x": .02, "label_ha": "left"}])
     img = render_panel(focus, cfg, "annotation-reference")
     items.append({"image": img, "label": "reference line", "note": "SOTA / threshold"})
 
@@ -449,7 +448,7 @@ def annotations():
     img = render_panel(inc, cfg, "annotation-increment")
     items.append({"image": img, "label": "base + increment", "note": "hatched base + solid delta"})
     make_sheet("annotation", "delta / capacity / reference-line / base+increment。",
-               items, 2, "12-annotation.png")
+               items, 2, "12-annotation.png", cell=(620, 420))
 
 
 def bar_spacing():
@@ -468,6 +467,44 @@ def bar_spacing():
         items.append({"image": img, "label": name, "note": note})
     make_sheet("bar spacing", "同一类的 bar 是否贴住；与 group 间距分开控制。",
                items, 2, "14-bar-spacing.png")
+
+
+def color_pairing():
+    rows = read("focus.csv")
+    base = ACCENTS["orange"]
+    pairings = [
+        ("accent-tints", ["#F6D3B5", "#E9A875", "#D98A48"]),
+        ("accent-shades", ["#FBE3D0", "#F2B48A", "#D4692A"]),
+        ("cool-gray", ["#C9D0D6", "#A3ACB9", "#7B848F"]),
+        ("warm-gray", ["#D8CFC4", "#BFB2A3", "#9C8C7B"]),
+        ("slate", ["#CBD5E1", "#94A3B8", "#64748B"]),
+        ("blue-tints", ["#D6E4F0", "#A8C8E8", "#6FA3D2"]),
+        ("blue-strong", ["#2F6B9A", "#4F8FC0", "#7FB2D9"]),
+        ("teal", ["#B7E0DA", "#7FC8C0", "#2A9D8F"]),
+        ("green", ["#CDE8CF", "#9CC2A4", "#3A9D5D"]),
+        ("rose", ["#F2C6CE", "#D98FA1", "#C44E6E"]),
+        ("violet", ["#DCD3F0", "#B4A8CF", "#7C5CBF"]),
+        ("amber", ["#F9E0B0", "#E9C46A", "#D9A441"]),
+        ("brown", ["#E5D2C2", "#C9A98F", "#A9714B"]),
+        ("pastel-mix", ["#99B4D7", "#F9D78D", "#9CC2A4"]),
+        ("tol-muted", ["#88CCEE", "#44AA99", "#999933"]),
+        ("npg", ["#4DBBD5", "#00A087", "#3C5488"]),
+        ("tableau", ["#4E79A7", "#F28E2B", "#E15759"]),
+        ("grayscale", ["#D9D9D9", "#A6A6A6", "#737373"]),
+        ("split-comp", ["#9CC2C8", "#B4A8CF", "#7B8FA8"]),
+        ("triadic", ["#9CC2A4", "#B4A8CF", "#8FA8C8"]),
+        ("low-sat", ["#C8C8C0", "#A8B0A0", "#8A9A8A"]),
+        ("dark-neutral", ["#B0A8A0", "#8A8078", "#5F574F"]),
+        ("cool-pastel", ["#C7DCEF", "#A8D8D0", "#D6C7E8"]),
+        ("warm-pastel", ["#F6D8C4", "#E8C8A0", "#D8B0A8"]),
+    ]
+    items = []
+    for name, baselines in pairings:
+        cfg = config(rows, colors=baselines + [base], labels=LABELS4)
+        img = render_panel(rows, cfg, f"pair-{name}")
+        items.append({"image": img, "label": name, "note": " / ".join(baselines)})
+    make_sheet("color pairing", f"基准 accent = {base}；24 组 baseline 配色，先选关系再选具体色卡。",
+               items, 4, "15-color-pairing.png", cell=(330, 270))
 
 
 def color_structure():
@@ -566,15 +603,17 @@ def main():
     annotations()
     panel_gap()
     bar_spacing()
+    color_pairing()
     index = {"version": 1,
              "sheets": ["00-color-structure.png", "01-baseline-color.png", "02-baseline-mark.png",
                         "03-baseline-matrix.png", "04-accent.png", "05-paired.png",
                         "06-categorical.png", "07-grid.png", "08-style.png", "09-type.png",
                         "10-layout.png", "11-size.png", "12-annotation.png", "13-panel-gap.png",
-                        "14-bar-spacing.png"],
+                        "14-bar-spacing.png", "15-color-pairing.png"],
              "axes": ["color structure", "baseline color", "baseline mark",
                       "baseline color x mark", "accent", "paired", "categorical", "grid",
-                      "style", "type", "layout", "size", "annotation", "panel gap", "bar spacing"]}
+                      "style", "type", "layout", "size", "annotation", "panel gap",
+                      "bar spacing", "color pairing"]}
     (HERE / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     print("wrote", HERE / "index.json")
 

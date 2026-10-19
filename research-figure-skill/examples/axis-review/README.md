@@ -14,13 +14,14 @@
 | `05-paired.png` | paired palette | before/after 用哪组同色相浅深 |
 | `06-categorical.png` | categorical palette | 5 个等权类别用哪组 |
 | `07-grid.png` | grid | none / h-hairline / h-dashed / full-hairline / full-dashed / dots |
-| `08-style.png` | style | 15 个风格：paper / soft / serif / bold-slide / minimal-mono / hand-drawn / boxed / grid / editorial / dark / blueprint / poster / notebook / high-contrast / pastel |
+| `08-style.png` | style | 15 个白底风格：paper / soft / serif / bold-slide / minimal-mono / hand-drawn / boxed / grid / editorial / white-slide / technical-grid / poster / compact / high-contrast / pastel |
 | `09-type.png` | type | 15 个字体：Arial / Helvetica / Segoe UI / Calibri / Verdana / Tahoma / Trebuchet / Times / Georgia / Garamond / Cambria / Consolas / Courier / Comic / Segoe Script |
 | `10-layout.png` | layout | 竖/横 × 1/2/4 series × 单/多面板 |
 | `11-size.png` | size | 9 种宽度/高度/长宽比 |
-| `12-annotation.png` | annotation | delta / capacity / reference-line / base+increment |
+| `12-annotation.png` | annotation | delta（含弧线）/ capacity / reference-line / base+increment |
 | `13-panel-gap.png` | panel gap | normal / zero gap / composite |
 | `14-bar-spacing.png` | bar spacing | spaced / touching / tight-groups / touching-all |
+| `15-color-pairing.png` | color pairing | 固定 accent = orange，24 组 baseline 配色 |
 
 ## 关于 outline / alpha / hatch
 
@@ -41,6 +42,14 @@
 
 `00-color-structure.png` 把这 6 种放在一张表里；`04-accent` / `05-paired` / `06-categorical` 是展开细节。
 
+## Color pairing
+
+`15-color-pairing.png` 固定 accent = orange `#E07A2F`，只变 baseline 的 24 组配色：
+
+- 先看关系：同色相浅深、邻近色、互补色、三角色、中性灰、pastel、Tol/NPG/Tableau；
+- 再看具体色卡；
+- 如果基准 accent 换成 blue/teal，同一组关系要重新筛，不能直接搬。
+
 ## 怎么给反馈
 
 一次回一张表即可，格式随意。例如：
@@ -56,8 +65,9 @@ style: 15 个都留
 type: 15 个都留
 layout: 6 个都留
 size: 9 个都留
-annotation: delta/capacity/reference-line/increment 保留；bracket/direct planned
+annotation: delta/delta-curved/capacity/reference-line/increment 保留；bracket/direct planned
 bar_spacing: spaced/touching/tight-groups/touching-all 都留
+color_pairing: 24 组都留；基准 accent 固定 orange
 ```
 
 不需要选“最终图”，只标“保留 / 删除 / 换颜色”。
@@ -78,4 +88,4 @@ cd research-figure-skill
 python examples/axis-review/render_review.py
 ```
 
-输出本目录的 15 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。
+输出本目录的 16 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。

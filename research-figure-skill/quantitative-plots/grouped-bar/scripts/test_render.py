@@ -477,6 +477,15 @@ def test_auto_delta_ascending_descending_and_small_changes(values, reverse):
     assert gain['leader'] is not None  # Outside-of-pair placement stays associated.
 
 
+def test_curved_delta_uses_one_smooth_arch_and_stays_clear():
+    config, rows = delta_case([40, 80])
+    config['gain_defaults']['arrow_style'] = 'curved'
+    fig, artists = build_figure(config, rows)
+    gain = artists['0']['auto_gains'][0]
+    assert len(gain['path_pt'].vertices) == 4
+    assert len(list(delta_geometry(fig, artists))) == 1
+
+
 def test_auto_delta_labels_stay_in_their_adjacent_group_slots():
     config, rows = delta_case([50, 51, 75, 60, 50, 80], ['a', 'a', 'b', 'b', 'c', 'c'])
     fig, artists = build_figure(config, rows)
