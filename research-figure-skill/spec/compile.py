@@ -1044,6 +1044,54 @@ def compile_flow(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_mesh3d(ir, ir_path, output, render=False):
+    enc = ir["encoding"]
+    missing = {"x", "y", "z"} - set(enc)
+    if missing:
+        raise ValueError(f"mesh3d encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    cells = {}
+    for i, raw in enumerate(source, 1):
+        x, y = numeric(raw[enc["x"]], enc["x"], str(i)), numeric(raw[enc["y"]], enc["y"], str(i))
+        if (x, y) in cells:
+            raise ValueError(f"CSV: duplicate mesh cell {(x, y)}")
+        cells[(x, y)] = numeric(raw[enc["z"]], enc["z"], str(i))
+    xs, ys = sorted({k[0] for k in cells}), sorted({k[1] for k in cells})
+    if len(cells) != len(xs) * len(ys):
+        raise ValueError("mesh3d requires a complete x/y grid")
+    rows = [{"x": x, "y": y, "z": cells[(x, y)]} for y in ys for x in xs]
+    axis = ir.get("axis", {}); view = ir.get("view", {})
+    size = ir["size"]["preset"]
+    size_pt = {"single": [420, 300], "medium": [480, 320], "double": [560, 340],
+               "slide": [680, 380]}[size]
+    config = {
+        "chart": "mesh3d", "xs": xs, "ys": ys, "rows": rows,
+        "x_label": axis.get("x_label", "x"), "y_label": axis.get("y_label", "y"),
+        "z_label": axis.get("z_label", "z"), "elev": view.get("elev", 24),
+        "azim": view.get("azim", -55), "size_pt": size_pt,
+        "color": "#2F80C9", "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["x", "y", "z"])
+        writer.writeheader(); writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": "mesh3d", "size": size, "size_pt": size_pt,
+        "palette": ir["theme"].get("palette", "d3-blue"), "encoding": ["mesh3d"],
+        "labels": ir["labels"], "layout": "mesh3d", "emphasis": [], "annotations": [],
+        "axes": {"x": xs, "y": ys}, "log": [f"mesh3d -> {len(xs)} x {len(ys)} grid"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        charts3d.render_mesh3d(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_bar3d(ir, ir_path, output, render=False):
     enc = ir["encoding"]
     missing = {"x", "y", "series"} - set(enc)
@@ -1174,6 +1222,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_radar(ir, ir_path, output, render)
     if ir["chart"] == "bar3d":
         return compile_bar3d(ir, ir_path, output, render)
+    if ir["chart"] == "mesh3d":
+        return compile_mesh3d(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

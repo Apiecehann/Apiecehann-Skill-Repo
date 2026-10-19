@@ -33,7 +33,8 @@
         "sankey",
         "treemap",
         "radar",
-        "bar3d"
+        "bar3d",
+        "mesh3d"
       ]
     },
     "data": {

@@ -322,6 +322,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/bar3d/figure.ir.json"
+    },
+    {
+      "id": "mesh3d",
+      "family": "3d",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "z"
+      ],
+      "supports": [],
+      "ir": "examples/templates/mesh3d/figure.ir.json"
     }
   ]
 }

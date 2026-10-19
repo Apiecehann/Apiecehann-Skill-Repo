@@ -41,7 +41,8 @@
         "sankey",
         "treemap",
         "radar",
-        "bar3d"
+        "bar3d",
+        "mesh3d"
       ]
     }
   },
@@ -126,6 +127,9 @@
     ],
     "bar3d": [
       "bar3d"
+    ],
+    "mesh3d": [
+      "mesh3d"
     ]
   },
   "entries": [
@@ -1985,6 +1989,85 @@
         },
         "log": [
           "bar3d -> 4 groups, 2 series"
+        ]
+      }
+    },
+    {
+      "recipe": "mesh3d",
+      "title": "3D wireframe",
+      "chart": "mesh3d",
+      "variant": "loss-landscape",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "mesh"
+      ],
+      "files": {
+        "png": "mesh3d/figure.png",
+        "pdf": "mesh3d/figure.pdf",
+        "svg": "mesh3d/figure.svg",
+        "config": "mesh3d/config.json",
+        "data": "mesh3d/data.csv",
+        "decisions": "mesh3d/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：二维参数网格上的 wireframe mesh。",
+        "chart": "mesh3d",
+        "size": "single",
+        "size_pt": [
+          420,
+          300
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "mesh3d"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "mesh3d",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0.0,
+            0.357,
+            0.714,
+            1.071,
+            1.429,
+            1.786,
+            2.143,
+            2.5,
+            2.857,
+            3.214,
+            3.571,
+            3.929,
+            4.286,
+            4.643,
+            5.0
+          ],
+          "y": [
+            0.0,
+            0.357,
+            0.714,
+            1.071,
+            1.429,
+            1.786,
+            2.143,
+            2.5,
+            2.857,
+            3.214,
+            3.571,
+            3.929,
+            4.286,
+            4.643,
+            5.0
+          ]
+        },
+        "log": [
+          "mesh3d -> 15 x 15 grid"
         ]
       }
     }

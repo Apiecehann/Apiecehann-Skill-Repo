@@ -427,6 +427,19 @@
       "ir": "examples/templates/bar3d/figure.ir.json",
       "chart": "bar3d",
       "variant": "four-groups"
+    },
+    {
+      "id": "mesh3d",
+      "title": "3D wireframe",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "mesh"
+      ],
+      "ir": "examples/templates/mesh3d/figure.ir.json",
+      "chart": "mesh3d",
+      "variant": "loss-landscape"
     }
   ]
 }

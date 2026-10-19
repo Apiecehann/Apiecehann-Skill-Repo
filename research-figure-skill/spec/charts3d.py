@@ -12,6 +12,28 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def render_mesh3d(config, rows, out_stem):
+    width, height = config.get("size_pt", [420, 300])
+    fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)
+    fig.patch.set_facecolor("white")
+    ax = fig.add_subplot(111, projection="3d")
+    xs, ys = config["xs"], config["ys"]
+    Z = np.array([[next(r["z"] for r in rows if r["x"] == x and r["y"] == y) for x in xs] for y in ys])
+    X, Y = np.meshgrid(xs, ys)
+    ax.plot_wireframe(X, Y, Z, color=config.get("color", "#2F80C9"), linewidth=.7)
+    ax.set_xlabel(config.get("x_label", "x"), fontsize=7, labelpad=1)
+    ax.set_ylabel(config.get("y_label", "y"), fontsize=7, labelpad=1)
+    ax.set_zlabel(config.get("z_label", "z"), fontsize=7, labelpad=1)
+    ax.tick_params(labelsize=6, pad=0)
+    ax.view_init(elev=config.get("elev", 24), azim=config.get("azim", -55))
+    fig.subplots_adjust(left=.02, right=.98, bottom=.02, top=.98)
+    out_stem = Path(out_stem); out_stem.parent.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
+    plt.close(fig)
+    return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
+
+
 def render_bar3d(config, rows, out_stem):
     width, height = config.get("size_pt", [420, 300])
     fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)
