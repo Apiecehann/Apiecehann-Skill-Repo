@@ -1,0 +1,41 @@
+{
+  "claim": "在黑白印刷下区分三个模拟方法。",
+  "chart": "grouped-bar",
+  "size": "single",
+  "size_pt": [
+    237.6,
+    169.7
+  ],
+  "palette": "grayscale",
+  "layout": "grouped",
+  "encoding": [
+    "grouped-bar"
+  ],
+  "emphasis": [],
+  "annotations": [],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0.0,
+        0.8
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ]
+    }
+  },
+  "log": [
+    "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+    "palette grayscale -> method-a #D9D9D9, method-b #BFBFBF, method-c #A3A3A3",
+    "axis main -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
+    "legend auto -> renderer measures columns at render time"
+  ]
+}

@@ -1,0 +1,5 @@
+id,panel,group,series,value
+row-0001,main,Grasp,method,0.81
+row-0002,main,Place,method,0.68
+row-0003,main,Push,method,0.54
+row-0004,main,Open,method,0.43

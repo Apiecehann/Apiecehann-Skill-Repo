@@ -1,0 +1,43 @@
+{
+  "claim": "显示一个模拟任务完成 88 项、总量为 96 项。",
+  "chart": "grouped-bar",
+  "size": "single",
+  "size_pt": [
+    237.6,
+    169.7
+  ],
+  "palette": "neutral-accent",
+  "layout": "grouped",
+  "encoding": [
+    "capacity"
+  ],
+  "emphasis": [],
+  "annotations": [],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0.0,
+        100
+      ],
+      "ticks": [
+        0.0,
+        20.0,
+        40.0,
+        60.0,
+        80.0,
+        100.0
+      ]
+    }
+  },
+  "log": [
+    "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+    "encoding capacity -> capacity normalized to capacity",
+    "palette neutral-accent -> achieved #A3ACB9",
+    "axis main -> [0.0, 100]; ticks [0.0, 20.0, 40.0, 60.0, 80.0, 100.0]",
+    "legend -> hidden"
+  ]
+}

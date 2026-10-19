@@ -1,0 +1,7 @@
+id,panel,group,series,value
+row-0001,main,Task A,before,42.0
+row-0002,main,Task A,after,59.0
+row-0003,main,Task B,before,48.0
+row-0004,main,Task B,after,67.0
+row-0005,main,Task C,before,53.0
+row-0006,main,Task C,after,72.0

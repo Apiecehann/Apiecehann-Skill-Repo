@@ -1,0 +1,10 @@
+id,panel,group,series,value
+row-0001,main,Task A,method-a,0.42
+row-0002,main,Task A,method-b,0.52
+row-0003,main,Task A,method-c,0.63
+row-0004,main,Task B,method-a,0.47
+row-0005,main,Task B,method-b,0.58
+row-0006,main,Task B,method-c,0.69
+row-0007,main,Task C,method-a,0.53
+row-0008,main,Task C,method-b,0.64
+row-0009,main,Task C,method-c,0.74

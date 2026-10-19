@@ -1,0 +1,42 @@
+{
+  "claim": "比较五个模拟消融设置在三个任务上的得分。",
+  "chart": "grouped-bar",
+  "size": "double",
+  "size_pt": [
+    504,
+    360
+  ],
+  "palette": "tol-muted",
+  "layout": "grouped",
+  "encoding": [
+    "grouped-bar"
+  ],
+  "emphasis": [],
+  "annotations": [],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0.0,
+        1.0
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ]
+    }
+  },
+  "log": [
+    "size double -> 504 x 360 pt; type 8/9/7.5 pt",
+    "palette tol-muted -> full #CC6677, no-a #332288, no-b #DDCC77, no-c #117733, no-d #88CCEE",
+    "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "legend auto -> renderer measures columns at render time"
+  ]
+}

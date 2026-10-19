@@ -1,0 +1,59 @@
+{
+  "claim": "在两个模拟环境中保持相同系列顺序与配色。",
+  "chart": "grouped-bar",
+  "size": "single",
+  "size_pt": [
+    237.6,
+    339.4
+  ],
+  "palette": "neutral-accent",
+  "layout": "grouped",
+  "encoding": [
+    "grouped-bar"
+  ],
+  "emphasis": [
+    "focus-gray"
+  ],
+  "annotations": [],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "axes": {
+    "Environment A": {
+      "limits": [
+        0.0,
+        0.8
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ]
+    },
+    "Environment B": {
+      "limits": [
+        0.0,
+        1.0
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ]
+    }
+  },
+  "log": [
+    "size single -> 237.6 x 339.4 pt; type 7/8/6.5 pt",
+    "emphasis focus-gray -> 1 focus (ours), 2 muted",
+    "palette neutral-accent -> method-a #A3ACB9, method-b #7B848F, ours #9979CB",
+    "axis Environment A -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
+    "axis Environment B -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "legend auto -> renderer measures columns at render time"
+  ]
+}

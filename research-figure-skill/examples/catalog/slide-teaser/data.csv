@@ -1,0 +1,13 @@
+id,panel,group,series,value
+row-0001,main,Bench A,method-1,0.38
+row-0002,main,Bench A,method-2,0.47
+row-0003,main,Bench A,method-3,0.53
+row-0004,main,Bench A,ours,0.69
+row-0005,main,Bench B,method-1,0.44
+row-0006,main,Bench B,method-2,0.5
+row-0007,main,Bench B,method-3,0.59
+row-0008,main,Bench B,ours,0.73
+row-0009,main,Bench C,method-1,0.49
+row-0010,main,Bench C,method-2,0.55
+row-0011,main,Bench C,method-3,0.64
+row-0012,main,Bench C,ours,0.8

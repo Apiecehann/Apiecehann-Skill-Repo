@@ -71,6 +71,30 @@ def load_ir(path):
     return ir
 
 
+def load_recipes():
+    """Load the curated registry; recipe paths are relative to the skill root."""
+    registry = json.loads((ROOT / "library/recipes.json").read_text(encoding="utf8"))
+    if registry.get("version") != 1 or not isinstance(registry.get("recipes"), list):
+        raise ValueError("recipes.json requires version 1 and a recipes list")
+    seen = set()
+    for recipe in registry["recipes"]:
+        if set(recipe) != {"id", "title", "tags", "ir"}:
+            raise ValueError("Each recipe needs id, title, tags and ir")
+        name = recipe["id"]
+        if not isinstance(name, str) or not name or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-" for c in name) or name in seen:
+            raise ValueError(f"Invalid or duplicate recipe id {name!r}")
+        seen.add(name)
+        if not isinstance(recipe["title"], str) or not recipe["title"].strip():
+            raise ValueError(f"Recipe {name}: title is required")
+        tags = recipe["tags"]
+        if not isinstance(tags, list) or not tags or any(not isinstance(t, str) or not t.strip() for t in tags) or len(set(tags)) != len(tags):
+            raise ValueError(f"Recipe {name}: tags must be unique nonempty strings")
+        path = (ROOT / recipe["ir"]).resolve()
+        if not path.is_relative_to(ROOT) or not path.is_file():
+            raise ValueError(f"Recipe {name}: ir must reference a file inside the skill")
+    return registry["recipes"]
+
+
 def numeric(raw, field, row_id):
     try:
         value = float(raw)
@@ -231,6 +255,7 @@ def apply_cards(ir, config, rows, log):
             label = format(difference, gain["label_format"]) + gain["label_suffix"]
         except ValueError:
             raise ValueError(f"delta: invalid label_format {gain['label_format']!r}") from None
+        gain["label_position"] = [.5, 1 if after["value"] >= before["value"] else 0]
         config["gains"].append(gain)
         log.append(f"annotation delta -> {panel}/{group}: {request['from']} -> {request['to']} ({label})")
 
@@ -265,7 +290,7 @@ def translate(ir, rows, order):
     # An annotation scales with the type hierarchy, not with the number of bars.
     config["gain_defaults"].update(linewidth=1, head_length_pt=3, head_width_pt=3,
                                    tail_dx_pt=0, tip_dx_pt=0, tip_anchor="center",
-                                   label_offset_pt=[0, 5])
+                                   label_offset_pt=[0, 6])
     if scale != 1:
         for key in ("left_pt", "right_pt", "top_pt", "bottom_pt", "row_gap_pt"):
             config["layout"][key] *= scale
@@ -276,6 +301,7 @@ def translate(ir, rows, order):
             raise ValueError("theme.hatch supports at most 5 series")
         for key, hatch in zip(order, hatches):
             config["palette"][key].setdefault("hatch", hatch)
+            config["palette"][key]["edge"] = "#20252c"
         config["panel_defaults"]["bar_edge_width"] = max(.7, config["panel_defaults"]["bar_edge_width"])
     if layout == "horizontal":
         # Size presets override layout margins; reserve room for semantic group labels.

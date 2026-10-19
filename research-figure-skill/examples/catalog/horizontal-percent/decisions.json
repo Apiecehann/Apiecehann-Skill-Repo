@@ -1,0 +1,43 @@
+{
+  "claim": "比较四个模拟类别的成功比例。",
+  "chart": "grouped-bar",
+  "size": "single",
+  "size_pt": [
+    237.6,
+    169.7
+  ],
+  "palette": "blue-orange",
+  "layout": "horizontal",
+  "encoding": [
+    "grouped-bar"
+  ],
+  "emphasis": [],
+  "annotations": [],
+  "labels": {
+    "values": true,
+    "legend": "none",
+    "value_format": ".0%"
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0.0,
+        1.0
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ]
+    }
+  },
+  "log": [
+    "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+    "palette blue-orange -> method #0077BB",
+    "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "legend -> hidden"
+  ]
+}

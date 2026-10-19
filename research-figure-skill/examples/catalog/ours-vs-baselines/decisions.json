@@ -1,0 +1,47 @@
+{
+  "claim": "在三个模拟基准中突出本文方法，并标注 Bench B 相对 Method 1 的提升。",
+  "chart": "grouped-bar",
+  "size": "single",
+  "size_pt": [
+    237.6,
+    169.7
+  ],
+  "palette": "neutral-accent",
+  "layout": "grouped",
+  "encoding": [
+    "grouped-bar"
+  ],
+  "emphasis": [
+    "focus-gray"
+  ],
+  "annotations": [
+    "delta"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0.0,
+        0.8
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ]
+    }
+  },
+  "log": [
+    "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+    "emphasis focus-gray -> 1 focus (ours), 3 muted",
+    "annotation delta -> main/Bench B: method-1 -> ours (+22.0 pp)",
+    "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
+    "axis main -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
+    "legend auto -> renderer measures columns at render time"
+  ]
+}

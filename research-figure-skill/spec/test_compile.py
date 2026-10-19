@@ -1,6 +1,4 @@
 """Semantic IR contracts and replay through the sole rendering backend."""
-import copy
-import csv
 import json
 import subprocess
 import sys
@@ -150,3 +148,123 @@ def test_all_recipes_compile(name, tmp_path):
     config, _ = compile_ir(TEMPLATES / name / "figure.ir.json", tmp_path / name)
     assert config["figure"]["formats"] == ["png", "pdf", "svg"]
     assert "MOCK / layout test" in (TEMPLATES / name / "README.md").read_text()
+
+
+@pytest.mark.parametrize("name", sorted(p.name for p in TEMPLATES.iterdir()))
+def test_every_recipe_renders_without_warnings_and_matches_decisions(name, tmp_path):
+    import warnings
+    path = tmp_path / name
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        config, decisions = compile_ir(TEMPLATES / name / "figure.ir.json", path, render=True)
+        rows = backend.load_data(path / "data.csv")
+        fig, artists = backend.build_figure(config, rows)
+    try:
+        assert len(artists) == len(rows)
+        for panel, ax in zip(config["panels"], fig.axes):
+            limits = ax.get_xlim() if config["panel_defaults"]["orientation"] == "horizontal" else ax.get_ylim()
+            assert list(limits) == decisions["axes"][panel["id"]]["limits"]
+        if name == "capacity-88-of-96":
+            assert next(iter(artists.values()))["capacity_label"].get_text() == "88 / 96 (92%)"
+        if name == "print-bw":
+            assert all(a["bar"].get_hatch() for a in artists.values())
+        for ext in ("png", "pdf", "svg"):
+            assert (path / f"figure.{ext}").stat().st_size > 1000
+        svg = (path / "figure.svg").read_text()
+        assert "<text" in svg and "<image" not in svg
+        assert b"/Subtype /Image" not in (path / "figure.pdf").read_bytes()
+    finally:
+        backend.plt.close(fig)
+
+
+@pytest.mark.parametrize("value", ["nan", "inf", "-inf", "bad"])
+def test_nonfinite_or_nonnumeric_data_rejected(source, tmp_path, value):
+    (tmp_path / "source.csv").write_text(f"task,method,score\nA,base,{value}\n")
+    with pytest.raises(ValueError, match="number|finite"):
+        compile_ir(source[0], tmp_path / "build")
+
+
+@pytest.mark.parametrize("mutation, message", [
+    (lambda ir: ir["theme"].update(type_scale=True), "number"),
+    (lambda ir: ir["axis"].update(y_max=.6), "clip"),
+    (lambda ir: ir["axis"].update(y_format="wrong-format"), "Invalid numeric format"),
+    (lambda ir: ir["output"].update(formats=["png", "png"]), "unique"),
+    (lambda ir: ir["emphasis"][0].update(series="absent"), "absent from CSV"),
+    (lambda ir: ir["emphasis"][0].update(accent="invalid-color"), "invalid accent"),
+])
+def test_additional_semantic_failures(source, tmp_path, mutation, message):
+    source[1]["emphasis"] = [{"card": "focus-gray", "series": "ours"}]
+    mutation(source[1])
+    with pytest.raises(ValueError, match=message):
+        compile_ir(save(source), tmp_path / "build")
+
+
+def test_delta_disambiguates_panel(source, tmp_path):
+    source[1]["encoding"]["panel"] = "env"
+    (tmp_path / "source.csv").write_text(
+        "id,env,task,method,score\na,p,A,base,.3\nb,p,A,ours,.5\nc,q,A,base,.4\nd,q,A,ours,.8\n")
+    source[1]["annotations"] = [{"card": "delta", "group": "A", "from": "base", "to": "ours"}]
+    with pytest.raises(ValueError, match="specify matching group and panel"):
+        compile_ir(save(source), tmp_path / "build")
+    source[1]["annotations"][0]["panel"] = "q"
+    config, _ = compile_ir(save(source), tmp_path / "build")
+    assert config["gains"][0]["from"] == "c"
+    assert config["gains"][0]["to"] == "d"
+
+
+def test_capacity_interval_is_rejected_before_output(source, tmp_path):
+    source[1]["encoding"]["capacity"] = "total"
+    (tmp_path / "source.csv").write_text("task,method,score,total,low,high\nA,base,.5,1,.4,.6\nA,ours,.8,1,.7,.9\n")
+    with pytest.raises(ValueError, match="interval.*capacity"):
+        compile_ir(save(source), tmp_path / "build")
+    assert not (tmp_path / "build").exists()
+
+
+def test_invalid_input_cli_has_actionable_error_and_no_traceback(source, tmp_path):
+    source[1]["encoding"]["y"] = "absent"
+    result = subprocess.run([sys.executable, str(SPEC / "compile.py"), "--ir", str(save(source)),
+                             "--output", str(tmp_path / "build"), "--dry-run"],
+                            capture_output=True, text=True)
+    assert result.returncode != 0
+    assert "missing columns" in result.stderr
+    assert "Traceback" not in result.stderr
+
+
+def test_catalog_indexes_generated_artifacts(tmp_path):
+    from PIL import Image
+    output = tmp_path / "catalog"
+    subprocess.run([sys.executable, str(SPEC / "catalog.py"), "--output", str(output)],
+                   check=True, capture_output=True, text=True)
+    index = json.loads((output / "index.json").read_text())
+    assert len(index["entries"]) == 8
+    assert len({e["recipe"] for e in index["entries"]}) == 8
+    for entry in index["entries"]:
+        assert entry["tags"]
+        assert entry["decisions"]["size"] in ("single", "double")
+        for relative in entry["files"].values():
+            assert not Path(relative).is_absolute()
+            assert (output / relative).is_file()
+    with Image.open(output / "contact-sheet.png") as sheet:
+        assert sheet.width > 1000 and sheet.height > 1000
+        assert sheet.convert("L").getextrema()[0] < 100
+
+
+def test_twelve_eval_templates_pass_and_produced_ir_is_checked(tmp_path):
+    check = SPEC / "evals/check.py"
+    cases = SPEC / "evals/cases.jsonl"
+    result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--check-templates"],
+                            check=True, capture_output=True, text=True)
+    assert "PASS 12" in result.stdout
+    result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--case", "case-01",
+                             "--ir", str(TEMPLATES / "ours-vs-baselines/figure.ir.json")],
+                            check=True, capture_output=True, text=True)
+    assert "PASS 1" in result.stdout
+    ir = json.loads((TEMPLATES / "ours-vs-baselines/figure.ir.json").read_text())
+    ir["data"] = str(TEMPLATES / "ours-vs-baselines/data.csv")
+    ir["size"]["preset"] = "double"
+    bad = tmp_path / "wrong.ir.json"
+    bad.write_text(json.dumps(ir))
+    result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--case", "case-01",
+                             "--ir", str(bad)], capture_output=True, text=True)
+    assert result.returncode != 0
+    assert "IR.size" in result.stderr

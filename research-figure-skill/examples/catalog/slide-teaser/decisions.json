@@ -1,0 +1,46 @@
+{
+  "claim": "在演示中突出一个方法在三个模拟基准上的结果。",
+  "chart": "grouped-bar",
+  "size": "double",
+  "size_pt": [
+    504,
+    360
+  ],
+  "palette": "neutral-accent",
+  "layout": "grouped",
+  "encoding": [
+    "grouped-bar"
+  ],
+  "emphasis": [
+    "focus-gray"
+  ],
+  "annotations": [],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0.0,
+        1.0
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ]
+    }
+  },
+  "log": [
+    "size double -> 504 x 360 pt; type 12/13.5/11.25 pt",
+    "type scale -> 1.5",
+    "emphasis focus-gray -> 1 focus (ours), 3 muted",
+    "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
+    "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "legend auto -> renderer measures columns at render time"
+  ]
+}
