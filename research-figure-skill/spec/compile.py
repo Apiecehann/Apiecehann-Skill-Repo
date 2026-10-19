@@ -815,6 +815,69 @@ def compile_surface(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_scatter3d(ir, ir_path, output, render=False):
+    enc = ir["encoding"]
+    missing = {"x", "y", "z", "series"} - set(enc)
+    if missing:
+        raise ValueError(f"scatter3d encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    if not source:
+        raise ValueError(f"CSV {path}: no rows")
+    rows, seen = [], set()
+    for i, raw in enumerate(source, 1):
+        row_id = raw.get(enc.get("id", "id"), f"row-{i:04d}").strip()
+        if row_id in seen:
+            raise ValueError(f"CSV: duplicate row id {row_id!r}")
+        seen.add(row_id)
+        series = raw[enc["series"]].strip()
+        if not series:
+            raise ValueError(f"CSV row {row_id}: empty series")
+        rows.append({"id": row_id, "series": series,
+                     "x": numeric(raw[enc["x"]], enc["x"], row_id),
+                     "y": numeric(raw[enc["y"]], enc["y"], row_id),
+                     "z": numeric(raw[enc["z"]], enc["z"], row_id)})
+    present = list(dict.fromkeys(r["series"] for r in rows))
+    order = ir.get("series_order", present)
+    if not set(present).issubset(order):
+        raise ValueError("series_order must contain every plotted series")
+    colors, _ = backend.palette_colors(ir["theme"]["palette"], order, ir.get("series_roles", {}))
+    axis = ir.get("axis", {})
+    view = ir.get("view", {})
+    size = ir["size"]["preset"]
+    size_pt = {"single": [420, 300], "medium": [480, 320], "double": [560, 340],
+               "slide": [680, 380]}[size]
+    config = {
+        "chart": "scatter3d", "rows": rows, "series_order": order, "colors": colors,
+        "series_labels": ir.get("series_labels", {}),
+        "x_label": axis.get("x_label", "x"), "y_label": axis.get("y_label", "y"),
+        "z_label": axis.get("z_label", "z"), "elev": view.get("elev", 24),
+        "azim": view.get("azim", -55), "size_pt": size_pt,
+        "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["id", "series", "x", "y", "z"])
+        writer.writeheader()
+        writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": "scatter3d", "size": size, "size_pt": size_pt,
+        "palette": ir["theme"]["palette"], "encoding": ["scatter3d"],
+        "labels": ir["labels"], "layout": "scatter3d", "emphasis": [], "annotations": [],
+        "axes": {"x": axis.get("x_label", "x"), "y": axis.get("y_label", "y"),
+                 "z": axis.get("z_label", "z")},
+        "log": [f"scatter3d -> {len(rows)} points, {len(order)} series"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        charts3d.render_scatter3d(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_ir(ir_path, output, render=False):
     ir_path, output = Path(ir_path), Path(output)
     ir = load_ir(ir_path)
@@ -828,6 +891,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_classification(ir, ir_path, output, render)
     if ir["chart"] == "surface":
         return compile_surface(ir, ir_path, output, render)
+    if ir["chart"] == "scatter3d":
+        return compile_scatter3d(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

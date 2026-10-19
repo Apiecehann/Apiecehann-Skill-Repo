@@ -1,0 +1,14 @@
+{
+  "claim": "MOCK：三个方法在三维指标空间中的分布。",
+  "chart": "scatter3d",
+  "data": "data.csv",
+  "encoding": {"x": "x", "y": "y", "z": "z", "series": "series"},
+  "series_order": ["baseline-a", "baseline-b", "ours"],
+  "series_labels": {"baseline-a": "Baseline A", "baseline-b": "Baseline B", "ours": "Ours"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "tol-bright", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Accuracy", "y_label": "Robustness", "z_label": "Efficiency"},
+  "view": {"elev": 24, "azim": -55}
+}

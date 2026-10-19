@@ -1,0 +1,569 @@
+{
+  "chart": "scatter3d",
+  "rows": [
+    {
+      "id": "baseline-a-0",
+      "series": "baseline-a",
+      "x": 18.0,
+      "y": 39.1,
+      "z": 27.7
+    },
+    {
+      "id": "baseline-a-1",
+      "series": "baseline-a",
+      "x": 17.5,
+      "y": 27.6,
+      "z": 27.9
+    },
+    {
+      "id": "baseline-a-2",
+      "series": "baseline-a",
+      "x": 28.9,
+      "y": 38.4,
+      "z": 40.4
+    },
+    {
+      "id": "baseline-a-3",
+      "series": "baseline-a",
+      "x": 22.0,
+      "y": 38.2,
+      "z": 31.9
+    },
+    {
+      "id": "baseline-a-4",
+      "series": "baseline-a",
+      "x": 6.7,
+      "y": 41.8,
+      "z": 35.1
+    },
+    {
+      "id": "baseline-a-5",
+      "series": "baseline-a",
+      "x": 24.0,
+      "y": 21.5,
+      "z": 12.6
+    },
+    {
+      "id": "baseline-a-6",
+      "series": "baseline-a",
+      "x": 12.9,
+      "y": 31.3,
+      "z": 33.1
+    },
+    {
+      "id": "baseline-a-7",
+      "series": "baseline-a",
+      "x": 19.6,
+      "y": 39.2,
+      "z": 23.6
+    },
+    {
+      "id": "baseline-a-8",
+      "series": "baseline-a",
+      "x": 22.5,
+      "y": 38.2,
+      "z": 23.4
+    },
+    {
+      "id": "baseline-a-9",
+      "series": "baseline-a",
+      "x": 33.7,
+      "y": 39.5,
+      "z": 42.0
+    },
+    {
+      "id": "baseline-a-10",
+      "series": "baseline-a",
+      "x": 15.0,
+      "y": 29.1,
+      "z": 26.6
+    },
+    {
+      "id": "baseline-a-11",
+      "series": "baseline-a",
+      "x": 19.1,
+      "y": 40.1,
+      "z": 32.5
+    },
+    {
+      "id": "baseline-a-12",
+      "series": "baseline-a",
+      "x": 16.4,
+      "y": 27.3,
+      "z": 24.8
+    },
+    {
+      "id": "baseline-a-13",
+      "series": "baseline-a",
+      "x": 29.8,
+      "y": 28.5,
+      "z": 32.4
+    },
+    {
+      "id": "baseline-a-14",
+      "series": "baseline-a",
+      "x": 23.4,
+      "y": 23.1,
+      "z": 30.5
+    },
+    {
+      "id": "baseline-a-15",
+      "series": "baseline-a",
+      "x": 30.4,
+      "y": 18.9,
+      "z": 26.8
+    },
+    {
+      "id": "baseline-a-16",
+      "series": "baseline-a",
+      "x": 19.2,
+      "y": 28.5,
+      "z": 35.0
+    },
+    {
+      "id": "baseline-a-17",
+      "series": "baseline-a",
+      "x": 19.5,
+      "y": 23.3,
+      "z": 38.3
+    },
+    {
+      "id": "baseline-a-18",
+      "series": "baseline-a",
+      "x": 25.4,
+      "y": 42.6,
+      "z": 44.4
+    },
+    {
+      "id": "baseline-a-19",
+      "series": "baseline-a",
+      "x": 22.9,
+      "y": 36.0,
+      "z": 17.0
+    },
+    {
+      "id": "baseline-a-20",
+      "series": "baseline-a",
+      "x": 24.9,
+      "y": 30.1,
+      "z": 25.5
+    },
+    {
+      "id": "baseline-a-21",
+      "series": "baseline-a",
+      "x": 9.9,
+      "y": 27.3,
+      "z": 24.7
+    },
+    {
+      "id": "baseline-a-22",
+      "series": "baseline-a",
+      "x": 30.3,
+      "y": 18.7,
+      "z": 15.4
+    },
+    {
+      "id": "baseline-a-23",
+      "series": "baseline-a",
+      "x": 21.9,
+      "y": 46.5,
+      "z": 35.8
+    },
+    {
+      "id": "baseline-a-24",
+      "series": "baseline-a",
+      "x": 4.8,
+      "y": 14.9,
+      "z": 33.6
+    },
+    {
+      "id": "baseline-b-0",
+      "series": "baseline-b",
+      "x": 39.1,
+      "y": 46.0,
+      "z": 64.8
+    },
+    {
+      "id": "baseline-b-1",
+      "series": "baseline-b",
+      "x": 53.8,
+      "y": 56.3,
+      "z": 57.5
+    },
+    {
+      "id": "baseline-b-2",
+      "series": "baseline-b",
+      "x": 48.5,
+      "y": 67.8,
+      "z": 61.2
+    },
+    {
+      "id": "baseline-b-3",
+      "series": "baseline-b",
+      "x": 49.1,
+      "y": 59.4,
+      "z": 39.3
+    },
+    {
+      "id": "baseline-b-4",
+      "series": "baseline-b",
+      "x": 55.3,
+      "y": 62.6,
+      "z": 60.3
+    },
+    {
+      "id": "baseline-b-5",
+      "series": "baseline-b",
+      "x": 29.2,
+      "y": 49.9,
+      "z": 63.4
+    },
+    {
+      "id": "baseline-b-6",
+      "series": "baseline-b",
+      "x": 30.5,
+      "y": 53.5,
+      "z": 65.2
+    },
+    {
+      "id": "baseline-b-7",
+      "series": "baseline-b",
+      "x": 34.5,
+      "y": 67.9,
+      "z": 60.5
+    },
+    {
+      "id": "baseline-b-8",
+      "series": "baseline-b",
+      "x": 43.8,
+      "y": 57.6,
+      "z": 61.5
+    },
+    {
+      "id": "baseline-b-9",
+      "series": "baseline-b",
+      "x": 46.0,
+      "y": 64.2,
+      "z": 48.4
+    },
+    {
+      "id": "baseline-b-10",
+      "series": "baseline-b",
+      "x": 41.7,
+      "y": 63.3,
+      "z": 55.3
+    },
+    {
+      "id": "baseline-b-11",
+      "series": "baseline-b",
+      "x": 38.0,
+      "y": 62.6,
+      "z": 69.7
+    },
+    {
+      "id": "baseline-b-12",
+      "series": "baseline-b",
+      "x": 41.4,
+      "y": 44.0,
+      "z": 53.7
+    },
+    {
+      "id": "baseline-b-13",
+      "series": "baseline-b",
+      "x": 43.8,
+      "y": 52.6,
+      "z": 69.0
+    },
+    {
+      "id": "baseline-b-14",
+      "series": "baseline-b",
+      "x": 36.8,
+      "y": 65.1,
+      "z": 42.3
+    },
+    {
+      "id": "baseline-b-15",
+      "series": "baseline-b",
+      "x": 38.7,
+      "y": 60.1,
+      "z": 66.3
+    },
+    {
+      "id": "baseline-b-16",
+      "series": "baseline-b",
+      "x": 51.9,
+      "y": 57.8,
+      "z": 56.4
+    },
+    {
+      "id": "baseline-b-17",
+      "series": "baseline-b",
+      "x": 46.2,
+      "y": 59.6,
+      "z": 53.2
+    },
+    {
+      "id": "baseline-b-18",
+      "series": "baseline-b",
+      "x": 47.2,
+      "y": 59.6,
+      "z": 55.0
+    },
+    {
+      "id": "baseline-b-19",
+      "series": "baseline-b",
+      "x": 51.1,
+      "y": 59.5,
+      "z": 75.1
+    },
+    {
+      "id": "baseline-b-20",
+      "series": "baseline-b",
+      "x": 47.6,
+      "y": 51.6,
+      "z": 51.3
+    },
+    {
+      "id": "baseline-b-21",
+      "series": "baseline-b",
+      "x": 44.9,
+      "y": 62.4,
+      "z": 51.6
+    },
+    {
+      "id": "baseline-b-22",
+      "series": "baseline-b",
+      "x": 48.1,
+      "y": 69.7,
+      "z": 29.4
+    },
+    {
+      "id": "baseline-b-23",
+      "series": "baseline-b",
+      "x": 36.0,
+      "y": 57.0,
+      "z": 59.0
+    },
+    {
+      "id": "baseline-b-24",
+      "series": "baseline-b",
+      "x": 46.9,
+      "y": 51.6,
+      "z": 61.6
+    },
+    {
+      "id": "ours-0",
+      "series": "ours",
+      "x": 72.3,
+      "y": 70.8,
+      "z": 104.3
+    },
+    {
+      "id": "ours-1",
+      "series": "ours",
+      "x": 72.8,
+      "y": 70.6,
+      "z": 79.0
+    },
+    {
+      "id": "ours-2",
+      "series": "ours",
+      "x": 68.2,
+      "y": 74.5,
+      "z": 52.7
+    },
+    {
+      "id": "ours-3",
+      "series": "ours",
+      "x": 66.1,
+      "y": 83.1,
+      "z": 68.3
+    },
+    {
+      "id": "ours-4",
+      "series": "ours",
+      "x": 69.5,
+      "y": 82.6,
+      "z": 88.6
+    },
+    {
+      "id": "ours-5",
+      "series": "ours",
+      "x": 81.9,
+      "y": 61.4,
+      "z": 76.5
+    },
+    {
+      "id": "ours-6",
+      "series": "ours",
+      "x": 67.3,
+      "y": 80.0,
+      "z": 90.9
+    },
+    {
+      "id": "ours-7",
+      "series": "ours",
+      "x": 48.5,
+      "y": 83.7,
+      "z": 65.5
+    },
+    {
+      "id": "ours-8",
+      "series": "ours",
+      "x": 75.5,
+      "y": 63.1,
+      "z": 81.8
+    },
+    {
+      "id": "ours-9",
+      "series": "ours",
+      "x": 79.6,
+      "y": 73.8,
+      "z": 81.9
+    },
+    {
+      "id": "ours-10",
+      "series": "ours",
+      "x": 76.4,
+      "y": 76.1,
+      "z": 79.1
+    },
+    {
+      "id": "ours-11",
+      "series": "ours",
+      "x": 82.3,
+      "y": 83.4,
+      "z": 77.1
+    },
+    {
+      "id": "ours-12",
+      "series": "ours",
+      "x": 92.0,
+      "y": 65.8,
+      "z": 89.1
+    },
+    {
+      "id": "ours-13",
+      "series": "ours",
+      "x": 67.9,
+      "y": 76.1,
+      "z": 87.1
+    },
+    {
+      "id": "ours-14",
+      "series": "ours",
+      "x": 71.8,
+      "y": 80.1,
+      "z": 64.7
+    },
+    {
+      "id": "ours-15",
+      "series": "ours",
+      "x": 57.9,
+      "y": 79.9,
+      "z": 70.4
+    },
+    {
+      "id": "ours-16",
+      "series": "ours",
+      "x": 61.8,
+      "y": 63.2,
+      "z": 92.7
+    },
+    {
+      "id": "ours-17",
+      "series": "ours",
+      "x": 76.0,
+      "y": 86.8,
+      "z": 70.6
+    },
+    {
+      "id": "ours-18",
+      "series": "ours",
+      "x": 70.0,
+      "y": 65.9,
+      "z": 87.7
+    },
+    {
+      "id": "ours-19",
+      "series": "ours",
+      "x": 82.7,
+      "y": 67.9,
+      "z": 95.6
+    },
+    {
+      "id": "ours-20",
+      "series": "ours",
+      "x": 77.9,
+      "y": 73.6,
+      "z": 60.3
+    },
+    {
+      "id": "ours-21",
+      "series": "ours",
+      "x": 81.3,
+      "y": 74.2,
+      "z": 74.0
+    },
+    {
+      "id": "ours-22",
+      "series": "ours",
+      "x": 73.2,
+      "y": 78.3,
+      "z": 95.0
+    },
+    {
+      "id": "ours-23",
+      "series": "ours",
+      "x": 61.8,
+      "y": 84.1,
+      "z": 94.9
+    },
+    {
+      "id": "ours-24",
+      "series": "ours",
+      "x": 81.6,
+      "y": 73.6,
+      "z": 72.6
+    }
+  ],
+  "series_order": [
+    "baseline-a",
+    "baseline-b",
+    "ours"
+  ],
+  "colors": {
+    "baseline-a": "#4477AA",
+    "baseline-b": "#EE6677",
+    "ours": "#228833"
+  },
+  "series_labels": {
+    "baseline-a": "Baseline A",
+    "baseline-b": "Baseline B",
+    "ours": "Ours"
+  },
+  "x_label": "Accuracy",
+  "y_label": "Robustness",
+  "z_label": "Efficiency",
+  "elev": 24,
+  "azim": -55,
+  "size_pt": [
+    420,
+    300
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

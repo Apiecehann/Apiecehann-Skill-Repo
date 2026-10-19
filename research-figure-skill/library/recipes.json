@@ -297,6 +297,19 @@
       "ir": "examples/templates/surface/figure.ir.json",
       "chart": "surface",
       "variant": "loss-landscape"
+    },
+    {
+      "id": "scatter3d",
+      "title": "3D scatter",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "scatter"
+      ],
+      "ir": "examples/templates/scatter3d/figure.ir.json",
+      "chart": "scatter3d",
+      "variant": "three-series"
     }
   ]
 }

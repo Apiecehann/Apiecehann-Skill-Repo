@@ -12,6 +12,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def render_scatter3d(config, rows, out_stem):
+    width, height = config.get("size_pt", [420, 300])
+    fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)
+    fig.patch.set_facecolor("white")
+    ax = fig.add_subplot(111, projection="3d")
+    for name in config["series_order"]:
+        subset = [r for r in rows if r["series"] == name]
+        ax.scatter([r["x"] for r in subset], [r["y"] for r in subset], [r["z"] for r in subset],
+                   s=config.get("marker", 18), color=config["colors"][name],
+                   edgecolors="white", linewidths=.3, alpha=.85,
+                   label=config.get("series_labels", {}).get(name, name))
+    ax.set_xlabel(config.get("x_label", "x"), fontsize=7, labelpad=2)
+    ax.set_ylabel(config.get("y_label", "y"), fontsize=7, labelpad=2)
+    ax.set_zlabel(config.get("z_label", "z"), fontsize=7, labelpad=2)
+    ax.tick_params(labelsize=6, pad=1)
+    ax.view_init(elev=config.get("elev", 24), azim=config.get("azim", -55))
+    ax.legend(frameon=False, fontsize=6.5, loc="upper left")
+    fig.tight_layout(pad=.3)
+    out_stem = Path(out_stem)
+    out_stem.parent.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
+    plt.close(fig)
+    return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
+
+
 def render_surface(config, rows, out_stem):
     width, height = config.get("size_pt", [504, 252])
     fig = plt.figure(figsize=(width / 72, height / 72), dpi=200)

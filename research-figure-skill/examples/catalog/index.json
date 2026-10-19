@@ -31,7 +31,8 @@
         "roc",
         "pr",
         "calibration",
-        "surface"
+        "surface",
+        "scatter3d"
       ]
     }
   },
@@ -88,6 +89,9 @@
     ],
     "surface": [
       "surface"
+    ],
+    "scatter3d": [
+      "scatter3d"
     ]
   },
   "entries": [
@@ -1428,6 +1432,54 @@
         },
         "log": [
           "surface -> 15 x 15 grid"
+        ]
+      }
+    },
+    {
+      "recipe": "scatter3d",
+      "title": "3D scatter",
+      "chart": "scatter3d",
+      "variant": "three-series",
+      "tags": [
+        "paper",
+        "single-column",
+        "3d",
+        "scatter"
+      ],
+      "files": {
+        "png": "scatter3d/figure.png",
+        "pdf": "scatter3d/figure.pdf",
+        "svg": "scatter3d/figure.svg",
+        "config": "scatter3d/config.json",
+        "data": "scatter3d/data.csv",
+        "decisions": "scatter3d/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：三个方法在三维指标空间中的分布。",
+        "chart": "scatter3d",
+        "size": "single",
+        "size_pt": [
+          420,
+          300
+        ],
+        "palette": "tol-bright",
+        "encoding": [
+          "scatter3d"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "scatter3d",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": "Accuracy",
+          "y": "Robustness",
+          "z": "Efficiency"
+        },
+        "log": [
+          "scatter3d -> 75 points, 3 series"
         ]
       }
     }

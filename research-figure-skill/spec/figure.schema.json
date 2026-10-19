@@ -24,7 +24,8 @@
         "roc",
         "pr",
         "calibration",
-        "surface"
+        "surface",
+        "scatter3d"
       ]
     },
     "data": {
@@ -469,6 +470,19 @@
           ]
         },
         "baseline": {
+          "type": "number"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "view": {
+      "type": "object",
+      "properties": {
+        "elev": {
+          "type": "number"
+        },
+        "azim": {
           "type": "number"
         }
       },

@@ -212,6 +212,19 @@
         "z"
       ],
       "supports": []
+    },
+    {
+      "id": "scatter3d",
+      "family": "3d",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y",
+        "z",
+        "series"
+      ],
+      "supports": [],
+      "ir": "examples/templates/scatter3d/figure.ir.json"
     }
   ]
 }
