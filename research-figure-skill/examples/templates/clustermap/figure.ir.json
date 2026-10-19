@@ -1,0 +1,11 @@
+{
+  "claim": "MOCK：行/列按总量排序的 clustered heatmap。",
+  "chart": "clustermap",
+  "data": "data.csv",
+  "encoding": {"row": "row", "col": "col", "value": "value"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans", "colormap": "Blues"},
+  "labels": {"values": true, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Task", "y_label": "Layer"}
+}

@@ -443,6 +443,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/hexbin/figure.ir.json"
+    },
+    {
+      "id": "clustermap",
+      "family": "matrix",
+      "status": "implemented",
+      "requires": [
+        "row",
+        "col",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/clustermap/figure.ir.json"
     }
   ]
 }

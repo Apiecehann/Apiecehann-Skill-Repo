@@ -43,7 +43,8 @@
         "qq",
         "eventplot",
         "hist2d",
-        "hexbin"
+        "hexbin",
+        "clustermap"
       ]
     },
     "data": {

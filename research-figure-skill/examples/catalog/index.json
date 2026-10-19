@@ -51,7 +51,8 @@
         "qq",
         "eventplot",
         "hist2d",
-        "hexbin"
+        "hexbin",
+        "clustermap"
       ]
     }
   },
@@ -166,6 +167,9 @@
     ],
     "hexbin": [
       "hexbin"
+    ],
+    "clustermap": [
+      "clustermap"
     ]
   },
   "entries": [
@@ -2510,6 +2514,64 @@
         "axes": {},
         "log": [
           "hexbin -> 360 points"
+        ]
+      }
+    },
+    {
+      "recipe": "clustermap",
+      "title": "Clustermap",
+      "chart": "clustermap",
+      "variant": "layer-task",
+      "tags": [
+        "paper",
+        "single-column",
+        "matrix",
+        "clustermap"
+      ],
+      "files": {
+        "png": "clustermap/figure.png",
+        "pdf": "clustermap/figure.pdf",
+        "svg": "clustermap/figure.svg",
+        "config": "clustermap/config.json",
+        "data": "clustermap/data.csv",
+        "decisions": "clustermap/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：行/列按总量排序的 clustered heatmap。",
+        "chart": "clustermap",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "heatmap"
+        ],
+        "labels": {
+          "values": true,
+          "legend": "none"
+        },
+        "layout": "heatmap",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "rows": [
+            "Layer 1",
+            "Layer 2",
+            "Layer 3",
+            "Layer 4"
+          ],
+          "cols": [
+            "Task A",
+            "Task B",
+            "Task C",
+            "Task D",
+            "Task E"
+          ]
+        },
+        "log": [
+          "heatmap -> 4 x 5 cells"
         ]
       }
     }

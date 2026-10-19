@@ -557,6 +557,19 @@
       "ir": "examples/templates/hexbin/figure.ir.json",
       "chart": "hexbin",
       "variant": "density"
+    },
+    {
+      "id": "clustermap",
+      "title": "Clustermap",
+      "tags": [
+        "paper",
+        "single-column",
+        "matrix",
+        "clustermap"
+      ],
+      "ir": "examples/templates/clustermap/figure.ir.json",
+      "chart": "clustermap",
+      "variant": "layer-task"
     }
   ]
 }

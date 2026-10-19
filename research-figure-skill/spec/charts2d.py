@@ -698,6 +698,22 @@ def _finish_handles(fig, ax, config, out_stem, handles):
     return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
 
 
+def render_clustermap(config, rows, out_stem):
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white")
+    matrix = np.array(config["matrix"], dtype=float)
+    row_order = np.argsort(matrix.sum(axis=1))
+    col_order = np.argsort(matrix.sum(axis=0))
+    matrix = matrix[np.ix_(row_order, col_order)]
+    image = ax.imshow(matrix, aspect="auto", cmap=plt.get_cmap(config.get("colormap", "Blues")))
+    ax.set_xticks(range(matrix.shape[1])); ax.set_xticklabels([config["cols"][i] for i in col_order], fontsize=7)
+    ax.set_yticks(range(matrix.shape[0])); ax.set_yticklabels([config["rows"][i] for i in row_order], fontsize=7)
+    ax.tick_params(length=0)
+    fig.colorbar(image, ax=ax, fraction=.046, pad=.04)
+    fig.subplots_adjust(left=.2, right=.9, top=.95, bottom=.18)
+    return _save_fig(fig, out_stem)
+
+
 def render_heatmap(config, rows, out_stem):
     fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
     fig.patch.set_facecolor("white")

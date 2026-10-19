@@ -663,6 +663,7 @@ def read_classification_rows(ir, ir_path):
 
 
 def compile_heatmap(ir, ir_path, output, render=False):
+    chart = ir["chart"]
     enc = ir["encoding"]
     missing = {"row", "col", "value"} - set(enc)
     if missing:
@@ -688,7 +689,7 @@ def compile_heatmap(ir, ir_path, output, render=False):
     size_pt = {"single": [360, 280], "medium": [420, 300], "double": [504, 340],
                "slide": [648, 360]}[size]
     config = {
-        "chart": "heatmap", "rows": rows_order, "cols": cols_order, "matrix": matrix,
+        "chart": chart, "rows": rows_order, "cols": cols_order, "matrix": matrix,
         "cell_values": ir["labels"].get("values", False),
         "colormap": ir["theme"].get("colormap", "Blues"),
         "x_label": axis.get("x_label", ""), "y_label": axis.get("y_label", ""),
@@ -705,7 +706,7 @@ def compile_heatmap(ir, ir_path, output, render=False):
             for col in cols_order:
                 writer.writerow({"row": row, "col": col, "value": cells[(row, col)]})
     decisions = {
-        "claim": ir["claim"], "chart": "heatmap", "size": size, "size_pt": size_pt,
+        "claim": ir["claim"], "chart": chart, "size": size, "size_pt": size_pt,
         "palette": ir["theme"].get("palette", "none"), "encoding": ["heatmap"],
         "labels": ir["labels"], "layout": "heatmap", "emphasis": [], "annotations": [],
         "axes": {"rows": rows_order, "cols": cols_order},
@@ -714,7 +715,7 @@ def compile_heatmap(ir, ir_path, output, render=False):
     (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     if render:
-        charts2d.render_heatmap(config, [], output / "figure")
+        (charts2d.render_clustermap if chart == "clustermap" else charts2d.render_heatmap)(config, [], output / "figure")
     return config, decisions
 
 
@@ -1338,7 +1339,7 @@ def compile_ir(ir_path, output, render=False):
         return compile_distribution(ir, ir_path, output, render)
     if ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline", "qq", "eventplot"):
         return compile_distribution_2d(ir, ir_path, output, render)
-    if ir["chart"] == "heatmap":
+    if ir["chart"] in ("heatmap", "clustermap"):
         return compile_heatmap(ir, ir_path, output, render)
     if ir["chart"] in ("roc", "pr", "calibration", "det"):
         return compile_classification(ir, ir_path, output, render)

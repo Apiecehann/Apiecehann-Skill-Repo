@@ -45,3 +45,4 @@
 {"id": "case-45", "request": "两个方法的延迟事件序列 eventplot，单栏", "recipe": "eventplot", "data": "examples/templates/eventplot/data.csv", "expect": {"chart": "eventplot"}}
 {"id": "case-46", "request": "两个指标的二维直方密度，hist2d，单栏", "recipe": "hist2d", "data": "examples/templates/hist2d/data.csv", "expect": {"chart": "hist2d"}}
 {"id": "case-47", "request": "两个指标的六边形分箱密度，hexbin，单栏", "recipe": "hexbin", "data": "examples/templates/hexbin/data.csv", "expect": {"chart": "hexbin"}}
+{"id": "case-48", "request": "行/列按总量排序的 clustered heatmap，单栏", "recipe": "clustermap", "data": "examples/templates/clustermap/data.csv", "expect": {"chart": "clustermap"}}
