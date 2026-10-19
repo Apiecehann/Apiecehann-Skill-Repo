@@ -212,6 +212,16 @@ def test_auto_limits_include_intervals_and_explicit_limits_win():
     assert fig.axes[0].get_ylim()==(0.0,2.0)
 
 
+def test_reference_line_and_label_are_drawn():
+    rows=[{'id':'a','panel':'p','group':'A','series':'base','value':.8}]
+    config={'panels':[{'id':'p'}],'panel_defaults':{'reference_lines':[
+        {'value':.8,'label':'SOTA','color':'#6B7280'}]}}
+    fig,_=build_figure(config,rows)
+    ax=fig.axes[0]
+    assert any(np.allclose(line.get_ydata(),[.8,.8]) for line in ax.lines)
+    assert any(text.get_text()=='SOTA' for text in ax.texts)
+
+
 def test_fixed_panel_rectangles_do_not_require_auto_grid():
     panels=[{'id':str(i),'rect_pt':[i*10,0,10,10]} for i in range(5)]
     config={'figure':{'size_pt':[360,210]},'layout':{'columns':1},'panels':panels}

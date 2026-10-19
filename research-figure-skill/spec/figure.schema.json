@@ -69,7 +69,9 @@
           "type": "string",
           "enum": [
             "single",
-            "double"
+            "medium",
+            "double",
+            "slide"
           ]
         }
       },

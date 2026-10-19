@@ -261,6 +261,191 @@
           "label_font": "bold"
         }
       }
+    },
+    "bold-slide": {
+      "description": "大字号、粗轴线、无网格；幻灯片和海报。",
+      "font": "sans",
+      "palette": "tol-bright",
+      "config": {
+        "figure": {
+          "background": "white",
+          "dpi": 200
+        },
+        "panel_defaults": {
+          "tick_size": 11,
+          "category_size": 11,
+          "label_size": 13,
+          "value_size": 10,
+          "tick_font": "regular",
+          "category_font": "regular",
+          "label_font": "regular",
+          "value_font": "bold",
+          "tick_length": 4,
+          "value_tick_length": 0,
+          "tick_pad": 5,
+          "category_pad": 8,
+          "label_pad": 8,
+          "axis_color": "#111827",
+          "text_color": "#111827",
+          "axis_width": 1.2,
+          "baseline_width": 1.8,
+          "spines": [
+            "bottom"
+          ],
+          "bar_fill_alpha": 1,
+          "bar_edge_alpha": 1,
+          "bar_edge_width": 0,
+          "value_labels": false,
+          "value_background": false,
+          "grid": {
+            "kind": "none"
+          }
+        },
+        "legend_defaults": {
+          "font": "regular",
+          "size": 10,
+          "columns": 3,
+          "frame": false,
+          "loc": "lower center",
+          "anchor": [
+            0.5,
+            1.06
+          ],
+          "borderaxespad": 0,
+          "columnspacing": 1.5,
+          "handlelength": 1.4,
+          "handleheight": 0.7,
+          "handletextpad": 0.5
+        },
+        "gain_defaults": {
+          "linewidth": 2.2,
+          "head_length_pt": 7,
+          "head_width_pt": 7,
+          "label_size": 14,
+          "label_font": "bold"
+        }
+      }
+    },
+    "minimal-mono": {
+      "description": "细轴线、无网格、低装饰；黑白打印和克制版式。",
+      "font": "sans",
+      "palette": "grayscale",
+      "config": {
+        "figure": {
+          "background": "white",
+          "dpi": 200
+        },
+        "panel_defaults": {
+          "tick_size": 8,
+          "category_size": 8,
+          "label_size": 9,
+          "value_size": 8,
+          "tick_font": "regular",
+          "category_font": "regular",
+          "label_font": "regular",
+          "value_font": "regular",
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_pad": 4,
+          "category_pad": 6,
+          "label_pad": 5,
+          "axis_color": "#4B5563",
+          "text_color": "#111827",
+          "axis_width": 0.5,
+          "baseline_width": 0.8,
+          "spines": [
+            "bottom"
+          ],
+          "bar_fill_alpha": 1,
+          "bar_edge_alpha": 1,
+          "bar_edge_width": 0.4,
+          "value_labels": false,
+          "value_background": false,
+          "grid": {
+            "kind": "none"
+          }
+        },
+        "legend_defaults": {
+          "font": "regular",
+          "size": 7.5,
+          "columns": 3,
+          "frame": false,
+          "loc": "lower center",
+          "anchor": [
+            0.5,
+            1.06
+          ],
+          "borderaxespad": 0,
+          "columnspacing": 1.2,
+          "handlelength": 1.2,
+          "handleheight": 0.7,
+          "handletextpad": 0.4
+        }
+      }
+    },
+    "hand-drawn": {
+      "description": "sketch 线条、纸色背景、手写字体；只用于博客/教学/talk，不进期刊。",
+      "font": "handwritten",
+      "palette": "tol-muted",
+      "config": {
+        "figure": {
+          "background": "#FAF7F0",
+          "dpi": 200
+        },
+        "rc": {
+          "path.sketch": [
+            1,
+            100,
+            2
+          ]
+        },
+        "panel_defaults": {
+          "tick_size": 8,
+          "category_size": 8,
+          "label_size": 9,
+          "value_size": 8,
+          "tick_font": "regular",
+          "category_font": "regular",
+          "label_font": "regular",
+          "value_font": "bold",
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_pad": 4,
+          "category_pad": 6,
+          "label_pad": 5,
+          "axis_color": "#3F3A34",
+          "text_color": "#2B2723",
+          "axis_width": 0.8,
+          "baseline_width": 1.0,
+          "spines": [
+            "bottom"
+          ],
+          "bar_fill_alpha": 0.9,
+          "bar_edge_alpha": 1,
+          "bar_edge_width": 0.6,
+          "value_labels": false,
+          "value_background": false,
+          "grid": {
+            "kind": "none"
+          }
+        },
+        "legend_defaults": {
+          "font": "regular",
+          "size": 7.5,
+          "columns": 3,
+          "frame": false,
+          "loc": "lower center",
+          "anchor": [
+            0.5,
+            1.06
+          ],
+          "borderaxespad": 0,
+          "columnspacing": 1.2,
+          "handlelength": 1.2,
+          "handleheight": 0.7,
+          "handletextpad": 0.4
+        }
+      }
     }
   },
   "layouts": {
@@ -451,6 +636,86 @@
           "handletextpad": 0.5
         }
       }
+    },
+    "medium": {
+      "description": "4.5 in 1.5 栏；7.5/8.5/7 pt 字号。",
+      "config": {
+        "figure": {
+          "size_pt": [
+            324,
+            231.4
+          ]
+        },
+        "layout": {
+          "left_pt": 50,
+          "right_pt": 12,
+          "top_pt": 34,
+          "bottom_pt": 38,
+          "column_gap_pt": 22,
+          "row_gap_pt": 28
+        },
+        "panel_defaults": {
+          "tick_size": 7.5,
+          "category_size": 7.5,
+          "label_size": 8.5,
+          "value_size": 7.5,
+          "tick_length": 3,
+          "value_tick_length": 0,
+          "tick_pad": 3.5,
+          "category_pad": 6,
+          "label_pad": 4,
+          "bar_width": 0.62,
+          "series_gap": 0.18,
+          "group_gap": 0.85
+        },
+        "legend_defaults": {
+          "size": 7,
+          "columns": "auto",
+          "handlelength": 1.2,
+          "columnspacing": 1.2,
+          "handletextpad": 0.4
+        }
+      }
+    },
+    "slide": {
+      "description": "9 in 16:9 幻灯片；10/11/9 pt 字号。",
+      "config": {
+        "figure": {
+          "size_pt": [
+            648,
+            364.5
+          ]
+        },
+        "layout": {
+          "left_pt": 64,
+          "right_pt": 18,
+          "top_pt": 48,
+          "bottom_pt": 52,
+          "column_gap_pt": 30,
+          "row_gap_pt": 36
+        },
+        "panel_defaults": {
+          "tick_size": 10,
+          "category_size": 10,
+          "label_size": 11,
+          "value_size": 10,
+          "tick_length": 4,
+          "value_tick_length": 0,
+          "tick_pad": 5,
+          "category_pad": 8,
+          "label_pad": 6,
+          "bar_width": 0.7,
+          "series_gap": 0.18,
+          "group_gap": 0.9
+        },
+        "legend_defaults": {
+          "size": 9,
+          "columns": "auto",
+          "handlelength": 1.4,
+          "columnspacing": 1.5,
+          "handletextpad": 0.5
+        }
+      }
     }
   },
   "palettes": {
@@ -542,6 +807,78 @@
         "#A3A3A3",
         "#858585",
         "#666666"
+      ],
+      "background": "white"
+    },
+    "pastel-eight": {
+      "description": "8 色等明度 pastel；参考 horizontal 图的柔和分类色。",
+      "kind": "categorical",
+      "colors": [
+        "#D88D91",
+        "#99B4D7",
+        "#F9D78D",
+        "#97C0C8",
+        "#9CC2A4",
+        "#B4A8CF",
+        "#D2AE92",
+        "#F2B996"
+      ],
+      "background": "white"
+    },
+    "tableau10": {
+      "description": "Tableau 10；通用分类色。",
+      "kind": "categorical",
+      "colors": [
+        "#4E79A7",
+        "#F28E2B",
+        "#E15759",
+        "#76B7B2",
+        "#59A14F",
+        "#EDC948",
+        "#B07AA1",
+        "#FF9DA7"
+      ],
+      "background": "white"
+    },
+    "ggsci-npg": {
+      "description": "ggsci NPG；期刊风格强对比分类色。",
+      "kind": "categorical",
+      "colors": [
+        "#E64B35",
+        "#4DBBD5",
+        "#00A087",
+        "#3C5488",
+        "#F39B7F",
+        "#8491B4",
+        "#91D1C2",
+        "#DC0000"
+      ],
+      "background": "white"
+    },
+    "paired-teal": {
+      "description": "before/after 的 teal 浅深配对。",
+      "kind": "categorical",
+      "colors": [
+        "#B7E0DA",
+        "#2A9D8F"
+      ],
+      "background": "white"
+    },
+    "paired-orange": {
+      "description": "before/after 的 orange 浅深配对。",
+      "kind": "categorical",
+      "colors": [
+        "#F6D3B5",
+        "#E07A2F"
+      ],
+      "background": "white"
+    },
+    "paired-rose": {
+      "description": "before/after 的 rose 浅深配对。",
+      "kind": "categorical",
+      "colors": [
+        "#F2C6CE",
+        "#C44E6E"
       ],
       "background": "white"
     }
@@ -647,6 +984,76 @@
         },
         "heading_bold": {
           "family": "DejaVu Sans Mono",
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "humanist": {
+      "description": "humanist sans：Segoe UI / Arial / Liberation Sans 回退。",
+      "roles": {
+        "light": {
+          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": ["Segoe UI", "Arial", "Liberation Sans", "DejaVu Sans"],
+          "weight": "bold",
+          "file": null
+        }
+      }
+    },
+    "handwritten": {
+      "description": "手写体：Comic Sans MS / Segoe Script 回退；只用于 talk/博客。",
+      "roles": {
+        "light": {
+          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "weight": "normal",
+          "file": null
+        },
+        "regular": {
+          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "weight": "normal",
+          "file": null
+        },
+        "bold": {
+          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "weight": "bold",
+          "file": null
+        },
+        "mono": {
+          "family": "DejaVu Sans Mono",
+          "weight": "normal",
+          "file": null
+        },
+        "heading": {
+          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
+          "weight": "normal",
+          "file": null
+        },
+        "heading_bold": {
+          "family": ["Comic Sans MS", "Segoe Script", "DejaVu Sans"],
           "weight": "bold",
           "file": null
         }

@@ -13,10 +13,11 @@
 | `05-paired.png` | paired palette | before/after 用哪组同色相浅深 |
 | `06-categorical.png` | categorical palette | 5 个等权类别用哪组 |
 | `07-grid.png` | grid | none / hairline / dashed / dots |
-| `08-style.png` | style | 3 个已实现风格；其余 planned |
-| `09-type.png` | type | sans / serif / mono；其余 planned |
-| `10-layout.png` | layout | grouped / horizontal / paired |
-| `11-size.png` | size | single / double |
+| `08-style.png` | style | 6 个风格：paper / soft / serif / bold-slide / minimal-mono / hand-drawn |
+| `09-type.png` | type | Arial / Times / Consolas / Segoe UI / Comic Sans |
+| `10-layout.png` | layout | grouped / horizontal / paired / multi-panel |
+| `11-size.png` | size | single / medium / double / slide |
+| `12-annotation.png` | annotation | delta / capacity / reference-line；increment 等 Codex |
 
 ## 关于 outline / alpha / hatch
 
@@ -35,13 +36,14 @@
 baseline_color: A/B/C/D 都留；D 默认
 baseline_mark: solid/outline/alpha/hatch 都留；hatch 只用于 increment，不做 baseline
 accent: orange 默认；blue/teal 备选
-paired: blue/green 保留；teal/orange/rose 先不做
-categorical: pastel-eight / tol-muted 保留；其余先不做
+paired: blue/green/teal/orange/rose 都留
+categorical: pastel-eight/tol-bright/tol-muted/set2/npg/tableau10 都留
 grid: none/hairline/dashed 保留；dots 删
-style: 三个已实现的保留；planned 先不评审
-type: sans/serif 保留；mono 只给 token
-layout: grouped/horizontal/paired 保留；multi-panel 用 double
-size: single/double 都保留
+style: 6 个都留
+type: 5 个都留
+layout: 4 个都留
+size: 4 个都留
+annotation: delta/capacity/reference-line 保留；increment 等 Codex；bracket/direct planned
 ```
 
 不需要选“最终图”，只标“保留 / 删除 / 换颜色”。
@@ -53,7 +55,7 @@ size: single/double 都保留
 - `implemented`：当前 renderer/compiler 能直接出图；
 - `planned`：类别先定，代码后续补。
 
-`08-style` / `09-type` 里只画了 implemented 的选项；planned 的（bold-slide、minimal-mono、hand-drawn、humanist、handwritten）等类别确认后再实现。
+`08-style` / `09-type` 现在都画了 6 / 5 个选项；`12-annotation` 里的 increment、bracket、direct-label 仍是 planned，等 Codex 或后续实现。
 
 ## 生成
 
@@ -62,4 +64,4 @@ cd research-figure-skill
 python examples/axis-review/render_review.py
 ```
 
-输出本目录的 11 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。
+输出本目录的 12 张表和 `panels/`。不下载图片或字体；颜色来自公开色卡或参考图采样。

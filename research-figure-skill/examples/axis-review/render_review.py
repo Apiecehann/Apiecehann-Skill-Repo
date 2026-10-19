@@ -62,9 +62,20 @@ def mix(color, t):
     return "#" + "".join(f"{round(c + (255 - c) * t):02x}" for c in rgb)
 
 
+def font_roles(path, family, bold_path=None):
+    roles = {}
+    for role in ("light", "regular", "bold", "mono", "heading", "heading_bold"):
+        bold = role in ("bold", "heading_bold")
+        roles[role] = {"family": family, "weight": "bold" if bold else "normal",
+                       "file": bold_path if bold and bold_path else path}
+    return roles
+
+
 def config(rows, *, style="paper-clean", layout="grouped", size="single",
            font="sans", colors=None, labels=None, grid="none", legend=True,
-           fill=None, edge=None, hatch=None, fonts=None, baseline_only=False):
+           fill=None, edge=None, hatch=None, fonts=None, baseline_only=False,
+           tick_format=".0%", ylabel="Success rate", panels=None, gains=None,
+           capacity=None, reference_lines=None):
     order = list(dict.fromkeys(row["series"] for row in rows))
     palette = {}
     if colors:
@@ -77,8 +88,8 @@ def config(rows, *, style="paper-clean", layout="grouped", size="single",
                     entry["edge"] = "#20252c"
             palette[series] = entry
     panel = {
-        "limits": "auto", "ticks": "auto", "tick_format": ".0%",
-        "ylabel": "Success rate", "value_labels": False,
+        "limits": "auto", "ticks": "auto", "tick_format": tick_format,
+        "ylabel": ylabel, "value_labels": False,
         "bar_edge_alpha": 1,
     }
     if grid is not None:
@@ -87,6 +98,10 @@ def config(rows, *, style="paper-clean", layout="grouped", size="single",
         panel["bar_fill_alpha"] = fill
     if edge is not None:
         panel["bar_edge_width"] = edge
+    if capacity:
+        panel["capacity"] = capacity
+    if reference_lines:
+        panel["reference_lines"] = reference_lines
     cfg = {
         "data": str(HERE / "data" / "focus.csv"),
         "figure": {"formats": ["png"], "dpi": 180},
@@ -102,6 +117,10 @@ def config(rows, *, style="paper-clean", layout="grouped", size="single",
         },
         "palette": palette,
     }
+    if panels:
+        cfg["panels"] = panels
+    if gains:
+        cfg["gains"] = gains
     if fonts:
         cfg["fonts"] = fonts
     if hatch:
@@ -234,48 +253,96 @@ def grids():
 def styles():
     rows = read("focus.csv")
     items = []
-    for style in ("paper-clean", "soft-outline", "serif-emphasis"):
+    for style in ("paper-clean", "soft-outline", "serif-emphasis",
+                  "bold-slide", "minimal-mono", "hand-drawn"):
+        extra = {}
+        if style == "hand-drawn":
+            extra["fonts"] = font_roles(str(Path(r"C:\Windows\Fonts") / "comic.ttf"), "Comic Sans MS")
         cfg = config(rows, style=style, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
-                     fill=None, edge=None, grid=None)
+                     fill=None, edge=None, grid=None, **extra)
         img = render_panel(rows, cfg, f"style-{style}")
         items.append({"image": img, "label": style, "note": "implemented"})
-    make_sheet("style", "3 个已实现；bold-slide / minimal-mono / hand-drawn 仍是 planned。",
+    make_sheet("style", "6 个已实现；hand-drawn 只用于 talk/博客。",
                items, 3, "08-style.png")
 
 
 def fonts():
     rows = read("focus.csv")
+    specs = [
+        ("sans", "Arial", "arial.ttf"),
+        ("serif", "Times New Roman", "times.ttf"),
+        ("mono", "Consolas", "consola.ttf"),
+        ("humanist", "Segoe UI", "segoeui.ttf"),
+        ("handwritten", "Comic Sans MS", "comic.ttf"),
+    ]
     items = []
-    for name in ("sans", "serif", "mono"):
-        cfg = config(rows, font=name, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4)
+    for name, family, filename in specs:
+        path = str(Path(r"C:\Windows\Fonts") / filename)
+        cfg = config(rows, font=name, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
+                     fonts=font_roles(path, family))
         img = render_panel(rows, cfg, f"type-{name}")
-        items.append({"image": img, "label": name, "note": "implemented"})
-    make_sheet("type", "3 个已实现；humanist / handwritten 仍是 planned。",
+        items.append({"image": img, "label": name, "note": family})
+    make_sheet("type", "5 个字体；review 使用 Windows 字体文件，skill 预设仍按可用性回退。",
                items, 3, "09-type.png")
 
 
 def layouts():
-    rows = read("focus.csv")
     items = []
     for layout in ("grouped", "horizontal", "paired"):
-        use = read("paired.csv") if layout == "paired" else rows
+        use = read("paired.csv") if layout == "paired" else read("focus.csv")
         labels = LABELS2 if layout == "paired" else LABELS4
         colors = PAIRS["blue"] if layout == "paired" else D_ORANGE + [ACCENTS["orange"]]
         cfg = config(use, layout=layout, colors=colors, labels=labels)
         img = render_panel(use, cfg, f"layout-{layout}")
         items.append({"image": img, "label": layout, "note": ""})
-    make_sheet("layout", "grouped / horizontal / paired；multi-panel 见 catalog。",
-               items, 3, "10-layout.png")
+    use = read("panels.csv")
+    cfg = config(use, layout="grouped", size="double",
+                 colors=[D_ORANGE[1], D_ORANGE[2], ACCENTS["orange"]],
+                 labels={"method-1": "Method 1", "method-2": "Method 2", "ours": "Ours"},
+                 panels=[{"id": "Environment A"}, {"id": "Environment B"}])
+    img = render_panel(use, cfg, "layout-multi-panel")
+    items.append({"image": img, "label": "multi-panel", "note": "2 panels"})
+    make_sheet("layout", "grouped / horizontal / paired / multi-panel。",
+               items, 2, "10-layout.png")
 
 
 def sizes():
     rows = read("focus.csv")
     items = []
-    for size in ("single", "double"):
+    for size, note in (("single", "3.3 in"), ("medium", "4.5 in"),
+                       ("double", "7 in"), ("slide", "9 in / 16:9")):
         cfg = config(rows, size=size, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4)
         img = render_panel(rows, cfg, f"size-{size}")
-        items.append({"image": img, "label": size, "note": "3.3 in" if size == "single" else "7 in"})
+        items.append({"image": img, "label": size, "note": note})
     make_sheet("size", "同一份数据，只换最终物理宽度。", items, 2, "11-size.png")
+
+
+def annotations():
+    items = []
+    paired = read("paired.csv")
+    cfg = config(paired, layout="paired", colors=PAIRS["blue"], labels=LABELS2)
+    cfg["gains"] = [{"from": "b-b", "to": "a-b", "label_format": "+.0f",
+                     "label_scale": 100, "label_suffix": " pp"}]
+    img = render_panel(paired, cfg, "annotation-delta")
+    items.append({"image": img, "label": "delta", "note": "same-panel pair"})
+
+    cap = read("capacity.csv")
+    cfg = config(cap, colors=["#A3ACB9"], labels={"achieved": "Achieved"},
+                 tick_format=".0f", ylabel="Items", grid="hairline",
+                 capacity={"field": "capacity", "label_format": "{value}/{capacity}",
+                           "show_percent": True})
+    cfg["panel_defaults"]["bar_width"] = .35
+    cfg["panel_defaults"]["category_margin"] = .55
+    img = render_panel(cap, cfg, "annotation-capacity")
+    items.append({"image": img, "label": "capacity", "note": "88 / 96"})
+
+    focus = read("focus.csv")
+    cfg = config(focus, colors=D_ORANGE + [ACCENTS["orange"]], labels=LABELS4,
+                 reference_lines=[{"value": .8, "label": "SOTA", "color": "#6B7280"}])
+    img = render_panel(focus, cfg, "annotation-reference")
+    items.append({"image": img, "label": "reference line", "note": "SOTA / threshold"})
+    make_sheet("annotation", "delta / capacity / reference-line；increment 等 Codex 完成。",
+               items, 3, "12-annotation.png")
 
 
 def main():
@@ -291,12 +358,15 @@ def main():
     fonts()
     layouts()
     sizes()
+    annotations()
     index = {"version": 1,
              "sheets": ["01-baseline-color.png", "02-baseline-mark.png", "03-baseline-matrix.png",
                         "04-accent.png", "05-paired.png", "06-categorical.png", "07-grid.png",
-                        "08-style.png", "09-type.png", "10-layout.png", "11-size.png"],
+                        "08-style.png", "09-type.png", "10-layout.png", "11-size.png",
+                        "12-annotation.png"],
              "axes": ["baseline color", "baseline mark", "baseline color x mark", "accent",
-                      "paired", "categorical", "grid", "style", "type", "layout", "size"]}
+                      "paired", "categorical", "grid", "style", "type", "layout", "size",
+                      "annotation"]}
     (HERE / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
     print("wrote", HERE / "index.json")
 

@@ -57,6 +57,7 @@ DEFAULTS = {
         'value_font': 'light', 'value_color': None,
         'value_pad': 5, 'value_anchor': 'high', 'value_background': True,
         'value_background_pad': .1, 'baseline': 0, 'allow_interval_clipping': False,
+        'reference_lines': [],
         'capacity': {'field': None, 'linestyle': '--', 'edge_width': .7,
                      'alpha': .45, 'label_format': '{value}/{capacity}', 'show_percent': True},
         'grid': {'kind': 'dots', 'spacing_pt': 10.5, 'value_step': 'auto',
@@ -710,6 +711,17 @@ def build_figure(config, rows, font_dir=None):
                                                linewidth=grid['linewidth'],linestyle=linestyle)
             elif grid['kind'] != 'none':
                 raise ValueError('grid.kind must be dots, lines, or none')
+            for ref in style.get('reference_lines', []):
+                value = float(ref['value'])
+                color = ref.get('color', '#6B7280')
+                ax.axhline(value, color=color, linestyle=ref.get('linestyle', '--'),
+                           linewidth=ref.get('linewidth', .8),
+                           alpha=opacity(ref.get('alpha', 1), 'reference.alpha'), zorder=1)
+                if ref.get('label'):
+                    ax.text(0.98, value, ref['label'], transform=ax.get_yaxis_transform(),
+                            ha='right', va='bottom', color=color,
+                            fontproperties=font(config, ref.get('font', 'regular'), ref.get('size', 7), font_dir),
+                            zorder=5, clip_on=False)
             for x, row in zip(xx, rr):
                 palette = config['palette'][row['series']]
                 fill, edge = bar_colors(palette, style)

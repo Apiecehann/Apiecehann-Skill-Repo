@@ -8,33 +8,74 @@
         {
           "id": "accent-tints",
           "label": "D · accent tints",
-          "when": ["一个焦点方法", "baseline 只作为上下文"],
-          "avoid": ["baseline 之间需要强身份区分"],
-          "params": {"ramp": ["accent + white 0.78", "accent + white 0.55", "accent + white 0.32"]},
+          "when": [
+            "一个焦点方法",
+            "baseline 只作为上下文"
+          ],
+          "avoid": [
+            "baseline 之间需要强身份区分"
+          ],
+          "params": {
+            "ramp": [
+              "accent + white 0.78",
+              "accent + white 0.55",
+              "accent + white 0.32"
+            ]
+          },
           "status": "implemented"
         },
         {
           "id": "gray-tints",
           "label": "B · gray tints",
-          "when": ["想要中性、安静的 baseline", "标签足够区分"],
-          "avoid": ["数值顺序可能被误读成深浅顺序"],
-          "params": {"ramp": ["#DEDAD2", "#C9C6BF", "#A8A49C"]},
+          "when": [
+            "想要中性、安静的 baseline",
+            "标签足够区分"
+          ],
+          "avoid": [
+            "数值顺序可能被误读成深浅顺序"
+          ],
+          "params": {
+            "ramp": [
+              "#DEDAD2",
+              "#C9C6BF",
+              "#A8A49C"
+            ]
+          },
           "status": "implemented"
         },
         {
           "id": "muted-hues",
           "label": "C · muted hues",
-          "when": ["baseline 是不同机构/数据集/条件", "需要颜色可分"],
-          "avoid": ["超过 3 个 baseline", "颜色本身太抢眼"],
-          "params": {"colors": ["#D88D91", "#99B4D7", "#97C0C8"]},
+          "when": [
+            "baseline 是不同机构/数据集/条件",
+            "需要颜色可分"
+          ],
+          "avoid": [
+            "超过 3 个 baseline",
+            "颜色本身太抢眼"
+          ],
+          "params": {
+            "colors": [
+              "#D88D91",
+              "#99B4D7",
+              "#97C0C8"
+            ]
+          },
           "status": "implemented"
         },
         {
           "id": "single-gray",
           "label": "A · single gray",
-          "when": ["标签/位置已经足够区分", "只想突出一个焦点"],
-          "avoid": ["baseline 必须只靠颜色区分"],
-          "params": {"color": "#C9C6BF"},
+          "when": [
+            "标签/位置已经足够区分",
+            "只想突出一个焦点"
+          ],
+          "avoid": [
+            "baseline 必须只靠颜色区分"
+          ],
+          "params": {
+            "color": "#C9C6BF"
+          },
           "status": "implemented"
         }
       ]
@@ -42,89 +83,657 @@
     "accent_hue": {
       "question": "焦点用什么色相？",
       "options": [
-        {"id": "orange", "label": "orange", "hex": "#E07A2F", "when": ["暖色、和蓝/绿 baseline 都容易分开"], "avoid": ["和红色警告语义冲突"], "status": "implemented"},
-        {"id": "blue", "label": "blue", "hex": "#2F80C9", "when": ["最中性、最安全"], "avoid": ["和蓝色 baseline 混在一起"], "status": "implemented"},
-        {"id": "teal", "label": "teal", "hex": "#1F9E89", "when": ["比蓝色更有辨识度"], "avoid": ["和绿色 baseline 太近"], "status": "implemented"},
-        {"id": "green", "label": "green", "hex": "#3A9D5D", "when": ["正向增长语义"], "avoid": ["色觉模拟下与橙色接近"], "status": "implemented"},
-        {"id": "rose", "label": "rose", "hex": "#C44E6E", "when": ["需要强强调、但不使用紫色"], "avoid": ["和红色 baseline 冲突"], "status": "implemented"}
+        {
+          "id": "orange",
+          "label": "orange",
+          "hex": "#E07A2F",
+          "when": [
+            "暖色、和蓝/绿 baseline 都容易分开"
+          ],
+          "avoid": [
+            "和红色警告语义冲突"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "blue",
+          "label": "blue",
+          "hex": "#2F80C9",
+          "when": [
+            "最中性、最安全"
+          ],
+          "avoid": [
+            "和蓝色 baseline 混在一起"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "teal",
+          "label": "teal",
+          "hex": "#1F9E89",
+          "when": [
+            "比蓝色更有辨识度"
+          ],
+          "avoid": [
+            "和绿色 baseline 太近"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "green",
+          "label": "green",
+          "hex": "#3A9D5D",
+          "when": [
+            "正向增长语义"
+          ],
+          "avoid": [
+            "色觉模拟下与橙色接近"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "rose",
+          "label": "rose",
+          "hex": "#C44E6E",
+          "when": [
+            "需要强强调、但不使用紫色"
+          ],
+          "avoid": [
+            "和红色 baseline 冲突"
+          ],
+          "status": "implemented"
+        }
       ]
     },
     "paired_palette": {
       "question": "before/after 用哪一组同色相浅深？",
       "options": [
-        {"id": "paired-blue", "label": "blue pair", "colors": ["#BDD8ED", "#5A9BD3"], "when": ["before/after、同一方法"], "avoid": ["两个不同方法各用一对时色相太近"], "status": "implemented"},
-        {"id": "paired-green", "label": "green pair", "colors": ["#C5E0B3", "#6FAE46"], "when": ["before/after、增长语义"], "avoid": ["与 blue pair 并排时色觉检查"], "status": "implemented"},
-        {"id": "paired-teal", "label": "teal pair", "colors": ["#B7E0DA", "#2A9D8F"], "when": ["before/after、冷色系"], "avoid": ["与 green pair 混用"], "status": "planned"},
-        {"id": "paired-orange", "label": "orange pair", "colors": ["#F6D3B5", "#E07A2F"], "when": ["before/after、暖色系"], "avoid": ["与 rose pair 混用"], "status": "planned"},
-        {"id": "paired-rose", "label": "rose pair", "colors": ["#F2C6CE", "#C44E6E"], "when": ["before/after、强强调"], "avoid": ["与红色语义冲突"], "status": "planned"}
+        {
+          "id": "paired-blue",
+          "label": "blue pair",
+          "colors": [
+            "#BDD8ED",
+            "#5A9BD3"
+          ],
+          "when": [
+            "before/after、同一方法"
+          ],
+          "avoid": [
+            "两个不同方法各用一对时色相太近"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "paired-green",
+          "label": "green pair",
+          "colors": [
+            "#C5E0B3",
+            "#6FAE46"
+          ],
+          "when": [
+            "before/after、增长语义"
+          ],
+          "avoid": [
+            "与 blue pair 并排时色觉检查"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "paired-teal",
+          "label": "teal pair",
+          "colors": [
+            "#B7E0DA",
+            "#2A9D8F"
+          ],
+          "when": [
+            "before/after、冷色系"
+          ],
+          "avoid": [
+            "与 green pair 混用"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "paired-orange",
+          "label": "orange pair",
+          "colors": [
+            "#F6D3B5",
+            "#E07A2F"
+          ],
+          "when": [
+            "before/after、暖色系"
+          ],
+          "avoid": [
+            "与 rose pair 混用"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "paired-rose",
+          "label": "rose pair",
+          "colors": [
+            "#F2C6CE",
+            "#C44E6E"
+          ],
+          "when": [
+            "before/after、强强调"
+          ],
+          "avoid": [
+            "与红色语义冲突"
+          ],
+          "status": "implemented"
+        }
       ]
     },
     "categorical_palette": {
       "question": "多类别（ablation/多任务）用哪组？",
       "options": [
-        {"id": "pastel-eight", "label": "pastel eight", "colors": ["#D88D91", "#99B4D7", "#F9D78D", "#97C0C8", "#9CC2A4", "#B4A8CF", "#D2AE92", "#F2B996"], "when": ["5–8 个等权类别"], "avoid": ["需要强对比的幻灯片"], "status": "planned"},
-        {"id": "tol-bright", "label": "Paul Tol bright", "colors": ["#4477AA", "#EE6677", "#228833", "#CCBB44", "#66CCEE", "#AA3377", "#BBBBBB"], "when": ["需要更高对比"], "avoid": ["浅色背景上的黄色"], "status": "implemented"},
-        {"id": "tol-muted", "label": "Paul Tol muted", "colors": ["#CC6677", "#332288", "#DDCC77", "#117733", "#88CCEE", "#882255", "#44AA99", "#999933", "#AA4499"], "when": ["3–9 个类别、低饱和"], "avoid": ["明度差过大时仍按颜色排序"], "status": "implemented"},
-        {"id": "colorbrewer-set2", "label": "ColorBrewer Set2", "colors": ["#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3"], "when": ["分类、色盲友好"], "avoid": ["超过 8 类"], "status": "implemented"},
-        {"id": "ggsci-npg", "label": "ggsci NPG", "colors": ["#E64B35", "#4DBBD5", "#00A087", "#3C5488", "#F39B7F", "#8491B4", "#91D1C2", "#DC0000"], "when": ["期刊风格、强对比"], "avoid": ["小尺寸密集图"], "status": "planned"},
-        {"id": "tableau10", "label": "Tableau 10", "colors": ["#4E79A7", "#F28E2B", "#E15759", "#76B7B2", "#59A14F", "#EDC948", "#B07AA1", "#FF9DA7"], "when": ["通用分类"], "avoid": ["需要低饱和 pastel 时"], "status": "planned"}
+        {
+          "id": "pastel-eight",
+          "label": "pastel eight",
+          "colors": [
+            "#D88D91",
+            "#99B4D7",
+            "#F9D78D",
+            "#97C0C8",
+            "#9CC2A4",
+            "#B4A8CF",
+            "#D2AE92",
+            "#F2B996"
+          ],
+          "when": [
+            "5–8 个等权类别"
+          ],
+          "avoid": [
+            "需要强对比的幻灯片"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tol-bright",
+          "label": "Paul Tol bright",
+          "colors": [
+            "#4477AA",
+            "#EE6677",
+            "#228833",
+            "#CCBB44",
+            "#66CCEE",
+            "#AA3377",
+            "#BBBBBB"
+          ],
+          "when": [
+            "需要更高对比"
+          ],
+          "avoid": [
+            "浅色背景上的黄色"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tol-muted",
+          "label": "Paul Tol muted",
+          "colors": [
+            "#CC6677",
+            "#332288",
+            "#DDCC77",
+            "#117733",
+            "#88CCEE",
+            "#882255",
+            "#44AA99",
+            "#999933",
+            "#AA4499"
+          ],
+          "when": [
+            "3–9 个类别、低饱和"
+          ],
+          "avoid": [
+            "明度差过大时仍按颜色排序"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "colorbrewer-set2",
+          "label": "ColorBrewer Set2",
+          "colors": [
+            "#66C2A5",
+            "#FC8D62",
+            "#8DA0CB",
+            "#E78AC3",
+            "#A6D854",
+            "#FFD92F",
+            "#E5C494",
+            "#B3B3B3"
+          ],
+          "when": [
+            "分类、色盲友好"
+          ],
+          "avoid": [
+            "超过 8 类"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "ggsci-npg",
+          "label": "ggsci NPG",
+          "colors": [
+            "#E64B35",
+            "#4DBBD5",
+            "#00A087",
+            "#3C5488",
+            "#F39B7F",
+            "#8491B4",
+            "#91D1C2",
+            "#DC0000"
+          ],
+          "when": [
+            "期刊风格、强对比"
+          ],
+          "avoid": [
+            "小尺寸密集图"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "tableau10",
+          "label": "Tableau 10",
+          "colors": [
+            "#4E79A7",
+            "#F28E2B",
+            "#E15759",
+            "#76B7B2",
+            "#59A14F",
+            "#EDC948",
+            "#B07AA1",
+            "#FF9DA7"
+          ],
+          "when": [
+            "通用分类"
+          ],
+          "avoid": [
+            "需要低饱和 pastel 时"
+          ],
+          "status": "implemented"
+        }
       ]
     },
     "grid": {
       "question": "网格要不要、用哪种？",
       "options": [
-        {"id": "none", "label": "no grid", "when": ["横向条、强调数据本身", "幻灯片"], "avoid": ["需要读精确差值"], "params": {"kind": "none"}, "status": "implemented"},
-        {"id": "hairline", "label": "hairline", "when": ["论文、需要轻参考线"], "avoid": ["和柱体颜色太接近"], "params": {"kind": "lines", "color": "#D9DEE3", "linewidth": 0.4, "linestyle": "-"}, "status": "implemented"},
-        {"id": "dashed", "label": "dashed horizontal", "when": ["参考图风格、读差值"], "avoid": ["密集多面板"], "params": {"kind": "lines", "color": "#BFC7CF", "linewidth": 0.5, "linestyle": [0, [4, 4]]}, "status": "implemented"},
-        {"id": "dots", "label": "dots", "when": ["轻量背景、论文"], "avoid": ["小尺寸输出，容易变噪点"], "params": {"kind": "dots", "spacing_pt": 10.5, "size": 0.75}, "status": "implemented"}
+        {
+          "id": "none",
+          "label": "no grid",
+          "when": [
+            "横向条、强调数据本身",
+            "幻灯片"
+          ],
+          "avoid": [
+            "需要读精确差值"
+          ],
+          "params": {
+            "kind": "none"
+          },
+          "status": "implemented"
+        },
+        {
+          "id": "hairline",
+          "label": "hairline",
+          "when": [
+            "论文、需要轻参考线"
+          ],
+          "avoid": [
+            "和柱体颜色太接近"
+          ],
+          "params": {
+            "kind": "lines",
+            "color": "#D9DEE3",
+            "linewidth": 0.4,
+            "linestyle": "-"
+          },
+          "status": "implemented"
+        },
+        {
+          "id": "dashed",
+          "label": "dashed horizontal",
+          "when": [
+            "参考图风格、读差值"
+          ],
+          "avoid": [
+            "密集多面板"
+          ],
+          "params": {
+            "kind": "lines",
+            "color": "#BFC7CF",
+            "linewidth": 0.5,
+            "linestyle": [
+              0,
+              [
+                4,
+                4
+              ]
+            ]
+          },
+          "status": "implemented"
+        },
+        {
+          "id": "dots",
+          "label": "dots",
+          "when": [
+            "轻量背景、论文"
+          ],
+          "avoid": [
+            "小尺寸输出，容易变噪点"
+          ],
+          "params": {
+            "kind": "dots",
+            "spacing_pt": 10.5,
+            "size": 0.75
+          },
+          "status": "implemented"
+        }
       ]
     },
     "style": {
       "question": "这张图是什么视觉语法？",
       "options": [
-        {"id": "journal-clean", "label": "journal-clean", "when": ["论文、单栏/双栏"], "avoid": ["需要强演示冲击力"], "status": "implemented"},
-        {"id": "soft-outline", "label": "soft-outline", "when": ["柔和面积 + 清晰轮廓"], "avoid": ["极细线条打印"], "status": "implemented"},
-        {"id": "serif-emphasis", "label": "serif-emphasis", "when": ["衬线正文、前后对比"], "avoid": ["小尺寸屏幕"], "status": "implemented"},
-        {"id": "bold-slide", "label": "bold-slide", "when": ["组会/会议幻灯片"], "avoid": ["期刊投稿"], "status": "planned"},
-        {"id": "minimal-mono", "label": "minimal-mono", "when": ["黑白打印、灰度"], "avoid": ["需要多色区分"], "status": "planned"},
-        {"id": "hand-drawn", "label": "hand-drawn", "when": ["博客/教学/talk"], "avoid": ["期刊投稿、密集数据"], "status": "planned"}
+        {
+          "id": "journal-clean",
+          "label": "journal-clean",
+          "when": [
+            "论文、单栏/双栏"
+          ],
+          "avoid": [
+            "需要强演示冲击力"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "soft-outline",
+          "label": "soft-outline",
+          "when": [
+            "柔和面积 + 清晰轮廓"
+          ],
+          "avoid": [
+            "极细线条打印"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "serif-emphasis",
+          "label": "serif-emphasis",
+          "when": [
+            "衬线正文、前后对比"
+          ],
+          "avoid": [
+            "小尺寸屏幕"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "bold-slide",
+          "label": "bold-slide",
+          "when": [
+            "组会/会议幻灯片"
+          ],
+          "avoid": [
+            "期刊投稿"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "minimal-mono",
+          "label": "minimal-mono",
+          "when": [
+            "黑白打印、灰度"
+          ],
+          "avoid": [
+            "需要多色区分"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "hand-drawn",
+          "label": "hand-drawn",
+          "when": [
+            "博客/教学/talk"
+          ],
+          "avoid": [
+            "期刊投稿、密集数据"
+          ],
+          "status": "implemented"
+        }
       ]
     },
     "type": {
       "question": "字体声音是什么？",
       "options": [
-        {"id": "sans", "label": "sans", "when": ["默认、屏幕/论文"], "avoid": ["需要传统衬线感"], "status": "implemented"},
-        {"id": "serif", "label": "serif", "when": ["与正文衬线协调"], "avoid": ["小尺寸密集标签"], "status": "implemented"},
-        {"id": "mono", "label": "mono", "when": ["代码/token/动作名"], "avoid": ["长标签、多面板"], "status": "implemented"},
-        {"id": "humanist", "label": "humanist sans", "when": ["海报、可读性优先"], "avoid": ["紧凑多面板"], "status": "planned"},
-        {"id": "handwritten", "label": "handwritten", "when": ["博客/教学"], "avoid": ["期刊"], "status": "planned"}
+        {
+          "id": "sans",
+          "label": "sans",
+          "when": [
+            "默认、屏幕/论文"
+          ],
+          "avoid": [
+            "需要传统衬线感"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "serif",
+          "label": "serif",
+          "when": [
+            "与正文衬线协调"
+          ],
+          "avoid": [
+            "小尺寸密集标签"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "mono",
+          "label": "mono",
+          "when": [
+            "代码/token/动作名"
+          ],
+          "avoid": [
+            "长标签、多面板"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "humanist",
+          "label": "humanist sans",
+          "when": [
+            "海报、可读性优先"
+          ],
+          "avoid": [
+            "紧凑多面板"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "handwritten",
+          "label": "handwritten",
+          "when": [
+            "博客/教学"
+          ],
+          "avoid": [
+            "期刊"
+          ],
+          "status": "implemented"
+        }
       ]
     },
     "annotation": {
       "question": "要加什么标记？",
       "options": [
-        {"id": "delta", "label": "delta arrow", "when": ["两根柱的差值就是重点"], "avoid": ["区间穿过箭头", "横向布局"], "status": "implemented"},
-        {"id": "capacity", "label": "capacity bar", "when": ["有真实总量/容量"], "avoid": ["总量只是另一个方法的分数", "有区间"], "status": "implemented"},
-        {"id": "increment", "label": "base + increment", "when": ["今年基数 + 明年增量", "增量是重点"], "avoid": ["增量为负", "没有真实基数"], "status": "planned"},
-        {"id": "bracket", "label": "group bracket", "when": ["比较两组/两段"], "avoid": ["组内标签已经拥挤"], "status": "planned"},
-        {"id": "reference-line", "label": "reference line", "when": ["SOTA/阈值/去年水平"], "avoid": ["参考值没有来源"], "status": "planned"},
-        {"id": "direct-label", "label": "direct labels", "when": ["可以去掉图例"], "avoid": ["标签重叠"], "status": "planned"}
+        {
+          "id": "delta",
+          "label": "delta arrow",
+          "when": [
+            "两根柱的差值就是重点"
+          ],
+          "avoid": [
+            "区间穿过箭头",
+            "横向布局"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "capacity",
+          "label": "capacity bar",
+          "when": [
+            "有真实总量/容量"
+          ],
+          "avoid": [
+            "总量只是另一个方法的分数",
+            "有区间"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "increment",
+          "label": "base + increment",
+          "when": [
+            "今年基数 + 明年增量",
+            "增量是重点"
+          ],
+          "avoid": [
+            "增量为负",
+            "没有真实基数"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "bracket",
+          "label": "group bracket",
+          "when": [
+            "比较两组/两段"
+          ],
+          "avoid": [
+            "组内标签已经拥挤"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "reference-line",
+          "label": "reference line",
+          "when": [
+            "SOTA/阈值/去年水平"
+          ],
+          "avoid": [
+            "参考值没有来源"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "direct-label",
+          "label": "direct labels",
+          "when": [
+            "可以去掉图例"
+          ],
+          "avoid": [
+            "标签重叠"
+          ],
+          "status": "planned"
+        }
       ]
     },
     "layout": {
       "question": "数据怎么排？",
       "options": [
-        {"id": "grouped", "label": "grouped", "when": ["少量类别 × 多个系列"], "avoid": ["类别或系列过多"], "status": "implemented"},
-        {"id": "horizontal", "label": "horizontal", "when": ["类别名长、单系列"], "avoid": ["需要组内多系列比较"], "status": "implemented"},
-        {"id": "paired", "label": "paired", "when": ["before/after、两系列"], "avoid": ["超过两组"], "status": "implemented"},
-        {"id": "multi-panel", "label": "multi-panel", "when": ["2–4 个环境/数据集"], "avoid": ["single 尺寸下塞太多面板"], "status": "implemented"}
+        {
+          "id": "grouped",
+          "label": "grouped",
+          "when": [
+            "少量类别 × 多个系列"
+          ],
+          "avoid": [
+            "类别或系列过多"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "horizontal",
+          "label": "horizontal",
+          "when": [
+            "类别名长、单系列"
+          ],
+          "avoid": [
+            "需要组内多系列比较"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "paired",
+          "label": "paired",
+          "when": [
+            "before/after、两系列"
+          ],
+          "avoid": [
+            "超过两组"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "multi-panel",
+          "label": "multi-panel",
+          "when": [
+            "2–4 个环境/数据集"
+          ],
+          "avoid": [
+            "single 尺寸下塞太多面板"
+          ],
+          "status": "implemented"
+        }
       ]
     },
     "size": {
       "question": "最终物理宽度是多少？",
       "options": [
-        {"id": "single", "label": "single 3.3 in", "when": ["期刊单栏"], "avoid": ["多面板、长标签"], "status": "implemented"},
-        {"id": "double", "label": "double 7 in", "when": ["期刊双栏、幻灯片"], "avoid": ["内容很少时显得空"], "status": "implemented"}
+        {
+          "id": "single",
+          "label": "single 3.3 in",
+          "when": [
+            "期刊单栏"
+          ],
+          "avoid": [
+            "多面板、长标签"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "double",
+          "label": "double 7 in",
+          "when": [
+            "期刊双栏、幻灯片"
+          ],
+          "avoid": [
+            "内容很少时显得空"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "medium",
+          "label": "medium 4.5 in",
+          "when": [
+            "1.5 栏"
+          ],
+          "avoid": [
+            "多面板"
+          ],
+          "status": "implemented"
+        },
+        {
+          "id": "slide",
+          "label": "slide 9 in / 16:9",
+          "when": [
+            "组会/会议幻灯片"
+          ],
+          "avoid": [
+            "期刊投稿"
+          ],
+          "status": "implemented"
+        }
       ]
     }
   }

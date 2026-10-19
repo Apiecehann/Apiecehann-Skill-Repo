@@ -1,0 +1,19 @@
+id,panel,group,series,value
+a1,Environment A,Task A,method-1,0.42
+a2,Environment A,Task A,method-2,0.51
+a3,Environment A,Task A,ours,0.63
+b1,Environment A,Task B,method-1,0.48
+b2,Environment A,Task B,method-2,0.55
+b3,Environment A,Task B,ours,0.67
+c1,Environment A,Task C,method-1,0.53
+c2,Environment A,Task C,method-2,0.58
+c3,Environment A,Task C,ours,0.71
+d1,Environment B,Task A,method-1,0.39
+d2,Environment B,Task A,method-2,0.47
+d3,Environment B,Task A,ours,0.59
+e1,Environment B,Task B,method-1,0.45
+e2,Environment B,Task B,method-2,0.52
+e3,Environment B,Task B,ours,0.64
+f1,Environment B,Task C,method-1,0.50
+f2,Environment B,Task C,method-2,0.56
+f3,Environment B,Task C,ours,0.69
