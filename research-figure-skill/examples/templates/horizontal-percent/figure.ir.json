@@ -11,7 +11,7 @@
     "preset": "single"
   },
   "theme": {
-    "style": "soft-outline",
+    "style": "paper-clean",
     "palette": "blue-orange",
     "font": "sans"
   },

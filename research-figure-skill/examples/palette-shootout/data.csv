@@ -1,0 +1,13 @@
+id,panel,group,series,value
+m1-a,main,Bench A,method-1,0.61
+m2-a,main,Bench A,method-2,0.74
+m3-a,main,Bench A,method-3,0.58
+m4-a,main,Bench A,ours,0.83
+m1-b,main,Bench B,method-1,0.47
+m2-b,main,Bench B,method-2,0.66
+m3-b,main,Bench B,method-3,0.52
+m4-b,main,Bench B,ours,0.79
+m1-c,main,Bench C,method-1,0.71
+m2-c,main,Bench C,method-2,0.69
+m3-c,main,Bench C,method-3,0.63
+m4-c,main,Bench C,ours,0.88

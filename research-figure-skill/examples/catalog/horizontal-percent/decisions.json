@@ -22,22 +22,27 @@
     "main": {
       "limits": [
         0.0,
-        1.0
+        0.9
       ],
       "ticks": [
         0.0,
+        0.1,
         0.2,
+        0.3,
         0.4,
+        0.5,
         0.6,
+        0.7,
         0.8,
-        1.0
+        0.9
       ]
     }
   },
   "log": [
     "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+    "horizontal single series -> group gap 0.06",
     "palette blue-orange -> method #0077BB",
-    "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
     "legend -> hidden"
   ]
 }

@@ -268,3 +268,23 @@ def test_twelve_eval_templates_pass_and_produced_ir_is_checked(tmp_path):
                              "--ir", str(bad)], capture_output=True, text=True)
     assert result.returncode != 0
     assert "IR.size" in result.stderr
+
+
+def test_auto_axis_keeps_tight_headroom():
+    limits, ticks = backend.auto_axis([{"value": .85}], 0)
+    assert limits == [0.0, .9]
+    assert ticks[-1] == .9
+
+
+def test_capacity_single_group_is_narrow(tmp_path):
+    config, decisions = compile_ir(TEMPLATES / "capacity-88-of-96/figure.ir.json", tmp_path / "cap")
+    assert config["panel_defaults"]["bar_width"] == .35
+    assert config["panel_defaults"]["category_margin"] == .55
+    assert any("bar width 0.35" in line for line in decisions["log"])
+
+
+def test_horizontal_single_series_is_tight_and_gridless(tmp_path):
+    config, decisions = compile_ir(TEMPLATES / "horizontal-percent/figure.ir.json", tmp_path / "horiz")
+    assert config["panel_defaults"]["group_gap"] == .06
+    assert config["panel_defaults"]["grid"]["kind"] == "none"
+    assert any("group gap 0.06" in line for line in decisions["log"])

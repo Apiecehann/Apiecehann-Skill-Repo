@@ -27,24 +27,32 @@
       ],
       "ticks": [
         0.0,
+        0.1,
         0.2,
+        0.3,
         0.4,
+        0.5,
         0.6,
+        0.7,
         0.8
       ]
     },
     "Environment B": {
       "limits": [
         0.0,
-        1.0
+        0.9
       ],
       "ticks": [
         0.0,
+        0.1,
         0.2,
+        0.3,
         0.4,
+        0.5,
         0.6,
+        0.7,
         0.8,
-        1.0
+        0.9
       ]
     }
   },
@@ -52,8 +60,8 @@
     "size single -> 237.6 x 339.4 pt; type 7/8/6.5 pt",
     "emphasis focus-gray -> 1 focus (ours), 2 muted",
     "palette neutral-accent -> method-a #A3ACB9, method-b #7B848F, ours #9979CB",
-    "axis Environment A -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
-    "axis Environment B -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "axis Environment A -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
+    "axis Environment B -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
     "legend auto -> renderer measures columns at render time"
   ]
 }

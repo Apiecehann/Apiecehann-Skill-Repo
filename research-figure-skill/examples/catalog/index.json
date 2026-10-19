@@ -69,9 +69,13 @@
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8
             ]
           }
@@ -81,7 +85,7 @@
           "emphasis focus-gray -> 1 focus (ours), 3 muted",
           "annotation delta -> main/Bench B: method-1 -> ours (+22.0 pp)",
           "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
-          "axis main -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
+          "axis main -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -134,9 +138,13 @@
             ],
             "ticks": [
               0.0,
+              10.0,
               20.0,
+              30.0,
               40.0,
+              50.0,
               60.0,
+              70.0,
               80.0
             ]
           }
@@ -147,7 +155,7 @@
           "annotation delta -> main/Task B: before -> after (+19.0)",
           "annotation delta -> main/Task C: before -> after (+19.0)",
           "palette blue-orange -> before #0077BB, after #EE7733",
-          "axis main -> [0.0, 80]; ticks [0.0, 20.0, 40.0, 60.0, 80.0]",
+          "axis main -> [0.0, 80]; ticks [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -195,19 +203,25 @@
             ],
             "ticks": [
               0.0,
+              10.0,
               20.0,
+              30.0,
               40.0,
+              50.0,
               60.0,
+              70.0,
               80.0,
+              90.0,
               100.0
             ]
           }
         },
         "log": [
           "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+          "capacity single group -> bar width 0.35, margin 0.55",
           "encoding capacity -> capacity normalized to capacity",
           "palette neutral-accent -> achieved #A3ACB9",
-          "axis main -> [0.0, 100]; ticks [0.0, 20.0, 40.0, 60.0, 80.0, 100.0]",
+          "axis main -> [0.0, 100]; ticks [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]",
           "legend -> hidden"
         ]
       }
@@ -252,22 +266,26 @@
           "main": {
             "limits": [
               0.0,
-              1.0
+              0.9
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8,
-              1.0
+              0.9
             ]
           }
         },
         "log": [
           "size double -> 504 x 360 pt; type 8/9/7.5 pt",
           "palette tol-muted -> full #CC6677, no-a #332288, no-b #DDCC77, no-c #117733, no-d #88CCEE",
-          "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+          "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -313,22 +331,27 @@
           "main": {
             "limits": [
               0.0,
-              1.0
+              0.9
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8,
-              1.0
+              0.9
             ]
           }
         },
         "log": [
           "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+          "horizontal single series -> group gap 0.06",
           "palette blue-orange -> method #0077BB",
-          "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+          "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
           "legend -> hidden"
         ]
       }
@@ -377,9 +400,13 @@
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8
             ]
           }
@@ -387,7 +414,7 @@
         "log": [
           "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
           "palette grayscale -> method-a #D9D9D9, method-b #BFBFBF, method-c #A3A3A3",
-          "axis main -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
+          "axis main -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -437,24 +464,32 @@
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8
             ]
           },
           "Environment B": {
             "limits": [
               0.0,
-              1.0
+              0.9
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8,
-              1.0
+              0.9
             ]
           }
         },
@@ -462,8 +497,8 @@
           "size single -> 237.6 x 339.4 pt; type 7/8/6.5 pt",
           "emphasis focus-gray -> 1 focus (ours), 2 muted",
           "palette neutral-accent -> method-a #A3ACB9, method-b #7B848F, ours #9979CB",
-          "axis Environment A -> [0.0, 0.8]; ticks [0.0, 0.2, 0.4, 0.6, 0.8]",
-          "axis Environment B -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+          "axis Environment A -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
+          "axis Environment B -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -510,15 +545,19 @@
           "main": {
             "limits": [
               0.0,
-              1.0
+              0.9
             ],
             "ticks": [
               0.0,
+              0.1,
               0.2,
+              0.3,
               0.4,
+              0.5,
               0.6,
+              0.7,
               0.8,
-              1.0
+              0.9
             ]
           }
         },
@@ -527,7 +566,7 @@
           "type scale -> 1.5",
           "emphasis focus-gray -> 1 focus (ours), 3 muted",
           "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
-          "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+          "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
           "legend auto -> renderer measures columns at render time"
         ]
       }

@@ -25,19 +25,25 @@
       ],
       "ticks": [
         0.0,
+        10.0,
         20.0,
+        30.0,
         40.0,
+        50.0,
         60.0,
+        70.0,
         80.0,
+        90.0,
         100.0
       ]
     }
   },
   "log": [
     "size single -> 237.6 x 169.7 pt; type 7/8/6.5 pt",
+    "capacity single group -> bar width 0.35, margin 0.55",
     "encoding capacity -> capacity normalized to capacity",
     "palette neutral-accent -> achieved #A3ACB9",
-    "axis main -> [0.0, 100]; ticks [0.0, 20.0, 40.0, 60.0, 80.0, 100.0]",
+    "axis main -> [0.0, 100]; ticks [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]",
     "legend -> hidden"
   ]
 }

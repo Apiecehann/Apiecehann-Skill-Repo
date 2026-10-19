@@ -55,3 +55,11 @@
 - Stage 5 文档：新增 `spec/README.md`、`library/README.md`；`SKILL.md` 改为 IR 主入口；`grouped-bar/README.md` 增加 IR quickstart；本报告补齐阶段 4–5。
 - 最终验收命令：`../.venv/bin/python -m pytest quantitative-plots/grouped-bar/scripts spec -q`。
 - 分支已推送到 `origin/feat/pattern-library`；服务器 `git fetch` 后已对齐到同一 commit，并复跑 137 passed。
+
+## 风味迭代 1（验收后）
+
+- `auto_axis` 收紧 headroom：85% 的数据现在到 90%，不再是 100%。
+- capacity 单组柱宽降到 0.35、`category_margin` 0.55，不再占满槽宽。
+- horizontal 单系列 `group_gap` 降到 0.06，并关闭网格；横向条更紧凑。
+- 新增 `examples/palette-shootout/`：4 种 baseline 策略 × 3 个 accent 的真实成图对照，附 `stage1.png` 和 `index.json`，用于用户选色。
+- 回归测试增加到 140 passed。

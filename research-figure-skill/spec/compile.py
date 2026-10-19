@@ -308,11 +308,23 @@ def translate(ir, rows, order):
         longest = max(len(r["group"]) for r in rows)
         config["layout"]["left_pt"] = max(config["layout"]["left_pt"], min(90, longest * 4 + 12))
         config["layout"]["right_pt"] = max(config["layout"]["right_pt"], 30 if labels["values"] else 10)
+        # Horizontal bars read better without a grid; see the pastel reference.
+        config["panel_defaults"]["grid"]["kind"] = "none"
     panel_count = len(config["panels"])
     if panel_count > 1:
         config["figure"]["size_pt"][1] *= panel_count
         config["layout"]["top_pt"] = max(config["layout"]["top_pt"], 42 * scale)
         config["layout"]["row_gap_pt"] = max(config["layout"]["row_gap_pt"], 48 * scale)
+    series_count = len({r["series"] for r in rows})
+    if "capacity" in ir["encoding"] and len({r["group"] for r in rows}) == 1:
+        # A single capacity bar should not fill the whole category slot.
+        config["panel_defaults"]["bar_width"] = 0.35
+        config["panel_defaults"]["category_margin"] = 0.55
+        log.append("capacity single group -> bar width 0.35, margin 0.55")
+    if layout == "horizontal" and series_count == 1:
+        # Horizontal single-series bars should sit close together vertically.
+        config["panel_defaults"]["group_gap"] = 0.06
+        log.append("horizontal single series -> group gap 0.06")
     if "y_max" in axis and axis["y_max"] is not None:
         upper = axis["y_max"]
         lower = axis.get("baseline", 0)

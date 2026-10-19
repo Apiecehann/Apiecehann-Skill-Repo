@@ -429,9 +429,10 @@ def auto_axis(rows, baseline):
     span = top - bottom
     if span <= 0:
         span = max(abs(top), 1.0) * 0.1
-    step = nice_step(span * 1.08, target=6)
-    lower = math.floor((bottom - span * 0.04) / step) * step
-    upper = math.ceil((top + span * 0.04) / step) * step
+    # Keep the headroom tight: 85% should end at 90%, not 100%.
+    step = nice_step(span * 1.02, target=12)
+    lower = math.floor((bottom * 0.98) / step) * step
+    upper = math.ceil((top * 1.02) / step) * step
     if baseline == 0 and bottom >= 0:
         lower = 0.0
     if top <= 0:

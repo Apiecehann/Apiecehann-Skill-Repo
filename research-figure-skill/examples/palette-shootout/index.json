@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "data": "data.csv",
+  "sheet": "stage1.png",
+  "entries": [
+    {
+      "id": "A-blue",
+      "strategy": "A same-gray",
+      "accent": "blue",
+      "accent_hex": "#2F80C9",
+      "baseline_colors": [
+        "#C9C6BF",
+        "#C9C6BF",
+        "#C9C6BF"
+      ],
+      "file": "panels/A-blue.png"
+    },
+    {
+      "id": "A-teal",
+      "strategy": "A same-gray",
+      "accent": "teal",
+      "accent_hex": "#1F9E89",
+      "baseline_colors": [
+        "#C9C6BF",
+        "#C9C6BF",
+        "#C9C6BF"
+      ],
+      "file": "panels/A-teal.png"
+    },
+    {
+      "id": "A-orange",
+      "strategy": "A same-gray",
+      "accent": "orange",
+      "accent_hex": "#E07A2F",
+      "baseline_colors": [
+        "#C9C6BF",
+        "#C9C6BF",
+        "#C9C6BF"
+      ],
+      "file": "panels/A-orange.png"
+    },
+    {
+      "id": "B-blue",
+      "strategy": "B gray-tints",
+      "accent": "blue",
+      "accent_hex": "#2F80C9",
+      "baseline_colors": [
+        "#DEDAD2",
+        "#C9C6BF",
+        "#A8A49C"
+      ],
+      "file": "panels/B-blue.png"
+    },
+    {
+      "id": "B-teal",
+      "strategy": "B gray-tints",
+      "accent": "teal",
+      "accent_hex": "#1F9E89",
+      "baseline_colors": [
+        "#DEDAD2",
+        "#C9C6BF",
+        "#A8A49C"
+      ],
+      "file": "panels/B-teal.png"
+    },
+    {
+      "id": "B-orange",
+      "strategy": "B gray-tints",
+      "accent": "orange",
+      "accent_hex": "#E07A2F",
+      "baseline_colors": [
+        "#DEDAD2",
+        "#C9C6BF",
+        "#A8A49C"
+      ],
+      "file": "panels/B-orange.png"
+    },
+    {
+      "id": "C-blue",
+      "strategy": "C muted-hues",
+      "accent": "blue",
+      "accent_hex": "#2F80C9",
+      "baseline_colors": [
+        "#D8A7A7",
+        "#A8C3B0",
+        "#A9B8C9"
+      ],
+      "file": "panels/C-blue.png"
+    },
+    {
+      "id": "C-teal",
+      "strategy": "C muted-hues",
+      "accent": "teal",
+      "accent_hex": "#1F9E89",
+      "baseline_colors": [
+        "#D8A7A7",
+        "#A8C3B0",
+        "#A9B8C9"
+      ],
+      "file": "panels/C-teal.png"
+    },
+    {
+      "id": "C-orange",
+      "strategy": "C muted-hues",
+      "accent": "orange",
+      "accent_hex": "#E07A2F",
+      "baseline_colors": [
+        "#D8A7A7",
+        "#A8C3B0",
+        "#A9B8C9"
+      ],
+      "file": "panels/C-orange.png"
+    },
+    {
+      "id": "D-blue",
+      "strategy": "D accent-tints",
+      "accent": "blue",
+      "accent_hex": "#2F80C9",
+      "baseline_colors": [
+        "#d1e3f3",
+        "#a1c6e7",
+        "#72a9da"
+      ],
+      "file": "panels/D-blue.png"
+    },
+    {
+      "id": "D-teal",
+      "strategy": "D accent-tints",
+      "accent": "teal",
+      "accent_hex": "#1F9E89",
+      "baseline_colors": [
+        "#ceeae5",
+        "#9ad3ca",
+        "#67bdaf"
+      ],
+      "file": "panels/D-teal.png"
+    },
+    {
+      "id": "D-orange",
+      "strategy": "D accent-tints",
+      "accent": "orange",
+      "accent_hex": "#E07A2F",
+      "baseline_colors": [
+        "#f8e2d1",
+        "#f1c3a1",
+        "#eaa572"
+      ],
+      "file": "panels/D-orange.png"
+    }
+  ]
+}

@@ -21,22 +21,26 @@
     "main": {
       "limits": [
         0.0,
-        1.0
+        0.9
       ],
       "ticks": [
         0.0,
+        0.1,
         0.2,
+        0.3,
         0.4,
+        0.5,
         0.6,
+        0.7,
         0.8,
-        1.0
+        0.9
       ]
     }
   },
   "log": [
     "size double -> 504 x 360 pt; type 8/9/7.5 pt",
     "palette tol-muted -> full #CC6677, no-a #332288, no-b #DDCC77, no-c #117733, no-d #88CCEE",
-    "axis main -> [0.0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
     "legend auto -> renderer measures columns at render time"
   ]
 }

@@ -12,7 +12,7 @@
     "preset": "single"
   },
   "theme": {
-    "style": "soft-outline",
+    "style": "paper-clean",
     "palette": "neutral-accent",
     "font": "sans"
   },
