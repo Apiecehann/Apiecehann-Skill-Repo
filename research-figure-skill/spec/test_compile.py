@@ -288,3 +288,15 @@ def test_horizontal_single_series_is_tight_and_gridless(tmp_path):
     assert config["panel_defaults"]["group_gap"] == .06
     assert config["panel_defaults"]["grid"]["kind"] == "none"
     assert any("group gap 0.06" in line for line in decisions["log"])
+
+
+def test_axes_catalog_declares_when_and_avoid_for_every_option():
+    axes = json.loads((SPEC.parent / "library/axes.json").read_text(encoding="utf8"))["axes"]
+    assert {"baseline_strategy", "accent_hue", "paired_palette", "categorical_palette",
+            "grid", "style", "type", "annotation", "layout", "size"} <= set(axes)
+    for name, axis in axes.items():
+        assert axis["options"], name
+        for option in axis["options"]:
+            assert option["id"] and option["label"], (name, option)
+            assert option["when"] and option["avoid"], (name, option)
+            assert option.get("status") in ("implemented", "planned"), (name, option)
