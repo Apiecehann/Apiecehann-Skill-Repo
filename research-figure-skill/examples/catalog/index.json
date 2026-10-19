@@ -52,7 +52,8 @@
         "eventplot",
         "hist2d",
         "hexbin",
-        "clustermap"
+        "clustermap",
+        "calendar-heatmap"
       ]
     }
   },
@@ -170,6 +171,9 @@
     ],
     "clustermap": [
       "clustermap"
+    ],
+    "calendar-heatmap": [
+      "calendar-heatmap"
     ]
   },
   "entries": [
@@ -2572,6 +2576,50 @@
         },
         "log": [
           "heatmap -> 4 x 5 cells"
+        ]
+      }
+    },
+    {
+      "recipe": "calendar-heatmap",
+      "title": "Calendar heatmap",
+      "chart": "calendar-heatmap",
+      "variant": "quarter",
+      "tags": [
+        "paper",
+        "single-column",
+        "matrix",
+        "calendar"
+      ],
+      "files": {
+        "png": "calendar-heatmap/figure.png",
+        "pdf": "calendar-heatmap/figure.pdf",
+        "svg": "calendar-heatmap/figure.svg",
+        "config": "calendar-heatmap/config.json",
+        "data": "calendar-heatmap/data.csv",
+        "decisions": "calendar-heatmap/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：每天的活动量日历热力图。",
+        "chart": "calendar-heatmap",
+        "size": "single",
+        "size_pt": [
+          420,
+          220
+        ],
+        "palette": "Blues",
+        "encoding": [
+          "calendar-heatmap"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "calendar",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "calendar-heatmap -> 120 days"
         ]
       }
     }

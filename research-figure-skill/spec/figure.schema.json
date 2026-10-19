@@ -44,7 +44,8 @@
         "eventplot",
         "hist2d",
         "hexbin",
-        "clustermap"
+        "clustermap",
+        "calendar-heatmap"
       ]
     },
     "data": {
@@ -194,6 +195,10 @@
           "minLength": 1
         },
         "parent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
           "type": "string",
           "minLength": 1
         },

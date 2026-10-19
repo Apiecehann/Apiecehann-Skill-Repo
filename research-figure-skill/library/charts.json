@@ -455,6 +455,17 @@
       ],
       "supports": [],
       "ir": "examples/templates/clustermap/figure.ir.json"
+    },
+    {
+      "id": "calendar-heatmap",
+      "family": "matrix",
+      "status": "implemented",
+      "requires": [
+        "date",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/calendar-heatmap/figure.ir.json"
     }
   ]
 }

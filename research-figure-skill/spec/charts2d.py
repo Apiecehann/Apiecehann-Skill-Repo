@@ -698,6 +698,30 @@ def _finish_handles(fig, ax, config, out_stem, handles):
     return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]
 
 
+def render_calendar_heatmap(config, rows, out_stem):
+    from datetime import date
+    fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
+    fig.patch.set_facecolor("white"); ax.set_facecolor("white")
+    values = [r["value"] for r in rows]
+    lo, hi = min(values), max(values)
+    cmap = plt.get_cmap(config.get("colormap", "Blues"))
+    dates = sorted(date.fromisoformat(r["date"]) for r in rows)
+    start = dates[0]
+    for row in rows:
+        d = date.fromisoformat(row["date"])
+        week = (d - start).days // 7
+        weekday = d.weekday()
+        t = (row["value"] - lo) / (hi - lo) if hi > lo else .5
+        ax.add_patch(matplotlib.patches.Rectangle((week, 6 - weekday), .86, .86, color=cmap(t)))
+    ax.set_xlim(-.5, max((d - start).days // 7 for d in dates) + 1)
+    ax.set_ylim(-.5, 7); ax.axis("off")
+    for month in sorted({(d.year, d.month) for d in dates}):
+        first = min(d for d in dates if (d.year, d.month) == month)
+        ax.text((first - start).days // 7, 7.1, f"{first.strftime('%b')}", fontsize=6.5)
+    fig.subplots_adjust(left=.06, right=.98, top=.86, bottom=.2)
+    return _save_fig(fig, out_stem)
+
+
 def render_clustermap(config, rows, out_stem):
     fig, ax = plt.subplots(figsize=(config["size_pt"][0] / 72, config["size_pt"][1] / 72), dpi=200)
     fig.patch.set_facecolor("white")

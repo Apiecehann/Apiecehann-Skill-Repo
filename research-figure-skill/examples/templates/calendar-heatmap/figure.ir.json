@@ -1,0 +1,10 @@
+{
+  "claim": "MOCK：每天的活动量日历热力图。",
+  "chart": "calendar-heatmap",
+  "data": "data.csv",
+  "encoding": {"date": "date", "value": "value"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans", "colormap": "Blues"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true}
+}

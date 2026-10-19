@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：每天的活动量日历热力图。",
+  "chart": "calendar-heatmap",
+  "size": "single",
+  "size_pt": [
+    420,
+    220
+  ],
+  "palette": "Blues",
+  "encoding": [
+    "calendar-heatmap"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "calendar",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "calendar-heatmap -> 120 days"
+  ]
+}

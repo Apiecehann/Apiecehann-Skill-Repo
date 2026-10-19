@@ -570,6 +570,19 @@
       "ir": "examples/templates/clustermap/figure.ir.json",
       "chart": "clustermap",
       "variant": "layer-task"
+    },
+    {
+      "id": "calendar-heatmap",
+      "title": "Calendar heatmap",
+      "tags": [
+        "paper",
+        "single-column",
+        "matrix",
+        "calendar"
+      ],
+      "ir": "examples/templates/calendar-heatmap/figure.ir.json",
+      "chart": "calendar-heatmap",
+      "variant": "quarter"
     }
   ]
 }

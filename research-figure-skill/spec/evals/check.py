@@ -79,7 +79,7 @@ def check_case(case, ir_path):
     elif ir["chart"] in ("box", "violin", "ecdf", "kde", "ridgeline", "qq", "eventplot"):
         actual_rows, _ = read_distribution_rows(ir, ir_path)
         expected_rows, _ = read_distribution_rows(expected_ir, ir_path)
-    elif ir["chart"] in ("heatmap", "clustermap", "roc", "pr", "calibration", "surface", "scatter3d", "voxel", "det", "node-link", "sankey", "treemap", "radar", "bar3d", "mesh3d", "quiver3d", "sunburst", "icicle", "chord", "alluvial", "hist2d", "hexbin"):
+    elif ir["chart"] in ("heatmap", "clustermap", "calendar-heatmap", "roc", "pr", "calibration", "surface", "scatter3d", "voxel", "det", "node-link", "sankey", "treemap", "radar", "bar3d", "mesh3d", "quiver3d", "sunburst", "icicle", "chord", "alluvial", "hist2d", "hexbin"):
         with (ir_path.parent / ir["data"]).open(encoding="utf-8-sig", newline="") as stream:
             actual_rows = list(csv.DictReader(stream))
         with Path(expected_data).open(encoding="utf-8-sig", newline="") as stream:
