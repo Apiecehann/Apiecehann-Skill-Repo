@@ -9,6 +9,7 @@ import numpy as np
 import pytest
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
+from matplotlib.transforms import Affine2D
 from render import (DEFAULTS, build_figure, load_data, merge, apply_override,
                     apply_override_file, panel_rectangles, render)
 
@@ -412,3 +413,139 @@ def test_increment_csv_base_parsed_and_validated(tmp_path):
     path.write_text("id,panel,group,series,base,value\na,p,A,base,91,90\n")
     with pytest.raises(ValueError, match="0 <= base <= value"):
         load_data(path)
+
+def delta_case(values, groups=None, reverse=False, **gain_defaults):
+    groups = groups or ['pair'] * len(values)
+    rows = [{'id': str(i), 'panel': 'p', 'group': group, 'series': 'base', 'value': value}
+            for i, (value, group) in enumerate(zip(values, groups))]
+    pairs = [(str(i), str(i+1)) for i in range(0, len(rows), 2)]
+    config = {'panels': [{'id': 'p'}],
+              'panel_defaults': {'position_mode': 'auto', 'value_format': '.1f'},
+              'gain_defaults': gain_defaults,
+              'gains': [{'from': b if reverse else a, 'to': a if reverse else b}
+                        for a, b in pairs]}
+    return config, rows
+
+
+def delta_geometry(fig, artists):
+    """Inspect the rendered shaft AND arrowhead independently of routing helpers."""
+    renderer = fig.canvas.get_renderer()
+    scale = 72 / fig.dpi
+    for item in artists.values():
+        for gain in item.get('auto_gains', []):
+            arrow = gain['arrow']
+            rendered = arrow.get_transform().transform_path(arrow.get_path())
+            samples = []
+            for curve, code in rendered.iter_bezier():
+                if code != rendered.CLOSEPOLY:
+                    samples.extend(curve(np.linspace(0, 1, 101)))
+            points = np.asarray(samples) * scale
+            label = gain['label'].get_window_extent(renderer).transformed(
+                Affine2D().scale(scale))
+            panel = item['axis'].get_window_extent(renderer).transformed(
+                Affine2D().scale(scale))
+            assert len(points) >= 40
+            assert np.all(points[:, 0] > panel.x0) and np.all(points[:, 0] < panel.x1)
+            assert np.all(points[:, 1] > panel.y0) and np.all(points[:, 1] < panel.y1)
+            assert panel.x0 < label.x0 < label.x1 < panel.x1
+            assert panel.y0 < label.y0 < label.y1 < panel.y1
+            for other in artists.values():
+                if other['axis'] is not item['axis']:
+                    continue
+                for key in ('bar', 'capacity_bar', 'label', 'capacity_label', 'increment_label'):
+                    artist = other.get(key)
+                    if artist is None:
+                        continue
+                    box = artist.get_window_extent(renderer).transformed(
+                        Affine2D().scale(scale)).padded(1)
+                    assert not np.any((points[:, 0] >= box.x0) & (points[:, 0] <= box.x1) &
+                                      (points[:, 1] >= box.y0) & (points[:, 1] <= box.y1)), key
+                    assert not label.overlaps(box), key
+            yield item, gain, label, points
+
+
+@pytest.mark.parametrize('values', [(40, 80), (80, 40), (79.8, 80), (80, 79.8)])
+@pytest.mark.parametrize('reverse', [False, True])
+def test_auto_delta_ascending_descending_and_small_changes(values, reverse):
+    config, rows = delta_case(values, reverse=reverse)
+    fig, artists = build_figure(config, rows)
+    results = list(delta_geometry(fig, artists))
+    assert len(results) == 1
+    _, gain, _, _ = results[0]
+    expected = (values[0]-values[1]) if reverse else (values[1]-values[0])
+    assert gain['label'].get_text() == format(expected, '+.1f')
+    assert gain['leader'] is not None  # Outside-of-pair placement stays associated.
+
+
+def test_auto_delta_labels_stay_in_their_adjacent_group_slots():
+    config, rows = delta_case([50, 51, 75, 60, 50, 80], ['a', 'a', 'b', 'b', 'c', 'c'])
+    fig, artists = build_figure(config, rows)
+    scale = 72/fig.dpi
+    results = list(delta_geometry(fig, artists))
+    assert len(results) == 3
+    boundaries = [(artists[str(i)]['bar'].get_window_extent().x1 +
+                   artists[str(i+1)]['bar'].get_window_extent().x0)*scale/2 for i in (1, 3)]
+    for (_, _, label, _), left, right in zip(results, [-np.inf]+boundaries, boundaries+[np.inf]):
+        assert left < label.x0 < label.x1 < right
+
+
+@pytest.mark.parametrize('anchor', ['left', 'center', 'right'])
+def test_auto_delta_tracks_current_bar_width_and_anchor(anchor):
+    config, rows = delta_case([50, 80], tail_anchor=anchor, tip_anchor=anchor)
+    for width in (.3, 1.1):
+        config['panel_defaults']['bar_width'] = width
+        fig, artists = build_figure(config, rows)
+        gain = artists['0']['auto_gains'][0]
+        box = artists['1']['bar'].get_window_extent()
+        expected = {'left': box.x0, 'center': (box.x0+box.x1)/2, 'right': box.x1}[anchor]
+        assert gain['path_pt'].vertices[-1, 0] == pytest.approx(expected*72/fig.dpi)
+        list(delta_geometry(fig, artists))
+
+
+def test_auto_delta_fixed_limits_report_insufficient_room():
+    config, rows = delta_case([50, 80])
+    config['panel_defaults']['limits'] = [0, 80]
+    with pytest.raises(ValueError, match='increase y_max or figure height'):
+        build_figure(config, rows)
+
+
+@pytest.mark.parametrize('name', ['cue-comparison', 'data-edit', 'teaser-strip',
+                                  'zero-shot-execution', 'affordance-distribution', 'planning-gains'])
+def test_frozen_gain_geometry_defaults_to_legacy(name):
+    config, rows = case(name)
+    fig, _ = build_figure(config, rows)
+    config.setdefault('gain_defaults', {})['auto_layout'] = False
+    legacy, _ = build_figure(config, rows)
+    def geometry(figure):
+        result = {}
+        for artist in figure.findobj():
+            gid = artist.get_gid() or ''
+            if gid.startswith('gain-'):
+                result[gid] = (artist.get_path().vertices if gid.endswith('-arrow')
+                               else np.array(artist.get_position()))
+        return result
+    actual, expected = geometry(fig), geometry(legacy)
+    assert actual.keys() == expected.keys()
+    for key in actual:
+        np.testing.assert_array_equal(actual[key], expected[key])
+    # Captured before this capability task; detects changes in the legacy branch too.
+    snapshot = json.loads((Path(__file__).parent/'fixtures/frozen-gains.json').read_text())[name]
+    assert actual.keys() == snapshot.keys()
+    for key, captured in snapshot.items():
+        coordinates = captured['position'] if key.endswith('-label') else captured
+        np.testing.assert_allclose(actual[key], coordinates, rtol=0, atol=1e-12)
+        if key.endswith('-label'):
+            label = fig.findobj(lambda artist: artist.get_gid() == key)[0]
+            assert label.get_text() == captured['text']
+
+@pytest.mark.parametrize('encoding', ['capacity', 'increment'])
+def test_auto_delta_respects_capacity_and_increment_labels(encoding):
+    config, rows = delta_case([50, 80])
+    if encoding == 'capacity':
+        rows[0]['capacity'], rows[1]['capacity'] = 60, 90
+        config['panel_defaults']['capacity'] = {'field': 'capacity'}
+    else:
+        rows[0]['base'], rows[1]['base'] = 45, 79.8
+        config['panel_defaults']['increment'] = {'field': 'base'}
+    fig, artists = build_figure(config, rows)
+    assert len(list(delta_geometry(fig, artists))) == 1

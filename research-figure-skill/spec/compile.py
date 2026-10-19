@@ -356,11 +356,7 @@ def translate(ir, rows, order):
     axes = {}
     for panel, rect in zip(config["panels"], backend.panel_rectangles(config)):
         members = [r for r in rows if r["panel"] == panel["id"]]
-        limits = style["limits"]
-        if limits == "auto":
-            limits, ticks = backend.auto_axis(members, style["baseline"])
-        else:
-            ticks = backend.nice_ticks(limits)
+        limits, ticks = backend.panel_axis(members, style, rect[3], config)
         axes[panel["id"]] = {"limits": limits, "ticks": ticks}
         log.append(f"axis {panel['id']} -> {limits}; ticks {ticks}")
         if panel_count > 1:

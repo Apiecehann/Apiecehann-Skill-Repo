@@ -73,3 +73,13 @@
 兼容约定：artists[row_id]["bar"] 是不绘制的完整总值矩形，仅保留几何元数据；base_bar 与 increment_bar 是实际两段。total_label／increment_label／increment_leader 暴露标签与引线。增量卡总值标签独立于普通 value_labels 开关；放不下的增量标签置于总值标签上方并加引线。新模板、注册与扩展几何覆盖将在阶段 3 完成。
 
 阶段 1 验收：完整测试 152 passed in 26.83s；/tmp/increment-base 中立预览已导出 PNG/PDF/SVG 并人工查看，三组的基数、增量、分隔与标签均正常。
+
+阶段 2：新 gain 默认 auto_layout=true，在物理 pt 坐标中测量柱体、数值标签与已有 delta 标签，采样三段三次曲线路径并布置标签；同组标签优先限制在本组槽内，移位较大时加引线。clearance_pt=5、label_collision_pad_pt=2、label_leader_pt=8 可调，后者是触发引线的水平位移阈值。自动轴仅在存在自动 gain 时预留标注空间，编译决策和渲染使用同一计算函数；无 gain 的轴行为不变。
+
+兼容与边界：auto_layout=false 完整保留旧几何；frozen_config=true 且未显式选择 auto_layout 时自动走旧路径，不改六份配置。显式轴范围不被悄悄扩大；空间不足以安全容纳箭头或标签时，明确要求增加 y_max／画布尺寸或缩短文字。artists[from_id]["auto_gains"] 提供 arrow、label、leader、path_pt、points_pt 供几何检查。
+
+阶段 2 验证覆盖升降、微小差值、左右反向、邻组槽、不同柱宽与锚点、容量／增量标签、空间不足、六个冻结示例。每个渲染曲线段独立采样 101 点，连同箭头头部检查 1 pt 膨胀柱体、数值标签及面板边界；冻结 gain 快照在修改前采集。before-after 与三组升降预览已导出 PNG/PDF/SVG 并查看。
+
+并行协作记录：共享检出被其他进程 reset 到 c9e7579，保留其 axis-review 提交，在 /tmp/increment-delta-work 独立检出恢复阶段 1 并完成阶段 2，再将两个能力提交整合回 feat/pattern-library。没有改动并行的色板／风格／字体／axes.json／palette-shootout。上下文轮换后按用户要求在阶段 2 绿灯提交处停下；阶段 3 尚需 increment-base 模板、recipes/evals 注册、相关验收与文档。
+
+阶段 2 最终验收：完整测试 173 passed in 30.04s，无警告；git diff --check 通过。冻结 gain 的坐标与标签快照逐一一致。

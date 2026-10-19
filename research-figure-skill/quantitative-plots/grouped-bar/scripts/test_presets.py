@@ -162,6 +162,7 @@ def test_single_size_legend_fits_without_manual_columns():
 
 def test_gain_tip_tracks_the_bar_edge_when_width_changes():
     config,rows = recipe('paired.json')
+    config.setdefault('gain_defaults', {})['auto_layout'] = False
     for width in (.5,1.2):
         config['panel_defaults']['bar_width'] = width
         fig,artists = build_figure(config,rows)

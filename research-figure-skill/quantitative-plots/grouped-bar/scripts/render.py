@@ -22,6 +22,7 @@ from matplotlib.offsetbox import AnnotationBbox, DrawingArea
 from matplotlib.text import Text
 from matplotlib.textpath import TextToPath
 from matplotlib.path import Path as MplPath
+from matplotlib.transforms import Bbox
 from matplotlib.patches import PathPatch, FancyBboxPatch, FancyArrowPatch, Patch, Rectangle
 import numpy as np
 
@@ -79,7 +80,8 @@ DEFAULTS = {
                         'frame_width': .8, 'rounded': True, 'borderpad': .4,
                         'columnspacing': 2, 'handlelength': 2, 'handleheight': .7,
                         'handletextpad': .8, 'borderaxespad': .5},
-    'gain_defaults': {'color': None, 'palette_part': 'edge', 'linewidth': 2.5,
+    'gain_defaults': {'auto_layout': True, 'clearance_pt': 5,
+                     'label_collision_pad_pt': 2, 'label_leader_pt': 8, 'color': None, 'palette_part': 'edge', 'linewidth': 2.5,
                      'alpha': 1, 'label_alpha': 1,
                      'head_length_pt': 7, 'head_width_pt': 6, 'tail_pad_pt': 5, 'tip_pad_pt': 9,
                      'tail_dx_pt': -12, 'tip_dx_pt': -16,
@@ -154,6 +156,8 @@ def resolve_config(config, rows):
     """
     if 'preset' not in config:
         result = merge(DEFAULTS, config)
+        if config.get('frozen_config') and 'auto_layout' not in config.get('gain_defaults', {}):
+            result['gain_defaults']['auto_layout'] = False
         for entry in result['palette'].values():
             for key in ('fill_alpha','edge_alpha','label_alpha'):
                 entry.setdefault(key, None)
@@ -557,6 +561,34 @@ def auto_axis(rows, baseline):
     return [round(lower, 10), round(upper, 10)], ticks
 
 
+def panel_axis(rows, style, height_pt, config):
+    """Resolve the data axis, reserving physical room only for automatic gains."""
+    limits, ticks = style['limits'], style['ticks']
+    if limits == 'auto':
+        limits, auto_ticks = auto_axis(rows, style['baseline'])
+        ids = {r['id'] for r in rows}
+        gains = [merge(config['gain_defaults'], g) for g in config['gains']
+                 if g['from'] in ids and g['to'] in ids]
+        gains = [g for g in gains if g['auto_layout']]
+        if gains:
+            reserve = max(g['clearance_pt']*2 + g['label_collision_pad_pt']*3 +
+                          g['label_size']*1.3 + max(g['head_length_pt'], 8) + 6 for g in gains)
+            if style['value_labels'] or style['increment']['field']:
+                reserve += style['value_pad'] + style['value_size']*1.3
+            if reserve >= height_pt*.8:
+                raise ValueError('Panel too short for automatic delta annotations; increase figure height or use auto_layout=false')
+            top = max(max(r.get('capacity', r['value']), r.get('high', r['value'])) for r in rows)
+            upper = limits[0] + (top-limits[0])/(1-reserve/height_pt)
+            step = nice_step(max(upper-limits[0], 1e-12), target=12)
+            limits = [limits[0], max(limits[1], math.ceil(upper/step)*step)]
+            auto_ticks = nice_ticks(limits)
+        if ticks == 'auto':
+            ticks = auto_ticks
+    elif ticks == 'auto':
+        ticks = nice_ticks(limits)
+    return limits, ticks
+
+
 def tint(color, amount=.84):
     rgb = np.array(matplotlib.colors.to_rgb(color))
     return tuple(rgb + (1-rgb)*amount)
@@ -666,6 +698,183 @@ def add_legend(fig, ax, panel, rows, style, config, font_dir):
         warnings.warn('Legend extends outside the figure; increase layout margins or reduce legend.size', UserWarning)
 
 
+def point_bbox(artist, renderer, scale):
+    box = artist.get_window_extent(renderer)
+    return Bbox.from_extents(*(np.array(box.extents)*scale))
+
+
+def padded(box, amount):
+    return Bbox.from_extents(box.x0-amount, box.y0-amount, box.x1+amount, box.y1+amount)
+
+
+def sample_cubic_path(path, count=96):
+    """Sample each Bezier segment, including its ends, in the path's coordinates."""
+    points = [path.vertices[0]]
+    start = path.vertices[0]
+    for i in range(1, len(path.vertices), 3):
+        c1, c2, end = path.vertices[i:i+3]
+        t = np.linspace(0, 1, count+1)[1:, None]
+        points.extend((1-t)**3*start + 3*(1-t)**2*t*c1 + 3*(1-t)*t**2*c2 + t**3*end)
+        start = end
+    return np.asarray(points)
+
+
+def points_hit_box(points, box):
+    return bool(np.any((points[:, 0] >= box.x0) & (points[:, 0] <= box.x1) &
+                       (points[:, 1] >= box.y0) & (points[:, 1] <= box.y1)))
+
+
+def gain_route(start, end, ceiling, lift):
+    """Three cubic segments: rise, traverse above intervening marks, then descend."""
+    across = end[0]-start[0]
+    first = np.array([start[0], ceiling])
+    last = np.array([end[0], ceiling])
+    vertices = [start, start+(first-start)/3, start+2*(first-start)/3, first,
+                first+[across/3, lift], first+[2*across/3, lift], last,
+                last+(end-last)/3, last+2*(end-last)/3, end]
+    return MplPath(vertices, [MplPath.MOVETO]+[MplPath.CURVE4]*9)
+
+
+def add_auto_gain(fig, spec, artists, config, font_dir):
+    """Route above obstacles and place measured text inside the panel's free space."""
+    before, after = artists[spec['from']], artists[spec['to']]
+    ax = before['axis']
+    for key in ('clearance_pt', 'label_collision_pad_pt', 'label_leader_pt'):
+        if type(spec[key]) not in (int, float) or not math.isfinite(spec[key]) or spec[key] < 0:
+            raise ValueError(f'gain.{key} must be a finite nonnegative number')
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    scale = 72/fig.dpi
+    width, height = config['figure']['size_pt']
+    size = np.array([width, height])
+    panel = point_bbox(ax, renderer, scale)
+    margin = max(1.5, spec['label_collision_pad_pt'])
+    inner = padded(panel, -margin)
+    members = [item for item in artists.values() if item['axis'] is ax]
+    bars = [point_bbox(item['bar'], renderer, scale) for item in members]
+    texts = []
+    for item in members:
+        for key in ('label', 'capacity_label', 'increment_label'):
+            text = item.get(key)
+            if text is not None and text.get_visible():
+                texts.append(point_bbox(text, renderer, scale))
+        if item.get('capacity_bar') is not None:
+            bars.append(point_bbox(item['capacity_bar'], renderer, scale))
+    previous = [gain for item in members for gain in item.get('auto_gains', [])]
+    texts += [point_bbox(g['label'], renderer, scale) for g in previous]
+    clearance = max(spec['clearance_pt'], spec['head_width_pt']/2+1, 2)
+    obstacles = [padded(b, 1+spec['linewidth']/2) for b in bars]
+    obstacles += [padded(b, spec['label_collision_pad_pt']) for b in texts]
+    def anchor(item, name):
+        box = point_bbox(item['bar'], renderer, scale)
+        xs = {'left': box.x0, 'center': (box.x0+box.x1)/2, 'right': box.x1}
+        if name not in xs:
+            raise ValueError('Gain anchors must be left, center or right')
+        x, y = xs[name], box.y1+clearance
+        # A value label may sit directly above this bar; start above that label too.
+        for obstacle in obstacles:
+            if obstacle.x0-clearance/2 <= x <= obstacle.x1+clearance/2:
+                y = max(y, obstacle.y1+clearance)
+        return np.array([x, y])
+    start, end = anchor(before, spec['tail_anchor']), anchor(after, spec['tip_anchor'])
+    left, right = sorted((start[0], end[0]))
+    across, change = abs(end[0]-start[0]), end[1]-start[1]
+    lift = min(3., across*.06)
+    ceiling = max(start[1], end[1]) + max(3., min(across*.1, 8.), abs(change)*.08)
+    for box in obstacles:
+        if box.x0 <= right and box.x1 >= left:
+            ceiling = max(ceiling, box.y1+clearance)
+    path = gain_route(start, end, ceiling, lift)
+    points = sample_cubic_path(path)
+    if (np.any(points[:, 0] < inner.x0) or np.any(points[:, 0] > inner.x1) or
+            np.any(points[:, 1] < inner.y0) or np.any(points[:, 1] > inner.y1) or
+            any(points_hit_box(points, box) for box in obstacles)):
+        raise ValueError('No collision-free delta path inside panel; increase y_max or figure height')
+
+    color = spec['color'] or config['palette'][after['series']][spec['palette_part']]
+    value = (after['value']-before['value'])*spec['label_scale']
+    key = f'gain-{spec["from"]}-{spec["to"]}'
+    label = fig.text(0, 0, format(value, spec['label_format'])+spec['label_suffix'],
+                     ha='center', va='center', color=color,
+                     alpha=opacity(spec['label_alpha'], 'gain.label_alpha'),
+                     fontproperties=font(config, spec['label_font'], spec['label_size'], font_dir))
+    label.set_gid(key+'-label')
+    # Text.get_window_extent measures with the current renderer without another draw.
+    measured = point_bbox(label, renderer, scale)
+    half_w, half_h = measured.width/2, measured.height/2
+    # Keep a group's label over its own slot, not over an adjacent group.
+    region = [inner.x0, inner.x1]
+    if before['group'] == after['group']:
+        own = [b for b, item in zip(bars, members) if item['group'] == before['group']]
+        other = [b for b, item in zip(bars, members) if item['group'] != before['group']]
+        own_left, own_right = min(b.x0 for b in own), max(b.x1 for b in own)
+        for box in other:
+            if box.x1 <= own_left:
+                region[0] = max(region[0], (box.x1+own_left)/2)
+            if box.x0 >= own_right:
+                region[1] = min(region[1], (box.x0+own_right)/2)
+    lo, hi = region[0]+half_w+margin, region[1]-half_w-margin
+    # A very wide label may use a free panel margin with a leader; never put it on bars.
+    constrained = lo <= hi
+    if not constrained:
+        lo, hi = inner.x0+half_w, inner.x1-half_w
+    if lo > hi:
+        label.remove()
+        raise ValueError('Delta label wider than panel; increase figure width or shorten label_format/label_suffix')
+    outward = 1 if (end[1] >= start[1]) == (end[0] >= start[0]) else -1
+    desired = (right+half_w+margin if outward > 0 else left-half_w-margin)
+    xs = [desired, (left+right)/2, left-half_w-margin, right+half_w+margin, lo, hi]
+    xs = list(dict.fromkeys(float(np.clip(x, lo, hi)) for x in xs))
+    above = points[:, 1].max()+margin+half_h
+    ys = [above + i*(2+half_h) for i in range(6)]
+    ys += list(np.arange(inner.y1-half_h, inner.y0+half_h, -max(half_h, 2)))
+    all_paths = [points] + [g['points_pt'] for g in previous]
+    position = None
+    leader_points = None
+    for y in ys:
+        if not inner.y0+half_h <= y <= inner.y1-half_h:
+            continue
+        for x in xs:
+            candidate = Bbox.from_extents(x-half_w, y-half_h, x+half_w, y+half_h)
+            expanded = padded(candidate, margin)
+            if any(expanded.overlaps(obstacle) for obstacle in obstacles):
+                continue
+            if any(points_hit_box(p, expanded) for p in all_paths):
+                continue
+            # Link displaced labels to the top of the route, avoiding bars and text.
+            center = points[np.argmax(points[:, 1])]
+            displacement = abs(x-(left+right)/2)
+            leader = None
+            if displacement > spec['label_leader_pt'] or not constrained or y < above:
+                edge = np.array([np.clip(center[0], candidate.x0, candidate.x1),
+                                 candidate.y0 if y >= center[1] else candidate.y1])
+                leader = np.linspace(center, edge, 96)
+                if any(points_hit_box(leader[1:-1], obstacle) for obstacle in obstacles):
+                    continue
+            position, leader_points = np.array([x, y]), leader
+            break
+        if position is not None:
+            break
+    if position is None:
+        label.remove()
+        raise ValueError('No free space for delta label; increase y_max/figure size or shorten its text')
+    label.set_position(position/size)
+    arrow = FancyArrowPatch(path=MplPath(path.vertices/size, path.codes), transform=fig.transFigure,
+        arrowstyle=f'-|>,head_length={spec["head_length_pt"]},head_width={spec["head_width_pt"]/2}',
+        mutation_scale=1, linewidth=spec['linewidth'], color=color,
+        alpha=opacity(spec['alpha'], 'gain.alpha'), clip_on=False, zorder=7)
+    arrow.set_gid(key+'-arrow')
+    fig.add_artist(arrow)
+    leader_artist = None
+    if leader_points is not None:
+        leader_artist = plt.Line2D(leader_points[:, 0]/width, leader_points[:, 1]/height,
+                                  transform=fig.transFigure, color=color, linewidth=.5, zorder=6)
+        leader_artist.set_gid(key+'-leader')
+        fig.add_artist(leader_artist)
+    before.setdefault('auto_gains', []).append(dict(arrow=arrow, label=label, leader=leader_artist,
+                                                   path_pt=path, points_pt=points))
+
+
 def add_gain(fig, spec, artists, config, font_dir):
     """Anchor a cubic gain arrow to two current bar values; derive its label from data."""
     spec=merge(config['gain_defaults'],spec)
@@ -674,6 +883,8 @@ def add_gain(fig, spec, artists, config, font_dir):
         raise ValueError('Gain arrows must connect bars in one panel')
     if not before['vertical']:
         raise ValueError('Gain arrows currently require vertical panels')
+    if spec['auto_layout']:
+        return add_auto_gain(fig, spec, artists, config, font_dir)
     width,height=config['figure']['size_pt'];size=np.array([width,height])
     ax=before['axis']
     def point(item, anchor):
@@ -731,14 +942,7 @@ def build_figure(config, rows, font_dir=None):
             rr = validate_capacity(rr, style['baseline'], style['capacity']['field'])
             rr = validate_increment(rr, style['baseline'], style['orientation'], style['increment']['field'])
             xx = positions(rr, style)
-            limits = style['limits']
-            ticks = style['ticks']
-            if limits == 'auto':
-                limits, auto_ticks = auto_axis(rr, style['baseline'])
-                if ticks == 'auto':
-                    ticks = auto_ticks
-            elif ticks == 'auto':
-                ticks = nice_ticks(limits)
+            limits, ticks = panel_axis(rr, style, rect[3], config)
             if not isinstance(limits, (list, tuple)) or len(limits) != 2:
                 raise ValueError('limits must be [lower, upper] or "auto"')
             if isinstance(ticks, str):
@@ -900,7 +1104,7 @@ def build_figure(config, rows, font_dir=None):
                     token_label(ax,x,tokens[row['id']],style,config,palette,font_dir,
                                 panel.get('token_shift_pt',{}).get(row['id'],0) if mode=='raw' else 0)
                 artists[row['id']] = {'bar':bar,'error':error,'label':label,'x':float(x),'axis':ax,
-                                      'value':row['value'],'series':row['series'],'vertical':vertical,
+                                      'value':row['value'],'series':row['series'],'group':row['group'],'vertical':vertical,
                                       'capacity_bar':capacity_bar,'capacity_label':capacity_label}
                 if increment:
                     artists[row['id']].update(increment, total_label=label)
