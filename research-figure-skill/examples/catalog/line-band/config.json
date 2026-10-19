@@ -1,0 +1,60 @@
+{
+  "chart": "line-band",
+  "groups": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "series_order": [
+    "method-1",
+    "ours"
+  ],
+  "colors": {
+    "method-1": "#6FA3D2",
+    "ours": "#2F80C9"
+  },
+  "series_labels": {
+    "method-1": "Method 1",
+    "ours": "Ours"
+  },
+  "x_label": "Training step",
+  "y_label": "Success rate (%)",
+  "x_min": 1,
+  "x_max": 5,
+  "reference": [
+    {
+      "axis": "y",
+      "value": 75,
+      "label": "SOTA"
+    }
+  ],
+  "stats": [
+    {
+      "kind": "ci-band"
+    }
+  ],
+  "overlays": [],
+  "legend": true,
+  "size_pt": [
+    360,
+    240
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

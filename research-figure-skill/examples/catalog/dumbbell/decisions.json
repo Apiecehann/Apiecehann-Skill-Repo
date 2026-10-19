@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：三个任务的改动前后差异，用 dumbbell 同时看两端和差值。",
+  "chart": "dumbbell",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "dumbbell"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "dumbbell",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      0,
+      100
+    ]
+  },
+  "log": [
+    "dumbbell -> 3 groups, 2 series"
+  ]
+}

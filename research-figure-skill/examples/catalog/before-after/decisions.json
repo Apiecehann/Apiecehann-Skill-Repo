@@ -25,18 +25,14 @@
     "main": {
       "limits": [
         0.0,
-        80
+        120
       ],
       "ticks": [
         0.0,
-        10.0,
-        20.0,
-        30.0,
-        40.0,
+        25.0,
         50.0,
-        60.0,
-        70.0,
-        80.0
+        75.0,
+        100.0
       ]
     }
   },
@@ -46,7 +42,7 @@
     "annotation delta -> main/Task B: before -> after (+19.0)",
     "annotation delta -> main/Task C: before -> after (+19.0)",
     "palette blue-orange -> before #0077BB, after #EE7733",
-    "axis main -> [0.0, 80]; ticks [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0]",
+    "axis main -> [0.0, 120]; ticks [0.0, 25.0, 50.0, 75.0, 100.0]",
     "legend auto -> renderer measures columns at render time"
   ]
 }

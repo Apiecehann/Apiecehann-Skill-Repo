@@ -1,0 +1,80 @@
+{
+  "chart": "scatter",
+  "groups": [
+    "12",
+    "18",
+    "25",
+    "33",
+    "40",
+    "48",
+    "55",
+    "62",
+    "70",
+    "80",
+    "90",
+    "10",
+    "16",
+    "22",
+    "30",
+    "37",
+    "45",
+    "52",
+    "60",
+    "92"
+  ],
+  "series_order": [
+    "method-1",
+    "ours"
+  ],
+  "colors": {
+    "method-1": "#6FA3D2",
+    "ours": "#2F80C9"
+  },
+  "series_labels": {
+    "method-1": "Method 1",
+    "ours": "Ours"
+  },
+  "x_label": "Latency (ms)",
+  "y_label": "Throughput",
+  "x_min": 0,
+  "x_max": 100,
+  "reference": [
+    {
+      "axis": "y",
+      "value": 80,
+      "label": "target"
+    }
+  ],
+  "stats": [
+    {
+      "kind": "trend",
+      "method": "linear"
+    },
+    {
+      "kind": "confidence-ellipse",
+      "level": 0.95
+    }
+  ],
+  "overlays": [],
+  "legend": true,
+  "size_pt": [
+    360,
+    240
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "claim": "模拟 2023-2025 三年任务成功率：hatched 部分是当年基数，实色部分是下一年增量。",
+  "chart": "grouped-bar",
+  "size": "medium",
+  "size_pt": [
+    324,
+    231.4
+  ],
+  "palette": "blue-orange",
+  "layout": "grouped",
+  "encoding": [
+    "increment"
+  ],
+  "emphasis": [],
+  "annotations": [],
+  "labels": {
+    "values": false,
+    "legend": "none",
+    "value_size": 6.5
+  },
+  "axes": {
+    "main": {
+      "limits": [
+        0,
+        1.0
+      ],
+      "ticks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ]
+    }
+  },
+  "log": [
+    "size medium -> 324 x 231.4 pt; type 7.5/8.5/7 pt",
+    "encoding increment -> base normalized to base; value is total",
+    "palette blue-orange -> ours #0077BB",
+    "axis main -> [0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+    "legend -> hidden"
+  ]
+}

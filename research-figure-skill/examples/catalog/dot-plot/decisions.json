@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：四种方法在三个 benchmark 上的成功率，用 dot plot 替代 grouped bar。",
+  "chart": "dot-plot",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-orange",
+  "encoding": [
+    "dot-plot"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "dot-plot",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      40,
+      95
+    ]
+  },
+  "log": [
+    "dot-plot -> 3 groups, 4 series"
+  ]
+}

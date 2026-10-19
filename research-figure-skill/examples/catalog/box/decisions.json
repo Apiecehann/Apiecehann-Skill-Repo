@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法在三个 benchmark 上的 latency 分布。",
+  "chart": "box",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "box"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "box",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      null,
+      null
+    ]
+  },
+  "log": [
+    "box -> 3 groups, 2 series, 60 observations"
+  ]
+}

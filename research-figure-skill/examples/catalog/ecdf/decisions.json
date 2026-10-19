@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法的 latency ECDF，比较尾部。",
+  "chart": "ecdf",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "blue-orange",
+  "encoding": [
+    "ecdf"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "ecdf",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      0,
+      120
+    ]
+  },
+  "log": [
+    "ecdf -> 1 groups, 2 series, 120 observations"
+  ]
+}

@@ -1,0 +1,11 @@
+id,panel,group,series,value,low,high
+a1,main,1,method-1,42.0,38.0,46.0
+b1,main,1,ours,46.0,42.0,50.0
+a2,main,2,method-1,51.0,46.0,56.0
+b2,main,2,ours,58.0,53.0,63.0
+a3,main,3,method-1,58.0,52.0,64.0
+b3,main,3,ours,68.0,62.0,74.0
+a4,main,4,method-1,63.0,58.0,68.0
+b4,main,4,ours,75.0,69.0,81.0
+a5,main,5,method-1,66.0,60.0,72.0
+b5,main,5,ours,81.0,75.0,87.0

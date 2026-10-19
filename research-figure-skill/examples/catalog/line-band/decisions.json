@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法在 5 个 step 上的成功率均值与 95% 区间。",
+  "chart": "line-band",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "line-band"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "line-band",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      1,
+      5
+    ]
+  },
+  "log": [
+    "line-band -> 5 groups, 2 series"
+  ]
+}

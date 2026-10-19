@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法的 confidence density，比较 overlap。",
+  "chart": "kde",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "blue-orange",
+  "encoding": [
+    "kde"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "kde",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      0,
+      1
+    ]
+  },
+  "log": [
+    "kde -> 1 groups, 2 series, 160 observations"
+  ]
+}

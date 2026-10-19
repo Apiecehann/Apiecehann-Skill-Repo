@@ -170,6 +170,17 @@
     "value_background_pad": 0.1,
     "baseline": 0,
     "allow_interval_clipping": false,
+    "reference_lines": [],
+    "increment": {
+      "field": null,
+      "hatch": "////",
+      "gap_pt": 1.5,
+      "pad_pt": 1.5,
+      "label_format": "{total}",
+      "delta_format": "+{delta:g}",
+      "reference_line": false,
+      "hatch_color": null
+    },
     "capacity": {
       "field": null,
       "linestyle": "--",
@@ -183,6 +194,7 @@
       "spacing_pt": 10.5,
       "value_step": "auto",
       "value_stop": "auto",
+      "axis": "value",
       "size": 0.75,
       "color": "#cbd2dc",
       "alpha": 0.45,
@@ -244,11 +256,16 @@
     "borderaxespad": 0
   },
   "gain_defaults": {
+    "auto_layout": true,
+    "clearance_pt": 5,
+    "label_collision_pad_pt": 2,
+    "label_leader_pt": 8,
     "color": null,
     "palette_part": "edge",
     "linewidth": 1,
     "alpha": 1,
     "label_alpha": 1,
+    "arrow_style": "route",
     "head_length_pt": 3,
     "head_width_pt": 3,
     "tail_pad_pt": 3,
@@ -278,6 +295,7 @@
     "label_format": "+.1f",
     "label_scale": 1,
     "label_suffix": "",
+    "label_side": "above",
     "clip": false
   },
   "panels": [

@@ -1,0 +1,38 @@
+{
+  "claim": "MOCK：四层 × 五任务的指标矩阵。",
+  "chart": "heatmap",
+  "size": "single",
+  "size_pt": [
+    360,
+    280
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "heatmap"
+  ],
+  "labels": {
+    "values": true,
+    "legend": "none"
+  },
+  "layout": "heatmap",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "rows": [
+      "Layer 1",
+      "Layer 2",
+      "Layer 3",
+      "Layer 4"
+    ],
+    "cols": [
+      "Task A",
+      "Task B",
+      "Task C",
+      "Task D",
+      "Task E"
+    ]
+  },
+  "log": [
+    "heatmap -> 4 x 5 cells"
+  ]
+}

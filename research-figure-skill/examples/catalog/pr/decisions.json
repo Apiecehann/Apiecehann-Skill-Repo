@@ -1,0 +1,26 @@
+{
+  "claim": "MOCK：不平衡二分类的 precision-recall 曲线。",
+  "chart": "pr",
+  "size": "single",
+  "size_pt": [
+    360,
+    260
+  ],
+  "palette": "d3-orange",
+  "encoding": [
+    "pr"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "pr",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "bins": 10
+  },
+  "log": [
+    "pr -> 240 observations, 1 series"
+  ]
+}

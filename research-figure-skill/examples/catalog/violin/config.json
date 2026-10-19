@@ -1,0 +1,59 @@
+{
+  "chart": "violin",
+  "groups": [
+    "Bench A",
+    "Bench B",
+    "Bench C"
+  ],
+  "series_order": [
+    "method-1",
+    "ours"
+  ],
+  "colors": {
+    "method-1": "#6FA3D2",
+    "ours": "#2F80C9"
+  },
+  "series_labels": {
+    "method-1": "Method 1",
+    "ours": "Ours"
+  },
+  "x_label": "Benchmark",
+  "y_label": "Latency (ms)",
+  "x_min": null,
+  "x_max": null,
+  "reference": [
+    {
+      "axis": "y",
+      "value": 90,
+      "label": "target"
+    }
+  ],
+  "overlays": [
+    {
+      "kind": "raw-points",
+      "jitter": 0.04,
+      "alpha": 0.4
+    }
+  ],
+  "legend": true,
+  "size_pt": [
+    360,
+    240
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

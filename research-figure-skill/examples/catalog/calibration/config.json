@@ -1,0 +1,36 @@
+{
+  "chart": "calibration",
+  "series_order": [
+    "all"
+  ],
+  "colors": {
+    "all": "#1F9E89"
+  },
+  "series_labels": {
+    "all": "Ours"
+  },
+  "bins": 10,
+  "size_pt": [
+    360,
+    260
+  ],
+  "x_label": "",
+  "y_label": "",
+  "legend": true,
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

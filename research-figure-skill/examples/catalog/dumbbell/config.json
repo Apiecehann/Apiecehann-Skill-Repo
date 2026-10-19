@@ -1,0 +1,48 @@
+{
+  "chart": "dumbbell",
+  "groups": [
+    "Task A",
+    "Task B",
+    "Task C"
+  ],
+  "series_order": [
+    "before",
+    "after"
+  ],
+  "colors": {
+    "before": "#6FA3D2",
+    "after": "#2F80C9"
+  },
+  "series_labels": {
+    "before": "Before",
+    "after": "After"
+  },
+  "x_label": "Success rate (%)",
+  "y_label": "Task",
+  "x_min": 0,
+  "x_max": 100,
+  "reference": [],
+  "stats": [],
+  "overlays": [],
+  "legend": true,
+  "size_pt": [
+    360,
+    240
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "svg_text": true,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

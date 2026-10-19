@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法的 latency/throughput 关系，带线性趋势与 95% 置信椭圆。",
+  "chart": "scatter",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "scatter"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "scatter",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      0,
+      100
+    ]
+  },
+  "log": [
+    "scatter -> 20 groups, 2 series"
+  ]
+}

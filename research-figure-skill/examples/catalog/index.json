@@ -16,7 +16,22 @@
         "horizontal-percent",
         "print-bw",
         "multi-panel",
-        "slide-teaser"
+        "slide-teaser",
+        "increment-base",
+        "distribution-overlap",
+        "dot-plot",
+        "dumbbell",
+        "line-band",
+        "scatter",
+        "box",
+        "violin",
+        "ecdf",
+        "kde",
+        "heatmap",
+        "roc",
+        "pr",
+        "calibration",
+        "surface"
       ]
     }
   },
@@ -65,18 +80,14 @@
           "main": {
             "limits": [
               0.0,
-              0.8
+              1.2000000000000002
             ],
             "ticks": [
               0.0,
-              0.1,
-              0.2,
-              0.3,
-              0.4,
+              0.25,
               0.5,
-              0.6,
-              0.7,
-              0.8
+              0.75,
+              1.0
             ]
           }
         },
@@ -85,7 +96,7 @@
           "emphasis focus-gray -> 1 focus (ours), 3 muted",
           "annotation delta -> main/Bench B: method-1 -> ours (+22.0 pp)",
           "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
-          "axis main -> [0.0, 0.8]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]",
+          "axis main -> [0.0, 1.2000000000000002]; ticks [0.0, 0.25, 0.5, 0.75, 1.0]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -134,18 +145,14 @@
           "main": {
             "limits": [
               0.0,
-              80
+              120
             ],
             "ticks": [
               0.0,
-              10.0,
-              20.0,
-              30.0,
-              40.0,
+              25.0,
               50.0,
-              60.0,
-              70.0,
-              80.0
+              75.0,
+              100.0
             ]
           }
         },
@@ -155,7 +162,7 @@
           "annotation delta -> main/Task B: before -> after (+19.0)",
           "annotation delta -> main/Task C: before -> after (+19.0)",
           "palette blue-orange -> before #0077BB, after #EE7733",
-          "axis main -> [0.0, 80]; ticks [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0]",
+          "axis main -> [0.0, 120]; ticks [0.0, 25.0, 50.0, 75.0, 100.0]",
           "legend auto -> renderer measures columns at render time"
         ]
       }
@@ -568,6 +575,758 @@
           "palette neutral-accent -> method-1 #A3ACB9, method-2 #7B848F, method-3 #57606C, ours #9979CB",
           "axis main -> [0.0, 0.9]; ticks [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]",
           "legend auto -> renderer measures columns at render time"
+        ]
+      }
+    },
+    {
+      "recipe": "increment-base",
+      "title": "Base plus increment",
+      "tags": [
+        "paper",
+        "1.5-column",
+        "increment",
+        "base"
+      ],
+      "files": {
+        "png": "increment-base/figure.png",
+        "pdf": "increment-base/figure.pdf",
+        "svg": "increment-base/figure.svg",
+        "config": "increment-base/config.json",
+        "data": "increment-base/data.csv",
+        "decisions": "increment-base/decisions.json"
+      },
+      "decisions": {
+        "claim": "模拟 2023-2025 三年任务成功率：hatched 部分是当年基数，实色部分是下一年增量。",
+        "chart": "grouped-bar",
+        "size": "medium",
+        "size_pt": [
+          324,
+          231.4
+        ],
+        "palette": "blue-orange",
+        "layout": "grouped",
+        "encoding": [
+          "increment"
+        ],
+        "emphasis": [],
+        "annotations": [],
+        "labels": {
+          "values": false,
+          "legend": "none",
+          "value_size": 6.5
+        },
+        "axes": {
+          "main": {
+            "limits": [
+              0,
+              1.0
+            ],
+            "ticks": [
+              0.0,
+              0.2,
+              0.4,
+              0.6,
+              0.8,
+              1.0
+            ]
+          }
+        },
+        "log": [
+          "size medium -> 324 x 231.4 pt; type 7.5/8.5/7 pt",
+          "encoding increment -> base normalized to base; value is total",
+          "palette blue-orange -> ours #0077BB",
+          "axis main -> [0, 1.0]; ticks [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]",
+          "legend -> hidden"
+        ]
+      }
+    },
+    {
+      "recipe": "distribution-overlap",
+      "title": "Distribution overlap",
+      "tags": [
+        "paper",
+        "double-column",
+        "distribution",
+        "overlap"
+      ],
+      "files": {
+        "png": "distribution-overlap/figure.png",
+        "pdf": "distribution-overlap/figure.pdf",
+        "svg": "distribution-overlap/figure.svg",
+        "config": "distribution-overlap/config.json",
+        "data": "distribution-overlap/data.csv",
+        "decisions": "distribution-overlap/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：比较 CE / LS 两种 setting 下 Correct 与 Incorrect 的 confidence 分布。",
+        "chart": "distribution-overlap",
+        "size": "double",
+        "size_pt": [
+          504,
+          252
+        ],
+        "palette": "blue-orange",
+        "encoding": [
+          "distribution-overlap"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "distribution-overlap",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            1
+          ],
+          "bins": 20
+        },
+        "log": [
+          "distribution -> 2 panel(s), 2 series, x [0, 1], 20 bins",
+          "palette blue-orange -> correct, incorrect"
+        ]
+      }
+    },
+    {
+      "recipe": "dot-plot",
+      "title": "Dot plot",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "dot"
+      ],
+      "files": {
+        "png": "dot-plot/figure.png",
+        "pdf": "dot-plot/figure.pdf",
+        "svg": "dot-plot/figure.svg",
+        "config": "dot-plot/config.json",
+        "data": "dot-plot/data.csv",
+        "decisions": "dot-plot/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：四种方法在三个 benchmark 上的成功率，用 dot plot 替代 grouped bar。",
+        "chart": "dot-plot",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-orange",
+        "encoding": [
+          "dot-plot"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "dot-plot",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            40,
+            95
+          ]
+        },
+        "log": [
+          "dot-plot -> 3 groups, 4 series"
+        ]
+      }
+    },
+    {
+      "recipe": "dumbbell",
+      "title": "Dumbbell",
+      "tags": [
+        "paper",
+        "single-column",
+        "comparison",
+        "paired"
+      ],
+      "files": {
+        "png": "dumbbell/figure.png",
+        "pdf": "dumbbell/figure.pdf",
+        "svg": "dumbbell/figure.svg",
+        "config": "dumbbell/config.json",
+        "data": "dumbbell/data.csv",
+        "decisions": "dumbbell/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：三个任务的改动前后差异，用 dumbbell 同时看两端和差值。",
+        "chart": "dumbbell",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "dumbbell"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "dumbbell",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            100
+          ]
+        },
+        "log": [
+          "dumbbell -> 3 groups, 2 series"
+        ]
+      }
+    },
+    {
+      "recipe": "line-band",
+      "title": "Line with CI band",
+      "tags": [
+        "paper",
+        "single-column",
+        "time",
+        "band"
+      ],
+      "files": {
+        "png": "line-band/figure.png",
+        "pdf": "line-band/figure.pdf",
+        "svg": "line-band/figure.svg",
+        "config": "line-band/config.json",
+        "data": "line-band/data.csv",
+        "decisions": "line-band/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法在 5 个 step 上的成功率均值与 95% 区间。",
+        "chart": "line-band",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "line-band"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "line-band",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            1,
+            5
+          ]
+        },
+        "log": [
+          "line-band -> 5 groups, 2 series"
+        ]
+      }
+    },
+    {
+      "recipe": "scatter",
+      "title": "Scatter with trend and ellipse",
+      "tags": [
+        "paper",
+        "single-column",
+        "relationship",
+        "trend"
+      ],
+      "files": {
+        "png": "scatter/figure.png",
+        "pdf": "scatter/figure.pdf",
+        "svg": "scatter/figure.svg",
+        "config": "scatter/config.json",
+        "data": "scatter/data.csv",
+        "decisions": "scatter/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法的 latency/throughput 关系，带线性趋势与 95% 置信椭圆。",
+        "chart": "scatter",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "scatter"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "scatter",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            100
+          ]
+        },
+        "log": [
+          "scatter -> 20 groups, 2 series"
+        ]
+      }
+    },
+    {
+      "recipe": "box",
+      "title": "Box distribution",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "box"
+      ],
+      "files": {
+        "png": "box/figure.png",
+        "pdf": "box/figure.pdf",
+        "svg": "box/figure.svg",
+        "config": "box/config.json",
+        "data": "box/data.csv",
+        "decisions": "box/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法在三个 benchmark 上的 latency 分布。",
+        "chart": "box",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "box"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "box",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "log": [
+          "box -> 3 groups, 2 series, 60 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "violin",
+      "title": "Violin distribution",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "violin"
+      ],
+      "files": {
+        "png": "violin/figure.png",
+        "pdf": "violin/figure.pdf",
+        "svg": "violin/figure.svg",
+        "config": "violin/config.json",
+        "data": "violin/data.csv",
+        "decisions": "violin/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法在三个 benchmark 上的 latency 分布形状。",
+        "chart": "violin",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "violin"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "violin",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            null,
+            null
+          ]
+        },
+        "log": [
+          "violin -> 3 groups, 2 series, 60 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "ecdf",
+      "title": "ECDF",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "ecdf"
+      ],
+      "files": {
+        "png": "ecdf/figure.png",
+        "pdf": "ecdf/figure.pdf",
+        "svg": "ecdf/figure.svg",
+        "config": "ecdf/config.json",
+        "data": "ecdf/data.csv",
+        "decisions": "ecdf/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法的 latency ECDF，比较尾部。",
+        "chart": "ecdf",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "blue-orange",
+        "encoding": [
+          "ecdf"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "ecdf",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            120
+          ]
+        },
+        "log": [
+          "ecdf -> 1 groups, 2 series, 120 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "kde",
+      "title": "KDE density",
+      "tags": [
+        "paper",
+        "single-column",
+        "distribution",
+        "kde"
+      ],
+      "files": {
+        "png": "kde/figure.png",
+        "pdf": "kde/figure.pdf",
+        "svg": "kde/figure.svg",
+        "config": "kde/config.json",
+        "data": "kde/data.csv",
+        "decisions": "kde/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个方法的 confidence density，比较 overlap。",
+        "chart": "kde",
+        "size": "single",
+        "size_pt": [
+          360,
+          240
+        ],
+        "palette": "blue-orange",
+        "encoding": [
+          "kde"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "kde",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0,
+            1
+          ]
+        },
+        "log": [
+          "kde -> 1 groups, 2 series, 160 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "heatmap",
+      "title": "Heatmap",
+      "tags": [
+        "paper",
+        "single-column",
+        "matrix",
+        "heatmap"
+      ],
+      "files": {
+        "png": "heatmap/figure.png",
+        "pdf": "heatmap/figure.pdf",
+        "svg": "heatmap/figure.svg",
+        "config": "heatmap/config.json",
+        "data": "heatmap/data.csv",
+        "decisions": "heatmap/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：四层 × 五任务的指标矩阵。",
+        "chart": "heatmap",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "heatmap"
+        ],
+        "labels": {
+          "values": true,
+          "legend": "none"
+        },
+        "layout": "heatmap",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "rows": [
+            "Layer 1",
+            "Layer 2",
+            "Layer 3",
+            "Layer 4"
+          ],
+          "cols": [
+            "Task A",
+            "Task B",
+            "Task C",
+            "Task D",
+            "Task E"
+          ]
+        },
+        "log": [
+          "heatmap -> 4 x 5 cells"
+        ]
+      }
+    },
+    {
+      "recipe": "roc",
+      "title": "ROC curve",
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "roc"
+      ],
+      "files": {
+        "png": "roc/figure.png",
+        "pdf": "roc/figure.pdf",
+        "svg": "roc/figure.svg",
+        "config": "roc/config.json",
+        "data": "roc/data.csv",
+        "decisions": "roc/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：二分类 ROC 曲线。",
+        "chart": "roc",
+        "size": "single",
+        "size_pt": [
+          360,
+          260
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "roc"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "roc",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "bins": 10
+        },
+        "log": [
+          "roc -> 240 observations, 1 series"
+        ]
+      }
+    },
+    {
+      "recipe": "pr",
+      "title": "Precision-recall curve",
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "pr"
+      ],
+      "files": {
+        "png": "pr/figure.png",
+        "pdf": "pr/figure.pdf",
+        "svg": "pr/figure.svg",
+        "config": "pr/config.json",
+        "data": "pr/data.csv",
+        "decisions": "pr/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：不平衡二分类的 precision-recall 曲线。",
+        "chart": "pr",
+        "size": "single",
+        "size_pt": [
+          360,
+          260
+        ],
+        "palette": "d3-orange",
+        "encoding": [
+          "pr"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "pr",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "bins": 10
+        },
+        "log": [
+          "pr -> 240 observations, 1 series"
+        ]
+      }
+    },
+    {
+      "recipe": "calibration",
+      "title": "Calibration curve",
+      "tags": [
+        "paper",
+        "single-column",
+        "classification",
+        "calibration"
+      ],
+      "files": {
+        "png": "calibration/figure.png",
+        "pdf": "calibration/figure.pdf",
+        "svg": "calibration/figure.svg",
+        "config": "calibration/config.json",
+        "data": "calibration/data.csv",
+        "decisions": "calibration/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：二分类置信度校准曲线。",
+        "chart": "calibration",
+        "size": "single",
+        "size_pt": [
+          360,
+          260
+        ],
+        "palette": "d3-teal",
+        "encoding": [
+          "calibration"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "top"
+        },
+        "layout": "calibration",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "bins": 10
+        },
+        "log": [
+          "calibration -> 240 observations, 1 series"
+        ]
+      }
+    },
+    {
+      "recipe": "surface",
+      "title": "3D surface and contour",
+      "tags": [
+        "paper",
+        "double-column",
+        "3d",
+        "surface"
+      ],
+      "files": {
+        "png": "surface/figure.png",
+        "pdf": "surface/figure.pdf",
+        "svg": "surface/figure.svg",
+        "config": "surface/config.json",
+        "data": "surface/data.csv",
+        "decisions": "surface/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：二维参数网格上的响应面（loss landscape）。",
+        "chart": "surface",
+        "size": "double",
+        "size_pt": [
+          560,
+          300
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "surface"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "surface",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {
+          "x": [
+            0.0,
+            0.357,
+            0.714,
+            1.071,
+            1.429,
+            1.786,
+            2.143,
+            2.5,
+            2.857,
+            3.214,
+            3.571,
+            3.929,
+            4.286,
+            4.643,
+            5.0
+          ],
+          "y": [
+            0.0,
+            0.357,
+            0.714,
+            1.071,
+            1.429,
+            1.786,
+            2.143,
+            2.5,
+            2.857,
+            3.214,
+            3.571,
+            3.929,
+            4.286,
+            4.643,
+            5.0
+          ]
+        },
+        "log": [
+          "surface -> 15 x 15 grid"
         ]
       }
     }

@@ -1,0 +1,31 @@
+{
+  "claim": "MOCK：比较 CE / LS 两种 setting 下 Correct 与 Incorrect 的 confidence 分布。",
+  "chart": "distribution-overlap",
+  "size": "double",
+  "size_pt": [
+    504,
+    252
+  ],
+  "palette": "blue-orange",
+  "encoding": [
+    "distribution-overlap"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "distribution-overlap",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      0,
+      1
+    ],
+    "bins": 20
+  },
+  "log": [
+    "distribution -> 2 panel(s), 2 series, x [0, 1], 20 bins",
+    "palette blue-orange -> correct, incorrect"
+  ]
+}

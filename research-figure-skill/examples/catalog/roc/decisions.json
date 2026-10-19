@@ -1,0 +1,26 @@
+{
+  "claim": "MOCK：二分类 ROC 曲线。",
+  "chart": "roc",
+  "size": "single",
+  "size_pt": [
+    360,
+    260
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "roc"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "roc",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "bins": 10
+  },
+  "log": [
+    "roc -> 240 observations, 1 series"
+  ]
+}

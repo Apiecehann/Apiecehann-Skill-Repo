@@ -1,0 +1,26 @@
+{
+  "claim": "MOCK：二分类置信度校准曲线。",
+  "chart": "calibration",
+  "size": "single",
+  "size_pt": [
+    360,
+    260
+  ],
+  "palette": "d3-teal",
+  "encoding": [
+    "calibration"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "calibration",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "bins": 10
+  },
+  "log": [
+    "calibration -> 240 observations, 1 series"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "claim": "MOCK：两个方法在三个 benchmark 上的 latency 分布形状。",
+  "chart": "violin",
+  "size": "single",
+  "size_pt": [
+    360,
+    240
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "violin"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "top"
+  },
+  "layout": "violin",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {
+    "x": [
+      null,
+      null
+    ]
+  },
+  "log": [
+    "violin -> 3 groups, 2 series, 60 observations"
+  ]
+}
