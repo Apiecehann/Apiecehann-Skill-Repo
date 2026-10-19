@@ -95,3 +95,5 @@ Promote：15 个 style、15 个 font、5 个 palette（d3-orange / d3-blue / d3-
 P0 开发文档：docs/DEVELOPMENT.md；新增 library/charts.json 与 library/overlays.json。M1 实现 dot-plot 与 dumbbell：IR、renderer、template、recipes/evals、catalog；tests 187 passed。
 
 M2：line-band 与 scatter 已实现；line-band 用 low/high 画 CI band，scatter 支持 trend + confidence-ellipse + reference；recipes/evals 增至 14/18，tests 191 passed。
+
+M3：kde/box/violin/ecdf 已实现；distribution 数据允许重复观测；recipes/evals 增至 18/22，tests 199 passed。

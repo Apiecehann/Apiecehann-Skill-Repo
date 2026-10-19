@@ -113,7 +113,7 @@
     {
       "id": "kde",
       "family": "distribution",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "panel",
         "series",
@@ -127,7 +127,7 @@
     {
       "id": "box",
       "family": "distribution",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "x",
         "y"
@@ -141,7 +141,7 @@
     {
       "id": "violin",
       "family": "distribution",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "x",
         "y"
@@ -155,7 +155,7 @@
     {
       "id": "ecdf",
       "family": "distribution",
-      "status": "planned",
+      "status": "implemented",
       "requires": [
         "panel",
         "series",

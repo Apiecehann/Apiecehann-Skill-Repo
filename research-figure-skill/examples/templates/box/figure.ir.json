@@ -1,0 +1,14 @@
+{
+  "claim": "MOCK：两个方法在三个 benchmark 上的 latency 分布。",
+  "chart": "box",
+  "data": "data.csv",
+  "encoding": {"x": "group", "y": "value", "series": "series"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": false, "legend": "top"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Benchmark", "y_label": "Latency (ms)"},
+  "series_order": ["method-1", "ours"],
+  "series_labels": {"method-1": "Method 1", "ours": "Ours"},
+  "reference": [{"axis": "y", "value": 90, "label": "target"}]
+}

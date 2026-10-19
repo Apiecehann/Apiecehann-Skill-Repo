@@ -526,11 +526,97 @@ def compile_2d(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def read_distribution_rows(ir, ir_path):
+    """Long distribution rows may repeat (panel, group, series); do not deduplicate."""
+    path = Path(ir_path).parent / ir["data"]
+    enc = ir["encoding"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        reader = csv.DictReader(stream)
+        columns = reader.fieldnames or []
+        missing = set(enc.values()) - set(columns)
+        if missing:
+            raise ValueError(f"CSV {path}: missing columns {sorted(missing)}; fix encoding or CSV")
+        source = list(reader)
+    if not source:
+        raise ValueError(f"CSV {path}: no rows")
+    rows = []
+    for i, raw in enumerate(source, 1):
+        row_id = raw.get(enc.get("id", "id"), f"row-{i:04d}").strip()
+        group = raw[enc["x"]].strip()
+        series = raw[enc["series"]].strip()
+        if not group or not series:
+            raise ValueError(f"CSV row {i}: group and series are required")
+        rows.append({
+            "id": row_id, "panel": raw[enc["panel"]].strip() if "panel" in enc else "main",
+            "group": group, "series": series,
+            "value": numeric(raw[enc["y"]], enc["y"], row_id),
+        })
+    present = list(dict.fromkeys(r["series"] for r in rows))
+    order = ir.get("series_order", present)
+    if set(order) != set(present) or len(order) != len(present):
+        raise ValueError("series_order must list every distribution series exactly once")
+    return rows, order
+
+
+def compile_distribution_2d(ir, ir_path, output, render=False):
+    chart = ir["chart"]
+    if chart not in ("box", "violin", "ecdf", "kde"):
+        raise ValueError(f"unsupported distribution chart {chart!r}")
+    rows, order = read_distribution_rows(ir, ir_path)
+    theme = ir["theme"]
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette_name = theme.get("palette", "d3-orange")
+    palette = presets["palettes"].get(palette_name)
+    if palette is None:
+        raise ValueError(f"Unknown palette {palette_name!r}")
+    if len(palette["colors"]) < len(order):
+        raise ValueError(f"Palette {palette_name!r} has {len(palette['colors'])} colors for {len(order)} series")
+    groups = list(dict.fromkeys(r["group"] for r in rows))
+    axis = ir.get("axis", {})
+    size = ir["size"]["preset"]
+    size_pt = {"single": [360, 240], "medium": [420, 260], "double": [504, 320],
+               "slide": [648, 360]}[size]
+    config = {
+        "chart": chart, "groups": groups, "series_order": order,
+        "colors": dict(zip(order, palette["colors"][-len(order):])),
+        "series_labels": ir.get("series_labels", {}),
+        "x_label": axis.get("x_label", ""), "y_label": axis.get("y_label", ""),
+        "x_min": axis.get("x_min"), "x_max": axis.get("x_max"),
+        "reference": ir.get("reference", []),
+        "legend": ir["labels"].get("legend", "top") == "top",
+        "size_pt": size_pt, "formats": ir["output"]["formats"],
+        "dpi": ir["output"]["dpi"], "svg_text": ir["output"].get("svg_text", True),
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["id", "panel", "group", "series", "value"])
+        writer.writeheader()
+        writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": chart, "size": size, "size_pt": size_pt,
+        "palette": palette_name, "encoding": [chart], "labels": ir["labels"],
+        "layout": chart, "emphasis": [], "annotations": [],
+        "axes": {"x": [axis.get("x_min"), axis.get("x_max")]},
+        "log": [f"{chart} -> {len(groups)} groups, {len(order)} series, {len(rows)} observations"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        renderer = {"box": charts2d.render_box, "violin": charts2d.render_violin,
+                    "ecdf": charts2d.render_ecdf, "kde": charts2d.render_kde}[chart]
+        renderer(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_ir(ir_path, output, render=False):
     ir_path, output = Path(ir_path), Path(output)
     ir = load_ir(ir_path)
     if ir["chart"] == "distribution-overlap":
         return compile_distribution(ir, ir_path, output, render)
+    if ir["chart"] in ("box", "violin", "ecdf", "kde"):
+        return compile_distribution_2d(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

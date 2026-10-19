@@ -16,3 +16,7 @@
 {"id": "case-16", "request": "三个任务改动前后用 dumbbell 对比，标出差值，单栏", "recipe": "dumbbell", "data": "examples/templates/dumbbell/data.csv", "expect": {"chart": "dumbbell", "labels": {"legend": "top"}}}
 {"id": "case-17", "request": "训练曲线两个方法，带 95% 区间和 SOTA 参考线，单栏", "recipe": "line-band", "data": "examples/templates/line-band/data.csv", "expect": {"chart": "line-band", "stats": [{"kind": "ci-band"}], "reference": [{"axis": "y", "value": 75, "label": "SOTA"}]}}
 {"id": "case-18", "request": "latency-throughput 散点，两个方法带线性趋势和置信椭圆，单栏", "recipe": "scatter", "data": "examples/templates/scatter/data.csv", "expect": {"chart": "scatter", "stats": [{"kind": "trend", "method": "linear"}, {"kind": "confidence-ellipse", "level": 0.95}], "reference": [{"axis": "y", "value": 80, "label": "target"}]}}
+{"id": "case-19", "request": "两个方法在三个 benchmark 上的 latency 分布，用 box 看中位数和 IQR", "recipe": "box", "data": "examples/templates/box/data.csv", "expect": {"chart": "box", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
+{"id": "case-20", "request": "两个方法在三个 benchmark 上的 latency 分布形状，用 violin", "recipe": "violin", "data": "examples/templates/violin/data.csv", "expect": {"chart": "violin", "reference": [{"axis": "y", "value": 90, "label": "target"}]}}
+{"id": "case-21", "request": "两个方法的 latency ECDF，比较尾部，单栏", "recipe": "ecdf", "data": "examples/templates/ecdf/data.csv", "expect": {"chart": "ecdf"}}
+{"id": "case-22", "request": "两个方法的 confidence KDE，比较 overlap，单栏", "recipe": "kde", "data": "examples/templates/kde/data.csv", "expect": {"chart": "kde"}}

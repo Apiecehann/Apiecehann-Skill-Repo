@@ -15,7 +15,11 @@
         "dot-plot",
         "dumbbell",
         "line-band",
-        "scatter"
+        "scatter",
+        "box",
+        "violin",
+        "ecdf",
+        "kde"
       ]
     },
     "data": {

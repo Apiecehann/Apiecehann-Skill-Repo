@@ -197,3 +197,133 @@ def render_scatter(config, rows, out_stem):
     if config.get("x_min") is not None or config.get("x_max") is not None:
         ax.set_xlim(config.get("x_min"), config.get("x_max"))
     return _finish(fig, ax, config, out_stem)
+
+
+def _category_grid(ax):
+    ax.grid(False)
+    ax.grid(True, axis="y", color="#D9DEE3", linewidth=.6, zorder=0)
+    ax.set_axisbelow(True)
+
+
+def _series_values(rows, groups, series):
+    return [[r["value"] for r in rows if r["group"] == group and r["series"] == series]
+            for group in groups]
+
+
+def render_box(config, rows, out_stem):
+    fig, ax = _setup(config)
+    _category_grid(ax)
+    groups, series, colors = config["groups"], config["series_order"], config["colors"]
+    labels = config.get("series_labels", {})
+    n = len(series)
+    width = .78 / n
+    handles = []
+    for i, name in enumerate(series):
+        data = _series_values(rows, groups, name)
+        positions = np.arange(len(groups)) + (i - (n - 1) / 2) * width
+        bp = ax.boxplot(data, positions=positions, widths=width * .82, patch_artist=True,
+                        showfliers=False, medianprops={"color": colors[name], "linewidth": 1.2},
+                        whiskerprops={"color": colors[name], "linewidth": .8},
+                        capprops={"color": colors[name], "linewidth": .8})
+        for patch in bp["boxes"]:
+            patch.set_facecolor(colors[name])
+            patch.set_alpha(.45)
+            patch.set_edgecolor(colors[name])
+            patch.set_linewidth(.8)
+        handles.append(matplotlib.patches.Patch(facecolor=colors[name], alpha=.45,
+                                                edgecolor=colors[name], label=labels.get(name, name)))
+    ax.set_xticks(range(len(groups)))
+    ax.set_xticklabels(groups)
+    _reference(ax, config)
+    if config.get("y_min") is not None or config.get("y_max") is not None:
+        ax.set_ylim(config.get("y_min"), config.get("y_max"))
+    return _finish_handles(fig, ax, config, out_stem, handles)
+
+
+def render_violin(config, rows, out_stem):
+    fig, ax = _setup(config)
+    _category_grid(ax)
+    groups, series, colors = config["groups"], config["series_order"], config["colors"]
+    labels = config.get("series_labels", {})
+    n = len(series)
+    width = .78 / n
+    handles = []
+    for i, name in enumerate(series):
+        data = _series_values(rows, groups, name)
+        positions = np.arange(len(groups)) + (i - (n - 1) / 2) * width
+        vp = ax.violinplot(data, positions=positions, widths=width * .85,
+                           showmeans=False, showmedians=True, showextrema=False)
+        for body in vp["bodies"]:
+            body.set_facecolor(colors[name])
+            body.set_edgecolor(colors[name])
+            body.set_alpha(.38)
+        vp["cmedians"].set_color(colors[name])
+        vp["cmedians"].set_linewidth(1.1)
+        handles.append(matplotlib.patches.Patch(facecolor=colors[name], alpha=.38,
+                                                edgecolor=colors[name], label=labels.get(name, name)))
+    ax.set_xticks(range(len(groups)))
+    ax.set_xticklabels(groups)
+    _reference(ax, config)
+    return _finish_handles(fig, ax, config, out_stem, handles)
+
+
+def _gaussian_kde(values, grid):
+    values = np.asarray(values, dtype=float)
+    if len(values) < 2:
+        return np.zeros_like(grid)
+    std = values.std(ddof=1)
+    bw = 1.06 * std * len(values) ** (-1 / 5)
+    bw = max(bw, 1e-9)
+    z = (grid[:, None] - values[None, :]) / bw
+    return np.exp(-.5 * z ** 2).mean(axis=1) / (bw * np.sqrt(2 * np.pi))
+
+
+def render_ecdf(config, rows, out_stem):
+    fig, ax = _setup(config)
+    colors, labels = config["colors"], config.get("series_labels", {})
+    for name in config["series_order"]:
+        values = np.sort(np.array([r["value"] for r in rows if r["series"] == name]))
+        if len(values) == 0:
+            continue
+        y = np.arange(1, len(values) + 1) / len(values)
+        ax.step(values, y, where="post", color=colors[name], linewidth=1.8,
+                label=labels.get(name, name))
+    ax.set_ylim(0, 1.02)
+    _reference(ax, config)
+    if config.get("x_min") is not None or config.get("x_max") is not None:
+        ax.set_xlim(config.get("x_min"), config.get("x_max"))
+    return _finish(fig, ax, config, out_stem)
+
+
+def render_kde(config, rows, out_stem):
+    fig, ax = _setup(config)
+    colors, labels = config["colors"], config.get("series_labels", {})
+    all_values = np.array([r["value"] for r in rows])
+    grid = np.linspace(all_values.min(), all_values.max(), 240)
+    for name in config["series_order"]:
+        values = [r["value"] for r in rows if r["series"] == name]
+        if len(values) < 2:
+            continue
+        density = _gaussian_kde(values, grid)
+        ax.plot(grid, density, color=colors[name], linewidth=1.8, label=labels.get(name, name))
+        ax.fill_between(grid, 0, density, color=colors[name], alpha=.12)
+    _reference(ax, config)
+    if config.get("x_min") is not None or config.get("x_max") is not None:
+        ax.set_xlim(config.get("x_min"), config.get("x_max"))
+    return _finish(fig, ax, config, out_stem)
+
+
+def _finish_handles(fig, ax, config, out_stem, handles):
+    ax.set_xlabel(config.get("x_label", ""), fontsize=8)
+    ax.set_ylabel(config.get("y_label", ""), fontsize=8)
+    if config.get("legend", True) and handles:
+        ax.legend(handles=handles, frameon=False, fontsize=7, loc="lower center",
+                  bbox_to_anchor=(.5, 1.01), ncol=min(4, len(handles)), handletextpad=.4,
+                  columnspacing=1.2, borderaxespad=0)
+    fig.subplots_adjust(left=.16, right=.98, top=.84, bottom=.16)
+    out_stem = Path(out_stem)
+    out_stem.parent.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf", "svg"):
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, facecolor="white")
+    plt.close(fig)
+    return [out_stem.with_suffix("." + ext) for ext in ("png", "pdf", "svg")]

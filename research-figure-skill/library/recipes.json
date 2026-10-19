@@ -152,6 +152,30 @@
         "trend"
       ],
       "ir": "examples/templates/scatter/figure.ir.json"
+    },
+    {
+      "id": "box",
+      "title": "Box distribution",
+      "tags": ["paper", "single-column", "distribution", "box"],
+      "ir": "examples/templates/box/figure.ir.json"
+    },
+    {
+      "id": "violin",
+      "title": "Violin distribution",
+      "tags": ["paper", "single-column", "distribution", "violin"],
+      "ir": "examples/templates/violin/figure.ir.json"
+    },
+    {
+      "id": "ecdf",
+      "title": "ECDF",
+      "tags": ["paper", "single-column", "distribution", "ecdf"],
+      "ir": "examples/templates/ecdf/figure.ir.json"
+    },
+    {
+      "id": "kde",
+      "title": "KDE density",
+      "tags": ["paper", "single-column", "distribution", "kde"],
+      "ir": "examples/templates/kde/figure.ir.json"
     }
   ]
 }

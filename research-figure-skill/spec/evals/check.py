@@ -9,7 +9,8 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from compile import ROOT, compile_ir, distribution_rows, load_ir, load_recipes, read_rows
+from compile import (ROOT, compile_ir, distribution_rows, load_ir, load_recipes,
+                     read_distribution_rows, read_rows)
 
 
 def read_cases(path):
@@ -75,6 +76,9 @@ def check_case(case, ir_path):
     if ir["chart"] == "distribution-overlap":
         actual_rows = distribution_rows(ir, ir_path)
         expected_rows = distribution_rows(expected_ir, ir_path)
+    elif ir["chart"] in ("box", "violin", "ecdf", "kde"):
+        actual_rows, _ = read_distribution_rows(ir, ir_path)
+        expected_rows, _ = read_distribution_rows(expected_ir, ir_path)
     else:
         actual_rows, _ = read_rows(ir, ir_path)
         expected_rows, _ = read_rows(expected_ir, ir_path)
