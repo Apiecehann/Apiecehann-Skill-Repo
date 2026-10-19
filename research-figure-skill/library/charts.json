@@ -273,6 +273,29 @@
       ],
       "supports": [],
       "ir": "examples/templates/node-link/figure.ir.json"
+    },
+    {
+      "id": "sankey",
+      "family": "flow",
+      "status": "implemented",
+      "requires": [
+        "source",
+        "target",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/sankey/figure.ir.json"
+    },
+    {
+      "id": "treemap",
+      "family": "hierarchy",
+      "status": "implemented",
+      "requires": [
+        "label",
+        "value"
+      ],
+      "supports": [],
+      "ir": "examples/templates/treemap/figure.ir.json"
     }
   ]
 }

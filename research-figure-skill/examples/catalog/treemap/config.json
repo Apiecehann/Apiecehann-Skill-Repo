@@ -1,0 +1,46 @@
+{
+  "chart": "treemap",
+  "rows": [
+    {
+      "label": "Vision",
+      "value": 38.0
+    },
+    {
+      "label": "Language",
+      "value": 31.0
+    },
+    {
+      "label": "Audio",
+      "value": 18.0
+    },
+    {
+      "label": "Sensor",
+      "value": 13.0
+    }
+  ],
+  "colors": [
+    "#D6E4F0",
+    "#A8C8E8",
+    "#6FA3D2",
+    "#2F80C9"
+  ],
+  "size_pt": [
+    360,
+    280
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

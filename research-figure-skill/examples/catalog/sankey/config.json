@@ -1,0 +1,55 @@
+{
+  "chart": "sankey",
+  "rows": [
+    {
+      "source": "Data",
+      "target": "Encoder",
+      "value": 40.0
+    },
+    {
+      "source": "Data",
+      "target": "Augment",
+      "value": 15.0
+    },
+    {
+      "source": "Encoder",
+      "target": "Fusion",
+      "value": 40.0
+    },
+    {
+      "source": "Augment",
+      "target": "Fusion",
+      "value": 15.0
+    },
+    {
+      "source": "Fusion",
+      "target": "Output",
+      "value": 55.0
+    }
+  ],
+  "colors": [
+    "#D6E4F0",
+    "#A8C8E8",
+    "#6FA3D2",
+    "#2F80C9"
+  ],
+  "size_pt": [
+    360,
+    280
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

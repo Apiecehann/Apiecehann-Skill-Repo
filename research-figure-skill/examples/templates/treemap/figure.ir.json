@@ -1,0 +1,10 @@
+{
+  "claim": "MOCK：多模态数据占比（treemap）。",
+  "chart": "treemap",
+  "data": "data.csv",
+  "encoding": {"label": "label", "value": "value"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": true, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true}
+}

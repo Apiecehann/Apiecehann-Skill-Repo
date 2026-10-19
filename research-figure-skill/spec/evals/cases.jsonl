@@ -30,3 +30,5 @@
 {"id": "case-30", "request": "四个难度分组的成功率分布，ridgeline 山脊图，单栏", "recipe": "ridgeline", "data": "examples/templates/ridgeline/data.csv", "expect": {"chart": "ridgeline"}}
 {"id": "case-31", "request": "二分类检测错误权衡 DET 曲线，单栏", "recipe": "det", "data": "examples/templates/det/data.csv", "expect": {"chart": "det"}}
 {"id": "case-32", "request": "模型模块之间的连接关系，node-link 圆形布局，单栏", "recipe": "node-link", "data": "examples/templates/node-link/data.csv", "expect": {"chart": "node-link"}}
+{"id": "case-33", "request": "数据到模块的三阶段流向，sankey，单栏", "recipe": "sankey", "data": "examples/templates/sankey/data.csv", "expect": {"chart": "sankey"}}
+{"id": "case-34", "request": "四个类别的面积占比，treemap，单栏", "recipe": "treemap", "data": "examples/templates/treemap/data.csv", "expect": {"chart": "treemap"}}

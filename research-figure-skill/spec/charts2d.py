@@ -342,6 +342,84 @@ def render_ecdf(config, rows, out_stem):
     return _finish(fig, ax, config, out_stem)
 
 
+def render_treemap(config, rows, out_stem):
+    fig, ax = _setup(config)
+    items = sorted(rows, key=lambda r: r["value"], reverse=True)
+    total = sum(r["value"] for r in items)
+    x, y, w, h = 0.0, 0.0, 1.0, 1.0
+    colors = config["colors"]
+    for i, row in enumerate(items):
+        frac = row["value"] / total
+        if w >= h:
+            rect = (x, y, w * frac, h); x += w * frac
+        else:
+            rect = (x, y, w, h * frac); y += h * frac
+        ax.add_patch(matplotlib.patches.Rectangle((rect[0], rect[1]), rect[2], rect[3],
+                                                  facecolor=colors[i % len(colors)],
+                                                  edgecolor="white", linewidth=1.4))
+        if rect[2] > .12 and rect[3] > .08:
+            ax.text(rect[0] + rect[2] / 2, rect[1] + rect[3] / 2,
+                    f"{row['label']}\n{row['value']:g}", ha="center", va="center", fontsize=6.5)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    return _save_fig(fig, out_stem)
+
+
+def render_sankey(config, rows, out_stem):
+    fig, ax = _setup(config)
+    nodes = list(dict.fromkeys([r["source"] for r in rows] + [r["target"] for r in rows]))
+    out_total = {n: sum(r["value"] for r in rows if r["source"] == n) for n in nodes}
+    in_total = {n: sum(r["value"] for r in rows if r["target"] == n) for n in nodes}
+    layer = {n: 0 for n in nodes}
+    for _ in range(len(nodes)):
+        changed = False
+        for r in rows:
+            if layer[r["target"]] < layer[r["source"]] + 1:
+                layer[r["target"]] = layer[r["source"]] + 1
+                changed = True
+        if not changed:
+            break
+    layers = {}
+    for n in nodes:
+        layers.setdefault(layer[n], []).append(n)
+    max_layer = max(layers)
+    total = max(sum(out_total.values()), sum(in_total.values()))
+    gap = .04
+    pos = {}
+    for li, names in layers.items():
+        sizes = [max(in_total[n], out_total[n]) / total for n in names]
+        span = sum(sizes) + gap * (len(names) - 1)
+        y = .5 + span / 2
+        for n, h in zip(names, sizes):
+            pos[n] = (li / max_layer, y - h, h)
+            y -= h + gap
+    out_cursor = {n: pos[n][1] + pos[n][2] for n in nodes}
+    in_cursor = {n: pos[n][1] + pos[n][2] for n in nodes}
+    colors = config["colors"]
+    for i, row in enumerate(rows):
+        src, tgt = row["source"], row["target"]
+        sh = row["value"] / total
+        x1 = pos[src][0] + .02; x2 = pos[tgt][0]
+        y1a = out_cursor[src]; y1b = y1a - sh
+        y2a = in_cursor[tgt]; y2b = y2a - sh
+        out_cursor[src] -= sh; in_cursor[tgt] -= sh
+        verts = [(x1, y1a), ((x1 + x2) / 2, y1a), ((x1 + x2) / 2, y2a), (x2, y2a),
+                 (x2, y2b), ((x1 + x2) / 2, y2b), ((x1 + x2) / 2, y1b), (x1, y1b)]
+        codes = [1, 4, 4, 4, 2, 4, 4, 4]
+        ax.add_patch(matplotlib.patches.PathPatch(matplotlib.path.Path(verts, codes),
+                                                  facecolor=colors[i % len(colors)],
+                                                  alpha=.35, edgecolor="none"))
+    for n in nodes:
+        x, y, h = pos[n]
+        ax.add_patch(matplotlib.patches.Rectangle((x, y), .02, h,
+                                                  color=colors[nodes.index(n) % len(colors)]))
+        if x == 0:
+            ax.text(x - .01, y + h / 2, n, ha="right", va="center", fontsize=6.5)
+        else:
+            ax.text(x + .03, y + h / 2, n, ha="left", va="center", fontsize=6.5)
+    ax.set_xlim(-.22, 1.25); ax.set_ylim(0, 1.05); ax.axis("off")
+    _save_fig(fig, out_stem)
+
+
 def render_node_link(config, rows, out_stem):
     fig, ax = _setup(config)
     nodes = list(dict.fromkeys([r["source"] for r in rows] + [r["target"] for r in rows]))

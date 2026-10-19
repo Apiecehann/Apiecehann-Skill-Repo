@@ -36,7 +36,9 @@
         "voxel",
         "ridgeline",
         "det",
-        "node-link"
+        "node-link",
+        "sankey",
+        "treemap"
       ]
     }
   },
@@ -108,6 +110,12 @@
     ],
     "node-link": [
       "node-link"
+    ],
+    "sankey": [
+      "sankey"
+    ],
+    "treemap": [
+      "treemap"
     ]
   },
   "entries": [
@@ -1707,6 +1715,94 @@
         "axes": {},
         "log": [
           "node-link -> 8 edges"
+        ]
+      }
+    },
+    {
+      "recipe": "sankey",
+      "title": "Sankey flow",
+      "chart": "sankey",
+      "variant": "three-stage",
+      "tags": [
+        "paper",
+        "single-column",
+        "flow",
+        "sankey"
+      ],
+      "files": {
+        "png": "sankey/figure.png",
+        "pdf": "sankey/figure.pdf",
+        "svg": "sankey/figure.svg",
+        "config": "sankey/config.json",
+        "data": "sankey/data.csv",
+        "decisions": "sankey/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：数据到模块的流向（sankey）。",
+        "chart": "sankey",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "sankey"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "sankey",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "sankey -> 5 items"
+        ]
+      }
+    },
+    {
+      "recipe": "treemap",
+      "title": "Treemap",
+      "chart": "treemap",
+      "variant": "four-categories",
+      "tags": [
+        "paper",
+        "single-column",
+        "hierarchy",
+        "treemap"
+      ],
+      "files": {
+        "png": "treemap/figure.png",
+        "pdf": "treemap/figure.pdf",
+        "svg": "treemap/figure.svg",
+        "config": "treemap/config.json",
+        "data": "treemap/data.csv",
+        "decisions": "treemap/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：多模态数据占比（treemap）。",
+        "chart": "treemap",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "treemap"
+        ],
+        "labels": {
+          "values": true,
+          "legend": "none"
+        },
+        "layout": "treemap",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "treemap -> 4 items"
         ]
       }
     }

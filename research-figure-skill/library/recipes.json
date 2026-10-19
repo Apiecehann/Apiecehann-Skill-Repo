@@ -362,6 +362,32 @@
       "ir": "examples/templates/node-link/figure.ir.json",
       "chart": "node-link",
       "variant": "circular"
+    },
+    {
+      "id": "sankey",
+      "title": "Sankey flow",
+      "tags": [
+        "paper",
+        "single-column",
+        "flow",
+        "sankey"
+      ],
+      "ir": "examples/templates/sankey/figure.ir.json",
+      "chart": "sankey",
+      "variant": "three-stage"
+    },
+    {
+      "id": "treemap",
+      "title": "Treemap",
+      "tags": [
+        "paper",
+        "single-column",
+        "hierarchy",
+        "treemap"
+      ],
+      "ir": "examples/templates/treemap/figure.ir.json",
+      "chart": "treemap",
+      "variant": "four-categories"
     }
   ]
 }

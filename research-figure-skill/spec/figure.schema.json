@@ -29,7 +29,9 @@
         "voxel",
         "ridgeline",
         "det",
-        "node-link"
+        "node-link",
+        "sankey",
+        "treemap"
       ]
     },
     "data": {

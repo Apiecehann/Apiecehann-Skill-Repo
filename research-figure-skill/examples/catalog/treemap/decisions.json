@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：多模态数据占比（treemap）。",
+  "chart": "treemap",
+  "size": "single",
+  "size_pt": [
+    360,
+    280
+  ],
+  "palette": "d3-blue",
+  "encoding": [
+    "treemap"
+  ],
+  "labels": {
+    "values": true,
+    "legend": "none"
+  },
+  "layout": "treemap",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "treemap -> 4 items"
+  ]
+}
