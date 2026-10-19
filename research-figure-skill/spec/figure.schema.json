@@ -41,7 +41,9 @@
         "chord",
         "alluvial",
         "qq",
-        "eventplot"
+        "eventplot",
+        "hist2d",
+        "hexbin"
       ]
     },
     "data": {

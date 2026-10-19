@@ -421,6 +421,28 @@
       ],
       "supports": [],
       "ir": "examples/templates/eventplot/figure.ir.json"
+    },
+    {
+      "id": "hist2d",
+      "family": "diagnostic",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y"
+      ],
+      "supports": [],
+      "ir": "examples/templates/hist2d/figure.ir.json"
+    },
+    {
+      "id": "hexbin",
+      "family": "diagnostic",
+      "status": "implemented",
+      "requires": [
+        "x",
+        "y"
+      ],
+      "supports": [],
+      "ir": "examples/templates/hexbin/figure.ir.json"
     }
   ]
 }

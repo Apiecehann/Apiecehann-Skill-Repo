@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：两个指标的二维直方密度（hist2d）。",
+  "chart": "hist2d",
+  "size": "single",
+  "size_pt": [
+    360,
+    280
+  ],
+  "palette": "Blues",
+  "encoding": [
+    "hist2d"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "hist2d",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "hist2d -> 360 points"
+  ]
+}

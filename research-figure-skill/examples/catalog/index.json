@@ -49,7 +49,9 @@
         "chord",
         "alluvial",
         "qq",
-        "eventplot"
+        "eventplot",
+        "hist2d",
+        "hexbin"
       ]
     }
   },
@@ -158,6 +160,12 @@
     ],
     "eventplot": [
       "eventplot"
+    ],
+    "hist2d": [
+      "hist2d"
+    ],
+    "hexbin": [
+      "hexbin"
     ]
   },
   "entries": [
@@ -2414,6 +2422,94 @@
         },
         "log": [
           "eventplot -> 1 groups, 2 series, 60 observations"
+        ]
+      }
+    },
+    {
+      "recipe": "hist2d",
+      "title": "2D histogram",
+      "chart": "hist2d",
+      "variant": "density",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "hist2d"
+      ],
+      "files": {
+        "png": "hist2d/figure.png",
+        "pdf": "hist2d/figure.pdf",
+        "svg": "hist2d/figure.svg",
+        "config": "hist2d/config.json",
+        "data": "hist2d/data.csv",
+        "decisions": "hist2d/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个指标的二维直方密度（hist2d）。",
+        "chart": "hist2d",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "Blues",
+        "encoding": [
+          "hist2d"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "hist2d",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "hist2d -> 360 points"
+        ]
+      }
+    },
+    {
+      "recipe": "hexbin",
+      "title": "Hexbin",
+      "chart": "hexbin",
+      "variant": "density",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "hexbin"
+      ],
+      "files": {
+        "png": "hexbin/figure.png",
+        "pdf": "hexbin/figure.pdf",
+        "svg": "hexbin/figure.svg",
+        "config": "hexbin/config.json",
+        "data": "hexbin/data.csv",
+        "decisions": "hexbin/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：两个指标的六边形分箱密度（hexbin）。",
+        "chart": "hexbin",
+        "size": "single",
+        "size_pt": [
+          360,
+          280
+        ],
+        "palette": "Blues",
+        "encoding": [
+          "hexbin"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "hexbin",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "hexbin -> 360 points"
         ]
       }
     }

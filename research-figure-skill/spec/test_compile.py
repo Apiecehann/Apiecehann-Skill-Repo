@@ -241,8 +241,8 @@ def test_catalog_indexes_generated_artifacts(tmp_path):
     subprocess.run([sys.executable, str(SPEC / "catalog.py"), "--output", str(output)],
                    check=True, capture_output=True, text=True)
     index = json.loads((output / "index.json").read_text())
-    assert len(index["entries"]) == 41
-    assert len({e["recipe"] for e in index["entries"]}) == 41
+    assert len(index["entries"]) == 43
+    assert len({e["recipe"] for e in index["entries"]}) == 43
     for entry in index["entries"]:
         assert entry["tags"]
         assert entry["decisions"]["size"] in ("single", "medium", "double")
@@ -259,7 +259,7 @@ def test_eval_templates_pass_and_produced_ir_is_checked(tmp_path):
     cases = SPEC / "evals/cases.jsonl"
     result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--check-templates"],
                             check=True, capture_output=True, text=True)
-    assert "PASS 45" in result.stdout
+    assert "PASS 47" in result.stdout
     result = subprocess.run([sys.executable, str(check), "--cases", str(cases), "--case", "case-01",
                              "--ir", str(TEMPLATES / "ours-vs-baselines/figure.ir.json")],
                             check=True, capture_output=True, text=True)

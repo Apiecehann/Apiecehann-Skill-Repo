@@ -503,6 +503,25 @@ def render_chord(config, rows, out_stem):
     return _save_fig(fig, out_stem)
 
 
+def render_hist2d(config, rows, out_stem):
+    fig, ax = _setup(config)
+    ax.hist2d([r["x"] for r in rows], [r["y"] for r in rows],
+              bins=config.get("bins", 20), cmap=plt.get_cmap(config.get("colormap", "Blues")))
+    ax.set_xlabel(config.get("x_label", "x"), fontsize=8)
+    ax.set_ylabel(config.get("y_label", "y"), fontsize=8)
+    return _save_fig(fig, out_stem)
+
+
+def render_hexbin(config, rows, out_stem):
+    fig, ax = _setup(config)
+    ax.hexbin([r["x"] for r in rows], [r["y"] for r in rows],
+              gridsize=config.get("bins", 18), cmap=plt.get_cmap(config.get("colormap", "Blues")),
+              mincnt=1, linewidths=.2)
+    ax.set_xlabel(config.get("x_label", "x"), fontsize=8)
+    ax.set_ylabel(config.get("y_label", "y"), fontsize=8)
+    return _save_fig(fig, out_stem)
+
+
 def render_qq(config, rows, out_stem):
     from statistics import NormalDist
     fig, ax = _setup(config)

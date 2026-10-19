@@ -531,6 +531,32 @@
       "ir": "examples/templates/eventplot/figure.ir.json",
       "chart": "eventplot",
       "variant": "two-series"
+    },
+    {
+      "id": "hist2d",
+      "title": "2D histogram",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "hist2d"
+      ],
+      "ir": "examples/templates/hist2d/figure.ir.json",
+      "chart": "hist2d",
+      "variant": "density"
+    },
+    {
+      "id": "hexbin",
+      "title": "Hexbin",
+      "tags": [
+        "paper",
+        "single-column",
+        "diagnostic",
+        "hexbin"
+      ],
+      "ir": "examples/templates/hexbin/figure.ir.json",
+      "chart": "hexbin",
+      "variant": "density"
     }
   ]
 }

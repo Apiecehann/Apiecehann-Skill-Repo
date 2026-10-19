@@ -1,0 +1,11 @@
+{
+  "claim": "MOCK：两个指标的六边形分箱密度（hexbin）。",
+  "chart": "hexbin",
+  "data": "data.csv",
+  "encoding": {"x": "x", "y": "y"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans", "colormap": "Blues"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true},
+  "axis": {"x_label": "Latency (ms)", "y_label": "Throughput", "bins": 18}
+}

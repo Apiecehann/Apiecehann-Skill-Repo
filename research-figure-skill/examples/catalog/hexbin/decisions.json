@@ -1,0 +1,24 @@
+{
+  "claim": "MOCK：两个指标的六边形分箱密度（hexbin）。",
+  "chart": "hexbin",
+  "size": "single",
+  "size_pt": [
+    360,
+    280
+  ],
+  "palette": "Blues",
+  "encoding": [
+    "hexbin"
+  ],
+  "labels": {
+    "values": false,
+    "legend": "none"
+  },
+  "layout": "hexbin",
+  "emphasis": [],
+  "annotations": [],
+  "axes": {},
+  "log": [
+    "hexbin -> 360 points"
+  ]
+}

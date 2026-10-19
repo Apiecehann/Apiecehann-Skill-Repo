@@ -43,3 +43,5 @@
 {"id": "case-43", "request": "数据到模块的三阶段 alluvial 流向，单栏", "recipe": "alluvial", "data": "examples/templates/alluvial/data.csv", "expect": {"chart": "alluvial"}}
 {"id": "case-44", "request": "样本分位数对正态理论分位数的 QQ 图，单栏", "recipe": "qq", "data": "examples/templates/qq/data.csv", "expect": {"chart": "qq"}}
 {"id": "case-45", "request": "两个方法的延迟事件序列 eventplot，单栏", "recipe": "eventplot", "data": "examples/templates/eventplot/data.csv", "expect": {"chart": "eventplot"}}
+{"id": "case-46", "request": "两个指标的二维直方密度，hist2d，单栏", "recipe": "hist2d", "data": "examples/templates/hist2d/data.csv", "expect": {"chart": "hist2d"}}
+{"id": "case-47", "request": "两个指标的六边形分箱密度，hexbin，单栏", "recipe": "hexbin", "data": "examples/templates/hexbin/data.csv", "expect": {"chart": "hexbin"}}

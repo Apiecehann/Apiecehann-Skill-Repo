@@ -1044,6 +1044,45 @@ def compile_flow(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_density2d(ir, ir_path, output, render=False):
+    chart = ir["chart"]
+    enc = ir["encoding"]
+    missing = {"x", "y"} - set(enc)
+    if missing:
+        raise ValueError(f"{chart} encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    rows = [{"x": numeric(raw[enc["x"]], enc["x"], str(i)),
+             "y": numeric(raw[enc["y"]], enc["y"], str(i))} for i, raw in enumerate(source, 1)]
+    axis = ir.get("axis", {})
+    size = ir["size"]["preset"]
+    size_pt = {"single": [360, 280], "medium": [420, 300], "double": [504, 340],
+               "slide": [648, 380]}[size]
+    config = {
+        "chart": chart, "rows": rows, "bins": axis.get("bins", 20),
+        "colormap": ir["theme"].get("colormap", "Blues"),
+        "x_label": axis.get("x_label", "x"), "y_label": axis.get("y_label", "y"),
+        "size_pt": size_pt, "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["x", "y"]); writer.writeheader(); writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": chart, "size": size, "size_pt": size_pt,
+        "palette": ir["theme"].get("colormap", "Blues"), "encoding": [chart],
+        "labels": ir["labels"], "layout": chart, "emphasis": [], "annotations": [],
+        "axes": {}, "log": [f"{chart} -> {len(rows)} points"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        (charts2d.render_hist2d if chart == "hist2d" else charts2d.render_hexbin)(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_hierarchy(ir, ir_path, output, render=False):
     chart = ir["chart"]
     enc = ir["encoding"]
@@ -1323,6 +1362,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_quiver3d(ir, ir_path, output, render)
     if ir["chart"] in ("sunburst", "icicle"):
         return compile_hierarchy(ir, ir_path, output, render)
+    if ir["chart"] in ("hist2d", "hexbin"):
+        return compile_density2d(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])
