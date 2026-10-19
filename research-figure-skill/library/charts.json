@@ -261,6 +261,18 @@
       ],
       "supports": [],
       "ir": "examples/templates/det/figure.ir.json"
+    },
+    {
+      "id": "node-link",
+      "family": "network",
+      "status": "implemented",
+      "requires": [
+        "source",
+        "target",
+        "weight"
+      ],
+      "supports": [],
+      "ir": "examples/templates/node-link/figure.ir.json"
     }
   ]
 }

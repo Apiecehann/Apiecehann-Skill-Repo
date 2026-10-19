@@ -28,7 +28,8 @@
         "scatter3d",
         "voxel",
         "ridgeline",
-        "det"
+        "det",
+        "node-link"
       ]
     },
     "data": {
@@ -142,6 +143,18 @@
           "minLength": 1
         },
         "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "weight": {
           "type": "string",
           "minLength": 1
         },

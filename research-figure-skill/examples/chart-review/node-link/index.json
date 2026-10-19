@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "chart": "node-link",
+  "sheets": [
+    {
+      "id": "00-style",
+      "title": "style",
+      "panels": 15,
+      "labels": [
+        "paper-clean",
+        "soft-outline",
+        "serif-emphasis",
+        "bold-slide",
+        "minimal-mono",
+        "hand-drawn",
+        "boxed-journal",
+        "grid-paper",
+        "editorial-serif",
+        "white-slide",
+        "technical-grid",
+        "poster-bold",
+        "compact-journal",
+        "high-contrast",
+        "pastel-poster"
+      ]
+    },
+    {
+      "id": "01-type",
+      "title": "type",
+      "panels": 15,
+      "labels": [
+        "Arial",
+        "Helvetica",
+        "Segoe UI",
+        "Calibri",
+        "Verdana",
+        "Tahoma",
+        "Trebuchet MS",
+        "Times New Roman",
+        "Georgia",
+        "Garamond",
+        "Cambria",
+        "Consolas",
+        "Courier New",
+        "Comic Sans MS",
+        "Segoe Script"
+      ]
+    },
+    {
+      "id": "02-layout",
+      "title": "layout",
+      "panels": 2,
+      "labels": [
+        "circular",
+        "two-column"
+      ]
+    },
+    {
+      "id": "03-labels",
+      "title": "labels",
+      "panels": 2,
+      "labels": [
+        "labels",
+        "no labels"
+      ]
+    },
+    {
+      "id": "04-size",
+      "title": "size",
+      "panels": 9,
+      "labels": [
+        "tiny",
+        "single",
+        "square",
+        "wide",
+        "medium",
+        "double",
+        "double-wide",
+        "slide",
+        "tall"
+      ]
+    }
+  ]
+}

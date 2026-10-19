@@ -1,0 +1,9 @@
+source,target,weight
+Ours,Encoder,12.0
+Ours,Decoder,9.0
+Ours,Aux Head,6.0
+Encoder,Fusion,8.0
+Decoder,Fusion,7.0
+Aux Head,Fusion,5.0
+Fusion,Output,18.0
+Output,Aux Head,3.0

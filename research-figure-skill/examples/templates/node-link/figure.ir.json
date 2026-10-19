@@ -1,0 +1,10 @@
+{
+  "claim": "MOCK：模型模块之间的连接关系（node-link）。",
+  "chart": "node-link",
+  "data": "data.csv",
+  "encoding": {"source": "source", "target": "target", "weight": "weight"},
+  "size": {"preset": "single"},
+  "theme": {"style": "paper-clean", "palette": "d3-blue", "font": "sans"},
+  "labels": {"values": false, "legend": "none"},
+  "output": {"formats": ["png", "pdf", "svg"], "dpi": 300, "svg_text": true}
+}

@@ -349,6 +349,19 @@
       "ir": "examples/templates/det/figure.ir.json",
       "chart": "det",
       "variant": "single-series"
+    },
+    {
+      "id": "node-link",
+      "title": "Node-link graph",
+      "tags": [
+        "paper",
+        "single-column",
+        "network",
+        "node-link"
+      ],
+      "ir": "examples/templates/node-link/figure.ir.json",
+      "chart": "node-link",
+      "variant": "circular"
     }
   ]
 }

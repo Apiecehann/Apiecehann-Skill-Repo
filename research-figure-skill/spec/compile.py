@@ -929,6 +929,61 @@ def compile_voxel(ir, ir_path, output, render=False):
     return config, decisions
 
 
+def compile_node_link(ir, ir_path, output, render=False):
+    enc = ir["encoding"]
+    missing = {"source", "target"} - set(enc)
+    if missing:
+        raise ValueError(f"node-link encoding requires {sorted(missing)}")
+    path = Path(ir_path).parent / ir["data"]
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        source = list(csv.DictReader(stream))
+    rows, seen = [], set()
+    for i, raw in enumerate(source, 1):
+        s, t = raw[enc["source"]].strip(), raw[enc["target"]].strip()
+        if not s or not t:
+            raise ValueError(f"CSV row {i}: empty source/target")
+        weight = numeric(raw[enc["weight"]], enc["weight"], str(i)) if "weight" in enc else 1.0
+        if weight <= 0:
+            raise ValueError(f"CSV row {i}: weight must be positive")
+        key = (s, t)
+        if key in seen:
+            raise ValueError(f"CSV: duplicate edge {key}")
+        seen.add(key)
+        rows.append({"source": s, "target": t, "weight": weight})
+    presets = json.loads((ROOT / "quantitative-plots/grouped-bar/scripts/presets.json").read_text(encoding="utf8"))
+    palette = presets["palettes"].get(ir["theme"].get("palette", "d3-blue"))
+    if palette is None:
+        raise ValueError("Unknown palette")
+    color = palette["colors"][-1]
+    size = ir["size"]["preset"]
+    size_pt = {"single": [360, 300], "medium": [420, 320], "double": [504, 360],
+               "slide": [648, 400]}[size]
+    config = {
+        "chart": "node-link", "rows": rows, "colors": [color], "edge_color": color,
+        "node_size": 70, "size_pt": size_pt,
+        "x_label": ir.get("axis", {}).get("x_label", ""),
+        "y_label": ir.get("axis", {}).get("y_label", ""),
+        "formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+        "figure": {"formats": ir["output"]["formats"], "dpi": ir["output"]["dpi"],
+                   "svg_text": ir["output"].get("svg_text", True)},
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / "data.csv").open("w", encoding="utf8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["source", "target", "weight"])
+        writer.writeheader(); writer.writerows(rows)
+    decisions = {
+        "claim": ir["claim"], "chart": "node-link", "size": size, "size_pt": size_pt,
+        "palette": ir["theme"].get("palette", "d3-blue"), "encoding": ["node-link"],
+        "labels": ir["labels"], "layout": "circular", "emphasis": [], "annotations": [],
+        "axes": {}, "log": [f"node-link -> {len(rows)} edges"],
+    }
+    (output / "config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    (output / "decisions.json").write_text(json.dumps(decisions, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    if render:
+        charts2d.render_node_link(config, rows, output / "figure")
+    return config, decisions
+
+
 def compile_ir(ir_path, output, render=False):
     ir_path, output = Path(ir_path), Path(output)
     ir = load_ir(ir_path)
@@ -946,6 +1001,8 @@ def compile_ir(ir_path, output, render=False):
         return compile_scatter3d(ir, ir_path, output, render)
     if ir["chart"] == "voxel":
         return compile_voxel(ir, ir_path, output, render)
+    if ir["chart"] == "node-link":
+        return compile_node_link(ir, ir_path, output, render)
     if ir["chart"] in ("dot-plot", "dumbbell", "line-band", "scatter"):
         return compile_2d(ir, ir_path, output, render)
     missing = {"x", "y", "series"} - set(ir["encoding"])

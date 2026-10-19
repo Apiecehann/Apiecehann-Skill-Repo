@@ -342,6 +342,27 @@ def render_ecdf(config, rows, out_stem):
     return _finish(fig, ax, config, out_stem)
 
 
+def render_node_link(config, rows, out_stem):
+    fig, ax = _setup(config)
+    nodes = list(dict.fromkeys([r["source"] for r in rows] + [r["target"] for r in rows]))
+    angle = np.linspace(0, 2 * np.pi, len(nodes), endpoint=False)
+    pos = {name: (float(np.cos(a)), float(np.sin(a))) for name, a in zip(nodes, angle)}
+    max_w = max([r["weight"] for r in rows] + [1])
+    for row in rows:
+        x1, y1 = pos[row["source"]]; x2, y2 = pos[row["target"]]
+        ax.plot([x1, x2], [y1, y2], color=config["edge_color"],
+                linewidth=.6 + 2.2 * row["weight"] / max_w, alpha=.55, zorder=1)
+    for name, (x, y) in pos.items():
+        ax.scatter([x], [y], s=config.get("node_size", 70), color=config["colors"][0],
+                   edgecolors="white", linewidths=1.2, zorder=3)
+        ax.text(x, y - .13, name, ha="center", va="top", fontsize=6.5)
+    ax.set_xlim(-1.25, 1.25); ax.set_ylim(-1.25, 1.25)
+    ax.set_aspect("equal"); ax.axis("off")
+    ax.set_xlabel(config.get("x_label", ""), fontsize=8)
+    ax.set_ylabel(config.get("y_label", ""), fontsize=8)
+    return _save_fig(fig, out_stem)
+
+
 def render_ridgeline(config, rows, out_stem):
     fig, ax = _setup(config)
     colors, labels = config["colors"], config.get("series_labels", {})

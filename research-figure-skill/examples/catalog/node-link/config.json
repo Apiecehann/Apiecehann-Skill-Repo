@@ -1,0 +1,71 @@
+{
+  "chart": "node-link",
+  "rows": [
+    {
+      "source": "Ours",
+      "target": "Encoder",
+      "weight": 12.0
+    },
+    {
+      "source": "Ours",
+      "target": "Decoder",
+      "weight": 9.0
+    },
+    {
+      "source": "Ours",
+      "target": "Aux Head",
+      "weight": 6.0
+    },
+    {
+      "source": "Encoder",
+      "target": "Fusion",
+      "weight": 8.0
+    },
+    {
+      "source": "Decoder",
+      "target": "Fusion",
+      "weight": 7.0
+    },
+    {
+      "source": "Aux Head",
+      "target": "Fusion",
+      "weight": 5.0
+    },
+    {
+      "source": "Fusion",
+      "target": "Output",
+      "weight": 18.0
+    },
+    {
+      "source": "Output",
+      "target": "Aux Head",
+      "weight": 3.0
+    }
+  ],
+  "colors": [
+    "#2F80C9"
+  ],
+  "edge_color": "#2F80C9",
+  "node_size": 70,
+  "size_pt": [
+    360,
+    300
+  ],
+  "x_label": "",
+  "y_label": "",
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "dpi": 300,
+  "figure": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "dpi": 300,
+    "svg_text": true
+  }
+}

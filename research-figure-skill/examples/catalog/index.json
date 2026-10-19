@@ -35,7 +35,8 @@
         "scatter3d",
         "voxel",
         "ridgeline",
-        "det"
+        "det",
+        "node-link"
       ]
     }
   },
@@ -104,6 +105,9 @@
     ],
     "det": [
       "det"
+    ],
+    "node-link": [
+      "node-link"
     ]
   },
   "entries": [
@@ -1659,6 +1663,50 @@
         },
         "log": [
           "det -> 240 observations, 1 series"
+        ]
+      }
+    },
+    {
+      "recipe": "node-link",
+      "title": "Node-link graph",
+      "chart": "node-link",
+      "variant": "circular",
+      "tags": [
+        "paper",
+        "single-column",
+        "network",
+        "node-link"
+      ],
+      "files": {
+        "png": "node-link/figure.png",
+        "pdf": "node-link/figure.pdf",
+        "svg": "node-link/figure.svg",
+        "config": "node-link/config.json",
+        "data": "node-link/data.csv",
+        "decisions": "node-link/decisions.json"
+      },
+      "decisions": {
+        "claim": "MOCK：模型模块之间的连接关系（node-link）。",
+        "chart": "node-link",
+        "size": "single",
+        "size_pt": [
+          360,
+          300
+        ],
+        "palette": "d3-blue",
+        "encoding": [
+          "node-link"
+        ],
+        "labels": {
+          "values": false,
+          "legend": "none"
+        },
+        "layout": "circular",
+        "emphasis": [],
+        "annotations": [],
+        "axes": {},
+        "log": [
+          "node-link -> 8 edges"
         ]
       }
     }
